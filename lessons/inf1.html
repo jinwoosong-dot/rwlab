@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 17 · Inferences</title>
+<style>
+:root{--ink:#17213b;--mut:#5b6580;--line:#e3e7f0;--pri:#2447b8;--pri2:#e8eefc;--ok:#18a058;--bad:#e0464e;--warn:#f2b632;--subj:#2f6fe4;--verb:#e0464e;--bg:#0f1730}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+.player{max-width:1100px;width:100%;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;align-items:center;gap:10px;color:#fff}.top h1{font-size:16px;margin:0;font-weight:700}.top .sp{flex:1}
+.top select,.top button{font:inherit;font-size:13px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;padding:6px 10px;cursor:pointer}
+.top select option{color:#000}
+.stagewrap{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border-radius:16px;overflow:hidden;container-type:inline-size;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.scene{position:absolute;inset:0;padding:5cqw 6cqw;display:none;flex-direction:column;gap:2.2cqw;background:linear-gradient(180deg,#fff,#f6f8fd)}
+.scene.on{display:flex;animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.kick{font-size:1.5cqw;font-weight:800;letter-spacing:.08em;color:var(--pri);text-transform:uppercase}
+.h2{font-size:3.6cqw;font-weight:800;line-height:1.2;margin:0}
+.h{opacity:0;transform:translateY(1.2cqw);transition:opacity .45s ease,transform .45s ease}
+.h.in{opacity:1;transform:none}
+.big{font-size:3.4cqw;font-weight:700;font-family:Georgia,"Times New Roman",serif;line-height:1.5}
+.tok{padding:.1em .15em;border-radius:.3em;transition:background .4s,color .4s,box-shadow .4s}
+.tok.subj{background:#dfe9ff;color:var(--subj);box-shadow:inset 0 -.2em 0 var(--subj)}
+.tok.verb{background:#ffe3e5;color:var(--verb);box-shadow:inset 0 -.2em 0 var(--verb)}
+.tok.dep{background:#fff1cc;color:#8a5a00;box-shadow:inset 0 -.2em 0 var(--warn)}
+.tok.ing{background:#eee;color:#666;text-decoration:line-through wavy #999}
+.tok.bad{background:#ffe3e5;color:var(--bad);font-weight:800}
+.tok.good{background:#ddf5e7;color:var(--ok);font-weight:800}
+.row{display:flex;align-items:center;gap:1.6cqw;flex-wrap:wrap}
+.chk{display:flex;flex-direction:column;gap:1.1cqw;font-size:2.2cqw}
+.chk div{display:flex;align-items:center;gap:1cqw}.chk i{width:2.6cqw;height:2.6cqw;border-radius:50%;border:.25cqw solid #c9d0e0;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:1.6cqw;color:#fff;transition:.4s}
+.chk .on i{background:var(--ok);border-color:var(--ok)}
+.stamp{font-size:2.4cqw;font-weight:900;border:.35cqw solid;border-radius:1cqw;padding:.4cqw 1.2cqw;transform:rotate(-6deg);display:inline-block}
+.stamp.ok{color:var(--ok);border-color:var(--ok)}.stamp.no{color:var(--bad);border-color:var(--bad)}
+.card{background:#fff;border:.15cqw solid var(--line);border-radius:1.4cqw;padding:1.8cqw 2.2cqw;box-shadow:0 .6cqw 1.8cqw rgba(23,33,59,.06)}
+.chips{display:flex;gap:1cqw;flex-wrap:wrap}.chip{font-size:2cqw;font-weight:700;border-radius:99px;padding:.5cqw 1.4cqw;background:var(--pri2);color:var(--pri)}
+.chip.y{background:#fff1cc;color:#8a5a00}
+.lbl{font-size:1.6cqw;font-weight:800;border-radius:.6cqw;padding:.3cqw .9cqw;color:#fff}
+.lbl.s{background:var(--subj)}.lbl.v{background:var(--verb)}.lbl.r{background:var(--bad)}.lbl.g{background:var(--ok)}
+.cars{display:flex;align-items:center;gap:0;font-size:2.8cqw;font-family:Georgia,serif;font-weight:700}
+.car{background:#eef3ff;border:.25cqw solid var(--pri);border-radius:1.2cqw;padding:1.2cqw 2cqw}
+.link{width:7cqw;display:grid;place-items:center;font-size:3.2cqw;font-weight:900;color:var(--bad);position:relative}
+.link.broken::after{content:"";position:absolute;left:10%;right:10%;top:50%;height:.4cqw;background:var(--bad);transform:rotate(-20deg)}
+.fix{display:grid;grid-template-columns:4.4cqw 1fr;gap:1cqw;align-items:center;font-size:2.3cqw;padding:.6cqw 0}
+.fix b.n{width:3.6cqw;height:3.6cqw;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:1.8cqw}
+.fix .s{font-family:Georgia,serif}.fix .p{color:var(--ok);font-weight:900;font-size:1.15em}
+.brace{border-left:.4cqw solid var(--warn);padding-left:1.4cqw;margin-left:1cqw;font-size:2cqw;font-weight:800;color:#8a5a00}
+.vline{display:inline-block;width:.45cqw;height:4.6cqw;background:var(--pri);vertical-align:middle;margin:0 .6cqw;transform:scaleY(0);transition:transform .5s}
+.vline.in{transform:scaleY(1)}
+.side{display:flex;gap:2cqw}.side .card{flex:1;font-size:2cqw}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:1cqw;font-size:2.1cqw}
+.choices div{border:.15cqw solid var(--line);border-radius:1cqw;padding:1cqw 1.4cqw;background:#fff;transition:.4s}
+.choices .x{opacity:.45;text-decoration:line-through}.choices .o{border-color:var(--ok);background:#e9f8ef;font-weight:800}
+.sum li{font-size:2.3cqw;margin:.8cqw 0;line-height:1.4}
+.big-ic{font-size:7cqw}
+.sub{position:absolute;left:4cqw;right:4cqw;bottom:2.4cqw;text-align:center;pointer-events:none}
+.sub span{display:inline;background:rgba(15,23,48,.86);color:#fff;font-size:2cqw;line-height:1.55;padding:.35cqw 1cqw;border-radius:.6cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub.off{display:none}.sub span:empty{display:none}
+.quiz{position:absolute;inset:0;background:rgba(15,23,48,.6);display:none;align-items:center;justify-content:center;padding:3cqw;z-index:5}
+.quiz.on{display:flex}
+.qbox{background:#fff;border-radius:2cqw;padding:3cqw;width:min(78cqw,100%);box-shadow:0 2cqw 5cqw rgba(0,0,0,.3)}
+.qbox .qk{font-size:1.6cqw;font-weight:800;color:var(--pri);letter-spacing:.06em}
+.qbox h3{font-size:2.7cqw;margin:1cqw 0 2cqw}
+.qbox button.o{display:block;width:100%;text-align:left;font:inherit;font-size:2.2cqw;border:.2cqw solid var(--line);border-radius:1.2cqw;background:#fff;padding:1.4cqw 1.8cqw;margin:.9cqw 0;cursor:pointer;font-family:Georgia,serif}
+.qbox button.o:hover{border-color:var(--pri)}
+.qbox button.o.right{border-color:var(--ok);background:#e9f8ef}.qbox button.o.wrong{border-color:var(--bad);background:#fdecee;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-.6cqw)}75%{transform:translateX(.6cqw)}}
+.qfb{font-size:2cqw;line-height:1.5;margin-top:1.2cqw;min-height:3cqw}
+.qgo{font:inherit;font-size:2cqw;font-weight:800;background:var(--pri);color:#fff;border:0;border-radius:1cqw;padding:1.2cqw 2.4cqw;cursor:pointer;margin-top:1cqw;display:none}
+.ctrl{display:flex;align-items:center;gap:8px;color:#fff}
+.ctrl button{font:inherit;font-size:15px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;cursor:pointer;min-width:44px;min-height:40px}
+.ctrl button.main{background:#ffd34d;color:#1b2340;border-color:#ffd34d;font-weight:800;min-width:96px}
+.bar{flex:1;display:flex;gap:3px;height:10px;cursor:pointer}
+.bar i{flex:1;background:rgba(255,255,255,.18);border-radius:4px;overflow:hidden;position:relative}
+.bar i b{position:absolute;inset:0;width:0;background:#ffd34d}
+.bar i.q{flex:0 0 10px;background:#7aa2ff}
+.time{font-size:13px;min-width:64px;text-align:right;opacity:.85}
+.chap{display:flex;gap:6px;flex-wrap:wrap}
+.chap button{font:inherit;font-size:12.5px;background:rgba(255,255,255,.06);color:#cfd7f2;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 10px;cursor:pointer}
+.chap button.on{background:#fff;color:var(--ink)}
+.chap button.done::before{content:"✓ ";color:#7be0a3}
+.end{position:absolute;inset:0;background:linear-gradient(135deg,#14275f,#2447b8);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.6cqw;text-align:center;z-index:6}
+.end.on{display:flex}.end h2{font-size:4cqw;margin:0}.end p{font-size:2cqw;margin:0;opacity:.9}
+.end button{font:inherit;font-size:2.1cqw;font-weight:800;border-radius:1.2cqw;padding:1.3cqw 2.6cqw;cursor:pointer;border:0}
+.end .go{background:#ffd34d;color:#1b2340}.end .re{background:rgba(255,255,255,.15);color:#fff}
+.embed .top{padding-right:52px}.note{color:#8f9bc0;font-size:12px;text-align:center}
+.pass{font-family:Georgia,"Times New Roman",serif;font-size:2.05cqw;line-height:1.6}
+.small{font-size:1.9cqw;line-height:1.5}
+.hl{background:#fff1cc;border-radius:.3em;padding:0 .15em;transition:background .4s}
+.tbl{border-collapse:collapse;font-size:1.9cqw;background:#fff}.tbl th,.tbl td{border:.15cqw solid var(--line);padding:.6cqw 1.2cqw;text-align:center}.tbl th{background:#f2f5fc}
+.tbl td.hit{background:#fff1cc;font-weight:800}
+.scene.tight{gap:1.1cqw;padding-top:3.4cqw}.scene.tight .card{padding:1cqw 1.8cqw}.scene.tight .h2{font-size:3.1cqw}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4cqw}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="player">
+  <div class="top"><h1 id="ttl"></h1><span class="sp"></span>
+    <select id="lang" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">中文</option></select>
+    <select id="spd" aria-label="Speed"><option value="0.85">0.85×</option><option value="1" selected>1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select>
+    <button id="cc" aria-pressed="true">CC</button></div>
+  <div class="stagewrap" id="stage">
+    <div id="scenes"></div>
+    <div class="sub" id="sub"><span id="subt"></span></div>
+    <div class="quiz" id="quiz"><div class="qbox"><div class="qk" id="qk"></div><h3 id="qq"></h3><div id="qo"></div><div class="qfb" id="qfb"></div><button class="qgo" id="qgo"></button></div></div>
+    <div class="end" id="end"><div class="big-ic">🎉</div><h2 id="endh"></h2><p id="endp"></p><div class="row" style="justify-content:center"><button class="go" id="endgo"></button><button class="re" id="endre"></button></div></div>
+  </div>
+  <div class="ctrl"><button id="prev" aria-label="Previous">⏮</button><button id="play" class="main"></button><button id="next" aria-label="Next">⏭</button><div class="bar" id="bar"></div><span class="time" id="time"></span></div>
+  <div class="chap" id="chap"></div>
+  <p class="note" id="note"></p>
+</div>
+<script>
+/* ===== UI strings (shared) ===== */
+const BASE={
+ en:{play:'▶ Play',pause:'❚❚ Pause',cont:'Continue ▶',check:'Check question',right:'Correct!',wrong:'Not quite. Try again.',go:'Start practice →',go0:'Back to course →',re:'Watch again',note:'If you hear nothing, check your volume. Captions advance automatically.',sum:'Summary',left:'Left side',right2:'Right side'},
+ ko:{play:'▶ 재생',pause:'❚❚ 일시정지',cont:'계속 ▶',check:'확인 문제',right:'정답이에요!',wrong:'아쉬워요. 다시 골라 보세요.',go:'연습 문제 시작 →',go0:'코스로 돌아가기 →',re:'다시 보기',note:'소리가 안 들리면 볼륨을 확인하세요. 자막은 자동으로 넘어가요.',sum:'정리',left:'왼쪽',right2:'오른쪽'},
+ zh:{play:'▶ 播放',pause:'❚❚ 暂停',cont:'继续 ▶',check:'确认题',right:'答对了！',wrong:'不对，再选一次。',go:'开始练习 →',go0:'返回课程 →',re:'重看',note:'听不到声音时请检查音量。字幕会自动前进。',sum:'总结',left:'左边',right2:'右边'}};
+const META={"id":"inf1","k":"INF","n":17,"title":{"en":"Lesson 17 · Inferences","ko":"17강 · 추론","zh":"第17课 · 推理"},"desc":{"en":"The blank is a conclusion, “must be true” vs. “could be true”, following the passage’s logic, avoiding extreme answers","ko":"빈칸은 결론, \"반드시 참\"과 \"참일 수도\", 지문의 논리 따라가기, 극단적 선택지 피하기","zh":"空格是结论、“必然为真”与“可能为真”、顺着文章的逻辑、避开极端选项"},"endh":{"en":"Lesson 17 complete","ko":"17강 완료","zh":"第17课完成"},"endp":{"en":"Practice writing the premises as a short chain before you choose.","ko":"고르기 전에 전제를 짧은 사슬로 적어 보는 연습을 해요.","zh":"练习在作答前把前提写成一条短链。"}};
+const L={"en":{"conc":"The blank = the conclusion","must":"Must be true, not could be true","chain":"Write the logic chain","extreme":"Extreme words are usually wrong"},"ko":{"conc":"빈칸 = 결론","must":"\"참일 수도\"가 아니라 \"반드시 참\"","chain":"논리 사슬을 적어 보기","extreme":"극단적인 말은 대개 오답"},"zh":{"conc":"空格 = 结论","must":"必然为真，而不是可能为真","chain":"写出逻辑链","extreme":"极端的词通常是错的"}};
+const UI={};for(const k of ['en','ko','zh'])UI[k]=Object.assign({},BASE[k],L[k]||{},{title:META.title[k],endh:META.endh[k],endp:META.endp[k]});
+
+/* ===== Scenes: each beat = narration (3 languages) + visual actions ===== */
+const SC=[{"id":"intro","ch":{"en":"Intro","ko":"도입","zh":"导入"},"html":"\n <div class=\"kick\">Unit 7 · Information and Ideas</div><h2 class=\"h2\" data-l=\"title\"></h2>\n <div class=\"pass card h\" id=\"i1\" style=\"font-size:2.1cqw\">Which choice most logically completes the text?<br>… The researchers therefore concluded that <b>______</b></div>\n <div class=\"card h\" id=\"i2\" style=\"font-size:2.3cqw\">🧩 <b data-l=\"conc\"></b></div>","b":[{"en":"Welcome to Lesson 17. Inference questions are among the hardest on the test. The passage ends with a blank, and you choose what logically completes it.","ko":"17강에 오신 걸 환영해요. 추론 문제는 시험에서 가장 어려운 유형 중 하나예요. 지문이 빈칸으로 끝나고, 논리적으로 이어지는 말을 골라요.","zh":"欢迎来到第17课。推理题是全卷最难的题型之一。文章以空格结尾，你要选出逻辑上能完成它的内容。","a":["in:#i1"]},{"en":"Think of the blank as the conclusion of an argument. Everything before it is a premise.","ko":"빈칸을 논증의 결론이라고 생각하세요. 그 앞의 모든 내용은 전제예요.","zh":"把空格看作一个论证的结论。它前面的一切都是前提。","a":["in:#i2"]}]},
+{"id":"must","ch":{"en":"Must be true","ko":"반드시 참","zh":"必然为真"},"html":"\n <div class=\"kick\">Rule</div><h2 class=\"h2\" data-l=\"must\"></h2>\n <div class=\"pass card\" style=\"font-size:2cqw\">All the paintings in the exhibit are by artists born before 1900. <i>The Blue Barn</i> is in the exhibit. So <b>______</b></div>\n <div class=\"pass card h\" id=\"m1\" style=\"font-size:1.95cqw\"><span class=\"lbl g\">must</span> the artist of <i>The Blue Barn</i> was born before 1900.</div>\n <div class=\"pass card h\" id=\"m2\" style=\"font-size:1.95cqw\"><span class=\"lbl r\">could</span> <i>The Blue Barn</i> is the most valuable painting in the exhibit.</div>","b":[{"en":"Here is the key rule. The right answer must be true based on the passage. An answer that only could be true is wrong.","ko":"핵심 규칙이에요. 정답은 지문을 근거로 반드시 참이어야 해요. 참일 수도 있는 정도인 답은 오답이에요.","zh":"关键规则：正确答案必须根据文章必然为真。只是可能为真的答案是错的。"},{"en":"'All the paintings in the exhibit are by artists born before 1900. The Blue Barn is in the exhibit.'","ko":"'All the paintings in the exhibit are by artists born before 1900. The Blue Barn is in the exhibit.'","zh":"All the paintings in the exhibit are by artists born before 1900. The Blue Barn is in the exhibit."},{"en":"So its artist must have been born before 1900. There is no other possibility.","ko":"그러니까 그 화가는 반드시 1900년 이전에 태어났어요. 다른 가능성은 없어요.","zh":"所以它的作者必然出生在1900年之前，没有别的可能。","a":["in:#m1"]},{"en":"Could it be the most valuable painting? Maybe, but the passage gives no reason to think so. That is the kind of answer to eliminate.","ko":"가장 비싼 그림일 수도 있을까요? 그럴 수도 있지만 지문에는 그렇게 볼 근거가 없어요. 이런 답을 지워야 해요.","zh":"它可能是最贵的画吗？也许，但文章没有给出任何依据。这类答案要排除。","a":["in:#m2"]}]},
+{"id":"chain","tight":1,"ch":{"en":"Logic chain","ko":"논리 사슬","zh":"逻辑链"},"html":"\n <div class=\"kick\">Method</div><h2 class=\"h2\" data-l=\"chain\"></h2>\n <div class=\"pass card\" style=\"font-size:1.9cqw\">A certain beetle survives cold winters only if its body contains a natural antifreeze protein. Researchers found that beetles from a lowland population lacked the protein. Winters in the lowlands, however, have recently become much colder. If this trend continues, <b>______</b></div>\n <div class=\"grid2\" style=\"gap:.6cqw 2cqw\"><div class=\"fix h\" id=\"c1\"><b class=\"n\">1</b><span>survive cold → needs protein</span></div>\n <div class=\"fix h\" id=\"c2\"><b class=\"n\">2</b><span>lowland beetles → no protein</span></div>\n <div class=\"fix h\" id=\"c3\"><b class=\"n\">3</b><span>lowland winters → colder</span></div>\n <div class=\"fix h\" id=\"c4\"><b class=\"n\" style=\"background:var(--ok)\">∴</b><span>the lowland population may not survive the winters</span></div></div>","b":[{"en":"For longer passages, write the logic as a short chain. Premise one: the beetle survives the cold only if it has the protein.","ko":"긴 지문은 논리를 짧은 사슬로 적어요. 전제 1: 이 딱정벌레는 단백질이 있어야만 추위를 견뎌요.","zh":"较长的文章，就把逻辑写成一条短链。前提一：这种甲虫只有具备这种蛋白才能熬过寒冬。","a":["in:#c1"]},{"en":"Premise two: the lowland beetles do not have the protein.","ko":"전제 2: 저지대 딱정벌레에는 그 단백질이 없어요.","zh":"前提二：低地种群的甲虫没有这种蛋白。","a":["in:#c2"]},{"en":"Premise three: lowland winters are getting colder.","ko":"전제 3: 저지대의 겨울이 더 추워지고 있어요.","zh":"前提三：低地的冬天越来越冷。","a":["in:#c3"]},{"en":"Put them together: the lowland population may not survive. Notice that we use every premise. A good answer uses all of them.","ko":"합치면, 저지대 개체군은 살아남지 못할 수 있어요. 모든 전제를 다 썼다는 점에 주목하세요. 좋은 답은 전제를 전부 써요.","zh":"合起来：低地种群可能无法存活。注意我们用上了每一个前提。好的答案会用上全部前提。","a":["in:#c4"]}]},
+{"id":"extreme","ch":{"en":"Extreme words","ko":"극단적 표현","zh":"极端用词"},"html":"\n <div class=\"kick\">Trap</div><h2 class=\"h2\" data-l=\"extreme\"></h2>\n <div class=\"chips h\" id=\"e1\"><span class=\"chip y\">always</span><span class=\"chip y\">never</span><span class=\"chip y\">all</span><span class=\"chip y\">prove</span><span class=\"chip y\">completely</span><span class=\"chip y\">the only</span></div>\n <div class=\"pass card h\" id=\"e2\" style=\"font-size:1.95cqw\"><span class=\"lbl r\">✗</span> all beetle species will soon become extinct.</div>\n <div class=\"pass card h\" id=\"e3\" style=\"font-size:1.95cqw\"><span class=\"lbl r\">✗</span> the lowland beetles will develop the protein. <span class=\"small\">(no evidence)</span></div>","b":[{"en":"Watch for extreme words: always, never, all, prove, completely, the only. The SAT rarely gives enough evidence for them.","ko":"극단적인 말을 조심하세요. always, never, all, prove, completely, the only. SAT 지문은 그런 말을 뒷받침할 만큼 근거를 주지 않아요.","zh":"注意极端的词：always、never、all、prove、completely、the only。SAT文章很少给出足以支撑它们的证据。","a":["in:#e1"]},{"en":"'All beetle species will soon become extinct' goes far beyond one lowland population.","ko":"'모든 딱정벌레 종이 곧 멸종할 것이다'는 저지대 개체군 하나를 훨씬 넘어서요.","zh":"所有甲虫物种都将很快灭绝，这远远超出了一个低地种群的范围。","a":["in:#e2"]},{"en":"'The lowland beetles will develop the protein' might sound hopeful, but nothing in the passage supports it.","ko":"'저지대 딱정벌레가 그 단백질을 갖게 될 것이다'는 희망적으로 들리지만 지문에 근거가 없어요.","zh":"低地甲虫会产生这种蛋白，听起来充满希望，但文章中没有任何支持。","a":["in:#e3"]}]},
+{"id":"example","ch":{"en":"Solve together","ko":"같이 풀기","zh":"一起做题"},"html":"\n <div class=\"kick\">SAT-style example</div>\n <div class=\"pass card\" style=\"font-size:1.9cqw\">Archaeologists found pottery at a coastal site in Peru. The clay contains a mineral that occurs only in mountain soils over 200 kilometers inland. No mountain clay deposits exist near the coast. These findings suggest that <b>______</b></div>\n <div class=\"choices\" style=\"grid-template-columns:1fr;font-size:1.85cqw\"><div id=\"x1\">A) the coastal people traveled to the mountains every year.</div><div id=\"x2\">B) the pottery, or the clay used to make it, came from the mountains to the coast.</div><div id=\"x3\">C) mountain pottery was more valuable than coastal pottery.</div><div id=\"x4\">D) the coastal site was once located in the mountains.</div></div>","b":[{"en":"Let's solve one. Chain: the clay has a mountain mineral. That mineral exists only in mountain soils. There is no mountain clay near the coast.","ko":"한 문제 풀어 봐요. 사슬로 적으면, 점토에 산의 광물이 있다. 그 광물은 산의 흙에만 있다. 해안 근처에는 산의 점토가 없다.","zh":"做一道题。逻辑链：陶土含有一种山地矿物。这种矿物只存在于山地土壤中。海岸附近没有山地黏土。"},{"en":"So the pottery or its clay must have been brought from the mountains. That is choice B.","ko":"그러니까 도자기나 그 점토는 산에서 옮겨 왔을 수밖에 없어요. B예요.","zh":"所以陶器或它的陶土必然是从山区运来的。这就是 B。"},{"en":"A says 'every year,' too specific. C talks about value, never mentioned. D is not supported. The answer is B.","ko":"A는 '매년'이라고 해서 너무 구체적이에요. C는 언급된 적 없는 가치 얘기예요. D는 근거가 없어요. 정답은 B예요.","zh":"A 说每年，过于具体。C 谈价值，文章没提过。D 没有依据。答案是 B。","a":["add:#x1:x","add:#x3:x","add:#x4:x","add:#x2:o"]},{"q":{"en":{"q":"Why is choice A (“traveled to the mountains every year”) wrong?","o":["It contradicts the passage","It could be true, but the passage does not show it must be true","It is too vague"],"e":"People might have traveled, or traders might have brought the pottery. “Every year” is not required by the evidence."},"ko":{"q":"A(“traveled to the mountains every year”)가 오답인 이유는?","o":["지문과 모순되어서","참일 수는 있지만 지문이 반드시 참이라고 보여 주지 않아서","너무 막연해서"],"e":"사람들이 직접 갔을 수도, 상인이 가져왔을 수도 있어요. \"매년\"은 근거가 요구하는 내용이 아니에요."},"zh":{"q":"为什么选项A（“traveled to the mountains every year”）是错的？","o":["它与文章矛盾","它可能为真，但文章没有表明它必然为真","它太笼统"],"e":"可能是人们自己去了，也可能是商人带来的陶器。证据并不要求“每年”。"},"a":1}}]},
+{"id":"summary","ch":{"en":"Summary","ko":"정리","zh":"总结"},"html":"\n <div class=\"kick\" data-l=\"sum\"></div><h2 class=\"h2\">📌 Lesson 17</h2>\n <ul class=\"sum card\"><li class=\"h\" id=\"z1\">The blank is a conclusion → premises → must be true</li>\n <li class=\"h\" id=\"z2\">Write a short logic chain · use every premise</li>\n <li class=\"h\" id=\"z3\">Could be true ≠ must be true</li>\n <li class=\"h\" id=\"z4\">Avoid extreme words and new information</li></ul>","b":[{"en":"Let's review. The blank is a conclusion. Find the premises and choose what must be true.","ko":"정리할게요. 빈칸은 결론이에요. 전제를 찾고 반드시 참인 것을 고르세요.","zh":"我们来总结。空格是结论。找出前提，选择必然为真的选项。","a":["in:#z1"]},{"en":"Write a short logic chain and make sure the answer uses every premise.","ko":"짧은 논리 사슬을 적고, 정답이 모든 전제를 쓰는지 확인하세요.","zh":"写一条短逻辑链，确认答案用上了每一个前提。","a":["in:#z2"]},{"en":"Could be true is not enough.","ko":"참일 수도 있다는 걸로는 부족해요.","zh":"可能为真是不够的。","a":["in:#z3"]},{"en":"And avoid extreme words and new information. Last lesson: cross-text connections. See you in Lesson 18!","ko":"그리고 극단적인 말과 새로운 정보는 피하세요. 마지막 강의는 두 지문 연결이에요. 18강에서 만나요!","zh":"避开极端用词和新信息。最后一课：双篇关联。第18课见！","a":["in:#z4"]}]}];
+
+/* ===== Player engine ===== */
+const $=s=>document.querySelector(s);
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q)return q;const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');return s.lang||'en'}catch(e){return 'en'}})();
+if(!UI[LANG])LANG='en';
+const FLAT=[];SC.forEach((s,si)=>s.b.forEach((b,bi)=>FLAT.push({si,bi,b})));
+let pos=0,playing=false,timer=null,speed=1,cc=true,done=new Set(),utter=null,token=0;
+function t(k){return (UI[LANG]||UI.en)[k]||UI.en[k]||k}
+function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene${s.tight?' tight':''}" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function applyStatic(){document.documentElement.lang=LANG==='zh'?'zh-CN':LANG;$('#ttl').textContent=t('title');document.title=t('title');$('#note').textContent=t('note');$('#lang').value=LANG;
+  $('#endh').textContent=t('endh');$('#endp').textContent=t('endp');$('#endgo').textContent=META.k==='GEN'?t('go0'):t('go');$('#endre').textContent=t('re');
+  document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l));chapters();bar();setPlay()}
+function chapters(){$('#chap').innerHTML=SC.map((s,i)=>`<button data-c="${i}" class="${FLAT[pos]&&FLAT[pos].si===i?'on':''} ${done.has(i)?'done':''}">${i+1}. ${s.ch[LANG]||s.ch.en}</button>`).join('')}
+function bar(){const segs=SC.map((s,i)=>{const idx=FLAT.map((f,k)=>f.si===i?k:-1).filter(k=>k>=0);const a=idx[0],z=idx[idx.length-1];const p=pos<a?0:pos>z?100:Math.round((pos-a+ (playing?0.5:0))/(z-a+1)*100);return`<i data-c="${i}"><b style="width:${p}%"></b></i>`});$('#bar').innerHTML=segs.join('');
+  const tot=FLAT.length;$('#time').textContent=`${Math.min(pos+1,tot)} / ${tot}`}
+function setPlay(){$('#play').textContent=playing?t('pause'):t('play')}
+function resetScene(si){const el=$('#sc'+si);el.innerHTML=SC[si].html;el.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function act(a){const[k,sel,v]=a.split(':');const el=document.querySelector(sel);if(!el)return;if(k==='in')el.classList.add('in');if(k==='add')el.classList.add(v);if(k==='text')el.textContent=v}
+function show(p,replay){const f=FLAT[p];if(!f)return;document.querySelectorAll('.scene').forEach((e,i)=>e.classList.toggle('on',i===f.si));
+  if(replay){resetScene(f.si);FLAT.forEach((g,k)=>{if(g.si===f.si&&k<p&&g.b.a)g.b.a.forEach(act)})}
+  if(f.b.a)f.b.a.forEach(act);chapters();bar()}
+function txt(b){return b[LANG]||b.en}
+function stopSpeech(){token++;clearTimeout(timer);stopAud();try{speechSynthesis.cancel()}catch(e){}}
+let MAN=null,AUD=null;const LID=META.id;
+function loadMan(){MAN=null;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.lang===LANG)MAN=m}).catch(()=>{})}
+function stopAud(){if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
+function speak(text,cb,idx){const my=++token;let fired=false;const fin=()=>{if(fired||my!==token)return;fired=true;cb()};
+  const rec=MAN&&idx!=null&&MAN.beats[idx];
+  if(rec){stopAud();AUD=new Audio('../audio/'+rec.file);AUD.playbackRate=speed;AUD.onended=fin;AUD.onerror=()=>{AUD=null;timer=setTimeout(fin,Math.max(2200,text.length/14*1000))};AUD.play().catch(()=>{timer=setTimeout(fin,(rec.dur||3)*1000/speed)});timer=setTimeout(fin,((rec.dur||3)/speed+4)*1000);return}
+  const cps={en:14,ko:7,zh:5}[LANG]*speed;const est=Math.max(2200,text.length/cps*1000)+500;
+  try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);const lc={en:'en-US',ko:'ko-KR',zh:'zh-CN'}[LANG];u.lang=lc;u.rate=speed*(LANG==='en'?0.98:1);
+    const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lc.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lc.slice(0,2)));
+    if(v){u.voice=v;u.onend=fin;u.onerror=()=>{timer=setTimeout(fin,est)};speechSynthesis.speak(u);timer=setTimeout(fin,est*2.2);return}}}catch(e){}
+  timer=setTimeout(fin,est)}
+function step(){const f=FLAT[pos];if(!f){finish();return}
+  if(f.b.q){showQuiz(f.b.q);return}
+  $('#subt').textContent=txt(f.b);speak(txt(f.b),()=>{if(!playing)return;pos++;if(FLAT[pos]&&FLAT[pos].si!==f.si)done.add(f.si);if(pos>=FLAT.length){done.add(f.si);finish();return}show(pos);step()},pos)}
+function play(){if(pos>=FLAT.length){pos=0;show(0,true)}playing=true;setPlay();$('#end').classList.remove('on');show(pos);step()}
+function pause(){playing=false;stopSpeech();setPlay();bar()}
+function jump(p){stopSpeech();$('#quiz').classList.remove('on');pos=Math.max(0,Math.min(FLAT.length-1,p));show(pos,true);if(playing)step();else{$('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)}}
+function sceneStart(i){return FLAT.findIndex(f=>f.si===i)}
+function showQuiz(q){stopSpeech();const d=q[LANG]||q.en;$('#qk').textContent=t('check');$('#qq').textContent=d.q;$('#qfb').textContent='';$('#qgo').style.display='none';$('#qgo').textContent=t('cont');
+  $('#qo').innerHTML=d.o.map((o,i)=>`<button class="o" data-i="${i}">${String.fromCharCode(65+i)}) ${o}</button>`).join('');$('#quiz').classList.add('on');$('#subt').textContent='';
+  const say=d.q;speak(say,()=>{},pos);
+  $('#qo').onclick=e=>{const b=e.target.closest('button.o');if(!b)return;const i=+b.dataset.i;if(i===q.a){b.classList.add('right');$('#qfb').innerHTML=`<b style="color:var(--ok)">${t('right')}</b> ${d.e}`;$('#qgo').style.display='inline-block';$('#qo').onclick=null;speak(t('right'),()=>{})}else{b.classList.add('wrong');$('#qfb').innerHTML=`<b style="color:var(--bad)">${t('wrong')}</b>`;setTimeout(()=>b.classList.remove('wrong'),400)}}}
+$('#qgo').onclick=()=>{$('#quiz').classList.remove('on');pos++;if(pos>=FLAT.length){finish();return}show(pos);if(playing)step();else play()};
+function finish(){playing=false;stopSpeech();setPlay();SC.forEach((s,i)=>done.add(i));chapters();bar();$('#end').classList.add('on');$('#subt').textContent='';try{parent.postMessage({type:'lessonDone',id:META.id},'*')}catch(e){}}
+$('#endgo').onclick=()=>{try{if(parent!==window){parent.postMessage({type:'lessonPractice',k:META.k},'*');return}}catch(e){}location.href='../index.html#train'};
+$('#endre').onclick=()=>{done.clear();pos=0;$('#end').classList.remove('on');show(0,true);play()};
+$('#play').onclick=()=>playing?pause():play();
+$('#next').onclick=()=>{const si=FLAT[pos].si;const n=sceneStart(si+1);if(n>=0)jump(n)};
+$('#prev').onclick=()=>{const si=FLAT[pos].si,st=sceneStart(si);jump(pos>st?st:sceneStart(Math.max(0,si-1)))};
+$('#chap').onclick=e=>{const b=e.target.closest('button');if(b)jump(sceneStart(+b.dataset.c))};
+$('#bar').onclick=e=>{const i=e.target.closest('i');if(i)jump(sceneStart(+i.dataset.c))};
+$('#lang').onchange=e=>{LANG=e.target.value;try{const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');s.lang=LANG;localStorage.setItem('rwlab_v1',JSON.stringify(s))}catch(x){}const was=playing;stopSpeech();loadMan();buildScenes();applyStatic();show(pos,true);if(was)step();else $('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)};
+$('#spd').onchange=e=>{speed=+e.target.value;if(AUD)AUD.playbackRate=speed;if(playing){stopSpeech();step()}};
+$('#cc').onclick=()=>{cc=!cc;$('#sub').classList.toggle('off',!cc);$('#cc').setAttribute('aria-pressed',cc)};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(e.code==='Space'){e.preventDefault();playing?pause():play()}if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
+try{speechSynthesis.onvoiceschanged=()=>{}}catch(e){}
+if(parent!==window)document.body.classList.add('embed');loadMan();buildScenes();applyStatic();show(0);$('#subt').textContent=txt(FLAT[0].b);
+</script>
+</body>
+</html>

@@ -206,5 +206,101 @@
    "ko": "목표부터 읽기, 목표 표현 해석하기, 선택지는 목표에만 맞춰 판단",
    "zh": "先读目标、解读目标用语、只用目标来检验选项"
   }
+ },
+ {
+  "id": "cid1",
+  "k": "CID",
+  "n": 13,
+  "min": 3,
+  "t": {
+   "en": "Lesson 13 · Central Ideas & Details",
+   "ko": "13강 · 중심 생각과 세부 내용",
+   "zh": "第13课 · 中心思想与细节"
+  },
+  "d": {
+   "en": "Find the turn, summarize in one sentence, the 4 wrong-answer types, detail questions",
+   "ko": "전환점 찾기, 한 문장 요약, 오답 4유형, 세부 내용 문제",
+   "zh": "找转折点、一句话概括、四种错误选项、细节题"
+  }
+ },
+ {
+  "id": "tsp1",
+  "k": "TSP",
+  "n": 14,
+  "min": 3,
+  "t": {
+   "en": "Lesson 14 · Text Structure & Purpose",
+   "ko": "14강 · 글의 구조와 목적",
+   "zh": "第14课 · 文章结构与目的"
+  },
+  "d": {
+   "en": "Label each sentence’s job, main purpose vs. function of one sentence, matching the verb in the answer",
+   "ko": "문장마다 역할 붙이기, 전체 목적과 한 문장의 기능, 답의 동사 맞추기",
+   "zh": "给每句话标注作用、整体目的与单句功能、匹配答案中的动词"
+  }
+ },
+ {
+  "id": "cot1",
+  "k": "COT",
+  "n": 15,
+  "min": 3,
+  "t": {
+   "en": "Lesson 15 · Command of Evidence: Text",
+   "ko": "15강 · 근거 찾기: 글",
+   "zh": "第15课 · 证据题：文本"
+  },
+  "d": {
+   "en": "Find the exact claim, split it into parts, support vs. weaken, quotation questions",
+   "ko": "정확한 주장 찾기, 주장을 부분으로 쪼개기, 지지와 약화, 인용문 문제",
+   "zh": "找准论点、把论点拆成几部分、支持与削弱、引文题"
+  }
+ },
+ {
+  "id": "coq1",
+  "k": "COQ",
+  "n": 16,
+  "min": 3,
+  "t": {
+   "en": "Lesson 16 · Command of Evidence: Tables & Graphs",
+   "ko": "16강 · 근거 찾기: 표와 그래프",
+   "zh": "第16课 · 证据题：图表"
+  },
+  "d": {
+   "en": "Read the claim first, then titles, labels and units; true but irrelevant data; checking the direction of a comparison",
+   "ko": "주장부터 읽고, 제목·축·단위 확인; 사실이지만 관련 없는 데이터; 비교 방향 확인",
+   "zh": "先读论点，再看标题、坐标和单位；真实但无关的数据；检查比较方向"
+  }
+ },
+ {
+  "id": "inf1",
+  "k": "INF",
+  "n": 17,
+  "min": 3,
+  "t": {
+   "en": "Lesson 17 · Inferences",
+   "ko": "17강 · 추론",
+   "zh": "第17课 · 推理"
+  },
+  "d": {
+   "en": "The blank is a conclusion, “must be true” vs. “could be true”, following the passage’s logic, avoiding extreme answers",
+   "ko": "빈칸은 결론, \"반드시 참\"과 \"참일 수도\", 지문의 논리 따라가기, 극단적 선택지 피하기",
+   "zh": "空格是结论、“必然为真”与“可能为真”、顺着文章的逻辑、避开极端选项"
+  }
+ },
+ {
+  "id": "ctc1",
+  "k": "CTC",
+  "n": 18,
+  "min": 3,
+  "t": {
+   "en": "Lesson 18 · Cross-Text Connections",
+   "ko": "18강 · 두 지문 연결",
+   "zh": "第18课 · 双篇关联"
+  },
+  "d": {
+   "en": "One-line summary of each text, agree / disagree / qualify, responding to the exact claim",
+   "ko": "지문마다 한 줄 요약, 동의·반대·부분 동의, 정확한 주장에 대한 반응",
+   "zh": "每篇一句话概括、同意·反对·部分同意、针对确切的论点作回应"
+  }
  }
 ]

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 14 · Text Structure & Purpose</title>
+<style>
+:root{--ink:#17213b;--mut:#5b6580;--line:#e3e7f0;--pri:#2447b8;--pri2:#e8eefc;--ok:#18a058;--bad:#e0464e;--warn:#f2b632;--subj:#2f6fe4;--verb:#e0464e;--bg:#0f1730}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+.player{max-width:1100px;width:100%;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;align-items:center;gap:10px;color:#fff}.top h1{font-size:16px;margin:0;font-weight:700}.top .sp{flex:1}
+.top select,.top button{font:inherit;font-size:13px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;padding:6px 10px;cursor:pointer}
+.top select option{color:#000}
+.stagewrap{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border-radius:16px;overflow:hidden;container-type:inline-size;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.scene{position:absolute;inset:0;padding:5cqw 6cqw;display:none;flex-direction:column;gap:2.2cqw;background:linear-gradient(180deg,#fff,#f6f8fd)}
+.scene.on{display:flex;animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.kick{font-size:1.5cqw;font-weight:800;letter-spacing:.08em;color:var(--pri);text-transform:uppercase}
+.h2{font-size:3.6cqw;font-weight:800;line-height:1.2;margin:0}
+.h{opacity:0;transform:translateY(1.2cqw);transition:opacity .45s ease,transform .45s ease}
+.h.in{opacity:1;transform:none}
+.big{font-size:3.4cqw;font-weight:700;font-family:Georgia,"Times New Roman",serif;line-height:1.5}
+.tok{padding:.1em .15em;border-radius:.3em;transition:background .4s,color .4s,box-shadow .4s}
+.tok.subj{background:#dfe9ff;color:var(--subj);box-shadow:inset 0 -.2em 0 var(--subj)}
+.tok.verb{background:#ffe3e5;color:var(--verb);box-shadow:inset 0 -.2em 0 var(--verb)}
+.tok.dep{background:#fff1cc;color:#8a5a00;box-shadow:inset 0 -.2em 0 var(--warn)}
+.tok.ing{background:#eee;color:#666;text-decoration:line-through wavy #999}
+.tok.bad{background:#ffe3e5;color:var(--bad);font-weight:800}
+.tok.good{background:#ddf5e7;color:var(--ok);font-weight:800}
+.row{display:flex;align-items:center;gap:1.6cqw;flex-wrap:wrap}
+.chk{display:flex;flex-direction:column;gap:1.1cqw;font-size:2.2cqw}
+.chk div{display:flex;align-items:center;gap:1cqw}.chk i{width:2.6cqw;height:2.6cqw;border-radius:50%;border:.25cqw solid #c9d0e0;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:1.6cqw;color:#fff;transition:.4s}
+.chk .on i{background:var(--ok);border-color:var(--ok)}
+.stamp{font-size:2.4cqw;font-weight:900;border:.35cqw solid;border-radius:1cqw;padding:.4cqw 1.2cqw;transform:rotate(-6deg);display:inline-block}
+.stamp.ok{color:var(--ok);border-color:var(--ok)}.stamp.no{color:var(--bad);border-color:var(--bad)}
+.card{background:#fff;border:.15cqw solid var(--line);border-radius:1.4cqw;padding:1.8cqw 2.2cqw;box-shadow:0 .6cqw 1.8cqw rgba(23,33,59,.06)}
+.chips{display:flex;gap:1cqw;flex-wrap:wrap}.chip{font-size:2cqw;font-weight:700;border-radius:99px;padding:.5cqw 1.4cqw;background:var(--pri2);color:var(--pri)}
+.chip.y{background:#fff1cc;color:#8a5a00}
+.lbl{font-size:1.6cqw;font-weight:800;border-radius:.6cqw;padding:.3cqw .9cqw;color:#fff}
+.lbl.s{background:var(--subj)}.lbl.v{background:var(--verb)}.lbl.r{background:var(--bad)}.lbl.g{background:var(--ok)}
+.cars{display:flex;align-items:center;gap:0;font-size:2.8cqw;font-family:Georgia,serif;font-weight:700}
+.car{background:#eef3ff;border:.25cqw solid var(--pri);border-radius:1.2cqw;padding:1.2cqw 2cqw}
+.link{width:7cqw;display:grid;place-items:center;font-size:3.2cqw;font-weight:900;color:var(--bad);position:relative}
+.link.broken::after{content:"";position:absolute;left:10%;right:10%;top:50%;height:.4cqw;background:var(--bad);transform:rotate(-20deg)}
+.fix{display:grid;grid-template-columns:4.4cqw 1fr;gap:1cqw;align-items:center;font-size:2.3cqw;padding:.6cqw 0}
+.fix b.n{width:3.6cqw;height:3.6cqw;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:1.8cqw}
+.fix .s{font-family:Georgia,serif}.fix .p{color:var(--ok);font-weight:900;font-size:1.15em}
+.brace{border-left:.4cqw solid var(--warn);padding-left:1.4cqw;margin-left:1cqw;font-size:2cqw;font-weight:800;color:#8a5a00}
+.vline{display:inline-block;width:.45cqw;height:4.6cqw;background:var(--pri);vertical-align:middle;margin:0 .6cqw;transform:scaleY(0);transition:transform .5s}
+.vline.in{transform:scaleY(1)}
+.side{display:flex;gap:2cqw}.side .card{flex:1;font-size:2cqw}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:1cqw;font-size:2.1cqw}
+.choices div{border:.15cqw solid var(--line);border-radius:1cqw;padding:1cqw 1.4cqw;background:#fff;transition:.4s}
+.choices .x{opacity:.45;text-decoration:line-through}.choices .o{border-color:var(--ok);background:#e9f8ef;font-weight:800}
+.sum li{font-size:2.3cqw;margin:.8cqw 0;line-height:1.4}
+.big-ic{font-size:7cqw}
+.sub{position:absolute;left:4cqw;right:4cqw;bottom:2.4cqw;text-align:center;pointer-events:none}
+.sub span{display:inline;background:rgba(15,23,48,.86);color:#fff;font-size:2cqw;line-height:1.55;padding:.35cqw 1cqw;border-radius:.6cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub.off{display:none}.sub span:empty{display:none}
+.quiz{position:absolute;inset:0;background:rgba(15,23,48,.6);display:none;align-items:center;justify-content:center;padding:3cqw;z-index:5}
+.quiz.on{display:flex}
+.qbox{background:#fff;border-radius:2cqw;padding:3cqw;width:min(78cqw,100%);box-shadow:0 2cqw 5cqw rgba(0,0,0,.3)}
+.qbox .qk{font-size:1.6cqw;font-weight:800;color:var(--pri);letter-spacing:.06em}
+.qbox h3{font-size:2.7cqw;margin:1cqw 0 2cqw}
+.qbox button.o{display:block;width:100%;text-align:left;font:inherit;font-size:2.2cqw;border:.2cqw solid var(--line);border-radius:1.2cqw;background:#fff;padding:1.4cqw 1.8cqw;margin:.9cqw 0;cursor:pointer;font-family:Georgia,serif}
+.qbox button.o:hover{border-color:var(--pri)}
+.qbox button.o.right{border-color:var(--ok);background:#e9f8ef}.qbox button.o.wrong{border-color:var(--bad);background:#fdecee;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-.6cqw)}75%{transform:translateX(.6cqw)}}
+.qfb{font-size:2cqw;line-height:1.5;margin-top:1.2cqw;min-height:3cqw}
+.qgo{font:inherit;font-size:2cqw;font-weight:800;background:var(--pri);color:#fff;border:0;border-radius:1cqw;padding:1.2cqw 2.4cqw;cursor:pointer;margin-top:1cqw;display:none}
+.ctrl{display:flex;align-items:center;gap:8px;color:#fff}
+.ctrl button{font:inherit;font-size:15px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;cursor:pointer;min-width:44px;min-height:40px}
+.ctrl button.main{background:#ffd34d;color:#1b2340;border-color:#ffd34d;font-weight:800;min-width:96px}
+.bar{flex:1;display:flex;gap:3px;height:10px;cursor:pointer}
+.bar i{flex:1;background:rgba(255,255,255,.18);border-radius:4px;overflow:hidden;position:relative}
+.bar i b{position:absolute;inset:0;width:0;background:#ffd34d}
+.bar i.q{flex:0 0 10px;background:#7aa2ff}
+.time{font-size:13px;min-width:64px;text-align:right;opacity:.85}
+.chap{display:flex;gap:6px;flex-wrap:wrap}
+.chap button{font:inherit;font-size:12.5px;background:rgba(255,255,255,.06);color:#cfd7f2;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 10px;cursor:pointer}
+.chap button.on{background:#fff;color:var(--ink)}
+.chap button.done::before{content:"✓ ";color:#7be0a3}
+.end{position:absolute;inset:0;background:linear-gradient(135deg,#14275f,#2447b8);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.6cqw;text-align:center;z-index:6}
+.end.on{display:flex}.end h2{font-size:4cqw;margin:0}.end p{font-size:2cqw;margin:0;opacity:.9}
+.end button{font:inherit;font-size:2.1cqw;font-weight:800;border-radius:1.2cqw;padding:1.3cqw 2.6cqw;cursor:pointer;border:0}
+.end .go{background:#ffd34d;color:#1b2340}.end .re{background:rgba(255,255,255,.15);color:#fff}
+.embed .top{padding-right:52px}.note{color:#8f9bc0;font-size:12px;text-align:center}
+.pass{font-family:Georgia,"Times New Roman",serif;font-size:2.05cqw;line-height:1.6}
+.small{font-size:1.9cqw;line-height:1.5}
+.hl{background:#fff1cc;border-radius:.3em;padding:0 .15em;transition:background .4s}
+.tbl{border-collapse:collapse;font-size:1.9cqw;background:#fff}.tbl th,.tbl td{border:.15cqw solid var(--line);padding:.6cqw 1.2cqw;text-align:center}.tbl th{background:#f2f5fc}
+.tbl td.hit{background:#fff1cc;font-weight:800}
+.scene.tight{gap:1.1cqw;padding-top:3.4cqw}.scene.tight .card{padding:1cqw 1.8cqw}.scene.tight .h2{font-size:3.1cqw}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4cqw}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="player">
+  <div class="top"><h1 id="ttl"></h1><span class="sp"></span>
+    <select id="lang" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">中文</option></select>
+    <select id="spd" aria-label="Speed"><option value="0.85">0.85×</option><option value="1" selected>1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select>
+    <button id="cc" aria-pressed="true">CC</button></div>
+  <div class="stagewrap" id="stage">
+    <div id="scenes"></div>
+    <div class="sub" id="sub"><span id="subt"></span></div>
+    <div class="quiz" id="quiz"><div class="qbox"><div class="qk" id="qk"></div><h3 id="qq"></h3><div id="qo"></div><div class="qfb" id="qfb"></div><button class="qgo" id="qgo"></button></div></div>
+    <div class="end" id="end"><div class="big-ic">🎉</div><h2 id="endh"></h2><p id="endp"></p><div class="row" style="justify-content:center"><button class="go" id="endgo"></button><button class="re" id="endre"></button></div></div>
+  </div>
+  <div class="ctrl"><button id="prev" aria-label="Previous">⏮</button><button id="play" class="main"></button><button id="next" aria-label="Next">⏭</button><div class="bar" id="bar"></div><span class="time" id="time"></span></div>
+  <div class="chap" id="chap"></div>
+  <p class="note" id="note"></p>
+</div>
+<script>
+/* ===== UI strings (shared) ===== */
+const BASE={
+ en:{play:'▶ Play',pause:'❚❚ Pause',cont:'Continue ▶',check:'Check question',right:'Correct!',wrong:'Not quite. Try again.',go:'Start practice →',go0:'Back to course →',re:'Watch again',note:'If you hear nothing, check your volume. Captions advance automatically.',sum:'Summary',left:'Left side',right2:'Right side'},
+ ko:{play:'▶ 재생',pause:'❚❚ 일시정지',cont:'계속 ▶',check:'확인 문제',right:'정답이에요!',wrong:'아쉬워요. 다시 골라 보세요.',go:'연습 문제 시작 →',go0:'코스로 돌아가기 →',re:'다시 보기',note:'소리가 안 들리면 볼륨을 확인하세요. 자막은 자동으로 넘어가요.',sum:'정리',left:'왼쪽',right2:'오른쪽'},
+ zh:{play:'▶ 播放',pause:'❚❚ 暂停',cont:'继续 ▶',check:'确认题',right:'答对了！',wrong:'不对，再选一次。',go:'开始练习 →',go0:'返回课程 →',re:'重看',note:'听不到声音时请检查音量。字幕会自动前进。',sum:'总结',left:'左边',right2:'右边'}};
+const META={"id":"tsp1","k":"TSP","n":14,"title":{"en":"Lesson 14 · Text Structure & Purpose","ko":"14강 · 글의 구조와 목적","zh":"第14课 · 文章结构与目的"},"desc":{"en":"Label each sentence’s job, main purpose vs. function of one sentence, matching the verb in the answer","ko":"문장마다 역할 붙이기, 전체 목적과 한 문장의 기능, 답의 동사 맞추기","zh":"给每句话标注作用、整体目的与单句功能、匹配答案中的动词"},"endh":{"en":"Lesson 14 complete","ko":"14강 완료","zh":"第14课完成"},"endp":{"en":"Practice labeling each sentence with a job word in the margin of your mind.","ko":"문장마다 머릿속으로 역할 단어를 붙이는 연습을 해요.","zh":"练习在心里给每句话标注一个作用词。"}};
+const L={"en":{"jobs":"Sentence jobs","label":"Label every sentence","verb":"Match the verb first","func":"Function of one sentence → look before and after"},"ko":{"jobs":"문장의 역할","label":"모든 문장에 역할 붙이기","verb":"동사부터 맞추기","func":"한 문장의 기능 → 앞뒤를 보기"},"zh":{"jobs":"句子的作用","label":"给每句话贴标签","verb":"先匹配动词","func":"单句功能 → 看前后文"}};
+const UI={};for(const k of ['en','ko','zh'])UI[k]=Object.assign({},BASE[k],L[k]||{},{title:META.title[k],endh:META.endh[k],endp:META.endp[k]});
+
+/* ===== Scenes: each beat = narration (3 languages) + visual actions ===== */
+const SC=[{"id":"intro","ch":{"en":"Intro","ko":"도입","zh":"导入"},"html":"\n <div class=\"kick\">Unit 5 · Craft and Structure</div><h2 class=\"h2\" data-l=\"title\"></h2>\n <div class=\"pass card h\" id=\"i1\" style=\"font-size:2.1cqw\">Which choice best states the <b>main purpose</b> of the text?<br>Which choice best describes the <b>function of the underlined sentence</b>?<br>Which choice best describes the <b>overall structure</b> of the text?</div>","b":[{"en":"Welcome to Lesson 14. These questions do not ask what the passage says. They ask what the writer is doing.","ko":"14강에 오신 걸 환영해요. 이 유형은 지문이 무엇을 말하는지가 아니라, 글쓴이가 무엇을 하고 있는지를 물어요.","zh":"欢迎来到第14课。这类题问的不是文章说了什么，而是作者在做什么。"},{"en":"There are three versions: the main purpose, the function of one underlined sentence, and the overall structure.","ko":"세 가지 형태가 있어요. 전체 목적, 밑줄 친 한 문장의 기능, 그리고 전체 구조예요.","zh":"有三种问法：整体目的、画线句的功能，以及整体结构。","a":["in:#i1"]},{"en":"One tool solves all three: label the job of each sentence.","ko":"하나의 도구로 셋 다 풀려요. 문장마다 역할을 붙이는 거예요.","zh":"一个工具就能解决这三种题：给每句话标注它的作用。"}]},
+{"id":"jobs","ch":{"en":"Sentence jobs","ko":"문장의 역할","zh":"句子的作用"},"html":"\n <div class=\"kick\">Toolkit</div><h2 class=\"h2\" data-l=\"jobs\"></h2>\n <div class=\"chips h\" id=\"j1\" style=\"gap:1.2cqw\"><span class=\"chip\">introduces a topic</span><span class=\"chip\">describes</span><span class=\"chip\">gives an example</span><span class=\"chip\">explains a cause</span><span class=\"chip y\">presents a common view</span><span class=\"chip y\">challenges / corrects it</span><span class=\"chip\">compares</span><span class=\"chip\">offers evidence</span><span class=\"chip\">concludes</span><span class=\"chip\">raises a question</span></div>","b":[{"en":"Here are the jobs a sentence can do: introduce a topic, describe, give an example, explain a cause, compare, offer evidence, conclude, or raise a question.","ko":"문장이 할 수 있는 역할은 이런 것들이에요. 주제 소개, 묘사, 예시, 원인 설명, 비교, 근거 제시, 결론, 질문 제기.","zh":"句子可以承担的作用有：引出话题、描述、举例、解释原因、比较、提供证据、总结、提出问题。","a":["in:#j1"]},{"en":"Two jobs appear very often on the SAT: presenting a common view, and then challenging or correcting it. You saw this pattern in Lesson 13.","ko":"SAT에서 특히 자주 나오는 역할은 두 가지예요. 흔한 견해를 제시하고, 그걸 반박하거나 바로잡는 거예요. 13강에서 본 패턴이죠.","zh":"SAT中特别常见的两个作用是：提出一个普遍观点，然后质疑或纠正它。第13课里你见过这个模式。"}]},
+{"id":"label","tight":1,"ch":{"en":"Label every sentence","ko":"역할 붙이기","zh":"贴标签"},"html":"\n <div class=\"kick\">Step 1</div><h2 class=\"h2\" data-l=\"label\"></h2>\n <div class=\"pass card\" style=\"font-size:1.95cqw\"><b>(1)</b> Glaciers are often pictured as frozen, motionless sheets of ice. <b>(2)</b> <u>In fact, they flow downhill, some moving several meters a day.</u> <b>(3)</b> This movement carves deep valleys and carries boulders hundreds of kilometers. <b>(4)</b> Understanding glacier flow therefore helps geologists read the history of a landscape.</div>\n <div class=\"grid2\" style=\"gap:.6cqw 2cqw\"><div class=\"fix h\" id=\"l1\"><b class=\"n\">1</b><span>common view</span></div><div class=\"fix h\" id=\"l2\"><b class=\"n\">2</b><span>corrects it</span></div><div class=\"fix h\" id=\"l3\"><b class=\"n\">3</b><span>describes effects</span></div><div class=\"fix h\" id=\"l4\"><b class=\"n\">4</b><span>explains why it matters</span></div></div>","b":[{"en":"Let's label a passage. Sentence one: glaciers are often pictured as motionless. That is a common view.","ko":"지문에 역할을 붙여 봐요. 1번 문장: 빙하는 흔히 움직이지 않는다고 생각돼요. 흔한 견해예요.","zh":"给一篇文章贴标签。第1句：冰川常被认为是静止的。这是普遍观点。","a":["in:#l1"]},{"en":"Sentence two: 'In fact, they flow downhill.' It corrects the common view.","ko":"2번 문장: 'In fact, they flow downhill.' 흔한 견해를 바로잡아요.","zh":"第2句：In fact, they flow downhill. 纠正了普遍观点。","a":["in:#l2"]},{"en":"Sentence three describes the effects of that movement. Sentence four explains why it matters.","ko":"3번 문장은 그 움직임의 결과를 설명하고, 4번 문장은 그게 왜 중요한지 설명해요.","zh":"第3句描述这种运动的影响。第4句解释它为什么重要。","a":["in:#l3","in:#l4"]},{"en":"Now the structure question is easy: it presents a misconception, corrects it, describes effects, and states its importance.","ko":"이제 구조 문제는 쉬워요. 오해를 제시하고, 바로잡고, 결과를 설명하고, 중요성을 말해요.","zh":"现在结构题就简单了：提出误解、纠正它、描述影响、说明重要性。"},{"q":{"en":{"q":"What is the function of the underlined sentence (2)?","o":["It gives an example of a glacier that has stopped moving.","It corrects the view described in the first sentence.","It explains how geologists measure glaciers."],"e":"Sentence 1 says glaciers seem motionless. Sentence 2, starting with “In fact,” corrects that view."},"ko":{"q":"밑줄 친 문장 (2)의 기능은?","o":["움직임을 멈춘 빙하의 예를 든다.","첫 문장의 견해를 바로잡는다.","지질학자가 빙하를 측정하는 방법을 설명한다."],"e":"1번 문장은 빙하가 움직이지 않는 것 같다고 해요. In fact로 시작하는 2번 문장이 그 견해를 바로잡아요."},"zh":{"q":"画线句（2）的作用是什么？","o":["举出一个已停止移动的冰川的例子。","纠正第一句所描述的观点。","解释地质学家如何测量冰川。"],"e":"第1句说冰川看似静止。以 In fact 开头的第2句纠正了这个观点。"},"a":1}}]},
+{"id":"verb","ch":{"en":"Match the verb","ko":"동사 맞추기","zh":"匹配动词"},"html":"\n <div class=\"kick\">Step 2</div><h2 class=\"h2\" data-l=\"verb\"></h2>\n <table class=\"tbl h\" id=\"v1\" style=\"width:100%\"><tr><th>answer starts with</th><th>passage must …</th></tr>\n <tr><td><b>describe / explain</b></td><td>inform, no strong opinion</td></tr><tr><td><b>argue / advocate</b></td><td>take a clear side</td></tr><tr><td><b>challenge / dispute</b></td><td>push back on a view</td></tr><tr><td><b>compare</b></td><td>discuss two things</td></tr></table>\n <div class=\"card h\" id=\"v2\" style=\"font-size:2.1cqw\">Glacier passage → <b>explain</b> ✓ &nbsp; <b>argue</b> that glaciers should be protected ✗</div>","b":[{"en":"For main purpose questions, look at the first word of each answer choice: the verb.","ko":"전체 목적 문제에서는 선택지마다 첫 단어, 즉 동사를 보세요.","zh":"整体目的题要看每个选项的第一个词，也就是动词。","a":["in:#v1"]},{"en":"If the passage just informs, the answer says describe or explain. If it takes a side, argue. If it pushes back on a view, challenge.","ko":"지문이 정보만 전달하면 describe나 explain, 한쪽 편을 들면 argue, 어떤 견해에 반박하면 challenge예요.","zh":"如果文章只是提供信息，答案会用 describe 或 explain；如果表明立场，用 argue；如果反驳某种观点，用 challenge。"},{"en":"The glacier passage explains. A choice that says it argues glaciers should be protected uses the wrong verb, even though it sounds reasonable.","ko":"빙하 지문은 설명하는 글이에요. 빙하를 보호해야 한다고 주장한다는 선택지는 그럴듯해 보여도 동사가 틀렸어요.","zh":"冰川那篇是说明性的。说它主张应该保护冰川的选项，听起来合理，但动词错了。","a":["in:#v2"]}]},
+{"id":"func","ch":{"en":"One sentence","ko":"한 문장의 기능","zh":"单句功能"},"html":"\n <div class=\"kick\">Step 3</div><h2 class=\"h2\" data-l=\"func\"></h2>\n <div class=\"cars h\" id=\"f1\" style=\"font-size:2cqw\"><div class=\"car\">sentence before</div><div class=\"link\" style=\"color:var(--pri)\">←</div><div class=\"car\" style=\"border-color:var(--warn);background:#fff8e1\">underlined</div><div class=\"link\" style=\"color:var(--pri)\">→</div><div class=\"car\">sentence after</div></div>\n <div class=\"card h\" id=\"f2\" style=\"font-size:2.1cqw\">Does it support, contrast, give an example of, or explain the cause of the sentence next to it?</div>","b":[{"en":"For the function of one underlined sentence, you cannot judge it alone. Read the sentence before and the sentence after.","ko":"밑줄 친 한 문장의 기능은 그 문장만 봐서는 알 수 없어요. 앞 문장과 뒤 문장을 읽으세요.","zh":"画线句的作用不能孤立判断。要读它前面和后面的句子。","a":["in:#f1"]},{"en":"Then ask: does it support the sentence before? Contrast with it? Give an example? Explain a cause?","ko":"그리고 물어요. 앞 문장을 뒷받침하나? 대조하나? 예를 드나? 원인을 설명하나?","zh":"然后问：它是在支持前一句？与之对比？举例？还是解释原因？","a":["in:#f2"]},{"en":"Wrong answers often describe the content of the sentence correctly but give it the wrong job.","ko":"오답은 그 문장의 내용은 맞게 말하지만 역할을 잘못 짚는 경우가 많아요.","zh":"错误选项往往正确描述了句子的内容，却说错了它的作用。"}]},
+{"id":"example","ch":{"en":"Solve together","ko":"같이 풀기","zh":"一起做题"},"html":"\n <div class=\"kick\">SAT-style example</div>\n <div class=\"pass card\" style=\"font-size:1.95cqw\">Urban planners have long treated street trees mainly as decoration. A 2021 study of three cities, however, found that blocks with dense tree cover were up to 4°C cooler in summer than nearby blocks without trees. The researchers also recorded lower energy use for air conditioning on the shaded blocks. Trees, the study suggests, may be essential city infrastructure.</div>\n <div class=\"choices\" style=\"grid-template-columns:1fr;font-size:1.85cqw\"><div id=\"x1\">A) To describe how planners choose which trees to plant</div><div id=\"x2\">B) To present findings that challenge the view that street trees are mainly decorative</div><div id=\"x3\">C) To argue that air conditioning should be banned in cities</div><div id=\"x4\">D) To compare the climates of three cities</div></div>","b":[{"en":"Let's solve one. Label it. Sentence one: a common view, trees are decoration. Sentence two: 'however,' a study found cooler blocks.","ko":"한 문제 풀어 봐요. 역할을 붙여요. 1번: 흔한 견해, 나무는 장식이다. 2번: however, 연구에서 더 시원한 구역이 발견됐어요.","zh":"做一道题。贴标签。第1句：普遍观点，树只是装饰。第2句：however，研究发现有树的街区更凉爽。"},{"en":"Sentence three adds more evidence. Sentence four concludes that trees may be essential. So the passage presents evidence that challenges a view.","ko":"3번은 근거를 더하고, 4번은 나무가 필수일 수 있다고 결론 내려요. 그러니까 견해에 도전하는 근거를 제시하는 글이에요.","zh":"第3句补充证据，第4句得出结论：树可能是必不可少的。所以这篇文章是在提出挑战某种观点的证据。"},{"en":"A and D are not discussed. C goes much too far. The answer is B.","ko":"A와 D는 지문에서 다루지 않아요. C는 너무 지나쳐요. 정답은 B예요.","zh":"A 和 D 文章没有讨论。C 走得太远了。答案是 B。","a":["add:#x1:x","add:#x3:x","add:#x4:x","add:#x2:o"]}]},
+{"id":"summary","ch":{"en":"Summary","ko":"정리","zh":"总结"},"html":"\n <div class=\"kick\" data-l=\"sum\"></div><h2 class=\"h2\">📌 Lesson 14</h2>\n <ul class=\"sum card\"><li class=\"h\" id=\"z1\">Label every sentence with a job</li>\n <li class=\"h\" id=\"z2\">common view → <i>however / in fact</i> → correction</li>\n <li class=\"h\" id=\"z3\">Purpose: match the verb (describe · argue · challenge · compare)</li>\n <li class=\"h\" id=\"z4\">One sentence: read before and after → what job?</li></ul>","b":[{"en":"Let's review. Label every sentence with a job.","ko":"정리할게요. 모든 문장에 역할을 붙이세요.","zh":"我们来总结。给每句话贴上作用标签。","a":["in:#z1"]},{"en":"Watch for the common view followed by a correction.","ko":"흔한 견해 다음에 오는 바로잡기를 주의해서 보세요.","zh":"注意普遍观点后面紧跟的纠正。","a":["in:#z2"]},{"en":"For purpose, match the verb first.","ko":"목적 문제는 동사부터 맞추세요.","zh":"目的题先匹配动词。","a":["in:#z3"]},{"en":"For one sentence, read the sentences around it. Next lesson: textual evidence. See you in Lesson 15!","ko":"한 문장의 기능은 주변 문장을 읽으세요. 다음은 글 속 근거 찾기예요. 15강에서 만나요!","zh":"单句功能题要读它周围的句子。下一课：文本证据。第15课见！","a":["in:#z4"]}]}];
+
+/* ===== Player engine ===== */
+const $=s=>document.querySelector(s);
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q)return q;const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');return s.lang||'en'}catch(e){return 'en'}})();
+if(!UI[LANG])LANG='en';
+const FLAT=[];SC.forEach((s,si)=>s.b.forEach((b,bi)=>FLAT.push({si,bi,b})));
+let pos=0,playing=false,timer=null,speed=1,cc=true,done=new Set(),utter=null,token=0;
+function t(k){return (UI[LANG]||UI.en)[k]||UI.en[k]||k}
+function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene${s.tight?' tight':''}" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function applyStatic(){document.documentElement.lang=LANG==='zh'?'zh-CN':LANG;$('#ttl').textContent=t('title');document.title=t('title');$('#note').textContent=t('note');$('#lang').value=LANG;
+  $('#endh').textContent=t('endh');$('#endp').textContent=t('endp');$('#endgo').textContent=META.k==='GEN'?t('go0'):t('go');$('#endre').textContent=t('re');
+  document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l));chapters();bar();setPlay()}
+function chapters(){$('#chap').innerHTML=SC.map((s,i)=>`<button data-c="${i}" class="${FLAT[pos]&&FLAT[pos].si===i?'on':''} ${done.has(i)?'done':''}">${i+1}. ${s.ch[LANG]||s.ch.en}</button>`).join('')}
+function bar(){const segs=SC.map((s,i)=>{const idx=FLAT.map((f,k)=>f.si===i?k:-1).filter(k=>k>=0);const a=idx[0],z=idx[idx.length-1];const p=pos<a?0:pos>z?100:Math.round((pos-a+ (playing?0.5:0))/(z-a+1)*100);return`<i data-c="${i}"><b style="width:${p}%"></b></i>`});$('#bar').innerHTML=segs.join('');
+  const tot=FLAT.length;$('#time').textContent=`${Math.min(pos+1,tot)} / ${tot}`}
+function setPlay(){$('#play').textContent=playing?t('pause'):t('play')}
+function resetScene(si){const el=$('#sc'+si);el.innerHTML=SC[si].html;el.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function act(a){const[k,sel,v]=a.split(':');const el=document.querySelector(sel);if(!el)return;if(k==='in')el.classList.add('in');if(k==='add')el.classList.add(v);if(k==='text')el.textContent=v}
+function show(p,replay){const f=FLAT[p];if(!f)return;document.querySelectorAll('.scene').forEach((e,i)=>e.classList.toggle('on',i===f.si));
+  if(replay){resetScene(f.si);FLAT.forEach((g,k)=>{if(g.si===f.si&&k<p&&g.b.a)g.b.a.forEach(act)})}
+  if(f.b.a)f.b.a.forEach(act);chapters();bar()}
+function txt(b){return b[LANG]||b.en}
+function stopSpeech(){token++;clearTimeout(timer);stopAud();try{speechSynthesis.cancel()}catch(e){}}
+let MAN=null,AUD=null;const LID=META.id;
+function loadMan(){MAN=null;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.lang===LANG)MAN=m}).catch(()=>{})}
+function stopAud(){if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
+function speak(text,cb,idx){const my=++token;let fired=false;const fin=()=>{if(fired||my!==token)return;fired=true;cb()};
+  const rec=MAN&&idx!=null&&MAN.beats[idx];
+  if(rec){stopAud();AUD=new Audio('../audio/'+rec.file);AUD.playbackRate=speed;AUD.onended=fin;AUD.onerror=()=>{AUD=null;timer=setTimeout(fin,Math.max(2200,text.length/14*1000))};AUD.play().catch(()=>{timer=setTimeout(fin,(rec.dur||3)*1000/speed)});timer=setTimeout(fin,((rec.dur||3)/speed+4)*1000);return}
+  const cps={en:14,ko:7,zh:5}[LANG]*speed;const est=Math.max(2200,text.length/cps*1000)+500;
+  try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);const lc={en:'en-US',ko:'ko-KR',zh:'zh-CN'}[LANG];u.lang=lc;u.rate=speed*(LANG==='en'?0.98:1);
+    const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lc.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lc.slice(0,2)));
+    if(v){u.voice=v;u.onend=fin;u.onerror=()=>{timer=setTimeout(fin,est)};speechSynthesis.speak(u);timer=setTimeout(fin,est*2.2);return}}}catch(e){}
+  timer=setTimeout(fin,est)}
+function step(){const f=FLAT[pos];if(!f){finish();return}
+  if(f.b.q){showQuiz(f.b.q);return}
+  $('#subt').textContent=txt(f.b);speak(txt(f.b),()=>{if(!playing)return;pos++;if(FLAT[pos]&&FLAT[pos].si!==f.si)done.add(f.si);if(pos>=FLAT.length){done.add(f.si);finish();return}show(pos);step()},pos)}
+function play(){if(pos>=FLAT.length){pos=0;show(0,true)}playing=true;setPlay();$('#end').classList.remove('on');show(pos);step()}
+function pause(){playing=false;stopSpeech();setPlay();bar()}
+function jump(p){stopSpeech();$('#quiz').classList.remove('on');pos=Math.max(0,Math.min(FLAT.length-1,p));show(pos,true);if(playing)step();else{$('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)}}
+function sceneStart(i){return FLAT.findIndex(f=>f.si===i)}
+function showQuiz(q){stopSpeech();const d=q[LANG]||q.en;$('#qk').textContent=t('check');$('#qq').textContent=d.q;$('#qfb').textContent='';$('#qgo').style.display='none';$('#qgo').textContent=t('cont');
+  $('#qo').innerHTML=d.o.map((o,i)=>`<button class="o" data-i="${i}">${String.fromCharCode(65+i)}) ${o}</button>`).join('');$('#quiz').classList.add('on');$('#subt').textContent='';
+  const say=d.q;speak(say,()=>{},pos);
+  $('#qo').onclick=e=>{const b=e.target.closest('button.o');if(!b)return;const i=+b.dataset.i;if(i===q.a){b.classList.add('right');$('#qfb').innerHTML=`<b style="color:var(--ok)">${t('right')}</b> ${d.e}`;$('#qgo').style.display='inline-block';$('#qo').onclick=null;speak(t('right'),()=>{})}else{b.classList.add('wrong');$('#qfb').innerHTML=`<b style="color:var(--bad)">${t('wrong')}</b>`;setTimeout(()=>b.classList.remove('wrong'),400)}}}
+$('#qgo').onclick=()=>{$('#quiz').classList.remove('on');pos++;if(pos>=FLAT.length){finish();return}show(pos);if(playing)step();else play()};
+function finish(){playing=false;stopSpeech();setPlay();SC.forEach((s,i)=>done.add(i));chapters();bar();$('#end').classList.add('on');$('#subt').textContent='';try{parent.postMessage({type:'lessonDone',id:META.id},'*')}catch(e){}}
+$('#endgo').onclick=()=>{try{if(parent!==window){parent.postMessage({type:'lessonPractice',k:META.k},'*');return}}catch(e){}location.href='../index.html#train'};
+$('#endre').onclick=()=>{done.clear();pos=0;$('#end').classList.remove('on');show(0,true);play()};
+$('#play').onclick=()=>playing?pause():play();
+$('#next').onclick=()=>{const si=FLAT[pos].si;const n=sceneStart(si+1);if(n>=0)jump(n)};
+$('#prev').onclick=()=>{const si=FLAT[pos].si,st=sceneStart(si);jump(pos>st?st:sceneStart(Math.max(0,si-1)))};
+$('#chap').onclick=e=>{const b=e.target.closest('button');if(b)jump(sceneStart(+b.dataset.c))};
+$('#bar').onclick=e=>{const i=e.target.closest('i');if(i)jump(sceneStart(+i.dataset.c))};
+$('#lang').onchange=e=>{LANG=e.target.value;try{const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');s.lang=LANG;localStorage.setItem('rwlab_v1',JSON.stringify(s))}catch(x){}const was=playing;stopSpeech();loadMan();buildScenes();applyStatic();show(pos,true);if(was)step();else $('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)};
+$('#spd').onchange=e=>{speed=+e.target.value;if(AUD)AUD.playbackRate=speed;if(playing){stopSpeech();step()}};
+$('#cc').onclick=()=>{cc=!cc;$('#sub').classList.toggle('off',!cc);$('#cc').setAttribute('aria-pressed',cc)};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(e.code==='Space'){e.preventDefault();playing?pause():play()}if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
+try{speechSynthesis.onvoiceschanged=()=>{}}catch(e){}
+if(parent!==window)document.body.classList.add('embed');loadMan();buildScenes();applyStatic();show(0);$('#subt').textContent=txt(FLAT[0].b);
+</script>
+</body>
+</html>

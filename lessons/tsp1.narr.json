@@ -1,0 +1,121 @@
+{
+ "id": "tsp1",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 14. These questions do not ask what the passage says. They ask what the writer is doing.",
+   "ko": "14강에 오신 걸 환영해요. 이 유형은 지문이 무엇을 말하는지가 아니라, 글쓴이가 무엇을 하고 있는지를 물어요.",
+   "zh": "欢迎来到第14课。这类题问的不是文章说了什么，而是作者在做什么。"
+  },
+  {
+   "en": "There are three versions: the main purpose, the function of one underlined sentence, and the overall structure.",
+   "ko": "세 가지 형태가 있어요. 전체 목적, 밑줄 친 한 문장의 기능, 그리고 전체 구조예요.",
+   "zh": "有三种问法：整体目的、画线句的功能，以及整体结构。"
+  },
+  {
+   "en": "One tool solves all three: label the job of each sentence.",
+   "ko": "하나의 도구로 셋 다 풀려요. 문장마다 역할을 붙이는 거예요.",
+   "zh": "一个工具就能解决这三种题：给每句话标注它的作用。"
+  },
+  {
+   "en": "Here are the jobs a sentence can do: introduce a topic, describe, give an example, explain a cause, compare, offer evidence, conclude, or raise a question.",
+   "ko": "문장이 할 수 있는 역할은 이런 것들이에요. 주제 소개, 묘사, 예시, 원인 설명, 비교, 근거 제시, 결론, 질문 제기.",
+   "zh": "句子可以承担的作用有：引出话题、描述、举例、解释原因、比较、提供证据、总结、提出问题。"
+  },
+  {
+   "en": "Two jobs appear very often on the SAT: presenting a common view, and then challenging or correcting it. You saw this pattern in Lesson 13.",
+   "ko": "SAT에서 특히 자주 나오는 역할은 두 가지예요. 흔한 견해를 제시하고, 그걸 반박하거나 바로잡는 거예요. 13강에서 본 패턴이죠.",
+   "zh": "SAT中特别常见的两个作用是：提出一个普遍观点，然后质疑或纠正它。第13课里你见过这个模式。"
+  },
+  {
+   "en": "Let's label a passage. Sentence one: glaciers are often pictured as motionless. That is a common view.",
+   "ko": "지문에 역할을 붙여 봐요. 1번 문장: 빙하는 흔히 움직이지 않는다고 생각돼요. 흔한 견해예요.",
+   "zh": "给一篇文章贴标签。第1句：冰川常被认为是静止的。这是普遍观点。"
+  },
+  {
+   "en": "Sentence two: 'In fact, they flow downhill.' It corrects the common view.",
+   "ko": "2번 문장: 'In fact, they flow downhill.' 흔한 견해를 바로잡아요.",
+   "zh": "第2句：In fact, they flow downhill. 纠正了普遍观点。"
+  },
+  {
+   "en": "Sentence three describes the effects of that movement. Sentence four explains why it matters.",
+   "ko": "3번 문장은 그 움직임의 결과를 설명하고, 4번 문장은 그게 왜 중요한지 설명해요.",
+   "zh": "第3句描述这种运动的影响。第4句解释它为什么重要。"
+  },
+  {
+   "en": "Now the structure question is easy: it presents a misconception, corrects it, describes effects, and states its importance.",
+   "ko": "이제 구조 문제는 쉬워요. 오해를 제시하고, 바로잡고, 결과를 설명하고, 중요성을 말해요.",
+   "zh": "现在结构题就简单了：提出误解、纠正它、描述影响、说明重要性。"
+  },
+  {
+   "q": 1,
+   "en": "What is the function of the underlined sentence (2)?",
+   "ko": "밑줄 친 문장 (2)의 기능은?",
+   "zh": "画线句（2）的作用是什么？"
+  },
+  {
+   "en": "For main purpose questions, look at the first word of each answer choice: the verb.",
+   "ko": "전체 목적 문제에서는 선택지마다 첫 단어, 즉 동사를 보세요.",
+   "zh": "整体目的题要看每个选项的第一个词，也就是动词。"
+  },
+  {
+   "en": "If the passage just informs, the answer says describe or explain. If it takes a side, argue. If it pushes back on a view, challenge.",
+   "ko": "지문이 정보만 전달하면 describe나 explain, 한쪽 편을 들면 argue, 어떤 견해에 반박하면 challenge예요.",
+   "zh": "如果文章只是提供信息，答案会用 describe 或 explain；如果表明立场，用 argue；如果反驳某种观点，用 challenge。"
+  },
+  {
+   "en": "The glacier passage explains. A choice that says it argues glaciers should be protected uses the wrong verb, even though it sounds reasonable.",
+   "ko": "빙하 지문은 설명하는 글이에요. 빙하를 보호해야 한다고 주장한다는 선택지는 그럴듯해 보여도 동사가 틀렸어요.",
+   "zh": "冰川那篇是说明性的。说它主张应该保护冰川的选项，听起来合理，但动词错了。"
+  },
+  {
+   "en": "For the function of one underlined sentence, you cannot judge it alone. Read the sentence before and the sentence after.",
+   "ko": "밑줄 친 한 문장의 기능은 그 문장만 봐서는 알 수 없어요. 앞 문장과 뒤 문장을 읽으세요.",
+   "zh": "画线句的作用不能孤立判断。要读它前面和后面的句子。"
+  },
+  {
+   "en": "Then ask: does it support the sentence before? Contrast with it? Give an example? Explain a cause?",
+   "ko": "그리고 물어요. 앞 문장을 뒷받침하나? 대조하나? 예를 드나? 원인을 설명하나?",
+   "zh": "然后问：它是在支持前一句？与之对比？举例？还是解释原因？"
+  },
+  {
+   "en": "Wrong answers often describe the content of the sentence correctly but give it the wrong job.",
+   "ko": "오답은 그 문장의 내용은 맞게 말하지만 역할을 잘못 짚는 경우가 많아요.",
+   "zh": "错误选项往往正确描述了句子的内容，却说错了它的作用。"
+  },
+  {
+   "en": "Let's solve one. Label it. Sentence one: a common view, trees are decoration. Sentence two: 'however,' a study found cooler blocks.",
+   "ko": "한 문제 풀어 봐요. 역할을 붙여요. 1번: 흔한 견해, 나무는 장식이다. 2번: however, 연구에서 더 시원한 구역이 발견됐어요.",
+   "zh": "做一道题。贴标签。第1句：普遍观点，树只是装饰。第2句：however，研究发现有树的街区更凉爽。"
+  },
+  {
+   "en": "Sentence three adds more evidence. Sentence four concludes that trees may be essential. So the passage presents evidence that challenges a view.",
+   "ko": "3번은 근거를 더하고, 4번은 나무가 필수일 수 있다고 결론 내려요. 그러니까 견해에 도전하는 근거를 제시하는 글이에요.",
+   "zh": "第3句补充证据，第4句得出结论：树可能是必不可少的。所以这篇文章是在提出挑战某种观点的证据。"
+  },
+  {
+   "en": "A and D are not discussed. C goes much too far. The answer is B.",
+   "ko": "A와 D는 지문에서 다루지 않아요. C는 너무 지나쳐요. 정답은 B예요.",
+   "zh": "A 和 D 文章没有讨论。C 走得太远了。答案是 B。"
+  },
+  {
+   "en": "Let's review. Label every sentence with a job.",
+   "ko": "정리할게요. 모든 문장에 역할을 붙이세요.",
+   "zh": "我们来总结。给每句话贴上作用标签。"
+  },
+  {
+   "en": "Watch for the common view followed by a correction.",
+   "ko": "흔한 견해 다음에 오는 바로잡기를 주의해서 보세요.",
+   "zh": "注意普遍观点后面紧跟的纠正。"
+  },
+  {
+   "en": "For purpose, match the verb first.",
+   "ko": "목적 문제는 동사부터 맞추세요.",
+   "zh": "目的题先匹配动词。"
+  },
+  {
+   "en": "For one sentence, read the sentences around it. Next lesson: textual evidence. See you in Lesson 15!",
+   "ko": "한 문장의 기능은 주변 문장을 읽으세요. 다음은 글 속 근거 찾기예요. 15강에서 만나요!",
+   "zh": "单句功能题要读它周围的句子。下一课：文本证据。第15课见！"
+  }
+ ]
+}

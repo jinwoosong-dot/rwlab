@@ -1,0 +1,106 @@
+{
+ "id": "coq1",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 16. These questions come with a table or a graph and a short passage.",
+   "ko": "16강에 오신 걸 환영해요. 이 유형은 표나 그래프와 짧은 지문이 함께 나와요.",
+   "zh": "欢迎来到第16课。这类题配有一个表格或图表，以及一段短文。"
+  },
+  {
+   "en": "Many students start by studying the whole table. That wastes time. Most of the data is not needed.",
+   "ko": "많은 학생이 표 전체를 먼저 분석해요. 그건 시간 낭비예요. 데이터 대부분은 필요 없어요.",
+   "zh": "很多学生一上来就研究整个表格。这很浪费时间，大部分数据根本用不到。"
+  },
+  {
+   "en": "Step one: read the question and the sentence with the claim or blank. That tells you exactly which data you need.",
+   "ko": "1단계, 질문과 주장 또는 빈칸이 있는 문장을 읽어요. 그래야 어떤 데이터가 필요한지 정확히 알 수 있어요.",
+   "zh": "第一步：读问题和含有论点或空格的句子。这会告诉你到底需要哪些数据。"
+  },
+  {
+   "en": "Step two: read the table title, the labels, and the units. Is it percent, number, or years?",
+   "ko": "2단계, 표 제목, 항목 이름, 단위를 읽어요. 퍼센트인가요, 개수인가요, 연도인가요?",
+   "zh": "第二步：读表格标题、标签和单位。是百分比、数量还是年份？"
+  },
+  {
+   "en": "Step three: find only the rows or bars the claim talks about. Ignore the rest.",
+   "ko": "3단계, 주장이 말하는 줄이나 막대만 찾으세요. 나머지는 무시해요.",
+   "zh": "第三步：只找论点提到的那几行或那几根柱子，其余的忽略。"
+  },
+  {
+   "en": "Here is a table with fictional data: the percent of students who bike to school in three cities, in 2015 and 2023.",
+   "ko": "가상의 데이터 표예요. 세 도시에서 자전거로 등교하는 학생의 비율을 2015년과 2023년으로 보여 줘요.",
+   "zh": "这是一张虚构数据的表格：三座城市骑自行车上学的学生比例，分2015年和2023年。"
+  },
+  {
+   "en": "The claim: after Arden built bike lanes, biking to school rose sharply there.",
+   "ko": "주장은 이거예요. Arden에 자전거 전용 도로가 생긴 뒤, 그곳의 자전거 등교가 크게 늘었다.",
+   "zh": "论点是：Arden 修建自行车道后，那里骑车上学的比例大幅上升。"
+  },
+  {
+   "en": "So we need only one row: Arden. Twelve percent in 2015, thirty-one percent in 2023. That is a sharp rise.",
+   "ko": "그러니까 필요한 건 Arden 한 줄뿐이에요. 2015년 12퍼센트, 2023년 31퍼센트. 크게 늘었어요.",
+   "zh": "所以只需要一行：Arden。2015年12%，2023年31%。大幅上升。"
+  },
+  {
+   "en": "Every choice needs two checks. First: is it accurate to the data? Second: does it prove the claim?",
+   "ko": "선택지마다 두 가지를 확인해요. 첫째, 데이터와 정확히 맞나? 둘째, 주장을 증명하나?",
+   "zh": "每个选项要做两项检查。第一：与数据准确相符吗？第二：能证明论点吗？"
+  },
+  {
+   "en": "'In 2023, twenty percent of Belmont students biked.' That is true, but it is about the wrong city. It fails check two.",
+   "ko": "'In 2023, 20% of Belmont students biked.' 사실이지만 다른 도시 얘기예요. 두 번째 확인에서 탈락이에요.",
+   "zh": "In 2023, 20% of Belmont students biked. 这是真的，但说的是另一座城市。第二项检查不通过。"
+  },
+  {
+   "en": "'Arden's rate fell from thirty-one to twelve.' The numbers are right, but the direction is reversed. It fails check one.",
+   "ko": "'Arden's rate fell from 31% to 12%.' 숫자는 맞지만 방향이 거꾸로예요. 첫 번째 확인에서 탈락이에요.",
+   "zh": "Arden's rate fell from 31% to 12%. 数字对，但方向反了。第一项检查不通过。"
+  },
+  {
+   "en": "Only the last choice passes both checks.",
+   "ko": "두 가지를 모두 통과하는 건 마지막 선택지뿐이에요.",
+   "zh": "只有最后一个选项两项都通过。"
+  },
+  {
+   "en": "Harder questions use comparison claims. 'Arden's increase was larger than the change in the other two cities.'",
+   "ko": "어려운 문제는 비교 주장을 써요. 'Arden's increase was larger than the change in the other two cities.'",
+   "zh": "难题会用比较型论点：Arden's increase was larger than the change in the other two cities."
+  },
+  {
+   "en": "Now one row is not enough. You need data for all three cities: Arden up nineteen points, Belmont up two, Corwin down three.",
+   "ko": "이제 한 줄로는 부족해요. 세 도시 데이터가 모두 필요해요. Arden은 19포인트 증가, Belmont는 2포인트 증가, Corwin은 3포인트 감소.",
+   "zh": "这时一行就不够了，需要三座城市的数据：Arden 上升19个百分点，Belmont 上升2个，Corwin 下降3个。"
+  },
+  {
+   "en": "Words like 'more than,' 'unlike,' and 'only' tell you how many items the answer must include.",
+   "ko": "more than, unlike, only 같은 말이 정답에 몇 개의 항목이 들어가야 하는지 알려 줘요.",
+   "zh": "more than、unlike、only 这类词告诉你答案必须包含几个对象。"
+  },
+  {
+   "q": 1,
+   "en": "Claim: “Corwin was the only city where biking to school declined.” Which data support it?",
+   "ko": "주장: “Corwin은 자전거 등교가 줄어든 유일한 도시였다.” 이를 뒷받침하는 데이터는?",
+   "zh": "论点：“Corwin 是唯一一个骑车上学比例下降的城市。”哪项数据支持它？"
+  },
+  {
+   "en": "Let's review. Read the claim first, then the title, labels, and units, then only the rows you need.",
+   "ko": "정리할게요. 주장을 먼저 읽고, 제목·항목·단위를 본 다음, 필요한 줄만 보세요.",
+   "zh": "我们来总结。先读论点，再看标题、标签和单位，然后只看需要的行。"
+  },
+  {
+   "en": "Check every choice twice: is it accurate, and does it prove the claim?",
+   "ko": "선택지마다 두 번 확인하세요. 정확한가, 그리고 주장을 증명하나?",
+   "zh": "每个选项检查两次：准确吗？能证明论点吗？"
+  },
+  {
+   "en": "True but irrelevant data is wrong, and so is a reversed direction.",
+   "ko": "사실이지만 관련 없는 데이터도 오답이고, 방향이 거꾸로인 것도 오답이에요.",
+   "zh": "真实但无关的数据是错的，方向相反的也是错的。"
+  },
+  {
+   "en": "And comparison words tell you how much data you need. Next lesson: inferences. See you in Lesson 17!",
+   "ko": "그리고 비교 표현이 필요한 데이터의 양을 알려 줘요. 다음은 추론이에요. 17강에서 만나요!",
+   "zh": "比较词告诉你需要多少数据。下一课：推理。第17课见！"
+  }
+ ]
+}
