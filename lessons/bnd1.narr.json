@@ -1,0 +1,203 @@
+{
+ "id": "bnd1",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 1. Today we start with punctuation, the fastest points you can earn on SAT Reading and Writing.",
+   "ko": "1강에 오신 걸 환영해요. 오늘은 SAT Reading and Writing에서 가장 빨리 점수를 올릴 수 있는 구두점부터 시작해요.",
+   "zh": "欢迎来到第1课。今天我们从标点开始，这是SAT阅读与写作中提分最快的部分。"
+  },
+  {
+   "en": "Punctuation questions follow fixed rules. Once you know the rules, you can answer each one in about thirty seconds.",
+   "ko": "구두점 문제는 규칙이 정해져 있어요. 규칙만 알면 한 문제를 30초 정도에 풀 수 있어요.",
+   "zh": "标点题有固定规则。掌握规则后，每道题大约30秒就能做完。"
+  },
+  {
+   "en": "And almost every punctuation question starts with one question: is this a complete sentence? Let's learn exactly what that means.",
+   "ko": "그리고 거의 모든 구두점 문제는 한 가지 질문에서 시작해요. 이게 완전한 문장인가? 그 뜻을 정확히 배워 봐요.",
+   "zh": "几乎所有标点题都从一个问题开始：这是完整句子吗？我们来准确理解它的意思。"
+  },
+  {
+   "en": "A complete sentence, also called an independent clause, needs three things.",
+   "ko": "완전한 문장, 다른 말로 독립절에는 세 가지가 꼭 있어야 해요.",
+   "zh": "完整句子，也叫独立分句，必须具备三样东西。"
+  },
+  {
+   "en": "First, a subject: who or what the sentence is about. Here, the subject is 'the bridge.'",
+   "ko": "첫째, 주어. 문장이 누구 또는 무엇에 관한 것인지예요. 여기서는 'the bridge'가 주어예요.",
+   "zh": "第一，主语：句子说的是谁或什么。这里的主语是 the bridge。"
+  },
+  {
+   "en": "Second, a verb with a tense: something that happened, happens, or will happen. Here, 'opened,' in the past tense.",
+   "ko": "둘째, 시제가 있는 동사. 일어났거나, 일어나거나, 일어날 일이에요. 여기서는 과거 시제 'opened'예요.",
+   "zh": "第二，有时态的动词：已经发生、正在发生或将要发生的事。这里是过去时的 opened。"
+  },
+  {
+   "en": "Third, it must be able to stand alone. Read it by itself: 'The bridge opened in 1937.' It makes complete sense, so it is a complete sentence.",
+   "ko": "셋째, 혼자 설 수 있어야 해요. 따로 읽어 보세요. 'The bridge opened in 1937.' 이것만으로 뜻이 끝나니까 완전한 문장이에요.",
+   "zh": "第三，它必须能独立成句。单独读一遍：The bridge opened in 1937. 意思完整，所以是完整句子。"
+  },
+  {
+   "en": "Now look at this: 'Although the bridge opened in 1937.' It has a subject and a verb, but something is missing.",
+   "ko": "이번엔 이걸 보세요. 'Although the bridge opened in 1937.' 주어도 있고 동사도 있는데, 뭔가 빠졌어요.",
+   "zh": "再看这个：Although the bridge opened in 1937. 有主语也有动词，但缺了点什么。"
+  },
+  {
+   "en": "The word 'although' makes us wait for more. Although the bridge opened... then what? It cannot stand alone, so it is not complete.",
+   "ko": "'although'가 뒷말을 기다리게 만들어요. 다리가 개통됐지만... 그래서 뭐요? 혼자 설 수 없으니까 완전한 문장이 아니에요.",
+   "zh": "although 让我们等着后面的话。虽然桥开通了……然后呢？它不能独立成句，所以不完整。"
+  },
+  {
+   "en": "Words like although, because, when, if, and which turn a sentence into a dependent clause. Watch for them.",
+   "ko": "although, because, when, if, which 같은 말이 붙으면 문장이 종속절로 바뀌어요. 이 단어들을 꼭 보세요.",
+   "zh": "although、because、when、if、which 这类词会把句子变成从句。一定要留意它们。"
+  },
+  {
+   "en": "Here is another one: 'The bridge opening in 1937.' 'Opening' is an i-n-g form, not a verb with a tense. No tensed verb, so it is not complete either.",
+   "ko": "하나 더 볼게요. 'The bridge opening in 1937.' 'opening'은 ing 형태라서 시제 있는 동사가 아니에요. 시제 있는 동사가 없으니 이것도 불완전해요.",
+   "zh": "再看一个：The bridge opening in 1937. opening 是 ing 形式，不是有时态的动词。没有时态动词，所以也不完整。"
+  },
+  {
+   "q": 1,
+   "en": "Which one is a complete sentence?",
+   "ko": "완전한 문장은 어느 것일까요?",
+   "zh": "哪一个是完整句子？"
+  },
+  {
+   "en": "Most SAT punctuation questions put two complete sentences side by side. Our job is to join them correctly.",
+   "ko": "SAT 구두점 문제는 대부분 완전한 문장 두 개를 나란히 놓아요. 우리가 할 일은 둘을 올바르게 연결하는 거예요.",
+   "zh": "SAT大多数标点题会把两个完整句子并排放在一起。我们的任务是正确地连接它们。"
+  },
+  {
+   "en": "If you put nothing between them, it is called a run-on sentence. 'The rain stopped the game continued.' That is wrong.",
+   "ko": "사이에 아무것도 안 넣으면 run-on 문장이라고 해요. 'The rain stopped the game continued.' 틀린 문장이에요.",
+   "zh": "如果中间什么都不加，就叫 run-on（连写句）。The rain stopped the game continued. 这是错的。"
+  },
+  {
+   "en": "If you put only a comma between them, it is called a comma splice. A comma is too weak to hold two complete sentences together.",
+   "ko": "사이에 쉼표 하나만 넣으면 comma splice라고 해요. 쉼표 하나로는 완전한 문장 두 개를 붙잡을 힘이 없어요.",
+   "zh": "如果中间只有一个逗号，就叫 comma splice（逗号粘连）。一个逗号的力量不足以连接两个完整句子。"
+  },
+  {
+   "en": "Remember this rule: complete sentence, comma, complete sentence is always wrong on the SAT.",
+   "ko": "이 규칙을 기억하세요. 완전한 문장, 쉼표, 완전한 문장은 SAT에서 무조건 오답이에요.",
+   "zh": "记住这条规则：完整句子、逗号、完整句子，在SAT中一定是错的。"
+  },
+  {
+   "en": "So how do we fix it? There are five correct ways.",
+   "ko": "그럼 어떻게 고칠까요? 올바른 방법은 다섯 가지예요.",
+   "zh": "那怎么改呢？正确的方法有五种。"
+  },
+  {
+   "en": "One: a period. 'The rain stopped. The game continued.' Two separate sentences.",
+   "ko": "첫째, 마침표. 'The rain stopped. The game continued.' 두 문장으로 나누는 거예요.",
+   "zh": "第一，句号。The rain stopped. The game continued. 分成两个句子。"
+  },
+  {
+   "en": "Two: a semicolon. A semicolon works like a soft period, so it needs a complete sentence on both sides.",
+   "ko": "둘째, 세미콜론. 세미콜론은 부드러운 마침표 같은 거라서 양쪽에 완전한 문장이 있어야 해요.",
+   "zh": "第二，分号。分号就像一个柔和的句号，所以两边都必须是完整句子。"
+  },
+  {
+   "en": "Three: a comma plus a coordinating conjunction, like and, but, or so. Remember FANBOYS: for, and, nor, but, or, yet, so. The comma and the conjunction must come together.",
+   "ko": "셋째, 쉼표 더하기 and, but, so 같은 등위접속사. FANBOYS로 외우세요. for, and, nor, but, or, yet, so. 쉼표와 접속사가 꼭 같이 와야 해요.",
+   "zh": "第三，逗号加并列连词，比如 and、but、so。用 FANBOYS 来记：for, and, nor, but, or, yet, so。逗号和连词必须一起出现。"
+  },
+  {
+   "en": "Four: a colon, when the second part explains the first. Five: a dash, which can do a similar job.",
+   "ko": "넷째, 콜론. 뒷부분이 앞부분을 설명할 때 써요. 다섯째, 대시도 비슷한 역할을 할 수 있어요.",
+   "zh": "第四，冒号，用在后半部分解释前半部分时。第五，破折号也可以起类似作用。"
+  },
+  {
+   "en": "On the SAT, the period, the semicolon, and comma plus FANBOYS do the same job. Since only one answer can be right, if two of them appear in the choices, both are wrong.",
+   "ko": "SAT에서는 마침표, 세미콜론, 쉼표 더하기 FANBOYS가 같은 역할을 해요. 정답은 하나뿐이니까, 선택지에 이 중 두 개가 같이 있으면 둘 다 오답이에요.",
+   "zh": "在SAT中，句号、分号、逗号加FANBOYS作用相同。因为正确答案只有一个，如果选项中同时出现其中两个，那两个都是错的。"
+  },
+  {
+   "en": "Here is the trap students fall for most. 'However' looks like a joining word, but it is not a conjunction.",
+   "ko": "학생들이 가장 많이 걸리는 함정이에요. 'however'는 연결하는 말처럼 보이지만 접속사가 아니에요.",
+   "zh": "这是学生最常掉进的陷阱。however 看起来像连接词，但它不是连词。"
+  },
+  {
+   "en": "'The rain stopped, however, the game was canceled.' Two complete sentences with only commas. That is still a comma splice.",
+   "ko": "'The rain stopped, however, the game was canceled.' 완전한 문장 두 개를 쉼표만으로 이었어요. 이것도 comma splice예요.",
+   "zh": "The rain stopped, however, the game was canceled. 两个完整句子只用逗号连接，这仍然是逗号粘连。"
+  },
+  {
+   "en": "Put a semicolon or a period before 'however,' and a comma after it: 'The rain stopped; however, the game was canceled.'",
+   "ko": "'however' 앞에는 세미콜론이나 마침표, 뒤에는 쉼표를 찍어요. 'The rain stopped; however, the game was canceled.'",
+   "zh": "在 however 前面用分号或句号，后面用逗号：The rain stopped; however, the game was canceled."
+  },
+  {
+   "en": "The same rule applies to therefore, moreover, consequently, and in fact.",
+   "ko": "therefore, moreover, consequently, in fact도 똑같은 규칙이에요.",
+   "zh": "therefore、moreover、consequently、in fact 也适用同样的规则。"
+  },
+  {
+   "en": "Here is a quick tool: the vertical line test. Draw a line where the punctuation goes.",
+   "ko": "빠르게 쓰는 도구를 알려 줄게요. 세로줄 테스트예요. 구두점이 들어갈 자리에 줄을 그어요.",
+   "zh": "教你一个快速工具：竖线测试。在标点的位置画一条竖线。"
+  },
+  {
+   "en": "Then ask two questions. Is the left side a complete sentence? Is the right side a complete sentence?",
+   "ko": "그리고 두 가지를 물어요. 왼쪽이 완전한 문장인가? 오른쪽이 완전한 문장인가?",
+   "zh": "然后问两个问题：左边是完整句子吗？右边是完整句子吗？"
+  },
+  {
+   "en": "If both sides are complete, use a period, a semicolon, or a comma plus FANBOYS. If one side is not complete, a period or a semicolon is wrong.",
+   "ko": "양쪽 다 완전하면 마침표, 세미콜론, 쉼표 더하기 FANBOYS를 써요. 한쪽이라도 불완전하면 마침표나 세미콜론은 오답이에요.",
+   "zh": "如果两边都完整，就用句号、分号或逗号加FANBOYS。只要有一边不完整，句号和分号就是错的。"
+  },
+  {
+   "en": "Let's solve one together. Read the sentence and the choices.",
+   "ko": "같이 한 문제 풀어 봐요. 문장과 선택지를 읽어 보세요.",
+   "zh": "我们一起做一道题。先读句子和选项。"
+  },
+  {
+   "en": "Draw the line at the blank. Left side: 'Engineers spent three years testing the new design.' Subject, tensed verb, stands alone. Complete.",
+   "ko": "빈칸에 줄을 그어요. 왼쪽: 'Engineers spent three years testing the new design.' 주어, 시제 있는 동사, 혼자 설 수 있음. 완전해요.",
+   "zh": "在空格处画线。左边：Engineers spent three years testing the new design. 有主语、有时态动词、能独立成句。完整。"
+  },
+  {
+   "en": "Right side: 'the bridge finally opened to traffic in 1937.' Also complete.",
+   "ko": "오른쪽: 'the bridge finally opened to traffic in 1937.' 이것도 완전해요.",
+   "zh": "右边：the bridge finally opened to traffic in 1937. 也完整。"
+  },
+  {
+   "en": "Complete plus complete. A is a comma splice. B is a run-on. D puts the comma after 'and' instead of before it. So the answer is C, the semicolon.",
+   "ko": "완전 더하기 완전이에요. A는 comma splice, B는 run-on, D는 쉼표가 and 앞이 아니라 뒤에 있어요. 그래서 정답은 세미콜론인 C예요.",
+   "zh": "完整加完整。A 是逗号粘连，B 是连写句，D 把逗号放在 and 后面而不是前面。所以答案是分号 C。"
+  },
+  {
+   "q": 1,
+   "en": "“The team tested the battery ___ it lasted twelve hours.” Which is correct?",
+   "ko": "“The team tested the battery ___ it lasted twelve hours.” 올바른 것은?",
+   "zh": "“The team tested the battery ___ it lasted twelve hours.” 哪个正确？"
+  },
+  {
+   "q": 1,
+   "en": "Which sentence is punctuated correctly?",
+   "ko": "구두점이 올바른 문장은?",
+   "zh": "哪个句子的标点是正确的？"
+  },
+  {
+   "en": "Let's review. A complete sentence has a subject and a verb with a tense, and it can stand alone.",
+   "ko": "정리해 볼게요. 완전한 문장은 주어와 시제 있는 동사가 있고, 혼자 설 수 있어요.",
+   "zh": "我们来总结。完整句子有主语和有时态的动词，并且能独立成句。"
+  },
+  {
+   "en": "Two complete sentences need a period, a semicolon, or a comma plus FANBOYS. A comma alone is a comma splice.",
+   "ko": "완전한 문장 두 개는 마침표, 세미콜론, 쉼표 더하기 FANBOYS로 이어요. 쉼표만 있으면 comma splice예요.",
+   "zh": "两个完整句子要用句号、分号或逗号加FANBOYS连接。只有逗号就是逗号粘连。"
+  },
+  {
+   "en": "However and therefore are not conjunctions, so put a semicolon before them.",
+   "ko": "however와 therefore는 접속사가 아니니까 앞에 세미콜론을 찍어요.",
+   "zh": "however 和 therefore 不是连词，所以前面要用分号。"
+  },
+  {
+   "en": "And when in doubt, use the vertical line test. Next, practice with test-style questions. See you in Lesson 2!",
+   "ko": "헷갈리면 세로줄 테스트를 쓰세요. 이제 실전형 문제로 연습해요. 2강에서 만나요!",
+   "zh": "拿不准时就用竖线测试。接下来用实战题型练习吧。第2课见！"
+  }
+ ]
+}

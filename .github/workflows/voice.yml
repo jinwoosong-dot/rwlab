@@ -1,0 +1,63 @@
+name: Generate lesson audio
+
+on:
+  workflow_dispatch:
+    inputs:
+      lessons:
+        description: "Lesson ids, e.g. bnd1 or bnd1,bnd2 or all"
+        default: "all"
+      langs:
+        description: "Languages: en,ko,zh"
+        default: "en,ko,zh"
+      voice:
+        description: "Chirp 3 HD voice (language prefix is added automatically)"
+        default: "Chirp3-HD-Aoede"
+      force:
+        description: "Regenerate even if audio exists (1 = yes)"
+        default: "0"
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: voice
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Google auth (keyless)
+        if: vars.GCP_WIF_PROVIDER != ''
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SA_EMAIL }}
+      - run: npm i --no-save google-auth-library
+      - name: Ensure ffmpeg
+        run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Extract narration
+        run: node scripts/extract_narration.mjs
+      - name: Generate
+        run: node scripts/generate_audio.mjs
+        env:
+          GOOGLE_TTS_API_KEY: ${{ secrets.GOOGLE_TTS_API_KEY }}
+          GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          LESSONS: ${{ inputs.lessons }}
+          LANGS: ${{ inputs.langs }}
+          VOICE: ${{ inputs.voice }}
+          FORCE: ${{ inputs.force }}
+      - name: Commit audio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio lessons/*.narr.json
+          git commit -m "Lesson audio: ${{ inputs.lessons }} (${{ inputs.langs }})" || echo "nothing to commit"
+          git pull --rebase origin main
+          git push
