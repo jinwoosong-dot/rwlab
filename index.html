@@ -2797,12 +2797,13 @@ if(!S.user&&!location.hash&&!S.diag.done&&!S.diag.cur&&!(S.log&&S.log.length))vi
 
 
 /* ---------- 동영상 강의 ---------- */
-const VIDS={BND:[{id:'bnd1',t:'1강 · 완전한 문장과 Comma Splice',d:'완전한 문장의 조건, run-on과 comma splice, 연결하는 5가지 방법, however 함정',min:8}]};
-function vidRows(k){return(VIDS[k]||[]).map(v=>{const ok=S.vid&&S.vid[v.id];return`<div class="pstep vidrow ${ok?'done':''}"><div class="pck">${ok?'✓':'▶'}</div><div class="sp"><b>🎬 ${v.t}</b><div class="sub">동영상 약 ${v.min}분 · 중간 확인 문제 포함 · ${v.d}</div></div><button class="btn sm ${ok?'':'pri'}" data-a="vid" data-v="${v.id}">${ok?'다시 보기':'영상 보기'}</button></div>`}).join('')}
+const VIDS={"BND":[{"id":"bnd1","t":{"en":"Lesson 1 · Complete Sentences & Comma Splices","ko":"1강 · 완전한 문장과 Comma Splice","zh":"第1课 · 完整句子与逗号粘连"},"d":{"en":"What makes a sentence complete, run-ons and comma splices, 5 ways to join sentences, the “however” trap","ko":"완전한 문장의 조건, run-on과 comma splice, 연결하는 5가지 방법, however 함정","zh":"完整句子的条件、连写句与逗号粘连、5种连接方法、however 陷阱"},"min":6}]};
+function vtx(x){return typeof x==='string'?x:(x[LANG]||x.ko||x.en)}
+function vidRows(k){return(VIDS[k]||[]).map(v=>{const ok=S.vid&&S.vid[v.id];return`<div class="pstep vidrow ${ok?'done':''}"><div class="pck">${ok?'✓':'▶'}</div><div class="sp"><b>🎬 ${vtx(v.t)}</b><div class="sub">동영상 약 ${v.min}분 · 중간 확인 문제 포함 · ${vtx(v.d)}</div></div><button class="btn sm ${ok?'':'pri'}" data-a="vid" data-v="${v.id}">${ok?'다시 보기':'영상 보기'}</button></div>`}).join('')}
 A.vid=id=>{const o=document.createElement('div');o.id='vidov';o.innerHTML=`<div class="vidbox"><button class="vidx" data-a="vidClose" aria-label="Close">✕</button><iframe src="lessons/${id}.html?lang=${LANG}" title="Lesson video" allow="autoplay; fullscreen"></iframe></div>`;document.body.appendChild(o);document.body.style.overflow='hidden'};
 A.vidClose=()=>{const o=$('#vidov');if(o)o.remove();document.body.style.overflow='';render()};
 window.addEventListener('message',e=>{const m=e.data||{};if(m.type==='lessonDone'){S.vid=S.vid||{};if(!S.vid[m.id]){S.vid[m.id]=today();save();gainXP(30);confetti()}}
-  if(m.type==='lessonPractice'){A.vidClose();A.startDrill(m.k)}});
+  if(m.type==='lessonPractice'){A.vidClose();if(m.k&&m.k!=='GEN')A.startDrill(m.k)}});
 
 /* ---------- 참여 요소: XP, 헤더 상태, 축하 효과 ---------- */
 function gainXP(n){if(!n)return;S.v.xp=(S.v.xp||0)+n;const k=today();if(!S.v.days[k])S.v.days[k]=1;S.v.best=Math.max(S.v.best||0,streak());save();toastXP(n)}

@@ -1,0 +1,18 @@
+[
+ {
+  "id": "bnd1",
+  "k": "BND",
+  "n": 1,
+  "min": 6,
+  "t": {
+   "en": "Lesson 1 · Complete Sentences & Comma Splices",
+   "ko": "1강 · 완전한 문장과 Comma Splice",
+   "zh": "第1课 · 完整句子与逗号粘连"
+  },
+  "d": {
+   "en": "What makes a sentence complete, run-ons and comma splices, 5 ways to join sentences, the “however” trap",
+   "ko": "완전한 문장의 조건, run-on과 comma splice, 연결하는 5가지 방법, however 함정",
+   "zh": "完整句子的条件、连写句与逗号粘连、5种连接方法、however 陷阱"
+  }
+ }
+]

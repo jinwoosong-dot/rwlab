@@ -5,7 +5,7 @@ import path from "node:path";
 import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const dir = path.join(ROOT, "lessons");
-for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".html"))) {
+for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".html") && !f.startsWith("_"))) {
   const id = f.replace(/\.html$/, "");
   const html = fs.readFileSync(path.join(dir, f), "utf8");
   const a = html.indexOf("const SC=");
