@@ -1,0 +1,126 @@
+{
+ "id": "gen1",
+ "beats": [
+  {
+   "en": "Welcome to RW Lab. Before we study any rules, let's see exactly how the Reading and Writing section works.",
+   "ko": "RW Lab에 오신 걸 환영해요. 규칙을 배우기 전에 Reading and Writing 시험이 정확히 어떻게 진행되는지 볼게요.",
+   "zh": "欢迎来到RW Lab。在学习规则之前，先来看看阅读与写作部分到底是怎么考的。"
+  },
+  {
+   "en": "The section has fifty-four questions in sixty-four minutes.",
+   "ko": "이 시험은 64분 동안 54문항을 풀어요.",
+   "zh": "这一部分共54道题，时间64分钟。"
+  },
+  {
+   "en": "Every question comes with its own short passage, usually under one hundred and fifty words. One passage, one question.",
+   "ko": "문항마다 짧은 지문이 하나씩 붙어 있어요. 보통 150단어 이하예요. 지문 하나에 문제 하나예요.",
+   "zh": "每道题都配有一篇短文，通常不超过150个单词。一篇文章，一道题。"
+  },
+  {
+   "en": "The section is split into two modules. Each module has twenty-seven questions and thirty-two minutes.",
+   "ko": "시험은 모듈 두 개로 나뉘어요. 모듈마다 27문항, 32분이에요.",
+   "zh": "这部分分为两个模块。每个模块27道题，32分钟。"
+  },
+  {
+   "en": "Module one mixes easy, medium, and hard questions. How you do on module one decides which version of module two you get.",
+   "ko": "모듈 1에는 쉬운 문제, 보통 문제, 어려운 문제가 섞여 있어요. 모듈 1 결과에 따라 어떤 모듈 2를 받을지 정해져요.",
+   "zh": "模块1混合了简单、中等和困难的题目。你在模块1的表现决定你拿到哪个版本的模块2。"
+  },
+  {
+   "en": "Do well, and you get the harder module two, which is the path to a high score. So module one matters a lot.",
+   "ko": "잘 풀면 더 어려운 모듈 2를 받는데, 그게 고득점으로 가는 길이에요. 그래서 모듈 1이 아주 중요해요.",
+   "zh": "做得好，就会拿到更难的模块2，这是通往高分的路。所以模块1非常重要。"
+  },
+  {
+   "en": "That gives you about seventy-one seconds per question. Some take twenty seconds, others take two minutes.",
+   "ko": "문항당 약 71초예요. 20초면 되는 문제도 있고, 2분이 걸리는 문제도 있어요.",
+   "zh": "平均每题约71秒。有的题20秒就够，有的要2分钟。"
+  },
+  {
+   "en": "Inside each module, questions come in groups. Questions that test similar skills are grouped together.",
+   "ko": "각 모듈 안에서 문제는 묶음으로 나와요. 비슷한 능력을 묻는 문제끼리 모여 있어요.",
+   "zh": "在每个模块里，题目是分组出现的。考查相似能力的题目放在一起。"
+  },
+  {
+   "en": "First come reading questions like vocabulary and text structure, then questions about central ideas, evidence, and inferences.",
+   "ko": "먼저 어휘, 글의 구조 같은 독해 문제가 나오고, 그다음 중심 생각, 근거, 추론 문제가 나와요.",
+   "zh": "先是词汇、文章结构这类阅读题，然后是中心思想、证据和推理题。"
+  },
+  {
+   "en": "Then grammar questions, and finally transitions and rhetorical synthesis at the end.",
+   "ko": "그다음 문법 문제, 마지막으로 연결어와 노트 종합 문제가 나와요.",
+   "zh": "接着是语法题，最后是过渡词和信息整合题。"
+  },
+  {
+   "en": "According to the College Board, within each group the questions go from easiest to hardest. Use that to plan your time.",
+   "ko": "College Board에 따르면 묶음 안에서는 쉬운 문제부터 어려운 문제 순서예요. 이걸 시간 계획에 활용하세요.",
+   "zh": "根据College Board的说明，每组题目内部按从易到难排列。用这一点来安排时间。"
+  },
+  {
+   "en": "Here is how to manage your time. Grammar and transition questions follow fixed rules, so aim to finish them quickly.",
+   "ko": "시간 관리 방법이에요. 문법과 연결어 문제는 규칙이 정해져 있으니 빠르게 끝내는 걸 목표로 하세요.",
+   "zh": "时间管理方法如下。语法和过渡词题规则固定，目标是快速做完。"
+  },
+  {
+   "en": "Save that time for the slow ones: inferences and questions with two passages.",
+   "ko": "그렇게 아낀 시간을 오래 걸리는 문제, 즉 추론과 지문 두 개짜리 문제에 써요.",
+   "zh": "把省下的时间留给慢题：推理题和双篇文章题。"
+  },
+  {
+   "en": "If you are stuck, choose your best guess, flag the question, and come back if you have time. You can move around freely inside a module.",
+   "ko": "막히면 가장 그럴듯한 답을 고르고 표시한 뒤, 시간이 남으면 돌아오세요. 모듈 안에서는 자유롭게 이동할 수 있어요.",
+   "zh": "卡住时，先选一个最可能的答案，做标记，有时间再回来。在模块内部可以自由来回切换。"
+  },
+  {
+   "en": "Wrong answers do not lose points, so never leave a question blank.",
+   "ko": "틀려도 감점이 없으니 빈칸으로 두지 마세요.",
+   "zh": "答错不扣分，所以永远不要留空。"
+  },
+  {
+   "en": "Finally, a method you can use on every question. Step one: read the question first, so you know what you are looking for.",
+   "ko": "마지막으로 모든 문제에 쓸 수 있는 방법이에요. 1단계, 질문부터 읽어서 무엇을 찾아야 하는지 알아요.",
+   "zh": "最后，介绍一个每道题都能用的方法。第一步：先读问题，知道自己要找什么。"
+  },
+  {
+   "en": "Step two: read the passage with that goal in mind.",
+   "ko": "2단계, 그 목적을 생각하며 지문을 읽어요.",
+   "zh": "第二步：带着这个目的读文章。"
+  },
+  {
+   "en": "Step three: before looking at the choices, predict the answer in your own words.",
+   "ko": "3단계, 선택지를 보기 전에 내 말로 답을 예측해요.",
+   "zh": "第三步：看选项之前，先用自己的话预测答案。"
+  },
+  {
+   "en": "Step four: eliminate choices that do not match, then choose. Each later lesson shows how to use these steps for one question type.",
+   "ko": "4단계, 맞지 않는 선택지를 지우고 골라요. 다음 강의들에서 유형별로 이 단계를 어떻게 쓰는지 보여 줄게요.",
+   "zh": "第四步：排除不符合的选项，再作选择。后面的每一课都会讲如何把这些步骤用在某一种题型上。"
+  },
+  {
+   "q": 1,
+   "en": "You have spent two minutes on a hard inference question in module 1. What should you do?",
+   "ko": "모듈 1에서 어려운 추론 문제에 2분을 썼어요. 어떻게 해야 할까요?",
+   "zh": "你在模块1的一道推理难题上已经花了2分钟。该怎么办？"
+  },
+  {
+   "en": "Let's review. Two modules, twenty-seven questions each, thirty-two minutes each. Module one decides module two.",
+   "ko": "정리할게요. 모듈 두 개, 각각 27문항, 32분. 모듈 1이 모듈 2를 결정해요.",
+   "zh": "我们来总结。两个模块，每个27题、32分钟。模块1决定模块2。"
+  },
+  {
+   "en": "Questions come in groups, from easiest to hardest within each group.",
+   "ko": "문제는 묶음으로 나오고, 묶음 안에서는 쉬운 것부터 어려운 것 순서예요.",
+   "zh": "题目分组出现，每组内部从易到难。"
+  },
+  {
+   "en": "Be fast on rule-based questions, take your time on inferences, and never leave a blank.",
+   "ko": "규칙 문제는 빠르게, 추론은 시간을 들여서, 그리고 빈칸은 절대 남기지 마세요.",
+   "zh": "规则类题目要快，推理题慢慢来，永远不要留空。"
+  },
+  {
+   "en": "And use the four steps on every question. Next, take the diagnostic test, then start with Lesson 1. Good luck!",
+   "ko": "그리고 모든 문제에 4단계를 쓰세요. 다음은 진단 테스트를 보고, 1강부터 시작해요. 화이팅!",
+   "zh": "每道题都用四步法。接下来先做诊断测试，然后从第1课开始。加油！"
+  }
+ ]
+}

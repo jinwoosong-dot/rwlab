@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 0 · How the Reading & Writing Test Works</title>
+<style>
+:root{--ink:#17213b;--mut:#5b6580;--line:#e3e7f0;--pri:#2447b8;--pri2:#e8eefc;--ok:#18a058;--bad:#e0464e;--warn:#f2b632;--subj:#2f6fe4;--verb:#e0464e;--bg:#0f1730}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+.player{max-width:1100px;width:100%;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;align-items:center;gap:10px;color:#fff}.top h1{font-size:16px;margin:0;font-weight:700}.top .sp{flex:1}
+.top select,.top button{font:inherit;font-size:13px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;padding:6px 10px;cursor:pointer}
+.top select option{color:#000}
+.stagewrap{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border-radius:16px;overflow:hidden;container-type:inline-size;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.scene{position:absolute;inset:0;padding:5cqw 6cqw;display:none;flex-direction:column;gap:2.2cqw;background:linear-gradient(180deg,#fff,#f6f8fd)}
+.scene.on{display:flex;animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.kick{font-size:1.5cqw;font-weight:800;letter-spacing:.08em;color:var(--pri);text-transform:uppercase}
+.h2{font-size:3.6cqw;font-weight:800;line-height:1.2;margin:0}
+.h{opacity:0;transform:translateY(1.2cqw);transition:opacity .45s ease,transform .45s ease}
+.h.in{opacity:1;transform:none}
+.big{font-size:3.4cqw;font-weight:700;font-family:Georgia,"Times New Roman",serif;line-height:1.5}
+.tok{padding:.1em .15em;border-radius:.3em;transition:background .4s,color .4s,box-shadow .4s}
+.tok.subj{background:#dfe9ff;color:var(--subj);box-shadow:inset 0 -.2em 0 var(--subj)}
+.tok.verb{background:#ffe3e5;color:var(--verb);box-shadow:inset 0 -.2em 0 var(--verb)}
+.tok.dep{background:#fff1cc;color:#8a5a00;box-shadow:inset 0 -.2em 0 var(--warn)}
+.tok.ing{background:#eee;color:#666;text-decoration:line-through wavy #999}
+.tok.bad{background:#ffe3e5;color:var(--bad);font-weight:800}
+.tok.good{background:#ddf5e7;color:var(--ok);font-weight:800}
+.row{display:flex;align-items:center;gap:1.6cqw;flex-wrap:wrap}
+.chk{display:flex;flex-direction:column;gap:1.1cqw;font-size:2.2cqw}
+.chk div{display:flex;align-items:center;gap:1cqw}.chk i{width:2.6cqw;height:2.6cqw;border-radius:50%;border:.25cqw solid #c9d0e0;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:1.6cqw;color:#fff;transition:.4s}
+.chk .on i{background:var(--ok);border-color:var(--ok)}
+.stamp{font-size:2.4cqw;font-weight:900;border:.35cqw solid;border-radius:1cqw;padding:.4cqw 1.2cqw;transform:rotate(-6deg);display:inline-block}
+.stamp.ok{color:var(--ok);border-color:var(--ok)}.stamp.no{color:var(--bad);border-color:var(--bad)}
+.card{background:#fff;border:.15cqw solid var(--line);border-radius:1.4cqw;padding:1.8cqw 2.2cqw;box-shadow:0 .6cqw 1.8cqw rgba(23,33,59,.06)}
+.chips{display:flex;gap:1cqw;flex-wrap:wrap}.chip{font-size:2cqw;font-weight:700;border-radius:99px;padding:.5cqw 1.4cqw;background:var(--pri2);color:var(--pri)}
+.chip.y{background:#fff1cc;color:#8a5a00}
+.lbl{font-size:1.6cqw;font-weight:800;border-radius:.6cqw;padding:.3cqw .9cqw;color:#fff}
+.lbl.s{background:var(--subj)}.lbl.v{background:var(--verb)}.lbl.r{background:var(--bad)}.lbl.g{background:var(--ok)}
+.cars{display:flex;align-items:center;gap:0;font-size:2.8cqw;font-family:Georgia,serif;font-weight:700}
+.car{background:#eef3ff;border:.25cqw solid var(--pri);border-radius:1.2cqw;padding:1.2cqw 2cqw}
+.link{width:7cqw;display:grid;place-items:center;font-size:3.2cqw;font-weight:900;color:var(--bad);position:relative}
+.link.broken::after{content:"";position:absolute;left:10%;right:10%;top:50%;height:.4cqw;background:var(--bad);transform:rotate(-20deg)}
+.fix{display:grid;grid-template-columns:4.4cqw 1fr;gap:1cqw;align-items:center;font-size:2.3cqw;padding:.6cqw 0}
+.fix b.n{width:3.6cqw;height:3.6cqw;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:1.8cqw}
+.fix .s{font-family:Georgia,serif}.fix .p{color:var(--ok);font-weight:900;font-size:1.15em}
+.brace{border-left:.4cqw solid var(--warn);padding-left:1.4cqw;margin-left:1cqw;font-size:2cqw;font-weight:800;color:#8a5a00}
+.vline{display:inline-block;width:.45cqw;height:4.6cqw;background:var(--pri);vertical-align:middle;margin:0 .6cqw;transform:scaleY(0);transition:transform .5s}
+.vline.in{transform:scaleY(1)}
+.side{display:flex;gap:2cqw}.side .card{flex:1;font-size:2cqw}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:1cqw;font-size:2.1cqw}
+.choices div{border:.15cqw solid var(--line);border-radius:1cqw;padding:1cqw 1.4cqw;background:#fff;transition:.4s}
+.choices .x{opacity:.45;text-decoration:line-through}.choices .o{border-color:var(--ok);background:#e9f8ef;font-weight:800}
+.sum li{font-size:2.3cqw;margin:.8cqw 0;line-height:1.4}
+.big-ic{font-size:7cqw}
+.sub{position:absolute;left:4cqw;right:4cqw;bottom:2.4cqw;text-align:center;pointer-events:none}
+.sub span{display:inline;background:rgba(15,23,48,.86);color:#fff;font-size:2cqw;line-height:1.55;padding:.35cqw 1cqw;border-radius:.6cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub.off{display:none}.sub span:empty{display:none}
+.quiz{position:absolute;inset:0;background:rgba(15,23,48,.6);display:none;align-items:center;justify-content:center;padding:3cqw;z-index:5}
+.quiz.on{display:flex}
+.qbox{background:#fff;border-radius:2cqw;padding:3cqw;width:min(78cqw,100%);box-shadow:0 2cqw 5cqw rgba(0,0,0,.3)}
+.qbox .qk{font-size:1.6cqw;font-weight:800;color:var(--pri);letter-spacing:.06em}
+.qbox h3{font-size:2.7cqw;margin:1cqw 0 2cqw}
+.qbox button.o{display:block;width:100%;text-align:left;font:inherit;font-size:2.2cqw;border:.2cqw solid var(--line);border-radius:1.2cqw;background:#fff;padding:1.4cqw 1.8cqw;margin:.9cqw 0;cursor:pointer;font-family:Georgia,serif}
+.qbox button.o:hover{border-color:var(--pri)}
+.qbox button.o.right{border-color:var(--ok);background:#e9f8ef}.qbox button.o.wrong{border-color:var(--bad);background:#fdecee;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-.6cqw)}75%{transform:translateX(.6cqw)}}
+.qfb{font-size:2cqw;line-height:1.5;margin-top:1.2cqw;min-height:3cqw}
+.qgo{font:inherit;font-size:2cqw;font-weight:800;background:var(--pri);color:#fff;border:0;border-radius:1cqw;padding:1.2cqw 2.4cqw;cursor:pointer;margin-top:1cqw;display:none}
+.ctrl{display:flex;align-items:center;gap:8px;color:#fff}
+.ctrl button{font:inherit;font-size:15px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;cursor:pointer;min-width:44px;min-height:40px}
+.ctrl button.main{background:#ffd34d;color:#1b2340;border-color:#ffd34d;font-weight:800;min-width:96px}
+.bar{flex:1;display:flex;gap:3px;height:10px;cursor:pointer}
+.bar i{flex:1;background:rgba(255,255,255,.18);border-radius:4px;overflow:hidden;position:relative}
+.bar i b{position:absolute;inset:0;width:0;background:#ffd34d}
+.bar i.q{flex:0 0 10px;background:#7aa2ff}
+.time{font-size:13px;min-width:64px;text-align:right;opacity:.85}
+.chap{display:flex;gap:6px;flex-wrap:wrap}
+.chap button{font:inherit;font-size:12.5px;background:rgba(255,255,255,.06);color:#cfd7f2;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 10px;cursor:pointer}
+.chap button.on{background:#fff;color:var(--ink)}
+.chap button.done::before{content:"✓ ";color:#7be0a3}
+.end{position:absolute;inset:0;background:linear-gradient(135deg,#14275f,#2447b8);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.6cqw;text-align:center;z-index:6}
+.end.on{display:flex}.end h2{font-size:4cqw;margin:0}.end p{font-size:2cqw;margin:0;opacity:.9}
+.end button{font:inherit;font-size:2.1cqw;font-weight:800;border-radius:1.2cqw;padding:1.3cqw 2.6cqw;cursor:pointer;border:0}
+.end .go{background:#ffd34d;color:#1b2340}.end .re{background:rgba(255,255,255,.15);color:#fff}
+.embed .top{padding-right:52px}.note{color:#8f9bc0;font-size:12px;text-align:center}
+.pass{font-family:Georgia,"Times New Roman",serif;font-size:2.05cqw;line-height:1.6}
+.small{font-size:1.9cqw;line-height:1.5}
+.hl{background:#fff1cc;border-radius:.3em;padding:0 .15em;transition:background .4s}
+.tbl{border-collapse:collapse;font-size:1.9cqw;background:#fff}.tbl th,.tbl td{border:.15cqw solid var(--line);padding:.6cqw 1.2cqw;text-align:center}.tbl th{background:#f2f5fc}
+.tbl td.hit{background:#fff1cc;font-weight:800}
+.scene.tight{gap:1.1cqw;padding-top:3.4cqw}.scene.tight .card{padding:1cqw 1.8cqw}.scene.tight .h2{font-size:3.1cqw}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4cqw}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="player">
+  <div class="top"><h1 id="ttl"></h1><span class="sp"></span>
+    <select id="lang" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">中文</option></select>
+    <select id="spd" aria-label="Speed"><option value="0.85">0.85×</option><option value="1" selected>1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select>
+    <button id="cc" aria-pressed="true">CC</button></div>
+  <div class="stagewrap" id="stage">
+    <div id="scenes"></div>
+    <div class="sub" id="sub"><span id="subt"></span></div>
+    <div class="quiz" id="quiz"><div class="qbox"><div class="qk" id="qk"></div><h3 id="qq"></h3><div id="qo"></div><div class="qfb" id="qfb"></div><button class="qgo" id="qgo"></button></div></div>
+    <div class="end" id="end"><div class="big-ic">🎉</div><h2 id="endh"></h2><p id="endp"></p><div class="row" style="justify-content:center"><button class="go" id="endgo"></button><button class="re" id="endre"></button></div></div>
+  </div>
+  <div class="ctrl"><button id="prev" aria-label="Previous">⏮</button><button id="play" class="main"></button><button id="next" aria-label="Next">⏭</button><div class="bar" id="bar"></div><span class="time" id="time"></span></div>
+  <div class="chap" id="chap"></div>
+  <p class="note" id="note"></p>
+</div>
+<script>
+/* ===== UI strings (shared) ===== */
+const BASE={
+ en:{play:'▶ Play',pause:'❚❚ Pause',cont:'Continue ▶',check:'Check question',right:'Correct!',wrong:'Not quite. Try again.',go:'Start practice →',go0:'Back to course →',re:'Watch again',note:'If you hear nothing, check your volume. Captions advance automatically.',sum:'Summary',left:'Left side',right2:'Right side'},
+ ko:{play:'▶ 재생',pause:'❚❚ 일시정지',cont:'계속 ▶',check:'확인 문제',right:'정답이에요!',wrong:'아쉬워요. 다시 골라 보세요.',go:'연습 문제 시작 →',go0:'코스로 돌아가기 →',re:'다시 보기',note:'소리가 안 들리면 볼륨을 확인하세요. 자막은 자동으로 넘어가요.',sum:'정리',left:'왼쪽',right2:'오른쪽'},
+ zh:{play:'▶ 播放',pause:'❚❚ 暂停',cont:'继续 ▶',check:'确认题',right:'答对了！',wrong:'不对，再选一次。',go:'开始练习 →',go0:'返回课程 →',re:'重看',note:'听不到声音时请检查音量。字幕会自动前进。',sum:'总结',left:'左边',right2:'右边'}};
+const META={"id":"gen1","k":"GEN","n":0,"title":{"en":"Lesson 0 · How the Reading & Writing Test Works","ko":"0강 · Reading & Writing 시험의 구조","zh":"第0课 · 阅读与写作考试的结构"},"desc":{"en":"Two adaptive modules, 27 questions in 32 minutes, the order of question types, pacing, and the 4-step method","ko":"적응형 모듈 2개, 32분에 27문항, 문항 유형 순서, 시간 배분, 4단계 풀이법","zh":"两个自适应模块、32分钟27题、题型顺序、时间分配、四步解题法"},"endh":{"en":"Orientation complete","ko":"오리엔테이션 완료","zh":"入门课完成"},"endp":{"en":"Next, take the diagnostic test to find the question types to train first.","ko":"다음은 진단 테스트로 먼저 훈련할 유형을 찾아요.","zh":"接下来做诊断测试，找出需要优先训练的题型。"}};
+const L={"en":{"m1":"Module 1","m2":"Module 2","mix":"easy + medium + hard","harder":"harder","easier":"easier","per":"≈ 71 seconds per question","order":"Order inside each module","st1":"Read the question first","st2":"Read the passage with that goal","st3":"Predict the answer in your own words","st4":"Eliminate, then choose"},"ko":{"m1":"모듈 1","m2":"모듈 2","mix":"쉬움 + 보통 + 어려움","harder":"더 어려운 모듈","easier":"더 쉬운 모듈","per":"문항당 약 71초","order":"모듈 안의 문항 순서","st1":"질문부터 읽기","st2":"목적을 갖고 지문 읽기","st3":"내 말로 답 예측하기","st4":"소거한 뒤 고르기"},"zh":{"m1":"模块1","m2":"模块2","mix":"简单 + 中等 + 困难","harder":"更难","easier":"更简单","per":"每题约71秒","order":"每个模块内的题目顺序","st1":"先读问题","st2":"带着目的读文章","st3":"用自己的话预测答案","st4":"排除后再选择"}};
+const UI={};for(const k of ['en','ko','zh'])UI[k]=Object.assign({},BASE[k],L[k]||{},{title:META.title[k],endh:META.endh[k],endp:META.endp[k]});
+
+/* ===== Scenes: each beat = narration (3 languages) + visual actions ===== */
+const SC=[{"id":"intro","ch":{"en":"Intro","ko":"도입","zh":"导入"},"html":"\n <div class=\"kick\">Orientation</div><h2 class=\"h2\" data-l=\"title\"></h2>\n <div class=\"grid3\"><div class=\"card h\" id=\"i1\" style=\"text-align:center\"><div class=\"big-ic\" style=\"font-size:5cqw\">📄</div><b class=\"small\">54 questions</b></div><div class=\"card h\" id=\"i2\" style=\"text-align:center\"><div class=\"big-ic\" style=\"font-size:5cqw\">⏱️</div><b class=\"small\">64 minutes</b></div><div class=\"card h\" id=\"i3\" style=\"text-align:center\"><div class=\"big-ic\" style=\"font-size:5cqw\">📝</div><b class=\"small\">1 short passage → 1 question</b></div></div>","b":[{"en":"Welcome to RW Lab. Before we study any rules, let's see exactly how the Reading and Writing section works.","ko":"RW Lab에 오신 걸 환영해요. 규칙을 배우기 전에 Reading and Writing 시험이 정확히 어떻게 진행되는지 볼게요.","zh":"欢迎来到RW Lab。在学习规则之前，先来看看阅读与写作部分到底是怎么考的。"},{"en":"The section has fifty-four questions in sixty-four minutes.","ko":"이 시험은 64분 동안 54문항을 풀어요.","zh":"这一部分共54道题，时间64分钟。","a":["in:#i1","in:#i2"]},{"en":"Every question comes with its own short passage, usually under one hundred and fifty words. One passage, one question.","ko":"문항마다 짧은 지문이 하나씩 붙어 있어요. 보통 150단어 이하예요. 지문 하나에 문제 하나예요.","zh":"每道题都配有一篇短文，通常不超过150个单词。一篇文章，一道题。","a":["in:#i3"]}]},
+{"id":"modules","ch":{"en":"Two modules","ko":"모듈 두 개","zh":"两个模块"},"html":"\n <div class=\"kick\">Structure</div><h2 class=\"h2\">Adaptive: Module 1 → Module 2</h2>\n <div class=\"row\" style=\"align-items:stretch\"><div class=\"card h\" id=\"m1\" style=\"flex:1\"><b data-l=\"m1\"></b><div class=\"small\">27 Q · 32 min</div><div class=\"small\" data-l=\"mix\"></div></div>\n <div class=\"link h\" id=\"m0\" style=\"color:var(--pri)\">→</div>\n <div style=\"flex:1;display:flex;flex-direction:column;gap:1cqw\"><div class=\"card h\" id=\"m2\" style=\"border-color:var(--ok)\"><b data-l=\"m2\"></b> · <span data-l=\"harder\"></span></div><div class=\"card h\" id=\"m3\"><b data-l=\"m2\"></b> · <span data-l=\"easier\"></span></div></div></div>\n <div class=\"card h\" id=\"m4\" style=\"font-size:2.2cqw\">⏱️ <b data-l=\"per\"></b></div>","b":[{"en":"The section is split into two modules. Each module has twenty-seven questions and thirty-two minutes.","ko":"시험은 모듈 두 개로 나뉘어요. 모듈마다 27문항, 32분이에요.","zh":"这部分分为两个模块。每个模块27道题，32分钟。","a":["in:#m1"]},{"en":"Module one mixes easy, medium, and hard questions. How you do on module one decides which version of module two you get.","ko":"모듈 1에는 쉬운 문제, 보통 문제, 어려운 문제가 섞여 있어요. 모듈 1 결과에 따라 어떤 모듈 2를 받을지 정해져요.","zh":"模块1混合了简单、中等和困难的题目。你在模块1的表现决定你拿到哪个版本的模块2。","a":["in:#m0"]},{"en":"Do well, and you get the harder module two, which is the path to a high score. So module one matters a lot.","ko":"잘 풀면 더 어려운 모듈 2를 받는데, 그게 고득점으로 가는 길이에요. 그래서 모듈 1이 아주 중요해요.","zh":"做得好，就会拿到更难的模块2，这是通往高分的路。所以模块1非常重要。","a":["in:#m2","in:#m3"]},{"en":"That gives you about seventy-one seconds per question. Some take twenty seconds, others take two minutes.","ko":"문항당 약 71초예요. 20초면 되는 문제도 있고, 2분이 걸리는 문제도 있어요.","zh":"平均每题约71秒。有的题20秒就够，有的要2分钟。","a":["in:#m4"]}]},
+{"id":"order","tight":1,"ch":{"en":"Question order","ko":"문항 순서","zh":"题目顺序"},"html":"\n <div class=\"kick\">Inside a module</div><h2 class=\"h2\" data-l=\"order\"></h2>\n <div class=\"fix h\" id=\"o1\"><b class=\"n\">1</b><span>Craft and Structure — <i>words in context, text structure, cross-text</i></span></div>\n <div class=\"fix h\" id=\"o2\"><b class=\"n\">2</b><span>Information and Ideas — <i>central ideas, evidence, inferences</i></span></div>\n <div class=\"fix h\" id=\"o3\"><b class=\"n\">3</b><span>Standard English Conventions — <i>boundaries, form and structure</i></span></div>\n <div class=\"fix h\" id=\"o4\"><b class=\"n\">4</b><span>Expression of Ideas — <i>transitions, rhetorical synthesis</i></span></div>\n <div class=\"card h\" id=\"o5\" style=\"font-size:2.1cqw\">Each group: easiest → hardest</div>","b":[{"en":"Inside each module, questions come in groups. Questions that test similar skills are grouped together.","ko":"각 모듈 안에서 문제는 묶음으로 나와요. 비슷한 능력을 묻는 문제끼리 모여 있어요.","zh":"在每个模块里，题目是分组出现的。考查相似能力的题目放在一起。"},{"en":"First come reading questions like vocabulary and text structure, then questions about central ideas, evidence, and inferences.","ko":"먼저 어휘, 글의 구조 같은 독해 문제가 나오고, 그다음 중심 생각, 근거, 추론 문제가 나와요.","zh":"先是词汇、文章结构这类阅读题，然后是中心思想、证据和推理题。","a":["in:#o1","in:#o2"]},{"en":"Then grammar questions, and finally transitions and rhetorical synthesis at the end.","ko":"그다음 문법 문제, 마지막으로 연결어와 노트 종합 문제가 나와요.","zh":"接着是语法题，最后是过渡词和信息整合题。","a":["in:#o3","in:#o4"]},{"en":"According to the College Board, within each group the questions go from easiest to hardest. Use that to plan your time.","ko":"College Board에 따르면 묶음 안에서는 쉬운 문제부터 어려운 문제 순서예요. 이걸 시간 계획에 활용하세요.","zh":"根据College Board的说明，每组题目内部按从易到难排列。用这一点来安排时间。","a":["in:#o5"]}]},
+{"id":"pace","ch":{"en":"Pacing","ko":"시간 배분","zh":"时间分配"},"html":"\n <div class=\"kick\">Strategy</div><h2 class=\"h2\">⏱️ Pacing</h2>\n <ul class=\"sum card\"><li class=\"h\" id=\"p1\">Grammar & transitions: fast (≈ 30–45 s)</li><li class=\"h\" id=\"p2\">Inferences, cross-text: slow (≈ 1.5–2 min)</li><li class=\"h\" id=\"p3\">Stuck? Pick your best guess, flag it ⚑, move on</li><li class=\"h\" id=\"p4\">No penalty for wrong answers → never leave a blank</li></ul>","b":[{"en":"Here is how to manage your time. Grammar and transition questions follow fixed rules, so aim to finish them quickly.","ko":"시간 관리 방법이에요. 문법과 연결어 문제는 규칙이 정해져 있으니 빠르게 끝내는 걸 목표로 하세요.","zh":"时间管理方法如下。语法和过渡词题规则固定，目标是快速做完。","a":["in:#p1"]},{"en":"Save that time for the slow ones: inferences and questions with two passages.","ko":"그렇게 아낀 시간을 오래 걸리는 문제, 즉 추론과 지문 두 개짜리 문제에 써요.","zh":"把省下的时间留给慢题：推理题和双篇文章题。","a":["in:#p2"]},{"en":"If you are stuck, choose your best guess, flag the question, and come back if you have time. You can move around freely inside a module.","ko":"막히면 가장 그럴듯한 답을 고르고 표시한 뒤, 시간이 남으면 돌아오세요. 모듈 안에서는 자유롭게 이동할 수 있어요.","zh":"卡住时，先选一个最可能的答案，做标记，有时间再回来。在模块内部可以自由来回切换。","a":["in:#p3"]},{"en":"Wrong answers do not lose points, so never leave a question blank.","ko":"틀려도 감점이 없으니 빈칸으로 두지 마세요.","zh":"答错不扣分，所以永远不要留空。","a":["in:#p4"]}]},
+{"id":"steps","ch":{"en":"4-step method","ko":"4단계 풀이법","zh":"四步解题法"},"html":"\n <div class=\"kick\">Method</div><h2 class=\"h2\">4 steps for every question</h2>\n <div class=\"fix h\" id=\"s1\"><b class=\"n\">1</b><span data-l=\"st1\"></span></div>\n <div class=\"fix h\" id=\"s2\"><b class=\"n\">2</b><span data-l=\"st2\"></span></div>\n <div class=\"fix h\" id=\"s3\"><b class=\"n\">3</b><span data-l=\"st3\"></span></div>\n <div class=\"fix h\" id=\"s4\"><b class=\"n\">4</b><span data-l=\"st4\"></span></div>","b":[{"en":"Finally, a method you can use on every question. Step one: read the question first, so you know what you are looking for.","ko":"마지막으로 모든 문제에 쓸 수 있는 방법이에요. 1단계, 질문부터 읽어서 무엇을 찾아야 하는지 알아요.","zh":"最后，介绍一个每道题都能用的方法。第一步：先读问题，知道自己要找什么。","a":["in:#s1"]},{"en":"Step two: read the passage with that goal in mind.","ko":"2단계, 그 목적을 생각하며 지문을 읽어요.","zh":"第二步：带着这个目的读文章。","a":["in:#s2"]},{"en":"Step three: before looking at the choices, predict the answer in your own words.","ko":"3단계, 선택지를 보기 전에 내 말로 답을 예측해요.","zh":"第三步：看选项之前，先用自己的话预测答案。","a":["in:#s3"]},{"en":"Step four: eliminate choices that do not match, then choose. Each later lesson shows how to use these steps for one question type.","ko":"4단계, 맞지 않는 선택지를 지우고 골라요. 다음 강의들에서 유형별로 이 단계를 어떻게 쓰는지 보여 줄게요.","zh":"第四步：排除不符合的选项，再作选择。后面的每一课都会讲如何把这些步骤用在某一种题型上。","a":["in:#s4"]},{"q":{"en":{"q":"You have spent two minutes on a hard inference question in module 1. What should you do?","o":["Keep working until you are sure","Choose your best guess, flag it, and move on","Leave it blank and move on"],"e":"Time is better spent on questions you can answer quickly. Guess, flag, and return if time allows. Blanks earn nothing, and wrong answers cost nothing."},"ko":{"q":"모듈 1에서 어려운 추론 문제에 2분을 썼어요. 어떻게 해야 할까요?","o":["확실해질 때까지 계속 푼다","가장 그럴듯한 답을 고르고 표시한 뒤 넘어간다","빈칸으로 두고 넘어간다"],"e":"빨리 풀 수 있는 문제에 시간을 쓰는 게 나아요. 찍고 표시한 뒤 시간이 남으면 돌아오세요. 빈칸은 점수가 없고, 틀려도 감점은 없어요."},"zh":{"q":"你在模块1的一道推理难题上已经花了2分钟。该怎么办？","o":["继续做，直到确定为止","选一个最可能的答案，做标记，然后继续","留空，继续往下做"],"e":"把时间用在能快速答对的题上更划算。先猜、做标记，有时间再回来。留空得不到分，答错也不扣分。"},"a":1}}]},
+{"id":"summary","ch":{"en":"Summary","ko":"정리","zh":"总结"},"html":"\n <div class=\"kick\" data-l=\"sum\"></div><h2 class=\"h2\">📌 Lesson 0</h2>\n <ul class=\"sum card\"><li class=\"h\" id=\"z1\">2 modules × 27 questions × 32 minutes · module 1 decides module 2</li>\n <li class=\"h\" id=\"z2\">Groups: reading → grammar → transitions & synthesis · easy → hard</li>\n <li class=\"h\" id=\"z3\">Fast on rules, slow on inferences · guess, flag, move on</li>\n <li class=\"h\" id=\"z4\">Question → passage → predict → eliminate</li></ul>","b":[{"en":"Let's review. Two modules, twenty-seven questions each, thirty-two minutes each. Module one decides module two.","ko":"정리할게요. 모듈 두 개, 각각 27문항, 32분. 모듈 1이 모듈 2를 결정해요.","zh":"我们来总结。两个模块，每个27题、32分钟。模块1决定模块2。","a":["in:#z1"]},{"en":"Questions come in groups, from easiest to hardest within each group.","ko":"문제는 묶음으로 나오고, 묶음 안에서는 쉬운 것부터 어려운 것 순서예요.","zh":"题目分组出现，每组内部从易到难。","a":["in:#z2"]},{"en":"Be fast on rule-based questions, take your time on inferences, and never leave a blank.","ko":"규칙 문제는 빠르게, 추론은 시간을 들여서, 그리고 빈칸은 절대 남기지 마세요.","zh":"规则类题目要快，推理题慢慢来，永远不要留空。","a":["in:#z3"]},{"en":"And use the four steps on every question. Next, take the diagnostic test, then start with Lesson 1. Good luck!","ko":"그리고 모든 문제에 4단계를 쓰세요. 다음은 진단 테스트를 보고, 1강부터 시작해요. 화이팅!","zh":"每道题都用四步法。接下来先做诊断测试，然后从第1课开始。加油！","a":["in:#z4"]}]}];
+
+/* ===== Player engine ===== */
+const $=s=>document.querySelector(s);
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q)return q;const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');return s.lang||'en'}catch(e){return 'en'}})();
+if(!UI[LANG])LANG='en';
+const FLAT=[];SC.forEach((s,si)=>s.b.forEach((b,bi)=>FLAT.push({si,bi,b})));
+let pos=0,playing=false,timer=null,speed=1,cc=true,done=new Set(),utter=null,token=0;
+function t(k){return (UI[LANG]||UI.en)[k]||UI.en[k]||k}
+function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene${s.tight?' tight':''}" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function applyStatic(){document.documentElement.lang=LANG==='zh'?'zh-CN':LANG;$('#ttl').textContent=t('title');document.title=t('title');$('#note').textContent=t('note');$('#lang').value=LANG;
+  $('#endh').textContent=t('endh');$('#endp').textContent=t('endp');$('#endgo').textContent=META.k==='GEN'?t('go0'):t('go');$('#endre').textContent=t('re');
+  document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l));chapters();bar();setPlay()}
+function chapters(){$('#chap').innerHTML=SC.map((s,i)=>`<button data-c="${i}" class="${FLAT[pos]&&FLAT[pos].si===i?'on':''} ${done.has(i)?'done':''}">${i+1}. ${s.ch[LANG]||s.ch.en}</button>`).join('')}
+function bar(){const segs=SC.map((s,i)=>{const idx=FLAT.map((f,k)=>f.si===i?k:-1).filter(k=>k>=0);const a=idx[0],z=idx[idx.length-1];const p=pos<a?0:pos>z?100:Math.round((pos-a+ (playing?0.5:0))/(z-a+1)*100);return`<i data-c="${i}"><b style="width:${p}%"></b></i>`});$('#bar').innerHTML=segs.join('');
+  const tot=FLAT.length;$('#time').textContent=`${Math.min(pos+1,tot)} / ${tot}`}
+function setPlay(){$('#play').textContent=playing?t('pause'):t('play')}
+function resetScene(si){const el=$('#sc'+si);el.innerHTML=SC[si].html;el.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function act(a){const[k,sel,v]=a.split(':');const el=document.querySelector(sel);if(!el)return;if(k==='in')el.classList.add('in');if(k==='add')el.classList.add(v);if(k==='text')el.textContent=v}
+function show(p,replay){const f=FLAT[p];if(!f)return;document.querySelectorAll('.scene').forEach((e,i)=>e.classList.toggle('on',i===f.si));
+  if(replay){resetScene(f.si);FLAT.forEach((g,k)=>{if(g.si===f.si&&k<p&&g.b.a)g.b.a.forEach(act)})}
+  if(f.b.a)f.b.a.forEach(act);chapters();bar()}
+function txt(b){return b[LANG]||b.en}
+function stopSpeech(){token++;clearTimeout(timer);stopAud();try{speechSynthesis.cancel()}catch(e){}}
+let MAN=null,AUD=null;const LID=META.id;
+function loadMan(){MAN=null;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.lang===LANG)MAN=m}).catch(()=>{})}
+function stopAud(){if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
+function speak(text,cb,idx){const my=++token;let fired=false;const fin=()=>{if(fired||my!==token)return;fired=true;cb()};
+  const rec=MAN&&idx!=null&&MAN.beats[idx];
+  if(rec){stopAud();AUD=new Audio('../audio/'+rec.file);AUD.playbackRate=speed;AUD.onended=fin;AUD.onerror=()=>{AUD=null;timer=setTimeout(fin,Math.max(2200,text.length/14*1000))};AUD.play().catch(()=>{timer=setTimeout(fin,(rec.dur||3)*1000/speed)});timer=setTimeout(fin,((rec.dur||3)/speed+4)*1000);return}
+  const cps={en:14,ko:7,zh:5}[LANG]*speed;const est=Math.max(2200,text.length/cps*1000)+500;
+  try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);const lc={en:'en-US',ko:'ko-KR',zh:'zh-CN'}[LANG];u.lang=lc;u.rate=speed*(LANG==='en'?0.98:1);
+    const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lc.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lc.slice(0,2)));
+    if(v){u.voice=v;u.onend=fin;u.onerror=()=>{timer=setTimeout(fin,est)};speechSynthesis.speak(u);timer=setTimeout(fin,est*2.2);return}}}catch(e){}
+  timer=setTimeout(fin,est)}
+function step(){const f=FLAT[pos];if(!f){finish();return}
+  if(f.b.q){showQuiz(f.b.q);return}
+  $('#subt').textContent=txt(f.b);speak(txt(f.b),()=>{if(!playing)return;pos++;if(FLAT[pos]&&FLAT[pos].si!==f.si)done.add(f.si);if(pos>=FLAT.length){done.add(f.si);finish();return}show(pos);step()},pos)}
+function play(){if(pos>=FLAT.length){pos=0;show(0,true)}playing=true;setPlay();$('#end').classList.remove('on');show(pos);step()}
+function pause(){playing=false;stopSpeech();setPlay();bar()}
+function jump(p){stopSpeech();$('#quiz').classList.remove('on');pos=Math.max(0,Math.min(FLAT.length-1,p));show(pos,true);if(playing)step();else{$('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)}}
+function sceneStart(i){return FLAT.findIndex(f=>f.si===i)}
+function showQuiz(q){stopSpeech();const d=q[LANG]||q.en;$('#qk').textContent=t('check');$('#qq').textContent=d.q;$('#qfb').textContent='';$('#qgo').style.display='none';$('#qgo').textContent=t('cont');
+  $('#qo').innerHTML=d.o.map((o,i)=>`<button class="o" data-i="${i}">${String.fromCharCode(65+i)}) ${o}</button>`).join('');$('#quiz').classList.add('on');$('#subt').textContent='';
+  const say=d.q;speak(say,()=>{},pos);
+  $('#qo').onclick=e=>{const b=e.target.closest('button.o');if(!b)return;const i=+b.dataset.i;if(i===q.a){b.classList.add('right');$('#qfb').innerHTML=`<b style="color:var(--ok)">${t('right')}</b> ${d.e}`;$('#qgo').style.display='inline-block';$('#qo').onclick=null;speak(t('right'),()=>{})}else{b.classList.add('wrong');$('#qfb').innerHTML=`<b style="color:var(--bad)">${t('wrong')}</b>`;setTimeout(()=>b.classList.remove('wrong'),400)}}}
+$('#qgo').onclick=()=>{$('#quiz').classList.remove('on');pos++;if(pos>=FLAT.length){finish();return}show(pos);if(playing)step();else play()};
+function finish(){playing=false;stopSpeech();setPlay();SC.forEach((s,i)=>done.add(i));chapters();bar();$('#end').classList.add('on');$('#subt').textContent='';try{parent.postMessage({type:'lessonDone',id:META.id},'*')}catch(e){}}
+$('#endgo').onclick=()=>{try{if(parent!==window){parent.postMessage({type:'lessonPractice',k:META.k},'*');return}}catch(e){}location.href='../index.html#train'};
+$('#endre').onclick=()=>{done.clear();pos=0;$('#end').classList.remove('on');show(0,true);play()};
+$('#play').onclick=()=>playing?pause():play();
+$('#next').onclick=()=>{const si=FLAT[pos].si;const n=sceneStart(si+1);if(n>=0)jump(n)};
+$('#prev').onclick=()=>{const si=FLAT[pos].si,st=sceneStart(si);jump(pos>st?st:sceneStart(Math.max(0,si-1)))};
+$('#chap').onclick=e=>{const b=e.target.closest('button');if(b)jump(sceneStart(+b.dataset.c))};
+$('#bar').onclick=e=>{const i=e.target.closest('i');if(i)jump(sceneStart(+i.dataset.c))};
+$('#lang').onchange=e=>{LANG=e.target.value;try{const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');s.lang=LANG;localStorage.setItem('rwlab_v1',JSON.stringify(s))}catch(x){}const was=playing;stopSpeech();loadMan();buildScenes();applyStatic();show(pos,true);if(was)step();else $('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)};
+$('#spd').onchange=e=>{speed=+e.target.value;if(AUD)AUD.playbackRate=speed;if(playing){stopSpeech();step()}};
+$('#cc').onclick=()=>{cc=!cc;$('#sub').classList.toggle('off',!cc);$('#cc').setAttribute('aria-pressed',cc)};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(e.code==='Space'){e.preventDefault();playing?pause():play()}if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
+try{speechSynthesis.onvoiceschanged=()=>{}}catch(e){}
+if(parent!==window)document.body.classList.add('embed');loadMan();buildScenes();applyStatic();show(0);$('#subt').textContent=txt(FLAT[0].b);
+</script>
+</body>
+</html>

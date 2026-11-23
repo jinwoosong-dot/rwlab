@@ -1,0 +1,126 @@
+{
+ "id": "wic1",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 10. Words in context questions ask for the most logical and precise word for a blank, or the meaning of a word as it is used in the passage.",
+   "ko": "10강에 오신 걸 환영해요. 문맥 속 단어 문제는 빈칸에 가장 논리적이고 정확한 단어를 고르거나, 지문에서 쓰인 단어의 뜻을 물어요.",
+   "zh": "欢迎来到第10课。语境词义题要求选出最合逻辑、最准确的词填空，或者判断某个词在文中的意思。"
+  },
+  {
+   "en": "Knowing many words helps, but the method matters just as much. It has four steps.",
+   "ko": "아는 단어가 많으면 도움이 되지만, 방법도 그만큼 중요해요. 네 단계예요.",
+   "zh": "词汇量大当然有帮助，但方法同样重要。一共四步。"
+  },
+  {
+   "en": "Cover the choices. Find the clue. Predict your own word. Then compare and eliminate.",
+   "ko": "선택지를 가린다. 단서를 찾는다. 내 단어로 예측한다. 그리고 비교하며 지운다.",
+   "zh": "遮住选项，找线索，用自己的词预测，然后对比排除。"
+  },
+  {
+   "en": "The passage always contains a clue that points to the answer. Your job is to find it.",
+   "ko": "지문에는 항상 답을 가리키는 단서가 있어요. 그걸 찾는 게 우리 일이에요.",
+   "zh": "文章里总有指向答案的线索。你的任务就是找到它。"
+  },
+  {
+   "en": "Some clue words keep the same direction: and, because, so, a colon, in fact. The blank agrees with nearby ideas.",
+   "ko": "어떤 단서어는 같은 방향을 유지해요. and, because, so, 콜론, in fact. 빈칸이 주변 내용과 같은 방향이에요.",
+   "zh": "有些线索词保持同一方向：and、because、so、冒号、in fact。空格与附近的意思一致。"
+  },
+  {
+   "en": "Others flip the direction: but, although, however, rather than, unlike. The blank is the opposite of nearby ideas.",
+   "ko": "어떤 단서어는 방향을 뒤집어요. but, although, however, rather than, unlike. 빈칸이 주변 내용과 반대예요.",
+   "zh": "另一些会反转方向：but、although、however、rather than、unlike。空格与附近的意思相反。"
+  },
+  {
+   "en": "'The critic expected the film to be dull, but it was surprisingly, blank.' 'But' flips 'dull,' so predict something like 'exciting.'",
+   "ko": "'The critic expected the film to be dull, but it was surprisingly' 다음 빈칸. but이 dull을 뒤집으니까 'exciting' 같은 말을 예측해요.",
+   "zh": "The critic expected the film to be dull, but it was surprisingly，空格。but 把 dull 反转，所以预测类似 exciting 的词。"
+  },
+  {
+   "en": "Why predict before looking at the choices? Because the wrong choices are designed to sound good. If you already have an answer in mind, they cannot trick you.",
+   "ko": "왜 선택지를 보기 전에 예측할까요? 오답은 그럴듯하게 들리도록 만들어져 있거든요. 미리 답을 정해 두면 속지 않아요.",
+   "zh": "为什么要在看选项前先预测？因为错误选项就是设计得听起来不错。心里先有答案，就不会被骗。"
+  },
+  {
+   "en": "'Early reviewers described the symphony as, blank: at nearly three hours, it was twice as long as most works of its time.'",
+   "ko": "'Early reviewers described the symphony as' 빈칸, 'at nearly three hours, it was twice as long as most works of its time.'",
+   "zh": "Early reviewers described the symphony as，空格：at nearly three hours, it was twice as long as most works of its time."
+  },
+  {
+   "en": "The colon explains the blank. Three hours, twice as long. Predict 'very long.' Then 'lengthy' matches. 'Melodic' and 'original' could describe music, but the clue is about length.",
+   "ko": "콜론이 빈칸을 설명해요. 세 시간, 두 배 길이. '아주 길다'를 예측해요. 그러면 lengthy가 맞아요. melodic과 original도 음악을 묘사할 수 있지만, 단서는 길이에 관한 거예요.",
+   "zh": "冒号解释了空格：三个小时，长一倍。预测为很长。那么 lengthy 就对了。melodic 和 original 也能形容音乐，但线索讲的是长度。"
+  },
+  {
+   "en": "Here is the biggest trap. Many SAT words have a common meaning and a less common one. The test often uses the less common one.",
+   "ko": "가장 큰 함정이에요. SAT 단어 중 상당수는 흔한 뜻과 덜 흔한 뜻이 있어요. 시험은 덜 흔한 뜻을 자주 써요.",
+   "zh": "这是最大的陷阱。很多SAT词既有常见意思也有不常见的意思，考试常常用不常见的那个。"
+  },
+  {
+   "en": "'Novel' can mean new. 'Command' can mean mastery, as in a command of French. 'Sound' can mean reliable.",
+   "ko": "novel은 새롭다는 뜻일 수 있어요. command는 a command of French처럼 숙달을 뜻할 수 있고, sound는 믿을 만하다는 뜻일 수 있어요.",
+   "zh": "novel 可以表示新的；command 可以表示精通，比如 a command of French；sound 可以表示可靠的。"
+  },
+  {
+   "en": "'The new vaccine helped check the spread of the disease.' Here, 'check' means limit, not examine. Always replace the word with your prediction and reread.",
+   "ko": "'The new vaccine helped check the spread of the disease.' 여기서 check는 조사한다가 아니라 억제한다는 뜻이에요. 항상 단어를 내 예측으로 바꿔 넣고 다시 읽어 보세요.",
+   "zh": "The new vaccine helped check the spread of the disease. 这里 check 是遏制的意思，不是检查。一定要把这个词换成你的预测再读一遍。"
+  },
+  {
+   "q": 1,
+   "en": "“The lawyer’s argument was so sound that even the opposing side admitted its strength.” As used here, “sound” most nearly means",
+   "ko": "“The lawyer’s argument was so sound that even the opposing side admitted its strength.” 여기서 sound의 뜻에 가장 가까운 것은?",
+   "zh": "“The lawyer’s argument was so sound that even the opposing side admitted its strength.” 这里的 sound 最接近哪个意思？"
+  },
+  {
+   "en": "If you cannot think of an exact word, at least decide: is the blank positive or negative?",
+   "ko": "딱 맞는 단어가 떠오르지 않으면 최소한 이것만 정하세요. 빈칸이 긍정인가, 부정인가?",
+   "zh": "如果想不出准确的词，至少判断一下：空格是褒义还是贬义？"
+  },
+  {
+   "en": "'Despite years of setbacks, the team remained, blank, convinced that the next trial would succeed.' 'Convinced it would succeed' is positive.",
+   "ko": "'Despite years of setbacks, the team remained' 빈칸, 'convinced that the next trial would succeed.' 성공할 거라고 확신했으니 긍정이에요.",
+   "zh": "Despite years of setbacks, the team remained，空格，convinced that the next trial would succeed. 确信会成功，是褒义。"
+  },
+  {
+   "en": "That removes 'skeptical' and 'indifferent.' 'Cautious' is not strong enough for 'convinced.' The answer is 'optimistic.'",
+   "ko": "그러면 skeptical과 indifferent는 지워져요. cautious는 '확신했다'와 어울리기엔 약해요. 정답은 optimistic이에요.",
+   "zh": "这样就排除了 skeptical 和 indifferent。cautious 不够强，配不上 convinced。答案是 optimistic。"
+  },
+  {
+   "en": "Let's solve one. Cover the choices. The clue word is 'however.' Ruiz assumed the otters would avoid the dam, but the cameras showed the opposite.",
+   "ko": "한 문제 풀어 봐요. 선택지를 가리세요. 단서어는 however예요. Ruiz는 수달이 댐을 피할 거라 생각했지만, 카메라는 반대를 보여 줬어요.",
+   "zh": "做一道题。遮住选项。线索词是 however。Ruiz 以为水獭会躲开水坝，但摄像头显示的恰恰相反。"
+  },
+  {
+   "en": "And the next part says they rested on it and came back every day. Predict: 'happily used' or 'accepted.'",
+   "ko": "그리고 뒷부분에는 거기서 쉬고 매일 돌아왔다고 해요. 예측은 '기꺼이 이용했다' 또는 '받아들였다'예요.",
+   "zh": "后面说它们在上面休息，而且每天都回来。预测：乐于使用或接受。"
+  },
+  {
+   "en": "'Abandoning' and 'fearing' are opposite. 'Inspecting' is neutral and does not explain the daily use. 'Embracing,' meaning readily accepting, fits. The answer is B.",
+   "ko": "abandoning과 fearing은 반대예요. inspecting은 중립적이라 매일 이용한 걸 설명하지 못해요. 기꺼이 받아들인다는 뜻의 embracing이 맞아요. 정답은 B예요.",
+   "zh": "abandoning 和 fearing 方向相反。inspecting 是中性的，解释不了每天使用。表示欣然接受的 embracing 符合。答案是 B。"
+  },
+  {
+   "en": "Let's review. Cover the choices, find the clue, predict your own word, then eliminate.",
+   "ko": "정리할게요. 선택지를 가리고, 단서를 찾고, 내 단어로 예측한 다음, 지우세요.",
+   "zh": "我们来总结。遮住选项、找线索、用自己的词预测，然后排除。"
+  },
+  {
+   "en": "Contrast words flip the meaning. Same-direction words continue it.",
+   "ko": "대조어는 뜻을 뒤집고, 같은 방향의 말은 뜻을 이어 가요.",
+   "zh": "转折词反转意思，同向词延续意思。"
+  },
+  {
+   "en": "Watch for less common meanings of familiar words.",
+   "ko": "익숙한 단어의 덜 흔한 뜻을 조심하세요.",
+   "zh": "注意熟悉单词的不常见意思。"
+  },
+  {
+   "en": "And if no word comes to mind, decide positive or negative. Next lesson: transitions. See you in Lesson 11!",
+   "ko": "단어가 떠오르지 않으면 긍정인지 부정인지 정하세요. 다음은 연결어예요. 11강에서 만나요!",
+   "zh": "想不出词时，就判断褒贬。下一课：过渡词。第11课见！"
+  }
+ ]
+}

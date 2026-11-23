@@ -1,0 +1,96 @@
+{
+ "id": "syn1",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 12. The last questions in each module look like this: a list of notes and a goal.",
+   "ko": "12강에 오신 걸 환영해요. 각 모듈의 마지막 문제들은 이렇게 생겼어요. 노트 목록과 목표가 있어요.",
+   "zh": "欢迎来到第12课。每个模块最后的几道题长这样：一组笔记和一个目标。"
+  },
+  {
+   "en": "These questions look long, but they are some of the fastest on the test once you know the trick.",
+   "ko": "길어 보이지만, 요령만 알면 시험에서 가장 빨리 풀 수 있는 문제 중 하나예요.",
+   "zh": "这些题看起来很长，但掌握诀窍后，它们是全卷做得最快的题之一。"
+  },
+  {
+   "en": "Here is the trick in one sentence: the answer is decided by the goal, not by the notes.",
+   "ko": "요령을 한 문장으로 말하면, 정답은 노트가 아니라 목표가 결정해요.",
+   "zh": "诀窍用一句话说：答案由目标决定，而不是由笔记决定。"
+  },
+  {
+   "en": "Normally you read the passage first. Here, do the opposite. Read the goal in the question first.",
+   "ko": "보통은 지문을 먼저 읽죠. 여기서는 반대로 하세요. 질문 속 목표를 먼저 읽어요.",
+   "zh": "通常我们先读文章。这里反过来，先读问题里的目标。"
+  },
+  {
+   "en": "Why? The wrong choices are not false. Every choice uses true information from the notes. They are wrong because they do not achieve the goal.",
+   "ko": "왜냐고요? 오답이 틀린 정보는 아니거든요. 모든 선택지가 노트의 사실을 써요. 목표를 달성하지 못해서 오답인 거예요.",
+   "zh": "为什么？错误选项并不是内容错误。每个选项都用了笔记里的真实信息。它们错，是因为没有完成目标。"
+  },
+  {
+   "en": "So the notes cannot tell you the answer. The goal can. Find the key words in it, such as 'emphasize a difference.'",
+   "ko": "그래서 노트로는 정답을 알 수 없어요. 목표로 알 수 있어요. 'emphasize a difference' 같은 핵심 표현을 찾으세요.",
+   "zh": "所以笔记告诉不了你答案，目标才能。找出其中的关键词，比如 emphasize a difference。"
+  },
+  {
+   "en": "Learn what each common goal requires. 'Emphasize a similarity' needs both things and a similarity word like 'both' or 'also.'",
+   "ko": "자주 나오는 목표마다 필요한 게 정해져 있어요. 'emphasize a similarity'는 두 대상과 both나 also 같은 공통점 표현이 필요해요.",
+   "zh": "记住常见目标各自需要什么。emphasize a similarity 需要两个对象和 both、also 这类表示相似的词。"
+  },
+  {
+   "en": "'Emphasize a difference' needs both things and a contrast word like 'while,' 'whereas,' or 'unlike.'",
+   "ko": "'emphasize a difference'는 두 대상과 while, whereas, unlike 같은 대조 표현이 필요해요.",
+   "zh": "emphasize a difference 需要两个对象和 while、whereas、unlike 这类表示对比的词。"
+  },
+  {
+   "en": "'An audience unfamiliar with' something means the answer must explain what that thing is.",
+   "ko": "'an audience unfamiliar with'이 있으면, 정답은 그게 무엇인지 설명해야 해요.",
+   "zh": "如果目标说 an audience unfamiliar with 某物，答案就必须解释那是什么。"
+  },
+  {
+   "en": "If the goal is a study's aim, method, or findings, the answer gives only that part. And a generalization needs a broad claim plus an example.",
+   "ko": "목표가 연구의 목적, 방법, 결과라면 정답은 딱 그 부분만 말해요. 그리고 generalization은 넓은 주장과 예시가 필요해요.",
+   "zh": "如果目标是研究的目的、方法或结果，答案只讲那一部分。generalization 则需要一个概括性论断加一个例子。"
+  },
+  {
+   "en": "Let's solve one. Skip the notes and read the goal: emphasize a difference in the lengths of the two main spans.",
+   "ko": "한 문제 풀어 봐요. 노트는 건너뛰고 목표를 읽어요. 두 다리의 주경간 길이 차이를 강조하라.",
+   "zh": "做一道题。跳过笔记，读目标：强调两座桥主跨长度的差异。"
+  },
+  {
+   "en": "So the answer needs both bridges, both lengths, and a contrast word.",
+   "ko": "그러니까 정답에는 두 다리, 두 길이, 대조 표현이 있어야 해요.",
+   "zh": "所以答案需要两座桥、两个长度和一个对比词。"
+  },
+  {
+   "en": "A is a similarity. B and D mention only one bridge. C has both lengths and the contrast word 'while.' The answer is C.",
+   "ko": "A는 공통점이에요. B와 D는 다리 하나만 말해요. C는 두 길이와 대조 표현 while이 있어요. 정답은 C예요.",
+   "zh": "A 讲的是相似点。B 和 D 只提到一座桥。C 有两个长度和对比词 while。答案是 C。"
+  },
+  {
+   "q": 1,
+   "en": "Goal: “introduce the Akashi Kaikyō Bridge to an audience unfamiliar with it.” Which choice works best?",
+   "ko": "목표: “Akashi Kaikyō Bridge를 모르는 독자에게 소개하라.” 가장 알맞은 것은?",
+   "zh": "目标：“向不了解 Akashi Kaikyō Bridge 的读者介绍它。”哪个最合适？"
+  },
+  {
+   "en": "Let's review. Read the goal first. Every choice is true, so the notes cannot decide the answer.",
+   "ko": "정리할게요. 목표부터 읽어요. 모든 선택지가 사실이라 노트로는 정답을 정할 수 없어요.",
+   "zh": "我们来总结。先读目标。每个选项都是真的，所以笔记决定不了答案。"
+  },
+  {
+   "en": "Similarity needs both items and a similarity word. Difference needs both items and a contrast word.",
+   "ko": "공통점은 두 대상과 공통 표현, 차이점은 두 대상과 대조 표현이 필요해요.",
+   "zh": "相似点需要两个对象和表示相似的词；差异需要两个对象和对比词。"
+  },
+  {
+   "en": "An unfamiliar audience needs a description.",
+   "ko": "모르는 독자에게는 설명이 필요해요.",
+   "zh": "不熟悉的读者需要说明。"
+  },
+  {
+   "en": "And for each choice, ask only one question: does it do the goal? Next, we start reading with central ideas. See you in Lesson 13!",
+   "ko": "그리고 선택지마다 딱 하나만 물으세요. 목표를 달성하나? 다음은 중심 생각으로 독해를 시작해요. 13강에서 만나요!",
+   "zh": "每个选项只问一个问题：它完成目标了吗？接下来我们从中心思想开始讲阅读。第13课见！"
+  }
+ ]
+}

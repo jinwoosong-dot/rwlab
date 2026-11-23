@@ -1,5 +1,21 @@
 [
  {
+  "id": "gen1",
+  "k": "GEN",
+  "n": 0,
+  "min": 3,
+  "t": {
+   "en": "Lesson 0 · How the Reading & Writing Test Works",
+   "ko": "0강 · Reading & Writing 시험의 구조",
+   "zh": "第0课 · 阅读与写作考试的结构"
+  },
+  "d": {
+   "en": "Two adaptive modules, 27 questions in 32 minutes, the order of question types, pacing, and the 4-step method",
+   "ko": "적응형 모듈 2개, 32분에 27문항, 문항 유형 순서, 시간 배분, 4단계 풀이법",
+   "zh": "两个自适应模块、32分钟27题、题型顺序、时间分配、四步解题法"
+  }
+ },
+ {
   "id": "bnd1",
   "k": "BND",
   "n": 1,
@@ -141,6 +157,54 @@
    "en": "Plural vs. possessive, singular ’s vs. plural s’, irregular plurals, its/it’s, their/they’re, whose/who’s",
    "ko": "복수와 소유격, 단수 ’s와 복수 s’, 불규칙 복수, its/it’s, their/they’re, whose/who’s",
    "zh": "复数与所有格、单数 ’s 与复数 s’、不规则复数、its/it’s、their/they’re、whose/who’s"
+  }
+ },
+ {
+  "id": "wic1",
+  "k": "WIC",
+  "n": 10,
+  "min": 4,
+  "t": {
+   "en": "Lesson 10 · Words in Context",
+   "ko": "10강 · 문맥 속 단어",
+   "zh": "第10课 · 语境中的词义"
+  },
+  "d": {
+   "en": "Cover the choices, find clue words, predict your own word, watch for second meanings and positive/negative tone",
+   "ko": "선택지 가리기, 단서어 찾기, 내 단어로 예측, 두 번째 뜻과 긍정·부정 톤 주의",
+   "zh": "遮住选项、找线索词、用自己的词预测、注意第二义项和褒贬色彩"
+  }
+ },
+ {
+  "id": "trn1",
+  "k": "TRN",
+  "n": 11,
+  "min": 4,
+  "t": {
+   "en": "Lesson 11 · Transitions",
+   "ko": "11강 · 연결어",
+   "zh": "第11课 · 过渡词"
+  },
+  "d": {
+   "en": "Label the relationship between two sentences, the 5 transition families, same-family elimination",
+   "ko": "두 문장의 관계에 이름 붙이기, 연결어 5가족, 같은 가족 소거",
+   "zh": "给两句话的关系贴标签、五类过渡词、同类排除"
+  }
+ },
+ {
+  "id": "syn1",
+  "k": "SYN",
+  "n": 12,
+  "min": 3,
+  "t": {
+   "en": "Lesson 12 · Rhetorical Synthesis (Notes Questions)",
+   "ko": "12강 · 노트 종합 문제",
+   "zh": "第12课 · 信息整合（笔记题）"
+  },
+  "d": {
+   "en": "Read the goal first, decode the goal words, check every choice against the goal only",
+   "ko": "목표부터 읽기, 목표 표현 해석하기, 선택지는 목표에만 맞춰 판단",
+   "zh": "先读目标、解读目标用语、只用目标来检验选项"
   }
  }
 ]
