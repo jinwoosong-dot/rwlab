@@ -56,6 +56,32 @@ function speakable(t, lang) {
   t = t.replace(/[‘’']/g, "");
   return t;
 }
+// In KO/ZH narration, English words/sentences (and numbers inside them, e.g. "in 1937") are read by the
+// English voice; numbers attached to Korean/Chinese words (1강, 30초, 第1课) stay in the native voice.
+const EN_SPAN = /[A-Za-z][A-Za-z0-9 ,.;:!?\-–—()]*[A-Za-z0-9.!?)]|[A-Za-z]/g;
+function trim(pcm) {
+  const n = pcm.length / 2, th = 300, pad = Math.round(0.04 * RATE);
+  let a = 0, b = n - 1;
+  while (a < n && Math.abs(pcm.readInt16LE(a * 2)) < th) a++;
+  while (b > a && Math.abs(pcm.readInt16LE(b * 2)) < th) b--;
+  return pcm.subarray(Math.max(0, a - pad) * 2, Math.min(n, b + 1 + pad) * 2);
+}
+async function mixed(voiceName, lang, s) {
+  if (lang === "en" || !/[A-Za-z]/.test(s)) return synth(voiceName, lang, s);
+  const segs = []; let last = 0;
+  for (const m of s.matchAll(EN_SPAN)) {
+    if (m.index > last) segs.push([lang, s.slice(last, m.index)]);
+    segs.push(["en", m[0]]); last = m.index + m[0].length;
+  }
+  if (last < s.length) segs.push([lang, s.slice(last)]);
+  const bufs = [];
+  for (const [l, t] of segs) {
+    if (!/[\p{L}\p{N}]/u.test(t)) continue; // punctuation/space only
+    bufs.push(trim(await synth(`${LC[l]}-${VOICE}`, l, t.trim())));
+    bufs.push(Buffer.alloc(Math.round(0.06 * RATE) * 2));
+  }
+  return Buffer.concat(bufs);
+}
 function sentences(t) { return t.split(/(?<=[.!?。！？])\s+/).filter(Boolean); }
 function mp3(pcm) {
   const r = spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-f", "s16le", "-ar", String(RATE), "-ac", "1", "-i", "pipe:0", "-ar", "44100", "-b:a", `${KBPS}k`, "-f", "mp3", "pipe:1"], { input: pcm, maxBuffer: 1 << 28 });
@@ -78,7 +104,7 @@ for (const id of ids) {
     for (let i = 0; i < beats.length; i++) {
       const text = speakable(beats[i][lang] || beats[i].en, lang);
       const gap = Buffer.alloc(Math.round(GAP * RATE) * 2), parts = [];
-      for (const [k, s] of sentences(text).entries()) { if (k) parts.push(gap); parts.push(await synth(voiceName, lang, s)); }
+      for (const [k, s] of sentences(text).entries()) { if (k) parts.push(gap); parts.push(await mixed(voiceName, lang, s)); }
       const pcm = Buffer.concat(parts), dur = +(pcm.length / 2 / RATE).toFixed(2);
       const rel = `${id}/${lang}/${i}.mp3`;
       fs.writeFileSync(path.join(ROOT, "audio", rel), mp3(pcm));
