@@ -1,0 +1,157 @@
+{
+ "id": "bnd3",
+ "lang": "en",
+ "voice": "en-US-Chirp3-HD-Aoede",
+ "n": 37,
+ "generatedAt": "2026-11-23T14:24:22.497Z",
+ "beats": {
+  "0": {
+   "file": "bnd3/en/0.mp3",
+   "dur": 5.85
+  },
+  "1": {
+   "file": "bnd3/en/1.mp3",
+   "dur": 6.28
+  },
+  "2": {
+   "file": "bnd3/en/2.mp3",
+   "dur": 7
+  },
+  "3": {
+   "file": "bnd3/en/3.mp3",
+   "dur": 5.05
+  },
+  "4": {
+   "file": "bnd3/en/4.mp3",
+   "dur": 7.7
+  },
+  "5": {
+   "file": "bnd3/en/5.mp3",
+   "dur": 6.13
+  },
+  "6": {
+   "file": "bnd3/en/6.mp3",
+   "dur": 6.04
+  },
+  "7": {
+   "file": "bnd3/en/7.mp3",
+   "dur": 8.85
+  },
+  "8": {
+   "file": "bnd3/en/8.mp3",
+   "dur": 3.52
+  },
+  "9": {
+   "file": "bnd3/en/9.mp3",
+   "dur": 9.45
+  },
+  "10": {
+   "file": "bnd3/en/10.mp3",
+   "dur": 6.49
+  },
+  "11": {
+   "file": "bnd3/en/11.mp3",
+   "dur": 8.09
+  },
+  "12": {
+   "file": "bnd3/en/12.mp3",
+   "dur": 8.12
+  },
+  "13": {
+   "file": "bnd3/en/13.mp3",
+   "dur": 6.45
+  },
+  "14": {
+   "file": "bnd3/en/14.mp3",
+   "dur": 8.14
+  },
+  "15": {
+   "file": "bnd3/en/15.mp3",
+   "dur": 7.3
+  },
+  "16": {
+   "file": "bnd3/en/16.mp3",
+   "dur": 9.73
+  },
+  "17": {
+   "file": "bnd3/en/17.mp3",
+   "dur": 7.24
+  },
+  "18": {
+   "file": "bnd3/en/18.mp3",
+   "dur": 5.56
+  },
+  "19": {
+   "file": "bnd3/en/19.mp3",
+   "dur": 7.61
+  },
+  "20": {
+   "file": "bnd3/en/20.mp3",
+   "dur": 8.22
+  },
+  "21": {
+   "file": "bnd3/en/21.mp3",
+   "dur": 6.73
+  },
+  "22": {
+   "file": "bnd3/en/22.mp3",
+   "dur": 9.36
+  },
+  "23": {
+   "file": "bnd3/en/23.mp3",
+   "dur": 2.2
+  },
+  "24": {
+   "file": "bnd3/en/24.mp3",
+   "dur": 7.01
+  },
+  "25": {
+   "file": "bnd3/en/25.mp3",
+   "dur": 4
+  },
+  "26": {
+   "file": "bnd3/en/26.mp3",
+   "dur": 5.52
+  },
+  "27": {
+   "file": "bnd3/en/27.mp3",
+   "dur": 6.61
+  },
+  "28": {
+   "file": "bnd3/en/28.mp3",
+   "dur": 9.09
+  },
+  "29": {
+   "file": "bnd3/en/29.mp3",
+   "dur": 5.62
+  },
+  "30": {
+   "file": "bnd3/en/30.mp3",
+   "dur": 8.34
+  },
+  "31": {
+   "file": "bnd3/en/31.mp3",
+   "dur": 9.91
+  },
+  "32": {
+   "file": "bnd3/en/32.mp3",
+   "dur": 2.2
+  },
+  "33": {
+   "file": "bnd3/en/33.mp3",
+   "dur": 8.46
+  },
+  "34": {
+   "file": "bnd3/en/34.mp3",
+   "dur": 4.12
+  },
+  "35": {
+   "file": "bnd3/en/35.mp3",
+   "dur": 4.4
+  },
+  "36": {
+   "file": "bnd3/en/36.mp3",
+   "dur": 8.66
+  }
+ }
+}

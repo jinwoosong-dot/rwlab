@@ -1,0 +1,113 @@
+{
+ "id": "fss4",
+ "lang": "ko",
+ "voice": "ko-KR-Chirp3-HD-Aoede",
+ "n": 26,
+ "generatedAt": "2026-11-23T14:38:09.529Z",
+ "beats": {
+  "0": {
+   "file": "fss4/ko/0.mp3",
+   "dur": 10.22
+  },
+  "1": {
+   "file": "fss4/ko/1.mp3",
+   "dur": 8.76
+  },
+  "2": {
+   "file": "fss4/ko/2.mp3",
+   "dur": 5.06
+  },
+  "3": {
+   "file": "fss4/ko/3.mp3",
+   "dur": 7.4
+  },
+  "4": {
+   "file": "fss4/ko/4.mp3",
+   "dur": 10.75
+  },
+  "5": {
+   "file": "fss4/ko/5.mp3",
+   "dur": 9.4
+  },
+  "6": {
+   "file": "fss4/ko/6.mp3",
+   "dur": 10.58
+  },
+  "7": {
+   "file": "fss4/ko/7.mp3",
+   "dur": 1.87
+  },
+  "8": {
+   "file": "fss4/ko/8.mp3",
+   "dur": 6.44
+  },
+  "9": {
+   "file": "fss4/ko/9.mp3",
+   "dur": 8.32
+  },
+  "10": {
+   "file": "fss4/ko/10.mp3",
+   "dur": 8.88
+  },
+  "11": {
+   "file": "fss4/ko/11.mp3",
+   "dur": 7.46
+  },
+  "12": {
+   "file": "fss4/ko/12.mp3",
+   "dur": 7.94
+  },
+  "13": {
+   "file": "fss4/ko/13.mp3",
+   "dur": 5.49
+  },
+  "14": {
+   "file": "fss4/ko/14.mp3",
+   "dur": 8
+  },
+  "15": {
+   "file": "fss4/ko/15.mp3",
+   "dur": 10.39
+  },
+  "16": {
+   "file": "fss4/ko/16.mp3",
+   "dur": 4.02
+  },
+  "17": {
+   "file": "fss4/ko/17.mp3",
+   "dur": 8.17
+  },
+  "18": {
+   "file": "fss4/ko/18.mp3",
+   "dur": 9.76
+  },
+  "19": {
+   "file": "fss4/ko/19.mp3",
+   "dur": 11.23
+  },
+  "20": {
+   "file": "fss4/ko/20.mp3",
+   "dur": 7.5
+  },
+  "21": {
+   "file": "fss4/ko/21.mp3",
+   "dur": 2.26
+  },
+  "22": {
+   "file": "fss4/ko/22.mp3",
+   "dur": 5.93
+  },
+  "23": {
+   "file": "fss4/ko/23.mp3",
+   "dur": 4.97
+  },
+  "24": {
+   "file": "fss4/ko/24.mp3",
+   "dur": 4.46
+  },
+  "25": {
+   "file": "fss4/ko/25.mp3",
+   "dur": 10.58
+  }
+ }
+}

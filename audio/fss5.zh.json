@@ -1,0 +1,93 @@
+{
+ "id": "fss5",
+ "lang": "zh",
+ "voice": "cmn-CN-Chirp3-HD-Aoede",
+ "n": 21,
+ "generatedAt": "2026-11-23T14:40:57.284Z",
+ "beats": {
+  "0": {
+   "file": "fss5/zh/0.mp3",
+   "dur": 8.58
+  },
+  "1": {
+   "file": "fss5/zh/1.mp3",
+   "dur": 9.2
+  },
+  "2": {
+   "file": "fss5/zh/2.mp3",
+   "dur": 4.08
+  },
+  "3": {
+   "file": "fss5/zh/3.mp3",
+   "dur": 5.39
+  },
+  "4": {
+   "file": "fss5/zh/4.mp3",
+   "dur": 6.6
+  },
+  "5": {
+   "file": "fss5/zh/5.mp3",
+   "dur": 14.94
+  },
+  "6": {
+   "file": "fss5/zh/6.mp3",
+   "dur": 7.56
+  },
+  "7": {
+   "file": "fss5/zh/7.mp3",
+   "dur": 11.38
+  },
+  "8": {
+   "file": "fss5/zh/8.mp3",
+   "dur": 8.96
+  },
+  "9": {
+   "file": "fss5/zh/9.mp3",
+   "dur": 2.63
+  },
+  "10": {
+   "file": "fss5/zh/10.mp3",
+   "dur": 8.66
+  },
+  "11": {
+   "file": "fss5/zh/11.mp3",
+   "dur": 11.62
+  },
+  "12": {
+   "file": "fss5/zh/12.mp3",
+   "dur": 8.15
+  },
+  "13": {
+   "file": "fss5/zh/13.mp3",
+   "dur": 18.19
+  },
+  "14": {
+   "file": "fss5/zh/14.mp3",
+   "dur": 12.2
+  },
+  "15": {
+   "file": "fss5/zh/15.mp3",
+   "dur": 4.16
+  },
+  "16": {
+   "file": "fss5/zh/16.mp3",
+   "dur": 4.78
+  },
+  "17": {
+   "file": "fss5/zh/17.mp3",
+   "dur": 7.12
+  },
+  "18": {
+   "file": "fss5/zh/18.mp3",
+   "dur": 7.01
+  },
+  "19": {
+   "file": "fss5/zh/19.mp3",
+   "dur": 3.2
+  },
+  "20": {
+   "file": "fss5/zh/20.mp3",
+   "dur": 11.68
+  }
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "bnd4",
+ "lang": "ko",
+ "voice": "ko-KR-Chirp3-HD-Aoede",
+ "n": 31,
+ "generatedAt": "2026-11-23T14:27:58.024Z",
+ "beats": {
+  "0": {
+   "file": "bnd4/ko/0.mp3",
+   "dur": 8.46
+  },
+  "1": {
+   "file": "bnd4/ko/1.mp3",
+   "dur": 9.35
+  },
+  "2": {
+   "file": "bnd4/ko/2.mp3",
+   "dur": 2.96
+  },
+  "3": {
+   "file": "bnd4/ko/3.mp3",
+   "dur": 8.3
+  },
+  "4": {
+   "file": "bnd4/ko/4.mp3",
+   "dur": 7.62
+  },
+  "5": {
+   "file": "bnd4/ko/5.mp3",
+   "dur": 9.68
+  },
+  "6": {
+   "file": "bnd4/ko/6.mp3",
+   "dur": 8.85
+  },
+  "7": {
+   "file": "bnd4/ko/7.mp3",
+   "dur": 9.39
+  },
+  "8": {
+   "file": "bnd4/ko/8.mp3",
+   "dur": 10.13
+  },
+  "9": {
+   "file": "bnd4/ko/9.mp3",
+   "dur": 9.57
+  },
+  "10": {
+   "file": "bnd4/ko/10.mp3",
+   "dur": 7.29
+  },
+  "11": {
+   "file": "bnd4/ko/11.mp3",
+   "dur": 2.48
+  },
+  "12": {
+   "file": "bnd4/ko/12.mp3",
+   "dur": 8.34
+  },
+  "13": {
+   "file": "bnd4/ko/13.mp3",
+   "dur": 6.76
+  },
+  "14": {
+   "file": "bnd4/ko/14.mp3",
+   "dur": 7.72
+  },
+  "15": {
+   "file": "bnd4/ko/15.mp3",
+   "dur": 9.78
+  },
+  "16": {
+   "file": "bnd4/ko/16.mp3",
+   "dur": 9.91
+  },
+  "17": {
+   "file": "bnd4/ko/17.mp3",
+   "dur": 4.97
+  },
+  "18": {
+   "file": "bnd4/ko/18.mp3",
+   "dur": 4.72
+  },
+  "19": {
+   "file": "bnd4/ko/19.mp3",
+   "dur": 4.3
+  },
+  "20": {
+   "file": "bnd4/ko/20.mp3",
+   "dur": 8.25
+  },
+  "21": {
+   "file": "bnd4/ko/21.mp3",
+   "dur": 6.71
+  },
+  "22": {
+   "file": "bnd4/ko/22.mp3",
+   "dur": 10.29
+  },
+  "23": {
+   "file": "bnd4/ko/23.mp3",
+   "dur": 6.56
+  },
+  "24": {
+   "file": "bnd4/ko/24.mp3",
+   "dur": 4.45
+  },
+  "25": {
+   "file": "bnd4/ko/25.mp3",
+   "dur": 5.11
+  },
+  "26": {
+   "file": "bnd4/ko/26.mp3",
+   "dur": 2.36
+  },
+  "27": {
+   "file": "bnd4/ko/27.mp3",
+   "dur": 8.55
+  },
+  "28": {
+   "file": "bnd4/ko/28.mp3",
+   "dur": 2.92
+  },
+  "29": {
+   "file": "bnd4/ko/29.mp3",
+   "dur": 7.36
+  },
+  "30": {
+   "file": "bnd4/ko/30.mp3",
+   "dur": 14.56
+  }
+ }
+}

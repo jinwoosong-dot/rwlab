@@ -1,0 +1,141 @@
+{
+ "id": "fss1",
+ "lang": "ko",
+ "voice": "ko-KR-Chirp3-HD-Aoede",
+ "n": 33,
+ "generatedAt": "2026-11-23T14:30:40.654Z",
+ "beats": {
+  "0": {
+   "file": "fss1/ko/0.mp3",
+   "dur": 7.45
+  },
+  "1": {
+   "file": "fss1/ko/1.mp3",
+   "dur": 10.57
+  },
+  "2": {
+   "file": "fss1/ko/2.mp3",
+   "dur": 6.07
+  },
+  "3": {
+   "file": "fss1/ko/3.mp3",
+   "dur": 8.37
+  },
+  "4": {
+   "file": "fss1/ko/4.mp3",
+   "dur": 6.8
+  },
+  "5": {
+   "file": "fss1/ko/5.mp3",
+   "dur": 6.6
+  },
+  "6": {
+   "file": "fss1/ko/6.mp3",
+   "dur": 9.69
+  },
+  "7": {
+   "file": "fss1/ko/7.mp3",
+   "dur": 6.85
+  },
+  "8": {
+   "file": "fss1/ko/8.mp3",
+   "dur": 6.01
+  },
+  "9": {
+   "file": "fss1/ko/9.mp3",
+   "dur": 9.52
+  },
+  "10": {
+   "file": "fss1/ko/10.mp3",
+   "dur": 10.61
+  },
+  "11": {
+   "file": "fss1/ko/11.mp3",
+   "dur": 6.08
+  },
+  "12": {
+   "file": "fss1/ko/12.mp3",
+   "dur": 5.4
+  },
+  "13": {
+   "file": "fss1/ko/13.mp3",
+   "dur": 8.55
+  },
+  "14": {
+   "file": "fss1/ko/14.mp3",
+   "dur": 7.61
+  },
+  "15": {
+   "file": "fss1/ko/15.mp3",
+   "dur": 8.15
+  },
+  "16": {
+   "file": "fss1/ko/16.mp3",
+   "dur": 8.65
+  },
+  "17": {
+   "file": "fss1/ko/17.mp3",
+   "dur": 8.11
+  },
+  "18": {
+   "file": "fss1/ko/18.mp3",
+   "dur": 6.3
+  },
+  "19": {
+   "file": "fss1/ko/19.mp3",
+   "dur": 7.26
+  },
+  "20": {
+   "file": "fss1/ko/20.mp3",
+   "dur": 8.65
+  },
+  "21": {
+   "file": "fss1/ko/21.mp3",
+   "dur": 6.38
+  },
+  "22": {
+   "file": "fss1/ko/22.mp3",
+   "dur": 5.76
+  },
+  "23": {
+   "file": "fss1/ko/23.mp3",
+   "dur": 6.17
+  },
+  "24": {
+   "file": "fss1/ko/24.mp3",
+   "dur": 5.12
+  },
+  "25": {
+   "file": "fss1/ko/25.mp3",
+   "dur": 10.83
+  },
+  "26": {
+   "file": "fss1/ko/26.mp3",
+   "dur": 4.88
+  },
+  "27": {
+   "file": "fss1/ko/27.mp3",
+   "dur": 9.31
+  },
+  "28": {
+   "file": "fss1/ko/28.mp3",
+   "dur": 4.67
+  },
+  "29": {
+   "file": "fss1/ko/29.mp3",
+   "dur": 7.7
+  },
+  "30": {
+   "file": "fss1/ko/30.mp3",
+   "dur": 8.58
+  },
+  "31": {
+   "file": "fss1/ko/31.mp3",
+   "dur": 4.8
+  },
+  "32": {
+   "file": "fss1/ko/32.mp3",
+   "dur": 12.17
+  }
+ }
+}

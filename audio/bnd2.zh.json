@@ -1,0 +1,177 @@
+{
+ "id": "bnd2",
+ "lang": "zh",
+ "voice": "cmn-CN-Chirp3-HD-Aoede",
+ "n": 42,
+ "generatedAt": "2026-11-23T14:23:36.012Z",
+ "beats": {
+  "0": {
+   "file": "bnd2/zh/0.mp3",
+   "dur": 7.56
+  },
+  "1": {
+   "file": "bnd2/zh/1.mp3",
+   "dur": 7.64
+  },
+  "2": {
+   "file": "bnd2/zh/2.mp3",
+   "dur": 8.16
+  },
+  "3": {
+   "file": "bnd2/zh/3.mp3",
+   "dur": 4
+  },
+  "4": {
+   "file": "bnd2/zh/4.mp3",
+   "dur": 7.24
+  },
+  "5": {
+   "file": "bnd2/zh/5.mp3",
+   "dur": 8.48
+  },
+  "6": {
+   "file": "bnd2/zh/6.mp3",
+   "dur": 10.19
+  },
+  "7": {
+   "file": "bnd2/zh/7.mp3",
+   "dur": 7.48
+  },
+  "8": {
+   "file": "bnd2/zh/8.mp3",
+   "dur": 6.82
+  },
+  "9": {
+   "file": "bnd2/zh/9.mp3",
+   "dur": 7.54
+  },
+  "10": {
+   "file": "bnd2/zh/10.mp3",
+   "dur": 5.69
+  },
+  "11": {
+   "file": "bnd2/zh/11.mp3",
+   "dur": 2.88
+  },
+  "12": {
+   "file": "bnd2/zh/12.mp3",
+   "dur": 9.72
+  },
+  "13": {
+   "file": "bnd2/zh/13.mp3",
+   "dur": 6.45
+  },
+  "14": {
+   "file": "bnd2/zh/14.mp3",
+   "dur": 10.08
+  },
+  "15": {
+   "file": "bnd2/zh/15.mp3",
+   "dur": 6.26
+  },
+  "16": {
+   "file": "bnd2/zh/16.mp3",
+   "dur": 5.84
+  },
+  "17": {
+   "file": "bnd2/zh/17.mp3",
+   "dur": 7.9
+  },
+  "18": {
+   "file": "bnd2/zh/18.mp3",
+   "dur": 7.27
+  },
+  "19": {
+   "file": "bnd2/zh/19.mp3",
+   "dur": 6.54
+  },
+  "20": {
+   "file": "bnd2/zh/20.mp3",
+   "dur": 2.72
+  },
+  "21": {
+   "file": "bnd2/zh/21.mp3",
+   "dur": 9.32
+  },
+  "22": {
+   "file": "bnd2/zh/22.mp3",
+   "dur": 8.24
+  },
+  "23": {
+   "file": "bnd2/zh/23.mp3",
+   "dur": 9.76
+  },
+  "24": {
+   "file": "bnd2/zh/24.mp3",
+   "dur": 9.87
+  },
+  "25": {
+   "file": "bnd2/zh/25.mp3",
+   "dur": 8.24
+  },
+  "26": {
+   "file": "bnd2/zh/26.mp3",
+   "dur": 8.4
+  },
+  "27": {
+   "file": "bnd2/zh/27.mp3",
+   "dur": 8.04
+  },
+  "28": {
+   "file": "bnd2/zh/28.mp3",
+   "dur": 9.02
+  },
+  "29": {
+   "file": "bnd2/zh/29.mp3",
+   "dur": 6.32
+  },
+  "30": {
+   "file": "bnd2/zh/30.mp3",
+   "dur": 3.58
+  },
+  "31": {
+   "file": "bnd2/zh/31.mp3",
+   "dur": 6.68
+  },
+  "32": {
+   "file": "bnd2/zh/32.mp3",
+   "dur": 6.88
+  },
+  "33": {
+   "file": "bnd2/zh/33.mp3",
+   "dur": 4.44
+  },
+  "34": {
+   "file": "bnd2/zh/34.mp3",
+   "dur": 6
+  },
+  "35": {
+   "file": "bnd2/zh/35.mp3",
+   "dur": 8.93
+  },
+  "36": {
+   "file": "bnd2/zh/36.mp3",
+   "dur": 18.94
+  },
+  "37": {
+   "file": "bnd2/zh/37.mp3",
+   "dur": 6.58
+  },
+  "38": {
+   "file": "bnd2/zh/38.mp3",
+   "dur": 7.44
+  },
+  "39": {
+   "file": "bnd2/zh/39.mp3",
+   "dur": 6.96
+  },
+  "40": {
+   "file": "bnd2/zh/40.mp3",
+   "dur": 5.12
+  },
+  "41": {
+   "file": "bnd2/zh/41.mp3",
+   "dur": 9.8
+  }
+ }
+}

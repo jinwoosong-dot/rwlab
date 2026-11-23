@@ -1,0 +1,133 @@
+{
+ "id": "bnd4",
+ "lang": "zh",
+ "voice": "cmn-CN-Chirp3-HD-Aoede",
+ "n": 31,
+ "generatedAt": "2026-11-23T14:28:50.277Z",
+ "beats": {
+  "0": {
+   "file": "bnd4/zh/0.mp3",
+   "dur": 9.08
+  },
+  "1": {
+   "file": "bnd4/zh/1.mp3",
+   "dur": 9.27
+  },
+  "2": {
+   "file": "bnd4/zh/2.mp3",
+   "dur": 3.2
+  },
+  "3": {
+   "file": "bnd4/zh/3.mp3",
+   "dur": 9.08
+  },
+  "4": {
+   "file": "bnd4/zh/4.mp3",
+   "dur": 7.63
+  },
+  "5": {
+   "file": "bnd4/zh/5.mp3",
+   "dur": 7.91
+  },
+  "6": {
+   "file": "bnd4/zh/6.mp3",
+   "dur": 9.2
+  },
+  "7": {
+   "file": "bnd4/zh/7.mp3",
+   "dur": 7.81
+  },
+  "8": {
+   "file": "bnd4/zh/8.mp3",
+   "dur": 8.82
+  },
+  "9": {
+   "file": "bnd4/zh/9.mp3",
+   "dur": 8.32
+  },
+  "10": {
+   "file": "bnd4/zh/10.mp3",
+   "dur": 7.8
+  },
+  "11": {
+   "file": "bnd4/zh/11.mp3",
+   "dur": 2.88
+  },
+  "12": {
+   "file": "bnd4/zh/12.mp3",
+   "dur": 8.12
+  },
+  "13": {
+   "file": "bnd4/zh/13.mp3",
+   "dur": 7.12
+  },
+  "14": {
+   "file": "bnd4/zh/14.mp3",
+   "dur": 8.4
+  },
+  "15": {
+   "file": "bnd4/zh/15.mp3",
+   "dur": 8.4
+  },
+  "16": {
+   "file": "bnd4/zh/16.mp3",
+   "dur": 10.57
+  },
+  "17": {
+   "file": "bnd4/zh/17.mp3",
+   "dur": 4.49
+  },
+  "18": {
+   "file": "bnd4/zh/18.mp3",
+   "dur": 4.24
+  },
+  "19": {
+   "file": "bnd4/zh/19.mp3",
+   "dur": 5.31
+  },
+  "20": {
+   "file": "bnd4/zh/20.mp3",
+   "dur": 8.11
+  },
+  "21": {
+   "file": "bnd4/zh/21.mp3",
+   "dur": 6.55
+  },
+  "22": {
+   "file": "bnd4/zh/22.mp3",
+   "dur": 9.14
+  },
+  "23": {
+   "file": "bnd4/zh/23.mp3",
+   "dur": 7.07
+  },
+  "24": {
+   "file": "bnd4/zh/24.mp3",
+   "dur": 5.51
+  },
+  "25": {
+   "file": "bnd4/zh/25.mp3",
+   "dur": 6.17
+  },
+  "26": {
+   "file": "bnd4/zh/26.mp3",
+   "dur": 2.76
+  },
+  "27": {
+   "file": "bnd4/zh/27.mp3",
+   "dur": 10.58
+  },
+  "28": {
+   "file": "bnd4/zh/28.mp3",
+   "dur": 4
+  },
+  "29": {
+   "file": "bnd4/zh/29.mp3",
+   "dur": 8.2
+  },
+  "30": {
+   "file": "bnd4/zh/30.mp3",
+   "dur": 11.97
+  }
+ }
+}

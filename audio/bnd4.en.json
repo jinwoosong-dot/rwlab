@@ -1,0 +1,133 @@
+{
+ "id": "bnd4",
+ "lang": "en",
+ "voice": "en-US-Chirp3-HD-Aoede",
+ "n": 31,
+ "generatedAt": "2026-11-23T14:27:02.519Z",
+ "beats": {
+  "0": {
+   "file": "bnd4/en/0.mp3",
+   "dur": 7.57
+  },
+  "1": {
+   "file": "bnd4/en/1.mp3",
+   "dur": 8.73
+  },
+  "2": {
+   "file": "bnd4/en/2.mp3",
+   "dur": 2.56
+  },
+  "3": {
+   "file": "bnd4/en/3.mp3",
+   "dur": 7.97
+  },
+  "4": {
+   "file": "bnd4/en/4.mp3",
+   "dur": 6
+  },
+  "5": {
+   "file": "bnd4/en/5.mp3",
+   "dur": 8.86
+  },
+  "6": {
+   "file": "bnd4/en/6.mp3",
+   "dur": 8.89
+  },
+  "7": {
+   "file": "bnd4/en/7.mp3",
+   "dur": 7.58
+  },
+  "8": {
+   "file": "bnd4/en/8.mp3",
+   "dur": 10.54
+  },
+  "9": {
+   "file": "bnd4/en/9.mp3",
+   "dur": 7.62
+  },
+  "10": {
+   "file": "bnd4/en/10.mp3",
+   "dur": 5.92
+  },
+  "11": {
+   "file": "bnd4/en/11.mp3",
+   "dur": 2.36
+  },
+  "12": {
+   "file": "bnd4/en/12.mp3",
+   "dur": 6.61
+  },
+  "13": {
+   "file": "bnd4/en/13.mp3",
+   "dur": 6.16
+  },
+  "14": {
+   "file": "bnd4/en/14.mp3",
+   "dur": 8.41
+  },
+  "15": {
+   "file": "bnd4/en/15.mp3",
+   "dur": 7.7
+  },
+  "16": {
+   "file": "bnd4/en/16.mp3",
+   "dur": 9.21
+  },
+  "17": {
+   "file": "bnd4/en/17.mp3",
+   "dur": 5.01
+  },
+  "18": {
+   "file": "bnd4/en/18.mp3",
+   "dur": 4.08
+  },
+  "19": {
+   "file": "bnd4/en/19.mp3",
+   "dur": 4.36
+  },
+  "20": {
+   "file": "bnd4/en/20.mp3",
+   "dur": 7.13
+  },
+  "21": {
+   "file": "bnd4/en/21.mp3",
+   "dur": 6.08
+  },
+  "22": {
+   "file": "bnd4/en/22.mp3",
+   "dur": 6.77
+  },
+  "23": {
+   "file": "bnd4/en/23.mp3",
+   "dur": 5.77
+  },
+  "24": {
+   "file": "bnd4/en/24.mp3",
+   "dur": 4.89
+  },
+  "25": {
+   "file": "bnd4/en/25.mp3",
+   "dur": 6.49
+  },
+  "26": {
+   "file": "bnd4/en/26.mp3",
+   "dur": 2.6
+  },
+  "27": {
+   "file": "bnd4/en/27.mp3",
+   "dur": 10.45
+  },
+  "28": {
+   "file": "bnd4/en/28.mp3",
+   "dur": 2.92
+  },
+  "29": {
+   "file": "bnd4/en/29.mp3",
+   "dur": 6.68
+  },
+  "30": {
+   "file": "bnd4/en/30.mp3",
+   "dur": 13.95
+  }
+ }
+}

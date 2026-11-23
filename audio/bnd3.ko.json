@@ -1,0 +1,157 @@
+{
+ "id": "bnd3",
+ "lang": "ko",
+ "voice": "ko-KR-Chirp3-HD-Aoede",
+ "n": 37,
+ "generatedAt": "2026-11-23T14:25:24.998Z",
+ "beats": {
+  "0": {
+   "file": "bnd3/ko/0.mp3",
+   "dur": 7.53
+  },
+  "1": {
+   "file": "bnd3/ko/1.mp3",
+   "dur": 6.68
+  },
+  "2": {
+   "file": "bnd3/ko/2.mp3",
+   "dur": 9.33
+  },
+  "3": {
+   "file": "bnd3/ko/3.mp3",
+   "dur": 5.57
+  },
+  "4": {
+   "file": "bnd3/ko/4.mp3",
+   "dur": 7.06
+  },
+  "5": {
+   "file": "bnd3/ko/5.mp3",
+   "dur": 6.45
+  },
+  "6": {
+   "file": "bnd3/ko/6.mp3",
+   "dur": 7.53
+  },
+  "7": {
+   "file": "bnd3/ko/7.mp3",
+   "dur": 8.46
+  },
+  "8": {
+   "file": "bnd3/ko/8.mp3",
+   "dur": 3.68
+  },
+  "9": {
+   "file": "bnd3/ko/9.mp3",
+   "dur": 9.56
+  },
+  "10": {
+   "file": "bnd3/ko/10.mp3",
+   "dur": 7.13
+  },
+  "11": {
+   "file": "bnd3/ko/11.mp3",
+   "dur": 9.46
+  },
+  "12": {
+   "file": "bnd3/ko/12.mp3",
+   "dur": 4.81
+  },
+  "13": {
+   "file": "bnd3/ko/13.mp3",
+   "dur": 7.76
+  },
+  "14": {
+   "file": "bnd3/ko/14.mp3",
+   "dur": 9.23
+  },
+  "15": {
+   "file": "bnd3/ko/15.mp3",
+   "dur": 8.42
+  },
+  "16": {
+   "file": "bnd3/ko/16.mp3",
+   "dur": 9.21
+  },
+  "17": {
+   "file": "bnd3/ko/17.mp3",
+   "dur": 7.17
+  },
+  "18": {
+   "file": "bnd3/ko/18.mp3",
+   "dur": 7.25
+  },
+  "19": {
+   "file": "bnd3/ko/19.mp3",
+   "dur": 8.37
+  },
+  "20": {
+   "file": "bnd3/ko/20.mp3",
+   "dur": 9.28
+  },
+  "21": {
+   "file": "bnd3/ko/21.mp3",
+   "dur": 7.22
+  },
+  "22": {
+   "file": "bnd3/ko/22.mp3",
+   "dur": 8.6
+  },
+  "23": {
+   "file": "bnd3/ko/23.mp3",
+   "dur": 2.48
+  },
+  "24": {
+   "file": "bnd3/ko/24.mp3",
+   "dur": 7.04
+  },
+  "25": {
+   "file": "bnd3/ko/25.mp3",
+   "dur": 3.91
+  },
+  "26": {
+   "file": "bnd3/ko/26.mp3",
+   "dur": 5.83
+  },
+  "27": {
+   "file": "bnd3/ko/27.mp3",
+   "dur": 6.73
+  },
+  "28": {
+   "file": "bnd3/ko/28.mp3",
+   "dur": 9.98
+  },
+  "29": {
+   "file": "bnd3/ko/29.mp3",
+   "dur": 6.9
+  },
+  "30": {
+   "file": "bnd3/ko/30.mp3",
+   "dur": 9.73
+  },
+  "31": {
+   "file": "bnd3/ko/31.mp3",
+   "dur": 11.17
+  },
+  "32": {
+   "file": "bnd3/ko/32.mp3",
+   "dur": 2.36
+  },
+  "33": {
+   "file": "bnd3/ko/33.mp3",
+   "dur": 6.78
+  },
+  "34": {
+   "file": "bnd3/ko/34.mp3",
+   "dur": 3.88
+  },
+  "35": {
+   "file": "bnd3/ko/35.mp3",
+   "dur": 5.15
+  },
+  "36": {
+   "file": "bnd3/ko/36.mp3",
+   "dur": 10.94
+  }
+ }
+}

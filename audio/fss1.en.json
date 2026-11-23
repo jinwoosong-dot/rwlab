@@ -1,0 +1,141 @@
+{
+ "id": "fss1",
+ "lang": "en",
+ "voice": "en-US-Chirp3-HD-Aoede",
+ "n": 33,
+ "generatedAt": "2026-11-23T14:29:34.789Z",
+ "beats": {
+  "0": {
+   "file": "fss1/en/0.mp3",
+   "dur": 6.13
+  },
+  "1": {
+   "file": "fss1/en/1.mp3",
+   "dur": 8.33
+  },
+  "2": {
+   "file": "fss1/en/2.mp3",
+   "dur": 6.46
+  },
+  "3": {
+   "file": "fss1/en/3.mp3",
+   "dur": 7.42
+  },
+  "4": {
+   "file": "fss1/en/4.mp3",
+   "dur": 6.01
+  },
+  "5": {
+   "file": "fss1/en/5.mp3",
+   "dur": 6.29
+  },
+  "6": {
+   "file": "fss1/en/6.mp3",
+   "dur": 8.1
+  },
+  "7": {
+   "file": "fss1/en/7.mp3",
+   "dur": 6.83
+  },
+  "8": {
+   "file": "fss1/en/8.mp3",
+   "dur": 5.05
+  },
+  "9": {
+   "file": "fss1/en/9.mp3",
+   "dur": 8.49
+  },
+  "10": {
+   "file": "fss1/en/10.mp3",
+   "dur": 9.38
+  },
+  "11": {
+   "file": "fss1/en/11.mp3",
+   "dur": 7.13
+  },
+  "12": {
+   "file": "fss1/en/12.mp3",
+   "dur": 6.72
+  },
+  "13": {
+   "file": "fss1/en/13.mp3",
+   "dur": 10
+  },
+  "14": {
+   "file": "fss1/en/14.mp3",
+   "dur": 7.46
+  },
+  "15": {
+   "file": "fss1/en/15.mp3",
+   "dur": 6.64
+  },
+  "16": {
+   "file": "fss1/en/16.mp3",
+   "dur": 7.48
+  },
+  "17": {
+   "file": "fss1/en/17.mp3",
+   "dur": 7.69
+  },
+  "18": {
+   "file": "fss1/en/18.mp3",
+   "dur": 5.37
+  },
+  "19": {
+   "file": "fss1/en/19.mp3",
+   "dur": 6.88
+  },
+  "20": {
+   "file": "fss1/en/20.mp3",
+   "dur": 9.37
+  },
+  "21": {
+   "file": "fss1/en/21.mp3",
+   "dur": 5.53
+  },
+  "22": {
+   "file": "fss1/en/22.mp3",
+   "dur": 5.2
+  },
+  "23": {
+   "file": "fss1/en/23.mp3",
+   "dur": 4.73
+  },
+  "24": {
+   "file": "fss1/en/24.mp3",
+   "dur": 5.48
+  },
+  "25": {
+   "file": "fss1/en/25.mp3",
+   "dur": 9.75
+  },
+  "26": {
+   "file": "fss1/en/26.mp3",
+   "dur": 7.1
+  },
+  "27": {
+   "file": "fss1/en/27.mp3",
+   "dur": 7.82
+  },
+  "28": {
+   "file": "fss1/en/28.mp3",
+   "dur": 6.64
+  },
+  "29": {
+   "file": "fss1/en/29.mp3",
+   "dur": 9.73
+  },
+  "30": {
+   "file": "fss1/en/30.mp3",
+   "dur": 6.13
+  },
+  "31": {
+   "file": "fss1/en/31.mp3",
+   "dur": 5.24
+  },
+  "32": {
+   "file": "fss1/en/32.mp3",
+   "dur": 11.03
+  }
+ }
+}
