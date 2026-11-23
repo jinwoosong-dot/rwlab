@@ -20,7 +20,11 @@ for (const f of fs.readdirSync(srcDir).filter((f) => f.endsWith(".js"))) {
   }));
   const enChars = SC.flatMap((s) => s.b.map((b) => (b.q ? b.q.en.q : b.en).length)).reduce((a, b) => a + b, 0);
   const beats = SC.reduce((a, s) => a + s.b.length, 0);
-  const min = Math.max(3, Math.round((enChars / 14 + beats * 0.6 + SC.flatMap((s) => s.b.filter((b) => b.q)).length * 20) / 60));
+  const nq = SC.flatMap((s) => s.b.filter((b) => b.q)).length;
+  // Use the recorded English narration length when it exists; otherwise estimate from text.
+  const mp = path.join(ROOT, "audio", `${META.id}.en.json`);
+  const narr = fs.existsSync(mp) ? Object.values(JSON.parse(fs.readFileSync(mp, "utf8")).beats).reduce((a, b) => a + b.dur + 0.4, 0) : enChars / 14 + beats * 0.6;
+  const min = Math.max(3, Math.round((narr + nq * 20) / 60));
   let html = tpl.replace("/*TITLE*/", META.title.en).replace("/*META*/", JSON.stringify(META)).replace("/*L*/", JSON.stringify(L)).replace("/*SC*/", JSON.stringify(SC, null, 0).replace(/\},\{"id"/g, '},\n{"id"'));
   fs.writeFileSync(path.join(ROOT, "lessons", `${META.id}.html`), html);
   list.push({ id: META.id, k: META.k, n: META.n, min, t: META.title, d: META.desc });

@@ -35,7 +35,7 @@
   "id": "bnd2",
   "k": "BND",
   "n": 2,
-  "min": 7,
+  "min": 6,
   "t": {
    "en": "Lesson 2 · Semicolons, Colons & Dashes",
    "ko": "2강 · 세미콜론, 콜론, 대시",
@@ -51,7 +51,7 @@
   "id": "bnd3",
   "k": "BND",
   "n": 3,
-  "min": 6,
+  "min": 5,
   "t": {
    "en": "Lesson 3 · Extra Information: Commas, Dashes & Parentheses",
    "ko": "3강 · 삽입 정보: 쉼표, 대시, 괄호",
@@ -147,7 +147,7 @@
   "id": "fss5",
   "k": "FSS",
   "n": 9,
-  "min": 3,
+  "min": 4,
   "t": {
    "en": "Lesson 9 · Apostrophes: Possessives & Plurals",
    "ko": "9강 · 아포스트로피: 소유격과 복수",
