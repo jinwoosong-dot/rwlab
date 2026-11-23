@@ -1,0 +1,105 @@
+{
+ "id": "gen1",
+ "lang": "ko",
+ "voice": "ko-KR-Chirp3-HD-Aoede",
+ "n": 24,
+ "generatedAt": "2026-11-23T14:52:38.007Z",
+ "beats": {
+  "0": {
+   "file": "gen1/ko/0.mp3",
+   "dur": 8.98
+  },
+  "1": {
+   "file": "gen1/ko/1.mp3",
+   "dur": 4.28
+  },
+  "2": {
+   "file": "gen1/ko/2.mp3",
+   "dur": 8.94
+  },
+  "3": {
+   "file": "gen1/ko/3.mp3",
+   "dur": 5.93
+  },
+  "4": {
+   "file": "gen1/ko/4.mp3",
+   "dur": 9.25
+  },
+  "5": {
+   "file": "gen1/ko/5.mp3",
+   "dur": 8.45
+  },
+  "6": {
+   "file": "gen1/ko/6.mp3",
+   "dur": 6.77
+  },
+  "7": {
+   "file": "gen1/ko/7.mp3",
+   "dur": 7.41
+  },
+  "8": {
+   "file": "gen1/ko/8.mp3",
+   "dur": 5.92
+  },
+  "9": {
+   "file": "gen1/ko/9.mp3",
+   "dur": 5.32
+  },
+  "10": {
+   "file": "gen1/ko/10.mp3",
+   "dur": 8.28
+  },
+  "11": {
+   "file": "gen1/ko/11.mp3",
+   "dur": 7.65
+  },
+  "12": {
+   "file": "gen1/ko/12.mp3",
+   "dur": 5.6
+  },
+  "13": {
+   "file": "gen1/ko/13.mp3",
+   "dur": 8.37
+  },
+  "14": {
+   "file": "gen1/ko/14.mp3",
+   "dur": 3.88
+  },
+  "15": {
+   "file": "gen1/ko/15.mp3",
+   "dur": 7.81
+  },
+  "16": {
+   "file": "gen1/ko/16.mp3",
+   "dur": 3.72
+  },
+  "17": {
+   "file": "gen1/ko/17.mp3",
+   "dur": 4.08
+  },
+  "18": {
+   "file": "gen1/ko/18.mp3",
+   "dur": 7.93
+  },
+  "19": {
+   "file": "gen1/ko/19.mp3",
+   "dur": 5.73
+  },
+  "20": {
+   "file": "gen1/ko/20.mp3",
+   "dur": 8.38
+  },
+  "21": {
+   "file": "gen1/ko/21.mp3",
+   "dur": 5.52
+  },
+  "22": {
+   "file": "gen1/ko/22.mp3",
+   "dur": 6.4
+  },
+  "23": {
+   "file": "gen1/ko/23.mp3",
+   "dur": 8.62
+  }
+ }
+}

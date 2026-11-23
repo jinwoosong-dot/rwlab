@@ -1,0 +1,105 @@
+{
+ "id": "gen1",
+ "lang": "zh",
+ "voice": "cmn-CN-Chirp3-HD-Aoede",
+ "n": 24,
+ "generatedAt": "2026-11-23T14:53:09.804Z",
+ "beats": {
+  "0": {
+   "file": "gen1/zh/0.mp3",
+   "dur": 8.04
+  },
+  "1": {
+   "file": "gen1/zh/1.mp3",
+   "dur": 4.52
+  },
+  "2": {
+   "file": "gen1/zh/2.mp3",
+   "dur": 8.92
+  },
+  "3": {
+   "file": "gen1/zh/3.mp3",
+   "dur": 6.64
+  },
+  "4": {
+   "file": "gen1/zh/4.mp3",
+   "dur": 10.32
+  },
+  "5": {
+   "file": "gen1/zh/5.mp3",
+   "dur": 7.84
+  },
+  "6": {
+   "file": "gen1/zh/6.mp3",
+   "dur": 6.44
+  },
+  "7": {
+   "file": "gen1/zh/7.mp3",
+   "dur": 6.96
+  },
+  "8": {
+   "file": "gen1/zh/8.mp3",
+   "dur": 7.68
+  },
+  "9": {
+   "file": "gen1/zh/9.mp3",
+   "dur": 5.16
+  },
+  "10": {
+   "file": "gen1/zh/10.mp3",
+   "dur": 8.35
+  },
+  "11": {
+   "file": "gen1/zh/11.mp3",
+   "dur": 6.8
+  },
+  "12": {
+   "file": "gen1/zh/12.mp3",
+   "dur": 5.8
+  },
+  "13": {
+   "file": "gen1/zh/13.mp3",
+   "dur": 9.88
+  },
+  "14": {
+   "file": "gen1/zh/14.mp3",
+   "dur": 3.92
+  },
+  "15": {
+   "file": "gen1/zh/15.mp3",
+   "dur": 8.24
+  },
+  "16": {
+   "file": "gen1/zh/16.mp3",
+   "dur": 3.48
+  },
+  "17": {
+   "file": "gen1/zh/17.mp3",
+   "dur": 5.4
+  },
+  "18": {
+   "file": "gen1/zh/18.mp3",
+   "dur": 11
+  },
+  "19": {
+   "file": "gen1/zh/19.mp3",
+   "dur": 6.12
+  },
+  "20": {
+   "file": "gen1/zh/20.mp3",
+   "dur": 8.76
+  },
+  "21": {
+   "file": "gen1/zh/21.mp3",
+   "dur": 4.12
+  },
+  "22": {
+   "file": "gen1/zh/22.mp3",
+   "dur": 5.48
+  },
+  "23": {
+   "file": "gen1/zh/23.mp3",
+   "dur": 8.28
+  }
+ }
+}

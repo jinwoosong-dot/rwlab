@@ -1,0 +1,89 @@
+{
+ "id": "coq1",
+ "lang": "zh",
+ "voice": "cmn-CN-Chirp3-HD-Aoede",
+ "n": 20,
+ "generatedAt": "2026-11-23T14:48:21.023Z",
+ "beats": {
+  "0": {
+   "file": "coq1/zh/0.mp3",
+   "dur": 7.56
+  },
+  "1": {
+   "file": "coq1/zh/1.mp3",
+   "dur": 8.56
+  },
+  "2": {
+   "file": "coq1/zh/2.mp3",
+   "dur": 7.84
+  },
+  "3": {
+   "file": "coq1/zh/3.mp3",
+   "dur": 7.72
+  },
+  "4": {
+   "file": "coq1/zh/4.mp3",
+   "dur": 6.32
+  },
+  "5": {
+   "file": "coq1/zh/5.mp3",
+   "dur": 10.04
+  },
+  "6": {
+   "file": "coq1/zh/6.mp3",
+   "dur": 6.04
+  },
+  "7": {
+   "file": "coq1/zh/7.mp3",
+   "dur": 9.63
+  },
+  "8": {
+   "file": "coq1/zh/8.mp3",
+   "dur": 9.08
+  },
+  "9": {
+   "file": "coq1/zh/9.mp3",
+   "dur": 9.82
+  },
+  "10": {
+   "file": "coq1/zh/10.mp3",
+   "dur": 8.11
+  },
+  "11": {
+   "file": "coq1/zh/11.mp3",
+   "dur": 3.48
+  },
+  "12": {
+   "file": "coq1/zh/12.mp3",
+   "dur": 5.47
+  },
+  "13": {
+   "file": "coq1/zh/13.mp3",
+   "dur": 10.38
+  },
+  "14": {
+   "file": "coq1/zh/14.mp3",
+   "dur": 5.57
+  },
+  "15": {
+   "file": "coq1/zh/15.mp3",
+   "dur": 7.27
+  },
+  "16": {
+   "file": "coq1/zh/16.mp3",
+   "dur": 8.56
+  },
+  "17": {
+   "file": "coq1/zh/17.mp3",
+   "dur": 5
+  },
+  "18": {
+   "file": "coq1/zh/18.mp3",
+   "dur": 5.48
+  },
+  "19": {
+   "file": "coq1/zh/19.mp3",
+   "dur": 7.08
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "ctc1",
+ "lang": "en",
+ "voice": "en-US-Chirp3-HD-Aoede",
+ "n": 20,
+ "generatedAt": "2026-11-23T14:50:20.573Z",
+ "beats": {
+  "0": {
+   "file": "ctc1/en/0.mp3",
+   "dur": 7.21
+  },
+  "1": {
+   "file": "ctc1/en/1.mp3",
+   "dur": 6.16
+  },
+  "2": {
+   "file": "ctc1/en/2.mp3",
+   "dur": 5.37
+  },
+  "3": {
+   "file": "ctc1/en/3.mp3",
+   "dur": 9.09
+  },
+  "4": {
+   "file": "ctc1/en/4.mp3",
+   "dur": 5.6
+  },
+  "5": {
+   "file": "ctc1/en/5.mp3",
+   "dur": 7.41
+  },
+  "6": {
+   "file": "ctc1/en/6.mp3",
+   "dur": 6.17
+  },
+  "7": {
+   "file": "ctc1/en/7.mp3",
+   "dur": 7.9
+  },
+  "8": {
+   "file": "ctc1/en/8.mp3",
+   "dur": 7.41
+  },
+  "9": {
+   "file": "ctc1/en/9.mp3",
+   "dur": 6.5
+  },
+  "10": {
+   "file": "ctc1/en/10.mp3",
+   "dur": 6.22
+  },
+  "11": {
+   "file": "ctc1/en/11.mp3",
+   "dur": 8.12
+  },
+  "12": {
+   "file": "ctc1/en/12.mp3",
+   "dur": 6.09
+  },
+  "13": {
+   "file": "ctc1/en/13.mp3",
+   "dur": 8.93
+  },
+  "14": {
+   "file": "ctc1/en/14.mp3",
+   "dur": 9.31
+  },
+  "15": {
+   "file": "ctc1/en/15.mp3",
+   "dur": 5.92
+  },
+  "16": {
+   "file": "ctc1/en/16.mp3",
+   "dur": 3.49
+  },
+  "17": {
+   "file": "ctc1/en/17.mp3",
+   "dur": 4.52
+  },
+  "18": {
+   "file": "ctc1/en/18.mp3",
+   "dur": 4.28
+  },
+  "19": {
+   "file": "ctc1/en/19.mp3",
+   "dur": 10.03
+  }
+ }
+}
