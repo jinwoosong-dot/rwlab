@@ -76,7 +76,7 @@ SC=[
  {en:"'The rain stopped, however, the game was canceled.' Two complete sentences with only commas. That is still a comma splice.",ko:"'The rain stopped, however, the game was canceled.' 완전한 문장 두 개를 쉼표만으로 이었어요. 이것도 comma splice예요.",zh:"The rain stopped, however, the game was canceled. 两个完整句子只用逗号连接，这仍然是逗号粘连。",a:['in:#h1']},
  {en:"Put a semicolon or a period before 'however,' and a comma after it: 'The rain stopped; however, the game was canceled.'",ko:"'however' 앞에는 세미콜론이나 마침표, 뒤에는 쉼표를 찍어요. 'The rain stopped; however, the game was canceled.'",zh:"在 however 前面用分号或句号，后面用逗号：The rain stopped; however, the game was canceled.",a:['in:#h2']},
  {en:"The same rule applies to therefore, moreover, consequently, and in fact.",ko:"therefore, moreover, consequently, in fact도 똑같은 규칙이에요.",zh:"therefore、moreover、consequently、in fact 也适用同样的规则。",a:['in:#h3']}]},
-{id:'vline',ch:{en:'Vertical line test',ko:'세로줄 테스트',zh:'竖线测试'},html:`
+{id:'vline',tight:1,ch:{en:'Vertical line test',ko:'세로줄 테스트',zh:'竖线测试'},html:`
  <div class="kick">Tool</div><h2 class="h2" data-l="vlt"></h2>
  <div class="big card">Engineers tested the design for three years<span class="vline" id="v0"></span>the bridge opened in 1937.</div>
  <div class="side"><div class="card h" id="v1"><b data-l="left"></b><br>Engineers tested the design for three years → <span data-l="complete"></span></div><div class="card h" id="v2"><b data-l="right2"></b><br>the bridge opened in 1937 → <span data-l="complete"></span></div></div>

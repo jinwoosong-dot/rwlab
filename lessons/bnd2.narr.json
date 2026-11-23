@@ -1,0 +1,218 @@
+{
+ "id": "bnd2",
+ "beats": [
+  {
+   "en": "Welcome to Lesson 2. In Lesson 1, we learned that two complete sentences need strong punctuation between them.",
+   "ko": "2강에 오신 걸 환영해요. 1강에서 완전한 문장 두 개 사이에는 강한 구두점이 필요하다고 배웠죠.",
+   "zh": "欢迎来到第2课。第1课我们学到，两个完整句子之间需要有力的标点。"
+  },
+  {
+   "en": "Today we look closely at three marks that students mix up all the time: the semicolon, the colon, and the dash.",
+   "ko": "오늘은 학생들이 늘 헷갈리는 세 가지 부호를 자세히 볼게요. 세미콜론, 콜론, 그리고 대시예요.",
+   "zh": "今天我们仔细看三个学生总是混淆的符号：分号、冒号和破折号。"
+  },
+  {
+   "en": "Each one has a simple rule. If you know the rule, you can check any answer choice in seconds.",
+   "ko": "각각 규칙은 간단해요. 규칙만 알면 어떤 선택지든 몇 초 만에 확인할 수 있어요.",
+   "zh": "每个符号的规则都很简单。掌握规则，任何选项几秒钟就能判断。"
+  },
+  {
+   "en": "Let's start with the semicolon. Think of it as a soft period.",
+   "ko": "세미콜론부터 볼게요. 부드러운 마침표라고 생각하세요.",
+   "zh": "先看分号。把它想成一个柔和的句号。"
+  },
+  {
+   "en": "That means the rule is the same as a period: there must be a complete sentence on the left and a complete sentence on the right.",
+   "ko": "그러니까 규칙도 마침표와 같아요. 왼쪽에도 완전한 문장, 오른쪽에도 완전한 문장이 있어야 해요.",
+   "zh": "所以规则和句号一样：左边必须是完整句子，右边也必须是完整句子。"
+  },
+  {
+   "en": "Here is a quick check. Replace the semicolon with a period. If both parts still work as sentences, the semicolon is correct.",
+   "ko": "빠르게 확인하는 방법이 있어요. 세미콜론 자리에 마침표를 넣어 보세요. 두 부분이 여전히 문장으로 성립하면 세미콜론이 맞아요.",
+   "zh": "有个快速检查方法：把分号换成句号。如果两部分仍然都是句子，分号就是对的。"
+  },
+  {
+   "en": "So a semicolon and a period are interchangeable on the SAT. If both appear in the choices for the same spot, neither can be the answer.",
+   "ko": "그래서 SAT에서 세미콜론과 마침표는 서로 바꿔 쓸 수 있어요. 같은 자리 선택지에 둘 다 있으면 둘 다 정답이 될 수 없어요.",
+   "zh": "所以在SAT中分号和句号可以互换。如果同一位置的选项里两者都出现，那两个都不是答案。"
+  },
+  {
+   "en": "Now the trap. 'Because the library closed at noon; the staff went home early.' Do the swap test.",
+   "ko": "이제 함정이에요. 'Because the library closed at noon; the staff went home early.' 바꿔 보기를 해 보세요.",
+   "zh": "现在看陷阱。Because the library closed at noon; the staff went home early. 做一下替换测试。"
+  },
+  {
+   "en": "The left side starts with 'because,' so it cannot stand alone. A semicolon is wrong here.",
+   "ko": "왼쪽이 because로 시작해서 혼자 설 수 없어요. 그래서 세미콜론은 틀려요.",
+   "zh": "左边以 because 开头，不能独立成句。所以这里用分号是错的。"
+  },
+  {
+   "en": "The same problem happens on the right: 'The staff went home early; because the library closed.' The right side is not complete.",
+   "ko": "오른쪽도 마찬가지예요. 'The staff went home early; because the library closed.' 오른쪽이 완전하지 않아요.",
+   "zh": "右边也会出现同样的问题：The staff went home early; because the library closed. 右边不完整。"
+  },
+  {
+   "en": "When a dependent clause comes first, use a comma: 'Because the library closed at noon, the staff went home early.'",
+   "ko": "종속절이 앞에 오면 쉼표를 써요. 'Because the library closed at noon, the staff went home early.'",
+   "zh": "从句在前时用逗号：Because the library closed at noon, the staff went home early."
+  },
+  {
+   "q": 1,
+   "en": "Which sentence uses the semicolon correctly?",
+   "ko": "세미콜론을 올바르게 쓴 문장은?",
+   "zh": "哪个句子的分号用得正确？"
+  },
+  {
+   "en": "Next, the colon. A colon means: here is what I mean. What comes after it explains or lists what came before.",
+   "ko": "다음은 콜론이에요. 콜론은 '무슨 뜻이냐면'이라는 신호예요. 뒤에 오는 말이 앞의 내용을 설명하거나 나열해요.",
+   "zh": "接下来是冒号。冒号的意思是：我的意思是。后面的内容解释或列举前面的内容。"
+  },
+  {
+   "en": "The rule: the left side must be a complete sentence. 'The recipe needs three things' is complete.",
+   "ko": "규칙은 이거예요. 왼쪽이 완전한 문장이어야 해요. 'The recipe needs three things'는 완전해요.",
+   "zh": "规则是：左边必须是完整句子。The recipe needs three things 是完整的。"
+  },
+  {
+   "en": "The right side can be almost anything, as long as it explains the left: a list, a single word, a phrase, or another sentence.",
+   "ko": "오른쪽은 왼쪽을 설명하기만 하면 거의 뭐든 괜찮아요. 목록, 단어 하나, 구, 또는 또 하나의 문장도 돼요.",
+   "zh": "右边几乎可以是任何形式，只要它解释左边：一个列表、一个词、一个短语，或者另一个句子。"
+  },
+  {
+   "en": "'She had one goal: to win.' 'He knew the answer: the bridge was unsafe.' Both are correct.",
+   "ko": "'She had one goal: to win.' 'He knew the answer: the bridge was unsafe.' 둘 다 맞아요.",
+   "zh": "She had one goal: to win. He knew the answer: the bridge was unsafe. 两句都对。"
+  },
+  {
+   "en": "Here is the most common colon mistake. 'The recipe needs: flour, eggs, and milk.'",
+   "ko": "가장 흔한 콜론 실수예요. 'The recipe needs: flour, eggs, and milk.'",
+   "zh": "这是最常见的冒号错误：The recipe needs: flour, eggs, and milk."
+  },
+  {
+   "en": "'The recipe needs' is not complete. Needs what? The verb is cut off from its object, so the colon is wrong.",
+   "ko": "'The recipe needs'는 완전하지 않아요. 뭘 필요로 하죠? 동사와 목적어 사이가 끊겼으니 콜론은 틀려요.",
+   "zh": "The recipe needs 不完整。需要什么？动词和宾语被切断了，所以冒号是错的。"
+  },
+  {
+   "en": "The same goes for 'such as,' 'including,' and 'for example.' A colon right after them is wrong.",
+   "ko": "such as, including, for example 뒤도 마찬가지예요. 이 말들 바로 뒤에 콜론을 찍으면 틀려요.",
+   "zh": "such as、including、for example 后面也一样。紧跟在它们后面加冒号是错的。"
+  },
+  {
+   "en": "The fix is often no punctuation at all: 'The recipe needs flour, eggs, and milk.'",
+   "ko": "고치는 방법은 대부분 아무 부호도 안 쓰는 거예요. 'The recipe needs flour, eggs, and milk.'",
+   "zh": "改法通常是什么标点都不加：The recipe needs flour, eggs, and milk."
+  },
+  {
+   "q": 1,
+   "en": "Which sentence uses the colon correctly?",
+   "ko": "콜론을 올바르게 쓴 문장은?",
+   "zh": "哪个句子的冒号用得正确？"
+  },
+  {
+   "en": "Now the dash. A single dash works almost like a colon. It introduces an explanation, so the left side should be complete.",
+   "ko": "이제 대시예요. 대시 하나는 콜론과 거의 비슷하게 써요. 설명을 이끌어 내니까 왼쪽이 완전해야 해요.",
+   "zh": "现在看破折号。单个破折号的用法几乎和冒号一样。它引出解释，所以左边应该完整。"
+  },
+  {
+   "en": "But dashes often come in pairs. A pair of dashes puts extra information in the middle of a sentence, like brackets.",
+   "ko": "그런데 대시는 두 개가 짝으로 자주 나와요. 대시 한 쌍은 괄호처럼 문장 중간에 추가 정보를 넣어요.",
+   "zh": "但破折号常常成对出现。一对破折号像括号一样，把补充信息放在句子中间。"
+  },
+  {
+   "en": "The rule for pairs: open with a dash, close with a dash. You cannot open with a dash and close with a comma.",
+   "ko": "짝 규칙은 이거예요. 대시로 열었으면 대시로 닫아요. 대시로 열고 쉼표로 닫으면 안 돼요.",
+   "zh": "成对的规则：用破折号开始，就用破折号结束。不能用破折号开始、用逗号结束。"
+  },
+  {
+   "en": "Quick tip: on the SAT, look for a dash earlier in the sentence. If there is one, the answer often needs the matching dash.",
+   "ko": "팁 하나. SAT에서는 문장 앞쪽에 대시가 있는지 보세요. 있으면 정답은 짝이 되는 대시인 경우가 많아요.",
+   "zh": "小技巧：在SAT中先看句子前面有没有破折号。如果有，答案往往需要与之成对的破折号。"
+  },
+  {
+   "en": "There is one more job for the semicolon: separating items in a list when the items already contain commas.",
+   "ko": "세미콜론에는 역할이 하나 더 있어요. 항목 안에 이미 쉼표가 있는 목록에서 항목끼리 구분하는 거예요.",
+   "zh": "分号还有一个作用：当列表项目内部已经有逗号时，用分号把项目隔开。"
+  },
+  {
+   "en": "'Lyon, France; Turin, Italy; and Geneva, Switzerland.' Each item is a city and a country with a comma inside.",
+   "ko": "'Lyon, France; Turin, Italy; and Geneva, Switzerland.' 각 항목이 도시와 나라라서 안에 쉼표가 있어요.",
+   "zh": "Lyon, France; Turin, Italy; and Geneva, Switzerland. 每一项都是城市加国家，内部有逗号。"
+  },
+  {
+   "en": "With commas only, the reader cannot tell where one item ends. So the semicolon marks the bigger break.",
+   "ko": "쉼표만 쓰면 한 항목이 어디서 끝나는지 알 수 없어요. 그래서 더 큰 구분을 세미콜론으로 표시해요.",
+   "zh": "如果只用逗号，读者分不清一项在哪里结束。所以用分号标出更大的分隔。"
+  },
+  {
+   "en": "On the SAT, keep the pattern consistent. If one item is followed by a semicolon, the others should be too.",
+   "ko": "SAT에서는 패턴을 일정하게 유지하세요. 한 항목 뒤에 세미콜론이 있으면 다른 항목 뒤에도 세미콜론이에요.",
+   "zh": "在SAT中保持一致。如果一个项目后用了分号，其他项目后也要用分号。"
+  },
+  {
+   "en": "Let's put it all in one table. Period and semicolon: complete on both sides.",
+   "ko": "한 표로 정리해 볼게요. 마침표와 세미콜론은 양쪽 모두 완전해야 해요.",
+   "zh": "我们把内容整理成一张表。句号和分号：两边都要完整。"
+  },
+  {
+   "en": "Comma plus FANBOYS: also complete on both sides.",
+   "ko": "쉼표 더하기 FANBOYS도 양쪽 모두 완전해야 해요.",
+   "zh": "逗号加FANBOYS：两边也都要完整。"
+  },
+  {
+   "en": "Colon and single dash: the left side must be complete. The right side just has to explain it.",
+   "ko": "콜론과 대시 하나는 왼쪽만 완전하면 돼요. 오른쪽은 설명이기만 하면 돼요.",
+   "zh": "冒号和单个破折号：左边必须完整，右边只要是解释就行。"
+  },
+  {
+   "en": "And paired dashes: whatever mark opens the extra information must also close it.",
+   "ko": "그리고 대시 한 쌍은 추가 정보를 연 부호와 같은 부호로 닫아야 해요.",
+   "zh": "成对的破折号：用什么符号开启补充信息，就用什么符号结束。"
+  },
+  {
+   "en": "Let's solve one together. Draw the line at the blank.",
+   "ko": "같이 한 문제 풀어 봐요. 빈칸에 세로줄을 그어요.",
+   "zh": "我们一起做一道题。在空格处画竖线。"
+  },
+  {
+   "en": "The left side, 'Rachel Okafor studies one feature of octopuses more than any other,' is complete.",
+   "ko": "왼쪽 'Rachel Okafor studies one feature of octopuses more than any other'는 완전해요.",
+   "zh": "左边 Rachel Okafor studies one feature of octopuses more than any other 是完整的。"
+  },
+  {
+   "en": "The right side, 'their ability to change color in less than a second,' has no tensed verb. It is not a sentence. It explains 'one feature.'",
+   "ko": "오른쪽 'their ability to change color in less than a second'에는 시제 있는 동사가 없어요. 문장이 아니에요. 'one feature'가 뭔지 설명하는 말이에요.",
+   "zh": "右边 their ability to change color in less than a second 没有时态动词，不是句子。它在解释 one feature。"
+  },
+  {
+   "en": "Complete left side, explanation on the right: that is the colon. A needs two complete sentences. C joins a sentence to a fragment. D is a comma splice: 'it is their ability' is a complete sentence. The answer is B.",
+   "ko": "왼쪽은 완전하고 오른쪽은 설명이에요. 바로 콜론 자리예요. A는 양쪽이 완전해야 하고, C는 문장과 조각을 이어요. D는 'it is their ability'가 완전한 문장이라 comma splice예요. 정답은 B예요.",
+   "zh": "左边完整，右边是解释：这正是冒号的用法。A 需要两个完整句子，C 把句子和片段连起来，D 的 it is their ability 是完整句子，所以是逗号粘连。答案是 B。"
+  },
+  {
+   "q": 1,
+   "en": "“The festival — held every spring since 1952 ___ draws thousands of visitors.” Which is correct?",
+   "ko": "“The festival — held every spring since 1952 ___ draws thousands of visitors.” 올바른 것은?",
+   "zh": "“The festival — held every spring since 1952 ___ draws thousands of visitors.” 哪个正确？"
+  },
+  {
+   "en": "Let's review. A semicolon is a soft period, so both sides must be complete. Use the swap test.",
+   "ko": "정리할게요. 세미콜론은 부드러운 마침표라서 양쪽 모두 완전해야 해요. 바꿔 보기를 쓰세요.",
+   "zh": "我们来总结。分号是柔和的句号，两边都必须完整。用替换测试。"
+  },
+  {
+   "en": "A colon needs a complete sentence on the left. Never put a colon right after a verb or after such as.",
+   "ko": "콜론은 왼쪽에 완전한 문장이 있어야 해요. 동사나 such as 바로 뒤에는 절대 콜론을 찍지 마세요.",
+   "zh": "冒号左边需要完整句子。绝不要在动词或 such as 后面直接加冒号。"
+  },
+  {
+   "en": "A single dash works like a colon, and paired dashes must match.",
+   "ko": "대시 하나는 콜론처럼 쓰고, 대시 한 쌍은 짝이 맞아야 해요.",
+   "zh": "单个破折号像冒号一样用，成对的破折号必须匹配。"
+  },
+  {
+   "en": "And when list items have commas inside, separate them with semicolons. Next time, we will learn about extra information in the middle of a sentence. See you in Lesson 3!",
+   "ko": "그리고 목록 항목 안에 쉼표가 있으면 항목 사이는 세미콜론으로 구분해요. 다음 시간에는 문장 중간에 들어가는 추가 정보를 배워요. 3강에서 만나요!",
+   "zh": "列表项目内有逗号时，项目之间用分号隔开。下节课我们学习句子中间的补充信息。第3课见！"
+  }
+ ]
+}

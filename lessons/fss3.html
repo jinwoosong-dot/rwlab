@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 7 · Pronouns</title>
+<style>
+:root{--ink:#17213b;--mut:#5b6580;--line:#e3e7f0;--pri:#2447b8;--pri2:#e8eefc;--ok:#18a058;--bad:#e0464e;--warn:#f2b632;--subj:#2f6fe4;--verb:#e0464e;--bg:#0f1730}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+.player{max-width:1100px;width:100%;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;align-items:center;gap:10px;color:#fff}.top h1{font-size:16px;margin:0;font-weight:700}.top .sp{flex:1}
+.top select,.top button{font:inherit;font-size:13px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;padding:6px 10px;cursor:pointer}
+.top select option{color:#000}
+.stagewrap{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border-radius:16px;overflow:hidden;container-type:inline-size;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.scene{position:absolute;inset:0;padding:5cqw 6cqw;display:none;flex-direction:column;gap:2.2cqw;background:linear-gradient(180deg,#fff,#f6f8fd)}
+.scene.on{display:flex;animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.kick{font-size:1.5cqw;font-weight:800;letter-spacing:.08em;color:var(--pri);text-transform:uppercase}
+.h2{font-size:3.6cqw;font-weight:800;line-height:1.2;margin:0}
+.h{opacity:0;transform:translateY(1.2cqw);transition:opacity .45s ease,transform .45s ease}
+.h.in{opacity:1;transform:none}
+.big{font-size:3.4cqw;font-weight:700;font-family:Georgia,"Times New Roman",serif;line-height:1.5}
+.tok{padding:.1em .15em;border-radius:.3em;transition:background .4s,color .4s,box-shadow .4s}
+.tok.subj{background:#dfe9ff;color:var(--subj);box-shadow:inset 0 -.2em 0 var(--subj)}
+.tok.verb{background:#ffe3e5;color:var(--verb);box-shadow:inset 0 -.2em 0 var(--verb)}
+.tok.dep{background:#fff1cc;color:#8a5a00;box-shadow:inset 0 -.2em 0 var(--warn)}
+.tok.ing{background:#eee;color:#666;text-decoration:line-through wavy #999}
+.tok.bad{background:#ffe3e5;color:var(--bad);font-weight:800}
+.tok.good{background:#ddf5e7;color:var(--ok);font-weight:800}
+.row{display:flex;align-items:center;gap:1.6cqw;flex-wrap:wrap}
+.chk{display:flex;flex-direction:column;gap:1.1cqw;font-size:2.2cqw}
+.chk div{display:flex;align-items:center;gap:1cqw}.chk i{width:2.6cqw;height:2.6cqw;border-radius:50%;border:.25cqw solid #c9d0e0;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:1.6cqw;color:#fff;transition:.4s}
+.chk .on i{background:var(--ok);border-color:var(--ok)}
+.stamp{font-size:2.4cqw;font-weight:900;border:.35cqw solid;border-radius:1cqw;padding:.4cqw 1.2cqw;transform:rotate(-6deg);display:inline-block}
+.stamp.ok{color:var(--ok);border-color:var(--ok)}.stamp.no{color:var(--bad);border-color:var(--bad)}
+.card{background:#fff;border:.15cqw solid var(--line);border-radius:1.4cqw;padding:1.8cqw 2.2cqw;box-shadow:0 .6cqw 1.8cqw rgba(23,33,59,.06)}
+.chips{display:flex;gap:1cqw;flex-wrap:wrap}.chip{font-size:2cqw;font-weight:700;border-radius:99px;padding:.5cqw 1.4cqw;background:var(--pri2);color:var(--pri)}
+.chip.y{background:#fff1cc;color:#8a5a00}
+.lbl{font-size:1.6cqw;font-weight:800;border-radius:.6cqw;padding:.3cqw .9cqw;color:#fff}
+.lbl.s{background:var(--subj)}.lbl.v{background:var(--verb)}.lbl.r{background:var(--bad)}.lbl.g{background:var(--ok)}
+.cars{display:flex;align-items:center;gap:0;font-size:2.8cqw;font-family:Georgia,serif;font-weight:700}
+.car{background:#eef3ff;border:.25cqw solid var(--pri);border-radius:1.2cqw;padding:1.2cqw 2cqw}
+.link{width:7cqw;display:grid;place-items:center;font-size:3.2cqw;font-weight:900;color:var(--bad);position:relative}
+.link.broken::after{content:"";position:absolute;left:10%;right:10%;top:50%;height:.4cqw;background:var(--bad);transform:rotate(-20deg)}
+.fix{display:grid;grid-template-columns:4.4cqw 1fr;gap:1cqw;align-items:center;font-size:2.3cqw;padding:.6cqw 0}
+.fix b.n{width:3.6cqw;height:3.6cqw;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:1.8cqw}
+.fix .s{font-family:Georgia,serif}.fix .p{color:var(--ok);font-weight:900;font-size:1.15em}
+.brace{border-left:.4cqw solid var(--warn);padding-left:1.4cqw;margin-left:1cqw;font-size:2cqw;font-weight:800;color:#8a5a00}
+.vline{display:inline-block;width:.45cqw;height:4.6cqw;background:var(--pri);vertical-align:middle;margin:0 .6cqw;transform:scaleY(0);transition:transform .5s}
+.vline.in{transform:scaleY(1)}
+.side{display:flex;gap:2cqw}.side .card{flex:1;font-size:2cqw}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:1cqw;font-size:2.1cqw}
+.choices div{border:.15cqw solid var(--line);border-radius:1cqw;padding:1cqw 1.4cqw;background:#fff;transition:.4s}
+.choices .x{opacity:.45;text-decoration:line-through}.choices .o{border-color:var(--ok);background:#e9f8ef;font-weight:800}
+.sum li{font-size:2.3cqw;margin:.8cqw 0;line-height:1.4}
+.big-ic{font-size:7cqw}
+.sub{position:absolute;left:4cqw;right:4cqw;bottom:2.4cqw;text-align:center;pointer-events:none}
+.sub span{display:inline;background:rgba(15,23,48,.86);color:#fff;font-size:2cqw;line-height:1.55;padding:.35cqw 1cqw;border-radius:.6cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub.off{display:none}.sub span:empty{display:none}
+.quiz{position:absolute;inset:0;background:rgba(15,23,48,.6);display:none;align-items:center;justify-content:center;padding:3cqw;z-index:5}
+.quiz.on{display:flex}
+.qbox{background:#fff;border-radius:2cqw;padding:3cqw;width:min(78cqw,100%);box-shadow:0 2cqw 5cqw rgba(0,0,0,.3)}
+.qbox .qk{font-size:1.6cqw;font-weight:800;color:var(--pri);letter-spacing:.06em}
+.qbox h3{font-size:2.7cqw;margin:1cqw 0 2cqw}
+.qbox button.o{display:block;width:100%;text-align:left;font:inherit;font-size:2.2cqw;border:.2cqw solid var(--line);border-radius:1.2cqw;background:#fff;padding:1.4cqw 1.8cqw;margin:.9cqw 0;cursor:pointer;font-family:Georgia,serif}
+.qbox button.o:hover{border-color:var(--pri)}
+.qbox button.o.right{border-color:var(--ok);background:#e9f8ef}.qbox button.o.wrong{border-color:var(--bad);background:#fdecee;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-.6cqw)}75%{transform:translateX(.6cqw)}}
+.qfb{font-size:2cqw;line-height:1.5;margin-top:1.2cqw;min-height:3cqw}
+.qgo{font:inherit;font-size:2cqw;font-weight:800;background:var(--pri);color:#fff;border:0;border-radius:1cqw;padding:1.2cqw 2.4cqw;cursor:pointer;margin-top:1cqw;display:none}
+.ctrl{display:flex;align-items:center;gap:8px;color:#fff}
+.ctrl button{font:inherit;font-size:15px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;cursor:pointer;min-width:44px;min-height:40px}
+.ctrl button.main{background:#ffd34d;color:#1b2340;border-color:#ffd34d;font-weight:800;min-width:96px}
+.bar{flex:1;display:flex;gap:3px;height:10px;cursor:pointer}
+.bar i{flex:1;background:rgba(255,255,255,.18);border-radius:4px;overflow:hidden;position:relative}
+.bar i b{position:absolute;inset:0;width:0;background:#ffd34d}
+.bar i.q{flex:0 0 10px;background:#7aa2ff}
+.time{font-size:13px;min-width:64px;text-align:right;opacity:.85}
+.chap{display:flex;gap:6px;flex-wrap:wrap}
+.chap button{font:inherit;font-size:12.5px;background:rgba(255,255,255,.06);color:#cfd7f2;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 10px;cursor:pointer}
+.chap button.on{background:#fff;color:var(--ink)}
+.chap button.done::before{content:"✓ ";color:#7be0a3}
+.end{position:absolute;inset:0;background:linear-gradient(135deg,#14275f,#2447b8);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.6cqw;text-align:center;z-index:6}
+.end.on{display:flex}.end h2{font-size:4cqw;margin:0}.end p{font-size:2cqw;margin:0;opacity:.9}
+.end button{font:inherit;font-size:2.1cqw;font-weight:800;border-radius:1.2cqw;padding:1.3cqw 2.6cqw;cursor:pointer;border:0}
+.end .go{background:#ffd34d;color:#1b2340}.end .re{background:rgba(255,255,255,.15);color:#fff}
+.embed .top{padding-right:52px}.note{color:#8f9bc0;font-size:12px;text-align:center}
+.pass{font-family:Georgia,"Times New Roman",serif;font-size:2.05cqw;line-height:1.6}
+.small{font-size:1.9cqw;line-height:1.5}
+.hl{background:#fff1cc;border-radius:.3em;padding:0 .15em;transition:background .4s}
+.tbl{border-collapse:collapse;font-size:1.9cqw;background:#fff}.tbl th,.tbl td{border:.15cqw solid var(--line);padding:.6cqw 1.2cqw;text-align:center}.tbl th{background:#f2f5fc}
+.tbl td.hit{background:#fff1cc;font-weight:800}
+.scene.tight{gap:1.1cqw;padding-top:3.4cqw}.scene.tight .card{padding:1cqw 1.8cqw}.scene.tight .h2{font-size:3.1cqw}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4cqw}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="player">
+  <div class="top"><h1 id="ttl"></h1><span class="sp"></span>
+    <select id="lang" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">中文</option></select>
+    <select id="spd" aria-label="Speed"><option value="0.85">0.85×</option><option value="1" selected>1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select>
+    <button id="cc" aria-pressed="true">CC</button></div>
+  <div class="stagewrap" id="stage">
+    <div id="scenes"></div>
+    <div class="sub" id="sub"><span id="subt"></span></div>
+    <div class="quiz" id="quiz"><div class="qbox"><div class="qk" id="qk"></div><h3 id="qq"></h3><div id="qo"></div><div class="qfb" id="qfb"></div><button class="qgo" id="qgo"></button></div></div>
+    <div class="end" id="end"><div class="big-ic">🎉</div><h2 id="endh"></h2><p id="endp"></p><div class="row" style="justify-content:center"><button class="go" id="endgo"></button><button class="re" id="endre"></button></div></div>
+  </div>
+  <div class="ctrl"><button id="prev" aria-label="Previous">⏮</button><button id="play" class="main"></button><button id="next" aria-label="Next">⏭</button><div class="bar" id="bar"></div><span class="time" id="time"></span></div>
+  <div class="chap" id="chap"></div>
+  <p class="note" id="note"></p>
+</div>
+<script>
+/* ===== UI strings (shared) ===== */
+const BASE={
+ en:{play:'▶ Play',pause:'❚❚ Pause',cont:'Continue ▶',check:'Check question',right:'Correct!',wrong:'Not quite. Try again.',go:'Start practice →',go0:'Back to course →',re:'Watch again',note:'If you hear nothing, check your volume. Captions advance automatically.',sum:'Summary',left:'Left side',right2:'Right side'},
+ ko:{play:'▶ 재생',pause:'❚❚ 일시정지',cont:'계속 ▶',check:'확인 문제',right:'정답이에요!',wrong:'아쉬워요. 다시 골라 보세요.',go:'연습 문제 시작 →',go0:'코스로 돌아가기 →',re:'다시 보기',note:'소리가 안 들리면 볼륨을 확인하세요. 자막은 자동으로 넘어가요.',sum:'정리',left:'왼쪽',right2:'오른쪽'},
+ zh:{play:'▶ 播放',pause:'❚❚ 暂停',cont:'继续 ▶',check:'确认题',right:'答对了！',wrong:'不对，再选一次。',go:'开始练习 →',go0:'返回课程 →',re:'重看',note:'听不到声音时请检查音量。字幕会自动前进。',sum:'总结',left:'左边',right2:'右边'}};
+const META={"id":"fss3","k":"FSS","n":7,"title":{"en":"Lesson 7 · Pronouns","ko":"7강 · 대명사","zh":"第7课 · 代词"},"desc":{"en":"Find the noun a pronoun replaces, it vs. they for companies and groups, unclear pronouns, I vs. me, who vs. whom","ko":"대명사가 가리키는 명사 찾기, 회사·단체는 it, 애매한 대명사, I와 me, who와 whom","zh":"找到代词指代的名词、公司和团体用 it、指代不清、I 与 me、who 与 whom"},"endh":{"en":"Lesson 7 complete","ko":"7강 완료","zh":"第7课完成"},"endp":{"en":"Practice drawing an arrow from every pronoun to its noun.","ko":"모든 대명사에서 명사로 화살표를 그리는 연습을 해요.","zh":"练习从每个代词画箭头指向它的名词。"}};
+const L={"en":{"agree":"Pronoun ↔ the noun it replaces","sg":"singular","pl":"plural","group":"company, team, city, study → it / its","unclear":"Unclear: who is “she”?","case1":"Subject form","case2":"Object form","cover":"Cover the other person"},"ko":{"agree":"대명사 ↔ 가리키는 명사","sg":"단수","pl":"복수","group":"company, team, city, study → it / its","unclear":"애매함: she가 누구?","case1":"주격","case2":"목적격","cover":"다른 사람을 가려 보기"},"zh":{"agree":"代词 ↔ 它指代的名词","sg":"单数","pl":"复数","group":"company、team、city、study → it / its","unclear":"指代不清：she 是谁？","case1":"主格","case2":"宾格","cover":"遮住另一个人"}};
+const UI={};for(const k of ['en','ko','zh'])UI[k]=Object.assign({},BASE[k],L[k]||{},{title:META.title[k],endh:META.endh[k],endp:META.endp[k]});
+
+/* ===== Scenes: each beat = narration (3 languages) + visual actions ===== */
+const SC=[{"id":"intro","ch":{"en":"Intro","ko":"도입","zh":"导入"},"html":"\n <div class=\"kick\">Unit 2 · Form, Structure, and Sense</div><h2 class=\"h2\" data-l=\"title\"></h2>\n <div class=\"pass card h\" id=\"i1\" style=\"font-size:2.5cqw\"><span class=\"tok\" id=\"i1a\">The scientists</span> published <span class=\"tok\" id=\"i1b\">their</span> results.</div>\n <div class=\"card h\" id=\"i2\" style=\"font-size:2.3cqw\">➜ <b data-l=\"agree\"></b></div>","b":[{"en":"Welcome to Lesson 7. A pronoun is a short word that replaces a noun: it, they, she, him, their, and so on.","ko":"7강에 오신 걸 환영해요. 대명사는 명사를 대신하는 짧은 말이에요. it, they, she, him, their 같은 거요.","zh":"欢迎来到第7课。代词是替代名词的短词：it、they、she、him、their 等。","a":["in:#i1"]},{"en":"Every pronoun must clearly match the noun it replaces. 'The scientists published their results.' 'Their' points back to 'scientists.'","ko":"모든 대명사는 가리키는 명사와 분명하게 맞아야 해요. 'The scientists published their results.' their는 scientists를 가리켜요.","zh":"每个代词都必须和它指代的名词明确一致。The scientists published their results. their 指回 scientists。","a":["add:#i1a:subj","add:#i1b:verb","in:#i2"]},{"en":"Your method: draw an arrow from the pronoun back to its noun, then check that they match.","ko":"방법은 이거예요. 대명사에서 명사로 화살표를 그리고, 둘이 맞는지 확인하세요.","zh":"方法是：从代词画箭头指回名词，然后检查两者是否一致。"}]},
+{"id":"agree","ch":{"en":"Singular or plural","ko":"단수 또는 복수","zh":"单数还是复数"},"html":"\n <div class=\"kick\">Step 1</div><h2 class=\"h2\" data-l=\"agree\"></h2>\n <div class=\"pass card\" style=\"font-size:2.3cqw\"><span class=\"tok\" id=\"a1\">The museum</span> in the old train station opened <b>______</b> doors to visitors in 1986.</div>\n <div class=\"choices\"><div id=\"x1\">their</div><div id=\"x2\">its</div></div>\n <div class=\"card h\" id=\"a2\" style=\"font-size:2.2cqw\">museum = 1 → <b>its</b> &nbsp;·&nbsp; <span data-l=\"group\"></span></div>","b":[{"en":"The most common pronoun question is singular or plural. 'The museum in the old train station opened, blank, doors to visitors.'","ko":"가장 흔한 대명사 문제는 단수냐 복수냐예요. 'The museum in the old train station opened' 다음 빈칸, 'doors to visitors.'","zh":"最常见的代词题是单数还是复数。The museum in the old train station opened，空格，doors to visitors.","a":["add:#a1:subj"]},{"en":"Draw the arrow. Whose doors? The museum's. One museum, so the pronoun is singular: 'its.'","ko":"화살표를 그려 보세요. 누구의 문이죠? 박물관의 문이에요. 박물관 하나니까 대명사는 단수 its예요.","zh":"画箭头。谁的门？博物馆的门。一个博物馆，所以代词是单数 its。","a":["add:#x1:x","add:#x2:o"]},{"en":"Many students write 'their' for companies, schools, and teams. On the SAT, these are singular: 'it' and 'its.'","ko":"많은 학생이 회사, 학교, 팀에 their를 써요. SAT에서 이런 명사는 단수라서 it과 its를 써요.","zh":"很多学生会给公司、学校、团队用 their。在SAT中这些都是单数，要用 it 和 its。","a":["in:#a2"]},{"q":{"en":{"q":"“After two years of testing, the company announced that ___ new battery would go on sale in May.”","o":["their","its","they"],"e":"“The company” is one company, so the singular possessive “its” is correct."},"ko":{"q":"“After two years of testing, the company announced that ___ new battery would go on sale in May.”","o":["their","its","they"],"e":"the company는 회사 하나라서 단수 소유격 its가 맞아요."},"zh":{"q":"“After two years of testing, the company announced that ___ new battery would go on sale in May.”","o":["their","its","they"],"e":"the company 是一家公司，所以用单数所有格 its。"},"a":1}}]},
+{"id":"far","ch":{"en":"Far-away nouns","ko":"멀리 있는 명사","zh":"距离较远的名词"},"html":"\n <div class=\"kick\">Trap</div><h2 class=\"h2\">The nearest noun is not always the one</h2>\n <div class=\"pass card\" style=\"font-size:2.2cqw\"><span class=\"tok\" id=\"f1\">The bees</span> that live in the old oak tree near the river return to <b>______</b> hive at dusk.</div>\n <div class=\"choices\"><div id=\"x1\">its</div><div id=\"x2\">their</div></div>","b":[{"en":"Be careful: the nearest noun is not always the one the pronoun replaces.","ko":"조심하세요. 가장 가까운 명사가 항상 대명사가 가리키는 명사는 아니에요.","zh":"注意：最近的名词不一定是代词指代的那个。"},{"en":"'The bees that live in the old oak tree near the river return to, blank, hive.' Tree and river are close, but they do not return to a hive.","ko":"'The bees that live in the old oak tree near the river return to' 다음 빈칸, 'hive.' tree와 river가 가깝지만, 벌집으로 돌아가는 건 그것들이 아니에요.","zh":"The bees that live in the old oak tree near the river return to，空格，hive. tree 和 river 离得近，但回到蜂巢的不是它们。"},{"en":"Who returns? The bees. Plural, so 'their.' Always ask what makes sense, not what is closest.","ko":"누가 돌아가죠? 벌들이에요. 복수니까 their예요. 가까운 게 아니라 뜻이 통하는 걸 찾으세요.","zh":"谁回去？蜜蜂。复数，所以用 their。永远问什么在意思上说得通，而不是哪个最近。","a":["add:#f1:subj","add:#x1:x","add:#x2:o"]}]},
+{"id":"unclear","ch":{"en":"Unclear pronouns","ko":"애매한 대명사","zh":"指代不清"},"html":"\n <div class=\"kick\">Step 2</div><h2 class=\"h2\" data-l=\"unclear\"></h2>\n <div class=\"pass card h\" id=\"u1\" style=\"font-size:2.3cqw\">Maria called her sister after <b style=\"color:var(--bad)\">she</b> got the job offer. ✗</div>\n <div class=\"pass card h\" id=\"u2\" style=\"font-size:2.3cqw\">Maria called her sister after <b style=\"color:var(--ok)\">Maria</b> got the job offer. ✓</div>\n <div class=\"pass card h\" id=\"u3\" style=\"font-size:2.3cqw\">After the mayor met the governor, <b style=\"color:var(--bad)\">he</b> → <b style=\"color:var(--ok)\">the governor</b> announced the plan.</div>","b":[{"en":"A pronoun must point to exactly one noun. 'Maria called her sister after she got the job offer.' Who got the job? Maria or her sister?","ko":"대명사는 딱 하나의 명사만 가리켜야 해요. 'Maria called her sister after she got the job offer.' 누가 일자리를 얻었죠? Maria예요, 언니예요?","zh":"代词必须只指向一个名词。Maria called her sister after she got the job offer. 谁得到了工作？Maria 还是她姐姐？","a":["in:#u1"]},{"en":"We cannot tell, so the sentence is unclear. The SAT fixes this by using the noun itself.","ko":"알 수 없으니까 애매한 문장이에요. SAT는 대명사 대신 명사 자체를 써서 해결해요.","zh":"我们无法判断，所以句子指代不清。SAT的改法是直接用名词本身。","a":["in:#u2"]},{"en":"So if a choice replaces a confusing pronoun with a specific noun, it is often correct.","ko":"그래서 헷갈리는 대명사를 구체적인 명사로 바꾼 선택지가 정답인 경우가 많아요.","zh":"所以，把含糊的代词换成具体名词的选项往往是正确的。","a":["in:#u3"]}]},
+{"id":"case","ch":{"en":"I vs. me","ko":"I와 me","zh":"I 与 me"},"html":"\n <div class=\"kick\">Step 3</div><h2 class=\"h2\">I / me · he / him · they / them</h2>\n <table class=\"tbl h\" id=\"c0\" style=\"width:100%\"><tr><th data-l=\"case1\"></th><td>I · he · she · we · they · who</td></tr><tr><th data-l=\"case2\"></th><td>me · him · her · us · them · whom</td></tr></table>\n <div class=\"pass card h\" id=\"c1\" style=\"font-size:2.2cqw\">The award was given to Jun and <b>______</b>. → <span data-l=\"cover\"></span>: given to <b style=\"color:var(--ok)\">me</b> ✓ (not I)</div>\n <div class=\"pass card h\" id=\"c2\" style=\"font-size:2.2cqw\">The researcher <b style=\"color:var(--ok)\">who</b> led the study … (<i>she</i> led) · The researcher <b style=\"color:var(--ok)\">whom</b> we interviewed … (we interviewed <i>her</i>)</div>","b":[{"en":"Pronouns also change form. Subject forms are I, he, she, we, they, and who. Object forms are me, him, her, us, them, and whom.","ko":"대명사는 형태도 바뀌어요. 주격은 I, he, she, we, they, who. 목적격은 me, him, her, us, them, whom이에요.","zh":"代词的形式也会变化。主格是 I、he、she、we、they、who；宾格是 me、him、her、us、them、whom。","a":["in:#c0"]},{"en":"With two people, cover the other one. 'The award was given to Jun and, blank.' Cover 'Jun and.' 'Given to me,' not 'given to I.'","ko":"두 사람이 나오면 다른 사람을 가려 보세요. 'The award was given to Jun and' 다음 빈칸. 'Jun and'를 가리면 'given to me'지, 'given to I'가 아니에요.","zh":"有两个人时，遮住另一个人。The award was given to Jun and，空格。遮住 Jun and：是 given to me，不是 given to I。","a":["in:#c1"]},{"en":"For who and whom, answer the question with he or him. If 'he' fits, use who. If 'him' fits, use whom.","ko":"who와 whom은 he나 him으로 바꿔 보세요. he가 맞으면 who, him이 맞으면 whom이에요.","zh":"who 和 whom 就用 he 或 him 代入。he 合适就用 who，him 合适就用 whom。","a":["in:#c2"]}]},
+{"id":"example","ch":{"en":"Solve together","ko":"같이 풀기","zh":"一起做题"},"html":"\n <div class=\"kick\">SAT-style example</div>\n <div class=\"pass card\" style=\"font-size:2.2cqw\">Founded in 1902, <span class=\"tok\" id=\"xs\">the Hartwell Orchestra</span> performs over sixty concerts a year, and <b>______</b> recordings of early jazz are studied by music historians.</div>\n <div class=\"choices\"><div id=\"x1\">A) their</div><div id=\"x2\">B) its</div><div id=\"x3\">C) it’s</div><div id=\"x4\">D) they’re</div></div>","b":[{"en":"Let's solve one. Whose recordings? Draw the arrow back: the Hartwell Orchestra.","ko":"한 문제 풀어 봐요. 누구의 녹음이죠? 화살표를 그려 보면 the Hartwell Orchestra예요.","zh":"做一道题。谁的录音？画箭头回去：the Hartwell Orchestra。","a":["add:#xs:subj"]},{"en":"An orchestra is one group, so it is singular. That eliminates 'their' and 'they're.'","ko":"오케스트라는 하나의 단체라서 단수예요. 그래서 their와 they're는 지워요.","zh":"乐团是一个团体，所以是单数。排除 their 和 they're。","a":["add:#x1:x","add:#x4:x"]},{"en":"'It's' means 'it is.' 'It is recordings' makes no sense. We need the possessive 'its,' with no apostrophe. The answer is B.","ko":"it's는 it is라는 뜻이에요. 'it is recordings'는 말이 안 돼요. 아포스트로피 없는 소유격 its가 필요해요. 정답은 B예요.","zh":"it's 的意思是 it is。it is recordings 讲不通。我们需要不带撇号的所有格 its。答案是 B。","a":["add:#x3:x","add:#x2:o"]},{"q":{"en":{"q":"“The coach praised Leo and ___ for our teamwork.”","o":["I","me","myself"],"e":"Cover “Leo and”: “The coach praised me.” “Praised” needs an object, so use the object form “me.”"},"ko":{"q":"“The coach praised Leo and ___ for our teamwork.”","o":["I","me","myself"],"e":"\"Leo and\"를 가리면 \"The coach praised me.\" praised 뒤에는 목적어가 와야 하니까 목적격 me예요."},"zh":{"q":"“The coach praised Leo and ___ for our teamwork.”","o":["I","me","myself"],"e":"遮住 Leo and：The coach praised me. praised 后面需要宾语，所以用宾格 me。"},"a":1}}]},
+{"id":"summary","ch":{"en":"Summary","ko":"정리","zh":"总结"},"html":"\n <div class=\"kick\" data-l=\"sum\"></div><h2 class=\"h2\">📌 Lesson 7</h2>\n <ul class=\"sum card\"><li class=\"h\" id=\"s1\">Draw an arrow: pronoun → noun → singular or plural?</li>\n <li class=\"h\" id=\"s2\">company, team, museum → <b>it / its</b></li>\n <li class=\"h\" id=\"s3\">Two possible nouns → use the noun itself</li>\n <li class=\"h\" id=\"s4\">Cover the other person: <i>to Jun and <b>me</b></i> · he → who, him → whom</li></ul>","b":[{"en":"Let's review. Draw an arrow from every pronoun to its noun and check singular or plural.","ko":"정리할게요. 모든 대명사에서 명사로 화살표를 그리고 단수인지 복수인지 확인하세요.","zh":"我们来总结。从每个代词画箭头到名词，检查单复数。","a":["in:#s1"]},{"en":"Companies, teams, and institutions are singular: it and its.","ko":"회사, 팀, 기관은 단수예요. it과 its를 써요.","zh":"公司、团队和机构是单数：用 it 和 its。","a":["in:#s2"]},{"en":"If a pronoun could point to two nouns, the clear answer uses the noun itself.","ko":"대명사가 두 명사를 가리킬 수 있으면, 명사 자체를 쓴 선택지가 정답이에요.","zh":"如果代词可能指向两个名词，清楚的答案会直接用名词本身。","a":["in:#s3"]},{"en":"And for I versus me, cover the other person. Next lesson: modifiers and comparisons. See you in Lesson 8!","ko":"그리고 I와 me는 다른 사람을 가려서 판단하세요. 다음은 수식어와 비교예요. 8강에서 만나요!","zh":"I 和 me 的判断就遮住另一个人。下一课：修饰语与比较。第8课见！","a":["in:#s4"]}]}];
+
+/* ===== Player engine ===== */
+const $=s=>document.querySelector(s);
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q)return q;const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');return s.lang||'en'}catch(e){return 'en'}})();
+if(!UI[LANG])LANG='en';
+const FLAT=[];SC.forEach((s,si)=>s.b.forEach((b,bi)=>FLAT.push({si,bi,b})));
+let pos=0,playing=false,timer=null,speed=1,cc=true,done=new Set(),utter=null,token=0;
+function t(k){return (UI[LANG]||UI.en)[k]||UI.en[k]||k}
+function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene${s.tight?' tight':''}" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function applyStatic(){document.documentElement.lang=LANG==='zh'?'zh-CN':LANG;$('#ttl').textContent=t('title');document.title=t('title');$('#note').textContent=t('note');$('#lang').value=LANG;
+  $('#endh').textContent=t('endh');$('#endp').textContent=t('endp');$('#endgo').textContent=META.k==='GEN'?t('go0'):t('go');$('#endre').textContent=t('re');
+  document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l));chapters();bar();setPlay()}
+function chapters(){$('#chap').innerHTML=SC.map((s,i)=>`<button data-c="${i}" class="${FLAT[pos]&&FLAT[pos].si===i?'on':''} ${done.has(i)?'done':''}">${i+1}. ${s.ch[LANG]||s.ch.en}</button>`).join('')}
+function bar(){const segs=SC.map((s,i)=>{const idx=FLAT.map((f,k)=>f.si===i?k:-1).filter(k=>k>=0);const a=idx[0],z=idx[idx.length-1];const p=pos<a?0:pos>z?100:Math.round((pos-a+ (playing?0.5:0))/(z-a+1)*100);return`<i data-c="${i}"><b style="width:${p}%"></b></i>`});$('#bar').innerHTML=segs.join('');
+  const tot=FLAT.length;$('#time').textContent=`${Math.min(pos+1,tot)} / ${tot}`}
+function setPlay(){$('#play').textContent=playing?t('pause'):t('play')}
+function resetScene(si){const el=$('#sc'+si);el.innerHTML=SC[si].html;el.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function act(a){const[k,sel,v]=a.split(':');const el=document.querySelector(sel);if(!el)return;if(k==='in')el.classList.add('in');if(k==='add')el.classList.add(v);if(k==='text')el.textContent=v}
+function show(p,replay){const f=FLAT[p];if(!f)return;document.querySelectorAll('.scene').forEach((e,i)=>e.classList.toggle('on',i===f.si));
+  if(replay){resetScene(f.si);FLAT.forEach((g,k)=>{if(g.si===f.si&&k<p&&g.b.a)g.b.a.forEach(act)})}
+  if(f.b.a)f.b.a.forEach(act);chapters();bar()}
+function txt(b){return b[LANG]||b.en}
+function stopSpeech(){token++;clearTimeout(timer);stopAud();try{speechSynthesis.cancel()}catch(e){}}
+let MAN=null,AUD=null;const LID=META.id;
+function loadMan(){MAN=null;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.lang===LANG)MAN=m}).catch(()=>{})}
+function stopAud(){if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
+function speak(text,cb,idx){const my=++token;let fired=false;const fin=()=>{if(fired||my!==token)return;fired=true;cb()};
+  const rec=MAN&&idx!=null&&MAN.beats[idx];
+  if(rec){stopAud();AUD=new Audio('../audio/'+rec.file);AUD.playbackRate=speed;AUD.onended=fin;AUD.onerror=()=>{AUD=null;timer=setTimeout(fin,Math.max(2200,text.length/14*1000))};AUD.play().catch(()=>{timer=setTimeout(fin,(rec.dur||3)*1000/speed)});timer=setTimeout(fin,((rec.dur||3)/speed+4)*1000);return}
+  const cps={en:14,ko:7,zh:5}[LANG]*speed;const est=Math.max(2200,text.length/cps*1000)+500;
+  try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);const lc={en:'en-US',ko:'ko-KR',zh:'zh-CN'}[LANG];u.lang=lc;u.rate=speed*(LANG==='en'?0.98:1);
+    const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase()===lc.toLowerCase())||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lc.slice(0,2)));
+    if(v){u.voice=v;u.onend=fin;u.onerror=()=>{timer=setTimeout(fin,est)};speechSynthesis.speak(u);timer=setTimeout(fin,est*2.2);return}}}catch(e){}
+  timer=setTimeout(fin,est)}
+function step(){const f=FLAT[pos];if(!f){finish();return}
+  if(f.b.q){showQuiz(f.b.q);return}
+  $('#subt').textContent=txt(f.b);speak(txt(f.b),()=>{if(!playing)return;pos++;if(FLAT[pos]&&FLAT[pos].si!==f.si)done.add(f.si);if(pos>=FLAT.length){done.add(f.si);finish();return}show(pos);step()},pos)}
+function play(){if(pos>=FLAT.length){pos=0;show(0,true)}playing=true;setPlay();$('#end').classList.remove('on');show(pos);step()}
+function pause(){playing=false;stopSpeech();setPlay();bar()}
+function jump(p){stopSpeech();$('#quiz').classList.remove('on');pos=Math.max(0,Math.min(FLAT.length-1,p));show(pos,true);if(playing)step();else{$('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)}}
+function sceneStart(i){return FLAT.findIndex(f=>f.si===i)}
+function showQuiz(q){stopSpeech();const d=q[LANG]||q.en;$('#qk').textContent=t('check');$('#qq').textContent=d.q;$('#qfb').textContent='';$('#qgo').style.display='none';$('#qgo').textContent=t('cont');
+  $('#qo').innerHTML=d.o.map((o,i)=>`<button class="o" data-i="${i}">${String.fromCharCode(65+i)}) ${o}</button>`).join('');$('#quiz').classList.add('on');$('#subt').textContent='';
+  const say=d.q;speak(say,()=>{},pos);
+  $('#qo').onclick=e=>{const b=e.target.closest('button.o');if(!b)return;const i=+b.dataset.i;if(i===q.a){b.classList.add('right');$('#qfb').innerHTML=`<b style="color:var(--ok)">${t('right')}</b> ${d.e}`;$('#qgo').style.display='inline-block';$('#qo').onclick=null;speak(t('right'),()=>{})}else{b.classList.add('wrong');$('#qfb').innerHTML=`<b style="color:var(--bad)">${t('wrong')}</b>`;setTimeout(()=>b.classList.remove('wrong'),400)}}}
+$('#qgo').onclick=()=>{$('#quiz').classList.remove('on');pos++;if(pos>=FLAT.length){finish();return}show(pos);if(playing)step();else play()};
+function finish(){playing=false;stopSpeech();setPlay();SC.forEach((s,i)=>done.add(i));chapters();bar();$('#end').classList.add('on');$('#subt').textContent='';try{parent.postMessage({type:'lessonDone',id:META.id},'*')}catch(e){}}
+$('#endgo').onclick=()=>{try{if(parent!==window){parent.postMessage({type:'lessonPractice',k:META.k},'*');return}}catch(e){}location.href='../index.html#train'};
+$('#endre').onclick=()=>{done.clear();pos=0;$('#end').classList.remove('on');show(0,true);play()};
+$('#play').onclick=()=>playing?pause():play();
+$('#next').onclick=()=>{const si=FLAT[pos].si;const n=sceneStart(si+1);if(n>=0)jump(n)};
+$('#prev').onclick=()=>{const si=FLAT[pos].si,st=sceneStart(si);jump(pos>st?st:sceneStart(Math.max(0,si-1)))};
+$('#chap').onclick=e=>{const b=e.target.closest('button');if(b)jump(sceneStart(+b.dataset.c))};
+$('#bar').onclick=e=>{const i=e.target.closest('i');if(i)jump(sceneStart(+i.dataset.c))};
+$('#lang').onchange=e=>{LANG=e.target.value;try{const s=JSON.parse(localStorage.getItem('rwlab_v1')||'{}');s.lang=LANG;localStorage.setItem('rwlab_v1',JSON.stringify(s))}catch(x){}const was=playing;stopSpeech();loadMan();buildScenes();applyStatic();show(pos,true);if(was)step();else $('#subt').textContent=FLAT[pos].b.q?'':txt(FLAT[pos].b)};
+$('#spd').onchange=e=>{speed=+e.target.value;if(AUD)AUD.playbackRate=speed;if(playing){stopSpeech();step()}};
+$('#cc').onclick=()=>{cc=!cc;$('#sub').classList.toggle('off',!cc);$('#cc').setAttribute('aria-pressed',cc)};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(e.code==='Space'){e.preventDefault();playing?pause():play()}if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
+try{speechSynthesis.onvoiceschanged=()=>{}}catch(e){}
+if(parent!==window)document.body.classList.add('embed');loadMan();buildScenes();applyStatic();show(0);$('#subt').textContent=txt(FLAT[0].b);
+</script>
+</body>
+</html>

@@ -91,6 +91,7 @@ body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Noto Sans SC
 .hl{background:#fff1cc;border-radius:.3em;padding:0 .15em;transition:background .4s}
 .tbl{border-collapse:collapse;font-size:1.9cqw;background:#fff}.tbl th,.tbl td{border:.15cqw solid var(--line);padding:.6cqw 1.2cqw;text-align:center}.tbl th{background:#f2f5fc}
 .tbl td.hit{background:#fff1cc;font-weight:800}
+.scene.tight{gap:1.1cqw;padding-top:3.4cqw}.scene.tight .card{padding:1cqw 1.8cqw}.scene.tight .h2{font-size:3.1cqw}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4cqw}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -132,7 +133,7 @@ if(!UI[LANG])LANG='en';
 const FLAT=[];SC.forEach((s,si)=>s.b.forEach((b,bi)=>FLAT.push({si,bi,b})));
 let pos=0,playing=false,timer=null,speed=1,cc=true,done=new Set(),utter=null,token=0;
 function t(k){return (UI[LANG]||UI.en)[k]||UI.en[k]||k}
-function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
+function buildScenes(){$('#scenes').innerHTML=SC.map((s,i)=>`<section class="scene${s.tight?' tight':''}" id="sc${i}">${s.html}</section>`).join('');document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l))}
 function applyStatic(){document.documentElement.lang=LANG==='zh'?'zh-CN':LANG;$('#ttl').textContent=t('title');document.title=t('title');$('#note').textContent=t('note');$('#lang').value=LANG;
   $('#endh').textContent=t('endh');$('#endp').textContent=t('endp');$('#endgo').textContent=META.k==='GEN'?t('go0'):t('go');$('#endre').textContent=t('re');
   document.querySelectorAll('[data-l]').forEach(e=>e.textContent=t(e.dataset.l));chapters();bar();setPlay()}
