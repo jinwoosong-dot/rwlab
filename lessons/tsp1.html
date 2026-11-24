@@ -154,11 +154,18 @@ function show(p,replay){const f=FLAT[p];if(!f)return;document.querySelectorAll('
   if(f.b.a)f.b.a.forEach(act);chapters();bar()}
 function txt(b){return b[LANG]||b.en}
 function stopSpeech(){token++;clearTimeout(timer);stopAud();try{speechSynthesis.cancel()}catch(e){}}
-let MAN=null,AUD=null;const LID=META.id;
-function loadMan(){MAN=null;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.lang===LANG)MAN=m}).catch(()=>{})}
-function stopAud(){if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
+let MAN=null,AUD=null,PK=null,PT=0;const LID=META.id;
+function loadMan(){MAN=null;if(PK){PK.pause();PK=null}const L0=LANG;fetch(`../audio/${LID}.${LANG}.json`,{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(!m||m.lang!==LANG)return;
+  if(!m.pack){MAN=m;return}
+  // one file per lesson+language: download it whole so seeking works on any host
+  fetch('../audio/'+m.pack).then(r=>r.ok?r.blob():null).then(b=>{if(!b||LANG!==L0)return;PK=new Audio(URL.createObjectURL(b));PK.preload='auto';MAN=m}).catch(()=>{})}).catch(()=>{})}
+function stopAud(){clearTimeout(PT);if(PK){PK.onplaying=null;PK.pause()}if(AUD){AUD.onended=null;AUD.pause();AUD=null}}
 function speak(text,cb,idx){const my=++token;let fired=false;const fin=()=>{if(fired||my!==token)return;fired=true;cb()};
   const rec=MAN&&idx!=null&&MAN.beats[idx];
+  if(rec&&MAN.pack&&PK){stopAud();const P=PK;P.playbackRate=speed;
+    // one file per lesson+language: seek to this sentence, stop when its time is up
+    P.onplaying=()=>{P.onplaying=null;clearTimeout(PT);PT=setTimeout(()=>{if(PK===P)P.pause();fin()},rec.dur*1000/P.playbackRate)};
+    try{P.currentTime=rec.start}catch(e){}P.play().catch(()=>{timer=setTimeout(fin,rec.dur*1000/speed)});timer=setTimeout(fin,(rec.dur/speed+5)*1000);return}
   if(rec){stopAud();AUD=new Audio('../audio/'+rec.file);AUD.playbackRate=speed;AUD.onended=fin;AUD.onerror=()=>{AUD=null;timer=setTimeout(fin,Math.max(2200,text.length/14*1000))};AUD.play().catch(()=>{timer=setTimeout(fin,(rec.dur||3)*1000/speed)});timer=setTimeout(fin,((rec.dur||3)/speed+4)*1000);return}
   const cps={en:14,ko:7,zh:5}[LANG]*speed;const est=Math.max(2200,text.length/cps*1000)+500;
   try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);const lc={en:'en-US',ko:'ko-KR',zh:'zh-CN'}[LANG];u.lang=lc;u.rate=speed*(LANG==='en'?0.98:1);
