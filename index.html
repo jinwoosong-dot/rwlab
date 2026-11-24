@@ -188,6 +188,16 @@ a{color:var(--pri)}
 .vtier.on{border-color:var(--pri,#2447b8);box-shadow:0 0 0 2px rgba(36,71,184,.15)}
 .vt-m{flex:1;height:8px;border-radius:5px;background:#e8ecf4;overflow:hidden}.vt-m i{display:block;height:100%}
 .vmore summary{cursor:pointer}
+.coach{border:2px solid var(--pri,#2447b8)}
+.c-head{display:flex;gap:14px;align-items:flex-start}.c-av{font-size:34px;line-height:1;background:var(--pri2,#eef2ff);border-radius:50%;width:56px;height:56px;display:grid;place-items:center;flex:none}
+.c-head p{font-size:17px;line-height:1.6;margin:4px 0 0}
+.c-cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:16px}
+.c-cols>div{border-radius:12px;padding:12px 16px}.c-good{background:#e9f7ef}.c-fix{background:#fff6e0}
+.c-cols h3{margin:0 0 6px;font-size:16px}.c-cols ul{margin:0;padding-left:18px;line-height:1.6}.c-cols li{margin:6px 0}
+.c-goal{margin-top:14px;padding:12px 16px;border-radius:12px;background:var(--pri2,#eef2ff);line-height:1.6}
+.c-plan{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.cweek{border:1px solid var(--line);border-radius:12px;padding:12px 16px}.cw-h{font-weight:800;color:var(--pri,#2447b8)}.cweek ol{margin:6px 0 0;padding-left:18px;line-height:1.6}.cweek li{margin:8px 0}
+.c-end{margin:14px 0 0;font-weight:600}
 .kbar{display:flex;gap:6px;margin:10px 0 4px;flex-wrap:wrap}
 .kbar>div{flex:1;min-width:84px;border-radius:12px;padding:8px 10px;background:#f1f3f8;text-align:center}
 .kbar b{display:block;font-size:20px;line-height:1.2}.kbar span{font-size:12.5px;color:#556}
@@ -405,7 +415,7 @@ h2.sec{font-size:18px;margin:22px 0 10px}
 .vidbox iframe{width:100%;height:100%;border:0;display:block}.vidx{position:absolute;top:10px;right:10px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer}
 .vidrow{background:#fff8e6;border-radius:12px;padding:10px 12px!important;margin:6px 0}.vidrow .pck{background:#ffd34d;color:#1b2340;border-color:#ffd34d}.vidrow.done .pck{background:var(--ok);color:#fff;border-color:var(--ok)}
 .vidcard{border-color:#f4dc95}
-@media (min-width:861px){.bar{flex-wrap:nowrap;max-width:1240px}#nav{flex:1 1 auto;min-width:0}#nav button{padding-left:9px;padding-right:9px}}
+@media (min-width:861px){.bar{flex-wrap:nowrap;max-width:1240px}.bar>*:not(#nav){flex:none;white-space:nowrap}#nav{flex:1 1 auto;min-width:0}#nav button{padding-left:9px;padding-right:9px}}
 </style>
 </head>
 <body>
@@ -2057,6 +2067,72 @@ function modal(html){$('#modal').innerHTML=`<div class="modal"><div class="card"
 function closeModal(){$('#modal').innerHTML=''}
 
 /* ---------- 리포트 ---------- */
+/* ---------- 진단 코칭 리포트 ---------- */
+const josa=(w,a,b)=>{const c=String(w).replace(/[^가-힣]+$/,'').slice(-1).charCodeAt(0)-44032;return c>=0&&c<11172&&c%28?a:b};
+const L3=(ko,en,zh)=>LANG==='en'?en:LANG==='zh'?zh:ko;
+const skN=k=>LANG==='en'?SK[k][0]:LANG==='zh'?T(SK[k][1]):SK[k][1];
+const dmN=k=>LANG==='en'?DOM[k][0]:LANG==='zh'?T(DOM[k][1]):DOM[k][1];
+const TIPK={BND:['세로줄을 긋고 양쪽이 완전한 문장인지 먼저 확인하는 습관','drawing a line at the blank and checking whether each side is a complete sentence','在空格处画竖线，先检查两边是否都是完整句子'],
+FSS:['of 구를 지워 진짜 주어를 찾고, 본동사와 시제 단서를 확인하는 순서','crossing out “of” phrases to find the real subject, then checking for a main verb and time clues','划掉 of 短语找到真正的主语，再检查谓语动词和时间线索'],
+WIC:['선택지를 가리고 지문의 단서어로 먼저 단어를 예측하는 습관','covering the choices and predicting a word from the clue words first','遮住选项，先根据线索词预测单词'],
+TRN:['앞 문장과의 관계(추가·예시·대조·인과·시간)에 먼저 이름 붙이기','naming the relationship with the previous sentence (add, example, contrast, cause, time) before reading choices','先说出与前一句的关系（递进、举例、转折、因果、时间）'],
+SYN:['노트보다 목표 문장을 먼저 읽고 목표에 맞는 선택지만 고르기','reading the goal before the notes and checking each choice against the goal only','先读目标再读笔记，只用目标来检验选项'],
+CID:['전환점(however 등)을 찾고 내 말로 한 문장 요약하기','finding the turn (however, but) and summarizing the passage in one sentence','找到转折点（however 等），用自己的话一句话概括'],
+TSP:['문장마다 역할을 붙이고 선택지의 동사(describe·argue·challenge)부터 맞추기','labeling each sentence’s job and matching the verb in the choices first','给每句话标注作用，先匹配选项中的动词'],
+COT:['주장을 부분으로 쪼개 모든 부분과 맞는 근거 고르기','splitting the claim into parts and choosing evidence that matches every part','把论点拆成几部分，选出符合每一部分的证据'],
+COQ:['주장부터 읽고 필요한 줄만 본 뒤, 정확성과 관련성 두 번 확인하기','reading the claim first, using only the rows you need, and checking accuracy and relevance','先读论点，只看需要的行，再检查准确性和相关性'],
+INF:['“반드시 참”인 결론만 고르고 극단적인 표현 지우기','choosing only conclusions that must be true and eliminating extreme wording','只选必然为真的结论，排除极端表述'],
+CTC:['지문마다 한 줄 요약 후 동의·반대·부분 동의 관계 정하기','summarizing each text in one line, then deciding agree, disagree, or qualify','每篇一句话概括，再判断同意、反对或部分同意']};
+function estAt(c,n){const st0={c,n};return estimate(st0)}
+function coachReport(st){
+  const two=S.diag.m2done,hard=S.diag.route==='hard',p=pct(st.c,st.n);
+  const sk=SKORDER.map(k=>({k,c:st.sk[k].c,n:st.sk[k].n,p:pct(st.sk[k].c,st.sk[k].n)})).filter(o=>o.n);
+  const doms=Object.keys(DOM).map(k=>({k,c:st.dm[k].c,n:st.dm[k].n,p:pct(st.dm[k].c,st.dm[k].n)})).filter(o=>o.n);
+  const focus=sk.filter(o=>o.p<80&&o.c<o.n&&o.n>=2).map(o=>Object.assign(o,{w:(1-o.p/100)*(WT[o.k]||1)*Math.sqrt(o.n)})).sort((a,b)=>b.w-a.w).slice(0,p>=85?2:3);
+  const fD=new Set(focus.map(o=>SK[o.k][2]));
+  let strongD=doms.filter(o=>o.p>=85&&o.n>=4&&!fD.has(o.k)).sort((a,b)=>b.p-a.p);
+  if(!strongD.length){const b=doms.filter(o=>!fD.has(o.k)).sort((a,b)=>b.p-a.p)[0];if(b&&b.p>=60)strongD=[b]}
+  const strongS=sk.filter(o=>o.c===o.n&&o.n>=3&&!strongD.some(d=>d.k===SK[o.k][2])).slice(0,2);
+  const gain=focus.reduce((a,o)=>a+Math.max(0,Math.ceil(o.n*0.85)-o.c),0);
+  const now=estimate(st),then=gain?estAt(Math.min(st.n,st.c+gain),st.n):now,avg=Math.round((S.diag.used||0)/st.n);
+  const list=a=>a.map(x=>`<b>${x}</b>`).join(L3(', ',', ','、'));
+  const sNames=strongD.map(o=>dmN(o.k)).concat(strongS.map(o=>skN(o.k))),fNames=focus.map(o=>skN(o.k));
+  // 한 줄 총평
+  const head=!focus.length?L3(`전 유형에서 고르게 맞혔어요. 이제는 <b>어려움 난이도</b>와 <b>시간 관리</b>로 만점에 가까워질 차례예요.`,`You scored evenly across every skill. Next step: <b>hard questions</b> and <b>pacing</b> to get close to a perfect score.`,`各题型表现均衡。接下来要攻克<b>高难度题</b>和<b>时间管理</b>，向满分冲刺。`)
+    :L3(`${sNames.length?`${list(sNames)}${josa(sNames[sNames.length-1],'은','는')} 이미 강점이에요. `:''}${list(fNames)}만 보강하면 ${then!==now?`<b>${then}점대</b>도 충분히 노려볼 수 있어요.`:'점수가 눈에 띄게 올라갈 거예요.'}`,
+        `${sNames.length?`${list(sNames)} ${sNames.length>1?'are':'is'} already a strength. `:''}Strengthen ${list(fNames)}, and ${then!==now?`<b>${then}</b> is well within reach.`:'your score will rise noticeably.'}`,
+        `${sNames.length?`${list(sNames)}已经是你的强项。`:''}只要补强${list(fNames)}，${then!==now?`完全有望达到<b>${then}分</b>。`:'分数会明显提高。'}`);
+  const good=[];
+  strongD.forEach(o=>good.push(L3(`${dmN(o.k)} 영역 정답률 ${o.p}% (${o.c}/${o.n})`,`${dmN(o.k)}: ${o.p}% correct (${o.c}/${o.n})`,`${dmN(o.k)}：正确率 ${o.p}%（${o.c}/${o.n}）`)));
+  strongS.forEach(o=>good.push(L3(`${skN(o.k)} ${o.n}문항 모두 정답`,`${skN(o.k)}: all ${o.n} correct`,`${skN(o.k)}：${o.n} 题全对`)));
+  if(two&&hard)good.push(L3('모듈 1을 잘 풀어 어려운 모듈 2로 올라갔어요. 고득점으로 가는 경로예요.','You did well enough in Module 1 to reach the harder Module 2, the path to a high score.','模块1表现好，进入了更难的模块2，这是通往高分的路径。'));
+  if(avg&&avg<=71&&p>=60)good.push(L3(`문항당 평균 ${avg}초로 시간 안에 여유 있게 풀었어요.`,`You averaged ${avg} seconds per question, comfortably within time.`,`平均每题 ${avg} 秒，时间充裕。`));
+  if(!good.length)good.push(L3('끝까지 시험을 마친 것 자체가 좋은 출발이에요. 약점이 분명하게 보이니 계획을 세우기 쉬워요.','Finishing the whole test is a good start. Your weak spots are clear, which makes planning easy.','坚持做完整套题就是很好的开始。弱项很清楚，计划就好定了。'));
+  const fix=focus.map(o=>`<li><b>${skN(o.k)}</b> <span class="sub">${o.c}/${o.n} · ${o.p}%</span><br>${L3(`핵심 습관: ${TIPK[o.k][0]}`,`Key habit: ${TIPK[o.k][1]}.`,`关键：${TIPK[o.k][2]}。`)}</li>`);
+  if(avg>80)fix.push(`<li><b>${L3('시간 관리','Pacing','时间管理')}</b> <span class="sub">${avg}${L3('초/문항','s / question','秒/题')}</span><br>${L3('평균 71초를 넘었어요. 문법·연결어는 45초 안에 끝내고, 남은 시간을 추론에 쓰세요.','You were over the 71-second average. Finish grammar and transitions within 45 seconds and save time for inferences.','超过了平均71秒。语法和过渡词题控制在45秒内，把时间留给推理题。')}</li>`);
+  if(two&&!hard)fix.push(`<li><b>${L3('모듈 1 정확도','Module 1 accuracy','模块1正确率')}</b><br>${L3('쉬운 모듈 2로 배정되면 최고 점수가 제한돼요. 모듈 1에서 실수를 줄이는 게 점수를 가장 크게 올려요.','The easier Module 2 caps your top score. Cutting mistakes in Module 1 raises your score the most.','被分到较易的模块2会限制最高分。减少模块1的失误对提分最有效。')}</li>`);
+  const vidsOf=k=>(VIDS[k]||[]).slice(0,2).map(v=>`<button class="btn sm" data-a="vid" data-v="${v.id}">🎬 ${esc(vtx(v.t))}</button>`).join('');
+  const f1=focus[0],f2=focus[1],f3=focus[2],wn=wrongIds().length;
+  const week=(n,items)=>`<div class="cweek"><div class="cw-h">${L3(`${n}주차`,`Week ${n}`,`第${n}周`)}</div><ol>${items.join('')}</ol></div>`;
+  const plan=focus.length?[
+    week(1,[`<li>${L3(`<b>${skN(f1.k)}</b> 개념 강의를 보고 규칙을 내 말로 정리하기`,`Watch the <b>${skN(f1.k)}</b> lesson and restate the rules in your own words`,`观看<b>${skN(f1.k)}</b>概念课，用自己的话整理规则`)}<div class="row" style="margin-top:6px">${vidsOf(f1.k)}</div></li>`,
+      `<li>${L3(`${skN(f1.k)} 유사 문제를 하루 10문제씩, 정답률 85%가 될 때까지`,`${skN(f1.k)} practice: 10 questions a day until you reach 85%`,`${skN(f1.k)}相似题每天10道，直到正确率达到85%`)} <button class="btn sm pri" data-a="openSkill" data-v="${f1.k}">${L3('훈련 시작','Start practice','开始练习')}</button></li>`,
+      `<li>${L3(`이번 시험에서 틀린 문제 ${wn}개를 오답 노트로 다시 풀기`,`Redo your ${wn} missed questions in the wrong-answer notes`,`在错题本里重做这次错的 ${wn} 道题`)} <button class="btn sm" data-a="nav" data-v="review">${L3('오답 노트','Wrong-answer notes','错题本')}</button></li>`]),
+    week(2,[...(f2?[`<li>${L3(`<b>${skN(f2.k)}</b>${f3?`, <b>${skN(f3.k)}</b>`:''} 강의 → 유사 문제 같은 순서로 반복`,`Repeat the same lesson → practice cycle for <b>${skN(f2.k)}</b>${f3?` and <b>${skN(f3.k)}</b>`:''}`,`对<b>${skN(f2.k)}</b>${f3?`和<b>${skN(f3.k)}</b>`:''}重复“课程 → 相似题”的流程`)}<div class="row" style="margin-top:6px">${vidsOf(f2.k)}${f3?vidsOf(f3.k):''}</div></li>`]:[]),
+      `<li>${L3('매일 단어장 카드 15장으로 어휘 유지하기','Keep up 15 vocabulary cards a day','每天学15张单词卡保持词汇量')} <button class="btn sm" data-a="nav" data-v="vocab">${L3('단어장','Vocabulary','单词本')}</button></li>`,
+      `<li>${L3('2주 차 끝에 다른 회차 모의고사로 변화 확인하기','At the end of week 2, take a different practice test to measure your progress','第2周结束时，做一套不同的模拟考试检验进步')} <button class="btn sm" data-a="nav" data-v="mock">${L3('모의고사','Practice tests','模拟考试')}</button></li>`])].join('')
+    :week(1,[`<li>${L3('어려움 난이도 문항 위주로 유형 훈련하기','Practice mainly hard-level questions','以高难度题为主进行题型训练')}</li>`,`<li>${L3('다른 회차 모의고사로 시간 관리 점검하기','Check your pacing with a different practice test','用另一套模拟考试检查时间管理')} <button class="btn sm" data-a="nav" data-v="mock">${L3('모의고사','Practice tests','模拟考试')}</button></li>`]);
+  return`<h2>${L3('코치의 진단','Coach’s assessment','教练的诊断')}</h2>
+  <div class="card coach">
+    <div class="c-head"><div class="c-av">🧑‍🏫</div><p>${head}</p></div>
+    <div class="c-cols"><div class="c-good"><h3>👍 ${L3('잘하고 있는 점','What’s going well','做得好的地方')}</h3><ul>${good.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      ${fix.length?`<div class="c-fix"><h3>🔧 ${L3('보강할 부분','What to strengthen','需要加强的地方')}</h3><ul>${fix.join('')}</ul></div>`:''}</div>
+    ${focus.length&&then!==now?`<div class="c-goal">🎯 ${L3(`위 유형을 85%까지 끌어올리면 예상 구간이 <b>${now}</b> → <b>${then}</b> 정도로 올라가요.`,`Bring those skills up to 85%, and your estimated range moves from <b>${now}</b> to about <b>${then}</b>.`,`把这些题型提高到85%，预估区间将从<b>${now}</b>升到约<b>${then}</b>。`)} <span class="sub">${L3('(이번 시험 결과와 자체 근사식으로 계산한 참고값이에요)','(a rough reference from this test and our own approximation)','（根据本次结果和自有估算公式得出的参考值）')}</span></div>`:''}
+    <h3 style="margin-top:18px">📅 ${L3(focus.length?'앞으로 2주 이렇게 해 보세요':'다음 단계','Your next two weeks','接下来两周这样做')}</h3>
+    <div class="c-plan">${plan}</div>
+    <p class="c-end">${L3('개념을 잡고 같은 유형을 여러 번 풀다 보면 틀리던 문제가 빠르게 줄어요. 2주 뒤 모의고사로 달라진 점수를 확인해 봐요!','Once the concepts click and you practice the same type a few times, the misses drop fast. Check your new score with a practice test in two weeks!','掌握概念、同类题多练几遍，错题会很快减少。两周后用模拟考试看看分数的变化吧！')}</p>
+  </div>`;
+}
 function report(){
   if(!S.diag.done){app.innerHTML=`<h1>리포트</h1><div class="card"><p>아직 결과가 없어요. 먼저 실력 진단을 받아 보세요.</p><button class="btn pri" data-a="nav" data-v="test">실력 진단으로 이동</button></div>`;return}
   const st=stats(),p=pct(st.c,st.n),pr=priority(),weak=pr.filter(o=>o.c<o.n).slice(0,3),two=S.diag.m2done,hard=S.diag.route==='hard',T=taken();
@@ -2069,15 +2145,14 @@ function report(){
   ${two?'':`<div class="card" style="border-color:var(--pri);background:var(--pri2)"><div class="row"><div><b>모듈 2가 남아 있어요</b><div class="sub">지금 결과는 모듈 1의 27문항만으로 계산했어요. 모듈 2까지 풀면 54문항 기준으로 다시 계산돼요.</div></div><span class="sp"></span><button class="btn pri" data-a="nav" data-v="test">모듈 2 이어서 풀기</button></div></div>`}
   <p class="note">예상 구간은 자체 근사식으로 계산한 참고값이고 공식 환산이 아니에요. 실제 시험은 문항별 가중치가 다르고 환산 기준이 공개되지 않아요.${two&&!hard?' 쉬운 모듈 2 경로는 받을 수 있는 최고 점수가 제한되므로, 모듈 1 정답 수를 올리는 것이 먼저예요.':''}</p>
 
-  <h2>먼저 훈련할 유형</h2>
-  ${weak.length?`<div class="grid">${weak.map((o,i)=>`<div class="card"><span class="chip bad">우선순위 ${i+1}</span><h3>${SK[o.k][1]}</h3><div class="sub">${SK[o.k][0]}</div><p>${o.c} / ${o.n} 정답</p><button class="btn pri sm" data-a="openSkill" data-v="${o.k}">훈련 시작</button></div>`).join('')}</div>`:`<div class="card">모든 문항을 맞혔어요. 어려움 난이도 문항 위주로 훈련해 보세요.</div>`}
+  ${coachReport(st)}
 
   <h2>영역별 정답률</h2>
   <div class="card">${Object.keys(DOM).map(k=>{const o=st.dm[k],x=pct(o.c,o.n);return`<div style="margin:10px 0"><div class="row"><b>${DOM[k][1]}</b><span class="sub">${DOM[k][0]} · 실제 시험 비중 약 ${DOM[k][2]}%</span><span class="sp"></span><b>${o.c}/${o.n} (${x}%)</b></div><div class="meter"><i class="${cls(x)}" style="width:${x}%"></i></div></div>`}).join('')}</div>
 
   <h2>유형별 결과</h2>
   <div class="card" style="overflow-x:auto"><table><tr><th>유형</th><th>영역</th><th>정답</th><th>평균 시간</th><th>판정</th><th></th></tr>
-  ${SKORDER.map(k=>{const o=st.sk[k],lb=label({c:o.c,n:o.n,p:pct(o.c,o.n)});return`<tr><td><b>${SK[k][1]}</b><div class="sub">${SK[k][0]}</div></td><td class="sub">${DOM[SK[k][2]][1]}</td><td>${o.c}/${o.n}</td><td>${Math.round(o.time/o.n)}초</td><td><span class="chip ${lb[1]}">${lb[0]}</span></td><td><button class="btn sm" data-a="openSkill" data-v="${k}">훈련</button></td></tr>`}).join('')}</table>
+  ${SKORDER.map(k=>{const o=st.sk[k],lb=label({c:o.c,n:o.n,p:pct(o.c,o.n)});return`<tr><td><b>${SK[k][1]}</b>${LANG==='en'?'':`<div class="sub">${SK[k][0]}</div>`}</td><td class="sub">${DOM[SK[k][2]][1]}</td><td>${o.c}/${o.n}</td><td>${Math.round(o.time/o.n)}초</td><td><span class="chip ${lb[1]}">${lb[0]}</span></td><td><button class="btn sm" data-a="openSkill" data-v="${k}">훈련</button></td></tr>`}).join('')}</table>
   <p class="sub" style="margin-top:8px">${two?'유형당 2–9문항 기준이에요.':'유형당 1–5문항이라 오차가 커요. 모듈 2까지 풀면 더 정확해져요.'} 훈련 결과가 쌓일수록 판단이 정확해져요.</p></div>
 
   ${S.hist.length?`<h2>응시 기록</h2><div class="card" style="overflow-x:auto"><table><tr><th>날짜</th><th>회차</th><th>정답</th><th>예상 구간</th><th>모듈 2</th></tr>
