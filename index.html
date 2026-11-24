@@ -2185,10 +2185,10 @@ function plan(){
   const st=(done,t,s,btn)=>`<div class="pstep ${done?'done':''}"><div class="pck">${done?'✓':''}</div><div class="sp"><b>${t}</b><div class="sub">${s}</div></div>${done?'':btn||''}</div>`;
   let steps='';
   if(!S.diag.done)steps+=st(false,'실력 진단 받기','모듈 1만 풀어도 돼요 (27문항 · 32분). 진단이 있어야 취약 유형에 맞춘 계획이 나와요.','<button class="btn pri sm" data-a="nav" data-v="test">실력 진단</button>');
-  if(!S.lec.GEN)steps+=st(false,'문제 접근법 강의 듣기 (처음 한 번)','시간 배분과 풀이 4단계 · 약 8분','<button class="btn pri sm" data-a="startLec" data-v="GEN">강의</button>');
+  if(!lecDone('GEN'))steps+=st(false,L3('오리엔테이션 영상 보기 (처음 한 번)','Watch the orientation video (once)','观看入门视频（一次）'),L3('시험 구조, 시간 배분, 풀이 4단계 · 약 3분','Test structure, pacing, the 4-step method · ~3 min','考试结构、时间分配、四步解题法 · 约3分钟'),'<button class="btn pri sm" data-a="startLesson" data-v="GEN">'+L3('영상','Watch','观看')+'</button>');
   if(vK(0))steps+=st(due===0,`단어 복습 ${due?due+'개':''}`,due?'잊기 직전에 다시 보는 단어예요. 가장 먼저 하세요.':'오늘 복습할 단어를 다 했어요.','<button class="btn pri sm" data-a="planReview">복습</button>');
   steps+=st(dd.vm>0,`새 단어 ${cfg.w}개`,dd.vm>0?`오늘 미션 ${dd.vm}회 클리어`:'학습 → 퀴즈 통과',`<button class="btn pri sm" data-a="planVocab" data-v="${cfg.w}">단어 미션</button>`);
-  if(focus){const need=!S.lec[focus];steps+=st(!need&&dd.q>=cfg.q,`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,`<button class="btn pri sm" data-a="${need?'startLec':'startDrill2'}" data-v="${focus}">${need?'강의':'훈련'}</button>`)}
+  if(focus){const need=!lecDone(focus);steps+=st(!need&&dd.q>=cfg.q,`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,`<button class="btn pri sm" data-a="${need?'startLesson':'startDrill2'}" data-v="${focus}">${need?'강의':'훈련'}</button>`)}
   else if(S.log.length&&dow===6)steps+=st(dd.q>=cfg.q,`혼합 훈련 ${cfg.q}개`,`이번 주에 연습한 유형을 섞어서 풀어요 · 오늘 ${dd.q} / ${cfg.q}`,'<button class="btn pri sm" data-a="startMixed">혼합 훈련</button>');
   else if(S.log.length&&dow===0)steps+=st(false,'쉬거나, 2–3주에 한 번 모의고사','오늘은 가볍게. 지난 모의고사에서 2–3주가 지났으면 다시 응시해 변화를 확인해요.','<button class="btn sm" data-a="nav" data-v="mock">모의고사</button>');
   if(wr)steps+=st(false,`오답 노트 ${wr}문항`,'어제까지 틀린 문제를 다시 풀어요. 맞히면 목록에서 빠져요.','<button class="btn pri sm" data-a="startReview">오답 풀기</button>');
@@ -2249,32 +2249,23 @@ function train(){
   if((S.tt||'course')==='course')return courseView();
   backfill();const d=S.log.length>0,rk=ranked(),list=d?rk.m.concat(rk.lack).map(a=>({k:a.k})):SKORDER.map(k=>({k}));
   app.innerHTML=`<h1>커리큘럼</h1>${ttabs()}<p class="sub">${d?'점수를 가장 많이 잃는 유형부터 정렬했어요. 정답률은 모의고사·훈련·오답 노트를 모두 합친 값이에요.':'모의고사나 훈련을 풀면 약한 유형 순서로 정렬돼요. 지금은 전체 유형을 보여드려요.'}</p>
-  <div class="card stepc ${S.lec.GEN?'':'cur'}"><div class="row"><div><b>먼저 듣기 · 문제 접근법 강의</b> <span class="chip ${S.lec.GEN?'ok':'warn'}">${S.lec.GEN?'강의 ✓':'강의 전'}</span><div class="sub">시간 배분, 한 문제를 푸는 4단계, 오답의 다섯 가지 얼굴, 틀린 문제 다루는 법 · 약 8분</div></div><span class="sp"></span><button class="btn ${S.lec.GEN?'':'pri'}" data-a="startLec" data-v="GEN">${S.lec.GEN?'다시 보기':'강의 시작'}</button></div></div>
+  <div class="card stepc ${lecDone('GEN')?'':'cur'}"><div class="row"><div><b>${L3('먼저 보기 · 오리엔테이션','Start here · Orientation','先看 · 入门')}</b> <span class="chip ${lecDone('GEN')?'ok':'warn'}">${lecDone('GEN')?L3('시청 ✓','Watched ✓','已看 ✓'):L3('시청 전','Not watched','未观看')}</span><div class="sub">${L3('시험 구조, 시간 배분, 풀이 4단계 · 영상 약 3분','Test structure, pacing, the 4-step method · ~3 min video','考试结构、时间分配、四步解题法 · 视频约3分钟')}</div></div><span class="sp"></span><button class="btn ${lecDone('GEN')?'':'pri'}" data-a="startLesson" data-v="GEN">${lecDone('GEN')?L3('다시 보기','Watch again','再看一遍'):L3('영상 보기','Watch','观看')}</button></div></div>
   <div class="card"><div class="row"><div><b>혼합 훈련 10문제</b><div class="sub">약한 유형 3개의 문제를 섞어서 풀어요. 실전처럼 유형을 스스로 알아보는 연습이 돼요.</div></div><span class="sp"></span><button class="btn" data-a="startMixed">시작</button></div></div>
   ${list.map(o=>{const s=drillStat(o.k),a=acc(o.k),lb=a.n?lvl(a):null,mst=s.n&&s.ok===s.n;return`<div class="card"><div class="row"><div><b>${SK[o.k][1]}</b> <span class="sub">${SK[o.k][0]}</span><br>
-    ${lb?`<span class="chip ${lb[1]}">정답률 ${a.p}% (${a.c}/${a.n}) · ${lb[0]}</span> `:''}<span class="chip ${S.lec[o.k]?'ok':'gray'}">${S.lec[o.k]?'강의 ✓':'강의 전'}</span> <span class="chip ${mst?'ok':'gray'}">훈련 ${s.ok}/${s.n} 정답${mst?' · 완료':''}</span></div><span class="sp"></span>
-    <button class="btn ${lb&&lb[1]==='bad'&&!mst?'pri':''}" data-a="openSkill" data-v="${o.k}">${S.lec[o.k]?'강의 · 훈련':'개념 강의부터'}</button></div>
+    ${lb?`<span class="chip ${lb[1]}">정답률 ${a.p}% (${a.c}/${a.n}) · ${lb[0]}</span> `:''}<span class="chip ${lecDone(o.k)?'ok':'gray'}">${lecDone(o.k)?'강의 ✓':'강의 전'}</span> <span class="chip ${mst?'ok':'gray'}">훈련 ${s.ok}/${s.n} 정답${mst?' · 완료':''}</span></div><span class="sp"></span>
+    <button class="btn ${lb&&lb[1]==='bad'&&!mst?'pri':''}" data-a="openSkill" data-v="${o.k}">${lecDone(o.k)?'강의 · 훈련':'개념 강의부터'}</button></div>
     <div class="meter" style="margin-top:10px"><i class="ok" style="width:${pct(s.ok,s.n)}%"></i></div></div>`}).join('')}`;
 }
 function skillPage(k){
-  const l=LESSON[k],s=drillStat(k),ms=missed(k).length,lc=LEC[k],nq=lc.filter(c=>c.q).length,done=S.lec[k];
+  const s=drillStat(k),ms=missed(k).length,done=lecDone(k),vs=VIDS[k]||[];
   app.innerHTML=`<button class="btn sm" data-a="backTrain">← 유형 목록</button>
   <h1>${SK[k][1]}</h1><p class="sub">${SK[k][0]} · ${DOM[SK[k][2]][1]}</p>
   ${(()=>{const a=acc(k);return a.n?`<div class="card">${srow(a)}</div>`:''})()}
-  ${VIDS[k]?`<div class="card stepc vidcard"><div class="row"><h3 style="margin:2px 0">🎬 동영상 강의</h3><span class="chip warn">NEW</span></div><p class="sub">강사가 화면에 직접 그려 가며 설명하는 영상이에요. 개념 강의 전에 먼저 보면 이해가 빨라요.</p>${vidRows(k)}</div>`:''}
-  <div class="card stepc ${done?'':'cur'}"><div class="step"><div class="num">1</div><div class="sp"><div class="row"><h3 style="margin:2px 0">개념 강의</h3>${done?'<span class="chip ok">완료</span>':'<span class="chip warn">먼저 들으세요</span>'}</div>
-    <p class="sub">${lc.length}장 · 확인 문제 ${nq}개 · 약 ${Math.max(5,Math.round(lc.length*1.3))}분. 꼭 알아야 하는 규칙과 예제 풀이를 한 장씩 넘기며 배워요.</p>
-    <div class="ltoc">${lc.map((c,i)=>`<span>${i+1}. ${c.t}</span>`).join('')}</div>
-    <button class="btn ${done?'':'pri'}" data-a="startLec" data-v="${k}">${done?'강의 다시 보기':'강의 시작'}</button></div></div></div>
+  <div class="card stepc ${done?'':'cur'}"><div class="step"><div class="num">1</div><div class="sp"><div class="row"><h3 style="margin:2px 0">${L3('개념 강의 (영상)','Concept lessons (video)','概念课（视频）')}</h3>${done?`<span class="chip ok">${L3('완료','Done','完成')}</span>`:`<span class="chip warn">${L3('먼저 보세요','Watch first','先看')}</span>`}</div>
+    <p class="sub">${L3(`영상 ${vs.length}개 · 규칙 설명, 예제 풀이, 확인 문제가 들어 있어요.`,`${vs.length} video${vs.length>1?'s':''} · rules, worked examples, and check questions.`,`视频 ${vs.length} 个 · 包含规则讲解、例题和确认题。`)}</p>${vidRows(k)}</div></div></div>
   <div class="card stepc ${done?'cur':''}"><div class="step"><div class="num">2</div><div class="sp"><h3 style="margin:2px 0">유사 문제 훈련</h3>
-    <p class="sub">훈련 문항 ${s.n}개 중 ${s.ok}개 정답 · 한 번에 10문제씩 (쉬움 → 어려움, 안 맞힌 문제 먼저)${ms?` · 모의고사에서 틀린 문항 포함`:''}. 틀리면 내가 고른 답이 왜 틀렸는지 알려줘요.${done?'':' 강의를 먼저 들으면 훈련 효과가 커요.'}</p>
-    <button class="btn ${done?'pri':''}" data-a="startDrill" data-v="${k}">훈련 시작</button></div></div></div>
-  <details class="card"><summary><b>요약 노트</b> <span class="sub">강의 핵심을 한 장으로 복습할 때</span></summary>
-    <h3>어떤 유형인가요</h3><p>${l.what}</p>
-    <h3>실제 시험에서는 이렇게 나와요</h3><div>${PAT[k]}</div>
-    <h3>푸는 순서</h3><ol>${l.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
-    <h3>자주 나오는 함정</h3><ul>${l.traps.map(x=>`<li>${x}</li>`).join('')}</ul>
-    <div class="exp"><b>학습 팁</b> ${l.tip}</div></details>`;
+    <p class="sub">훈련 문항 ${s.n}개 중 ${s.ok}개 정답 · 한 번에 10문제씩 (쉬움 → 어려움, 안 맞힌 문제 먼저)${ms?` · 모의고사에서 틀린 문항 포함`:''}. 틀리면 내가 고른 답이 왜 틀렸는지 알려줘요.</p>
+    <button class="btn ${done?'pri':''}" data-a="startDrill" data-v="${k}">훈련 시작</button></div></div></div>`;
 }
 function sayKo(t,cb){if(!TTS)return;try{speechSynthesis.cancel();t=T(t);const lc=LANG==='en'?'en-US':LANG==='zh'?'zh-CN':'ko-KR',re=new RegExp('^'+lc.slice(0,2),'i');const u=new SpeechSynthesisUtterance(t);if(cb)u.onend=cb;u.lang=lc;u.rate=LANG==='ko'?1.05:.95;const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang.replace('_','-').toLowerCase()===lc.toLowerCase())||vs.find(x=>re.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
 function lcTL(c){const t=[{ty:'p'}];(c.d||[]).forEach((d,di)=>{for(let n=0;n<=d.st.length+1;n++)t.push({ty:'d',di,n})});if(c.h||c.x)t.push({ty:'b'});if(c.k)t.push({ty:'k'});return t}
@@ -2349,7 +2340,8 @@ function drill(){
 
 /* ---------- 정규 코스 · 단원 테스트 ---------- */
 const ttabs=()=>`<div class="row" style="margin:8px 0 4px">${[['course','정규 코스 (순서대로)'],['type','유형별 (약한 순)']].map(t=>`<button class="btn sm ${(S.tt||'course')===t[0]?'pri':''}" data-a="ttab" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>`;
-function unitState(u){const steps=[];u.k.forEach(k=>{const vs=VIDS[k]||[],vd=vs.length&&vs.every(v=>S.vid&&S.vid[v.id]);steps.push({k,ty:'lec',done:!!S.lec[k]||!!vd});if(k!=='GEN'){const s=drillStat(k);steps.push({k,ty:'dr',done:s.ok>=UDR,ok:s.ok,n:s.n})}});if(u.id!=='u0'){const r=S.unit[u.id];steps.push({ty:'ut',done:!!(r&&r.pass),best:r?r.best:null})}return{steps,done:steps.every(s=>s.done),cnt:steps.filter(s=>s.done).length}}
+const lecDone=k=>!!S.lec[k]||!!((VIDS[k]||[]).length&&VIDS[k].every(v=>S.vid&&S.vid[v.id]));
+function unitState(u){const steps=[];u.k.forEach(k=>{const vs=VIDS[k]||[],vd=vs.length&&vs.every(v=>S.vid&&S.vid[v.id]);steps.push({k,ty:'lec',done:lecDone(k)});if(k!=='GEN'){const s=drillStat(k);steps.push({k,ty:'dr',done:s.ok>=UDR,ok:s.ok,n:s.n})}});if(u.id!=='u0'){const r=S.unit[u.id];steps.push({ty:'ut',done:!!(r&&r.pass),best:r?r.best:null})}return{steps,done:steps.every(s=>s.done),cnt:steps.filter(s=>s.done).length}}
 function courseView(){
   backfill();const sts=COURSE.map(unitState),cur=sts.findIndex(s=>!s.done),tot=sts.reduce((a,s)=>a+s.steps.length,0),dn=sts.reduce((a,s)=>a+s.cnt,0),a=acc();
   const open=S.openU!=null?S.openU:cur<0?COURSE.length:cur;
@@ -2357,19 +2349,18 @@ function courseView(){
   const nv=u=>u.k.reduce((s,k)=>s+(VIDS[k]||[]).length,0),vmin=u=>u.k.reduce((s,k)=>s+(VIDS[k]||[]).reduce((t,v)=>t+v.min,0),0);
   const grp=(n,title,note,body)=>body?`<div class="ugrp"><div class="ug-h"><b class="ug-n">${n}</b><b>${title}</b>${note?`<span class="sub">${note}</span>`:''}</div>${body}</div>`:'';
   const unit=(u,i)=>{const s=sts[i],isO=i===open,st=s.steps;
-    const vids=u.k.map(vidRows).join(''),cards=st.filter(x=>x.ty==='lec').map(x=>{const dn2=!!S.lec[x.k];return`<div class="pstep ${dn2?'done':''}"><div class="pck">${dn2?'✓':''}</div><div class="sp"><b>${L3('요약 카드','Summary cards','要点卡片')} · ${SK[x.k][1]}</b><div class="sub">${LEC[x.k].length}${L3('장 · 영상 핵심을 카드로 다시 보고, 강사와 같이 푼 뒤 직접 풀어 봐요',' cards · review the video’s key points, solve along with the tutor, then try on your own','张 · 用卡片复习视频要点，跟着老师做一遍再自己做')}</div></div><button class="btn sm" data-a="startLec" data-v="${x.k}">${dn2?L3('다시 보기','Review again','再看一遍'):L3('카드 보기','Open cards','查看卡片')}</button></div>`}).join('');
+    const vids=u.k.map(vidRows).join('');
     const drills=st.filter(x=>x.ty==='dr').map(x=>`<div class="pstep ${x.done?'done':''}"><div class="pck">${x.done?'✓':''}</div><div class="sp"><b>${L3('연습','Practice','练习')} · ${SK[x.k][1]}</b><div class="sub">${L3(`${x.ok} / ${x.n} 정답 · ${UDR}문제 이상 맞히면 완료`,`${x.ok} / ${x.n} correct · done at ${UDR} correct`,`${x.ok} / ${x.n} 正确 · 答对 ${UDR} 题即完成`)}</div></div><button class="btn sm ${x.done?'':'pri'}" data-a="startDrill2" data-v="${x.k}">${L3('10문제 풀기','Solve 10','做10题')}</button></div>`).join('');
     const ut=st.filter(x=>x.ty==='ut').map(x=>`<div class="pstep ${x.done?'done':''}"><div class="pck">${x.done?'✓':''}</div><div class="sp"><b>${L3('단원 테스트','Unit test','单元测试')}</b><div class="sub">${L3(`${UQ}문항 · ${UMIN}분 · ${UPASS}점 이상 통과`,`${UQ} questions · ${UMIN} min · pass at ${UPASS}`,`${UQ}题 · ${UMIN}分钟 · ${UPASS}分及格`)}${x.best!=null?L3(` · 최고 ${x.best}점`,` · best ${x.best}`,` · 最高 ${x.best}分`):''}</div></div><button class="btn sm ${x.done?'':'pri'}" data-a="startUT" data-v="${u.id}">${x.best!=null?L3('다시 응시','Retake','重新测试'):L3('테스트 보기','Take test','开始测试')}</button></div>`).join('');
     return`<details class="card unit ${i===cur?'cur':''} ${s.done?'udone':''}" id="unit${i}" ${isO?'open':''}><summary><span class="chip ${s.done?'ok':i===cur?'warn':'gray'}">${L3(`${i}단원`,`Unit ${i}`,`第${i}单元`)}${s.done?L3(' · 완료',' · Done',' · 完成'):i===cur?L3(' · 진행 중',' · In progress',' · 进行中'):''}</span><b class="u-t">${u.t}</b><span class="sp"></span><span class="sub">🎬 ${nv(u)} · ${L3(`약 ${vmin(u)}분`,`~${vmin(u)} min`,`约${vmin(u)}分钟`)}</span><span class="u-p"><i style="width:${pct(s.cnt,st.length)}%"></i></span><b class="sub">${s.cnt}/${st.length}</b></summary>
       <p class="sub" style="margin:10px 0 4px">${u.d}</p>
-      ${grp('1',L3('영상 강의','Video lessons','视频课程'),L3('먼저 보세요 · 개념 설명과 확인 문제','Watch first · concepts and check questions','先看 · 概念讲解和确认题'),vids)}
-      ${grp('2',L3('요약 카드','Summary cards','要点卡片'),L3('선택 · 영상 내용을 카드로 복습','Optional · review the video as cards','可选 · 用卡片复习视频内容'),cards)}
-      ${grp('3',L3('연습 문제','Practice','练习题'),'',drills)}
-      ${grp('4',L3('단원 테스트','Unit test','单元测试'),'',ut)}</details>`};
+      ${grp('1',L3('개념 강의 (영상)','Concept lessons (video)','概念课（视频）'),L3('규칙 설명 · 예제 풀이 · 확인 문제','rules · worked examples · check questions','规则讲解 · 例题 · 确认题'),vids)}
+      ${grp('2',L3('연습 문제','Practice','练习题'),'',drills)}
+      ${grp('3',L3('단원 테스트','Unit test','单元测试'),'',ut)}</details>`};
   const tile=(t,i,s,extra)=>`<button class="utile ${i===open?'on':''} ${s&&s.done?'done':''} ${i===cur?'cur':''}" data-a="openU" data-v="${i}"><span class="ut-n">${s&&s.done?'✓':i}</span><span class="ut-t">${t}</span>${s?`<span class="u-p"><i style="width:${pct(s.cnt,s.steps.length)}%"></i></span>`:extra||''}</button>`;
   app.innerHTML=`<h1>${L3('커리큘럼','Curriculum','课程体系')}</h1>${ttabs()}
   <div class="card"><div class="row"><b>${L3('코스 진행률','Course progress','课程进度')}</b><span class="sp"></span><b>${pct(dn,tot)}%</b></div><div class="meter" style="margin-top:8px"><i class="ok" style="width:${pct(dn,tot)}%"></i></div>
-    <p class="sub" style="margin-top:8px">${L3('단원마다 <b>영상 강의 → 연습 문제 → 단원 테스트</b> 순서예요. 아래에서 단원을 누르면 펼쳐져요.','Each unit goes <b>video lessons → practice → unit test</b>. Tap a unit below to open it.','每个单元按<b>视频课程 → 练习题 → 单元测试</b>进行。点击下面的单元即可展开。')}${lv?` <span class="chip">${lv[0]}</span>`:''}</p>
+    <p class="sub" style="margin-top:8px">${L3('단원마다 <b>개념 강의(영상) → 연습 문제 → 단원 테스트</b> 3단계예요. 아래에서 단원을 누르면 펼쳐져요.','Each unit has 3 steps: <b>concept lessons (video) → practice → unit test</b>. Tap a unit below to open it.','每个单元分3步：<b>概念课（视频）→ 练习题 → 单元测试</b>。点击下面的单元即可展开。')}${lv?` <span class="chip">${lv[0]}</span>`:''}</p>
     <div class="umap">${COURSE.map((u,i)=>tile(u.t,i,sts[i])).join('')}${tile(L3('실전 · 혼합 훈련과 모의고사','Final · mixed practice & tests','实战 · 混合训练与模拟考试'),COURSE.length,null,`<span class="sub">${L3('마무리','Wrap-up','收尾')}</span>`)}</div></div>
   ${COURSE.map(unit).join('')}
   <details class="card unit ${cur<0?'cur':''}" id="unit${COURSE.length}" ${open===COURSE.length?'open':''}><summary><span class="chip gray">${L3(`${COURSE.length}단원`,`Unit ${COURSE.length}`,`第${COURSE.length}单元`)}</span><b class="u-t">${L3('실전 · 혼합 훈련과 모의고사','Final · mixed practice & tests','实战 · 混合训练与模拟考试')}</b></summary><p class="sub" style="margin:10px 0">${L3('유형이 섞인 상태에서 시간 안에 푸는 연습이에요. 단원을 절반 이상 끝낸 뒤 시작하세요.','Practice solving mixed question types under time pressure. Start after finishing at least half the units.','在题型混合的情况下限时练习。完成一半以上单元后再开始。')}</p>
@@ -2927,6 +2918,7 @@ const VIDS={"GEN":[{"id":"gen1","t":{"en":"Lesson 0 · How the Reading & Writing
 function vtx(x){return typeof x==='string'?x:(x[LANG]||x.ko||x.en)}
 function vidRows(k){return(VIDS[k]||[]).map(v=>{const ok=S.vid&&S.vid[v.id];return`<div class="pstep vidrow ${ok?'done':''}"><div class="pck">${ok?'✓':'▶'}</div><div class="sp"><b>🎬 ${vtx(v.t)}</b><div class="sub">${L3(`동영상 약 ${v.min}분`,`Video · ~${v.min} min`,`视频 · 约${v.min}分钟`)} · ${vtx(v.d)}</div></div><button class="btn sm ${ok?'':'pri'}" data-a="vid" data-v="${v.id}">${ok?L3('다시 보기','Watch again','再看一遍'):L3('영상 보기','Watch','观看')}</button></div>`}).join('')}
 A.vid=id=>{const o=document.createElement('div');o.id='vidov';o.innerHTML=`<div class="vidbox"><button class="vidx" data-a="vidClose" aria-label="Close">✕</button><iframe src="lessons/${id}.html?lang=${LANG}" title="Lesson video" allow="autoplay; fullscreen"></iframe></div>`;document.body.appendChild(o);document.body.style.overflow='hidden'};
+A.startLesson=k=>{const vs=VIDS[k]||[],v=vs.find(x=>!(S.vid&&S.vid[x.id]))||vs[0];if(v)A.vid(v.id)};
 A.vidClose=()=>{const o=$('#vidov');if(o)o.remove();document.body.style.overflow='';render()};
 window.addEventListener('message',e=>{const m=e.data||{};if(m.type==='lessonDone'){S.vid=S.vid||{};if(!S.vid[m.id]){S.vid[m.id]=today();save();gainXP(30);confetti()}}
   if(m.type==='lessonPractice'){A.vidClose();if(m.k&&m.k!=='GEN')A.startDrill(m.k)}});
