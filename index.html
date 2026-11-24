@@ -170,6 +170,24 @@ a{color:var(--pri)}
 .btn small{font-weight:600;opacity:.8;margin-left:4px}
 @media (prefers-reduced-motion:reduce){.dstep.now,.dans.now,.lnote.now,.kchk.now,.demo.cur>.dsent,.narr .tch,.kb.wrong,.kb.right,.kpass{animation:none}.dsent mark{transition:none}}
 @media (max-width:600px){.dsent{font-size:17px}}
+.vhero{display:flex;gap:24px;flex-wrap:wrap;align-items:center;border:2px solid var(--pri,#2447b8)}
+.vhero.done{border-color:var(--ok)}
+.vh-l{flex:1;min-width:240px}.vh-r{min-width:230px}
+.vh-n{display:flex;align-items:baseline;gap:4px;margin-top:8px}.vh-n b{font-size:54px;line-height:1}.vh-n span{font-size:20px;font-weight:700}
+.vh-t{font-size:18px;font-weight:800;margin-bottom:4px}
+.vhero .btn.lg{margin-top:14px;font-size:17px;padding:12px 26px}
+.vh-fire{font-size:18px}.vh-fire b{font-size:34px}
+.vbig{display:flex;align-items:baseline;gap:8px;margin:12px 0 8px;flex-wrap:wrap}.vbig b{font-size:40px;line-height:1}.vbig span{color:var(--mut)}.vbig em{margin-left:auto;font-style:normal;font-size:26px;font-weight:800;color:var(--ok)}
+.vstack{display:flex;height:16px;border-radius:9px;overflow:hidden;background:#e8ecf4}.vstack i{display:block;height:100%}
+.vstack .k,.vleg .k{background:var(--ok)}.vstack .l,.vleg .l{background:#8fd1b0}.vstack .x,.vleg .x{background:#e2786e}
+.vleg{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--mut)}.vleg i{display:inline-block;width:10px;height:10px;border-radius:3px;background:#e8ecf4;margin-right:5px;vertical-align:-1px}
+.vgoal{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:10px 14px;border-radius:12px;background:var(--warnbg,#fff6e0)}.vgoal.ok{background:#e7f6ee}
+.vstats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.vstats>div{background:#f6f7fb;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px}.vstats b{font-size:20px}
+.vgot{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.vtier{display:flex;align-items:center;gap:10px;width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;margin-bottom:6px;font:inherit;cursor:pointer;text-align:left}
+.vtier.on{border-color:var(--pri,#2447b8);box-shadow:0 0 0 2px rgba(36,71,184,.15)}
+.vt-m{flex:1;height:8px;border-radius:5px;background:#e8ecf4;overflow:hidden}.vt-m i{display:block;height:100%}
+.vmore summary{cursor:pointer}
 .kbar{display:flex;gap:6px;margin:10px 0 4px;flex-wrap:wrap}
 .kbar>div{flex:1;min-width:84px;border-radius:12px;padding:8px 10px;background:#f1f3f8;text-align:center}
 .kbar b{display:block;font-size:20px;line-height:1.2}.kbar span{font-size:12.5px;color:#556}
@@ -387,6 +405,7 @@ h2.sec{font-size:18px;margin:22px 0 10px}
 .vidbox iframe{width:100%;height:100%;border:0;display:block}.vidx{position:absolute;top:10px;right:10px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer}
 .vidrow{background:#fff8e6;border-radius:12px;padding:10px 12px!important;margin:6px 0}.vidrow .pck{background:#ffd34d;color:#1b2340;border-color:#ffd34d}.vidrow.done .pck{background:var(--ok);color:#fff;border-color:var(--ok)}
 .vidcard{border-color:#f4dc95}
+@media (min-width:861px){.bar{flex-wrap:nowrap;max-width:1240px}#nav{flex:1 1 auto;min-width:0}#nav button{padding-left:9px;padding-right:9px}}
 </style>
 </head>
 <body>
@@ -2525,6 +2544,7 @@ function sortApply(w,res){const k=today(),was=S.v.k[w]||{},n=(was.n||0)+1;
 function vocab(){
   const m=VC.mode;
   if(m==='sort')return sortView();
+  if(m==='themes')return themesView();
   if(m==='learn'){const v=VC.set[VC.i],n=VC.set.length;
     app.innerHTML=`<div class="row"><button class="btn sm" data-a="vHome">← 그만하기</button><b>오늘의 단어 학습</b><span class="sp"></span><span class="chip" style="background:${TC[v[3]]};color:#fff">${TN[v[3]]}</span><b>${VC.i+1} / ${n}</b></div>
     <div class="meter" style="margin-top:10px"><i style="width:${pct(VC.i+1,n)}%"></i></div>
@@ -2575,47 +2595,53 @@ function vocab(){
     app.innerHTML=`<div class="card flash"><span class="chip ${c===n?'ok':'warn'}" style="font-size:15px;padding:5px 14px">${th.name}</span><div class="big" style="font-size:50px;margin-top:8px">${c} / ${n}</div><p class="sub">+${c*2} XP</p>
     ${wr.length?`<div style="text-align:left"><b>헷갈린 단어</b><table>${wr.map(q=>`<tr><td>${spk(q.w)} <b>${q.w}</b></td><td>${esc(VI[q.w][1])}</td><td><span class="chip">${th.poles[q.a][0]}</span></td></tr>`).join('')}</table></div>`:'<p>모두 맞혔어요. 뉘앙스를 정확히 잡고 있어요.</p>'}
     <div class="row" style="justify-content:center;margin-top:14px"><button class="btn pri" data-a="vThQuiz">한 번 더</button><button class="btn" data-a="vThBack">주제로</button><button class="btn" data-a="vHome">단어 홈</button></div></div>`;return}
-  // 단어 홈
-  const st=streak(),lvl=Math.floor(S.v.xp/300),into=S.v.xp%300,set=missionSet(),t=S.v.tier,left=vT(t).length-vT(t).filter(v=>S.v.k[v[0]]).length,pl=pile(),kn=vK(0);
+  // 단어장 홈: ① 오늘 할 일 ② 내 목표 진도 ③ 성취 — 나머지는 접어 둠
+  const st=streak(),lvl=Math.floor(S.v.xp/300),into=S.v.xp%300,set=missionSet(),t=S.v.tier||1,pl=pile();
   const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return{l:'일월화수목금토'[d.getDay()],on:!!S.v.days[dkey(d)],t:i===6}});
-  const nU=kCount('U'),nA=kCount('A'),nL=kCount('L'),nLd=pl.filter(w=>kSt(w)==='L').length,tot=Math.min(pl.length,40)+set.length,seen=Object.keys(S.v.k).length;
-  app.innerHTML=`<h1>단어</h1><p class="sub">카드를 보고 <b>알아요 · 애매해요 · 몰라요</b>로 나눠요. 아는 단어는 뜻 확인 한 번으로 끝내고, 애매하거나 모르는 단어만 연상과 함께 반복해요. 진도에는 <b>확실히 아는 단어만</b> 들어가요.</p>
-  <div class="card"><div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center;justify-content:center">
-    ${ring(pct(vK(1),vT(1).length),TC[1],'필수 · 확실히 앎',vK(1)+' / '+vT(1).length)}${ring(pct(kn,VOCAB.length),TC[0],'전체 · 확실히 앎',kn.toLocaleString()+' / '+VOCAB.length.toLocaleString())}
-    <div style="flex:1;min-width:230px">
-      <div class="row"><span class="big">${st}</span><b>일 연속</b><span class="sp"></span><span class="sub">최고 ${Math.max(S.v.best||0,st)}일</span></div>
-      <div class="week">${days.map(d=>`<div class="${d.on?'on':''} ${d.t?'td':''}">${d.l}</div>`).join('')}</div>
-      <div class="row" style="margin-top:12px"><b>Lv.${lvl+1} ${RANK[Math.min(lvl,RANK.length-1)]}</b><span class="sp"></span><span class="sub">${S.v.xp} XP · 다음 레벨까지 ${300-into}</span></div>
-      <div class="meter"><i style="width:${pct(into,300)}%;background:#d79a1c"></i></div>
-    </div></div>
-    <div class="kbar lg">${[['K',kn],['L',nL],['A',nA],['U',nU]].map(([k,n])=>`<div class="${k}"><b>${n.toLocaleString()}</b><span>${KN[k][1]} ${KN[k][0]}</span></div>`).join('')}<div><b>${(VOCAB.length-seen).toLocaleString()}</b><span>✨ 아직 안 본</span></div></div></div>
+  const nU=kCount('U'),nA=kCount('A'),nLd=pl.filter(w=>kSt(w)==='L').length,tot=Math.min(pl.length,40)+set.length,done=!!S.v.days[today()];
+  const tw=vT(t),N=tw.length,cnt={K:0,L:0,X:0};tw.forEach(v=>{const s=kSt(v[0]);if(s==='K')cnt.K++;else if(s==='L')cnt.L++;else if(s)cnt.X++});
+  const R=N-cnt.K-cnt.L-cnt.X,P=pct(cnt.K,N),ms=[10,25,50,75,100].find(m=>cnt.K<Math.ceil(m*N/100)),need=ms?Math.ceil(ms*N/100)-cnt.K:0,eta=Math.ceil((N-cnt.K)/Math.max(1,S.v.goal));
+  const bd=badges(),got=bd.filter(b=>b[2]),next=bd.filter(b=>!b[2]).slice(0,3),seg=(n,c,lab)=>n?`<i class="${c}" style="width:${n/N*100}%" title="${lab} ${n}"></i>`:'';
+  app.innerHTML=`<h1>단어장</h1>
+  <div class="card vhero ${done?'done':''}">
+    <div class="vh-l"><span class="chip ${done?'ok':'warn'}">${done?'오늘 학습 완료':'오늘 학습 전'}</span>
+      <div class="vh-n"><b>${tot}</b><span>장</span></div><div class="vh-t">오늘의 카드</div>
+      <div class="sub">${[nU?`😵 모름 ${nU}`:'',nA?`🤔 애매 ${nA}`:'',nLd?`🔁 다시 확인 ${nLd}`:'',set.length?`✨ 새 단어 ${set.length}`:''].filter(Boolean).join(' · ')||'오늘 볼 카드가 없어요.'}</div>
+      ${tot?`<button class="btn pri lg" data-a="vStart">${done?'이어서 학습':'학습 시작'} →</button>`:t<5?`<button class="btn pri lg" data-a="vTier" data-v="${t+1}">다음 단계 · ${TN[t+1]}</button>`:''}</div>
+    <div class="vh-r"><div class="vh-fire">🔥 <b>${st}</b>일 연속</div><div class="week">${days.map(d=>`<div class="${d.on?'on':''} ${d.t?'td':''}">${d.l}</div>`).join('')}</div><div class="sub" style="margin-top:6px">하루 한 번만 해도 연속 기록이 이어져요.</div></div>
+  </div>
 
-  <div class="card" style="border-color:${TC[t]};border-width:2px"><div class="row"><div><span class="chip ${S.v.days[today()]?'ok':'warn'}">${S.v.days[today()]?'오늘 학습함':'오늘 학습 전'}</span>
-    <h3>오늘의 카드 · ${tot}장</h3>
-    <div class="sub">${[nU?`😵 모름 ${nU}`:'',nA?`🤔 애매 ${nA}`:'',nLd?`🔁 어제 익힌 단어 확인 ${nLd}`:'',set.length?`✨ ${TN[t]} 새 단어 ${set.length}`:''].filter(Boolean).join(' · ')||'오늘 볼 카드가 없어요.'}</div>
-    <div class="sub" style="margin-top:4px">모름·애매 카드부터 먼저 나와요. 다 맞힐 때까지 몇 장 간격으로 다시 나와요.</div></div><span class="sp"></span>
-    ${tot?`<button class="btn pri" data-a="vStart">학습 시작</button>`:t<4?`<button class="btn pri" data-a="vTier" data-v="${t+1}">${TN[t+1]} 단계로</button>`:''}</div>
-    <div class="row" style="margin-top:12px"><span class="sub">하루 새 단어</span>${[10,15,20,30,50].map(g=>`<button class="btn sm ${S.v.goal===g?'pri':''}" data-a="vGoal" data-v="${g}">${g}개</button>`).join('')}</div>
-    ${set.length?`<p class="sub" style="margin-top:8px">이 속도라면 ${TN[t]} 단계를 한 번씩 다 보는 데 약 ${Math.ceil(left/S.v.goal)}일 걸려요.</p>`:''}</div>
+  <div class="card"><div class="row"><div><div class="sub">내가 외워야 할 단어</div><h3 style="margin:2px 0"><span class="chip" style="background:${TC[t]};color:#fff">${TN[t]}</span> ${TD[t]}</h3></div></div>
+    <div class="vbig"><b>${cnt.K.toLocaleString()}</b><span>/ ${N.toLocaleString()}개 확실히 앎</span><em>${P}%</em></div>
+    <div class="vstack">${seg(cnt.K,'k','확실히 앎')}${seg(cnt.L,'l','익히는 중')}${seg(cnt.X,'x','헷갈림')}</div>
+    <div class="vleg"><span><i class="k"></i>확실히 앎 ${cnt.K}</span><span><i class="l"></i>익히는 중 ${cnt.L}</span><span><i class="x"></i>헷갈림 ${cnt.X}</span><span><i></i>아직 안 봄 ${R}</span></div>
+    ${ms?`<div class="vgoal">🎯 <b>${ms}% 달성까지 ${need}개</b><span class="sub">하루 ${S.v.goal}개씩이면 이 단계를 약 ${eta}일 뒤 끝내요.</span></div>`:`<div class="vgoal ok">🏆 <b>${TN[t]}</b><b>이 단계를 모두 외웠어요!</b>${t<5?`<button class="btn sm pri" data-a="vTier" data-v="${t+1}">다음 단계 · ${TN[t+1]}</button>`:''}</div>`}
+  </div>
 
-  <details class="card how"><summary><b>왜 이렇게 외우나요?</b> <span class="sub">학습법 근거</span></summary>
-    <ol><li><b>먼저 떠올리고 뒤집기</b>: 뜻을 보기 전에 떠올려 보는 것 자체가 기억을 강하게 만들어요(인출 연습). 그래서 카드 앞면에는 단어만 나와요.</li>
-    <li><b>아는 단어는 건너뛰기</b>: 이미 아는 단어에 쓰는 시간을 모르는 단어로 돌려요. 다만 "안다"고 착각하기 쉬워서 뜻을 한 번 골라 확인해요.</li>
-    <li><b>연상 이미지</b>: 단어 안에 숨은 아는 영어 단어나 어원 조각을 뜻과 엮은 장면으로 기억하는 키워드 연상법이에요. 1970년대 스탠퍼드 연구 이후 효과가 여러 번 확인됐어요. 직접 만든 연상이 더 잘 남아서 "내 연상 메모" 칸을 두었어요.</li>
-    <li><b>간격을 두고 한 번 더</b>: 오늘 처음 익힌 단어는 다음 날 한 번 더 확인해야 "확실히 앎"이 돼요. 당일에 맞힌 것만으로는 오래 남는지 알 수 없어서예요.</li></ol></details>
+  <div class="card"><h3 style="margin:0 0 10px">내 성취</h3>
+    <div class="vstats"><div><span class="sub">레벨</span><b>Lv.${lvl+1} <span>${RANK[Math.min(lvl,RANK.length-1)]}</span></b><div class="meter"><i style="width:${pct(into,300)}%;background:#d79a1c"></i></div><span class="sub">다음 레벨까지 ${300-into} XP</span></div>
+      <div><span class="sub">확실히 아는 단어</span><b>${kCount('K').toLocaleString()}</b><span class="sub">전체 ${VOCAB.length.toLocaleString()}개 중</span></div>
+      <div><span class="sub">최고 연속</span><b>${Math.max(S.v.best||0,st)}일</b><span class="sub">배지 ${got.length} / ${bd.length}</span></div></div>
+    ${next.length?`<div class="sub" style="margin:14px 0 6px">다음에 받을 배지</div><div class="bgrid">${next.map(b=>`<div class="bdg"><b>🔒 <span>${b[0]}</span></b><span>${b[1]}</span></div>`).join('')}</div>`:''}
+    ${got.length?`<div class="vgot">${got.map(b=>`<span class="chip warn" title="${b[1]}">🏅 <span>${b[0]}</span></span>`).join('')}</div>`:''}
+  </div>
 
-  <h2>주제별로 외우기</h2><p class="sub">뜻이 반대인 단어끼리 짝지어 22개 주제로 묶었어요. 단계와 상관없이 골라 외울 수 있어요.</p>
-  <div class="tgrid">${THEMES.map(th=>{const all=th.poles.flatMap(p=>p[1]),k=all.filter(w=>S.v.m[w]).length;return`<button class="tcard" data-a="vTheme" data-v="${th.id}"><b>${th.name}</b><span>${k} / ${all.length}</span><div class="meter"><i class="${k===all.length?'ok':''}" style="width:${pct(k,all.length)}%"></i></div></button>`}).join('')}</div>
-  <h2>단계별 진행도</h2>
-  ${[1,2,3,4,5].map(x=>{const k=vK(x),n=vT(x).length;return`<div class="card" style="${t===x?'border-color:'+TC[x]:''}"><div class="row"><span class="chip" style="background:${TC[x]};color:#fff">${x}단계 ${TN[x]}</span><span class="sub">${TD[x]}</span><span class="sp"></span><b>${k.toLocaleString()} / ${n.toLocaleString()} (${pct(k,n)}%)</b>
-    ${t===x?'<span class="chip gray">학습 중</span>':`<button class="btn sm" data-a="vTier" data-v="${x}">이 단계 학습</button>`}</div>
-    <div class="meter" style="margin-top:10px"><i style="width:${pct(k,n)}%;background:${TC[x]}"></i></div>
-    <details class="wmap"><summary>단어 지도 보기</summary><div class="wgrid">${vT(x).map(v=>{const s=kSt(v[0]);return`<i title="${v[0]}" style="${s==='K'?'background:'+TC[x]:s==='L'?'background:'+TC[x]+';opacity:.4':s?'background:#e2786e':''}"></i>`}).join('')}</div></details></div>`}).join('')}
-  <p class="sub">단어 지도에서 칸 하나가 단어 하나예요. 진한 색은 확실히 아는 단어, 연한 색은 익히는 중, 빨간색은 모름·애매 단어예요.</p>
+  <details class="card vmore"><summary><b>설정 · 더 보기</b> <span class="sub">학습 단계, 하루 새 단어 수, 주제별 학습, 전체 목록</span></summary>
+    <div class="row" style="margin-top:12px"><span class="sub" style="min-width:90px">하루 새 단어</span>${[10,15,20,30,50].map(g=>`<button class="btn sm ${S.v.goal===g?'pri':''}" data-a="vGoal" data-v="${g}">${g}개</button>`).join('')}</div>
+    <div class="sub" style="margin:14px 0 6px">학습 단계 (눌러서 바꾸기)</div>
+    ${[1,2,3,4,5].map(x=>{const k=vT(x).filter(v=>kSt(v[0])==='K').length,n=vT(x).length;return`<button class="vtier ${t===x?'on':''}" data-a="vTier" data-v="${x}"><span class="chip" style="background:${TC[x]};color:#fff">${TN[x]}</span><span class="vt-m"><i style="width:${pct(k,n)}%;background:${TC[x]}"></i></span><b>${pct(k,n)}%</b><span class="sub">${k.toLocaleString()} / ${n.toLocaleString()}</span></button>`}).join('')}
+    <div class="row" style="margin-top:14px"><button class="btn" data-a="vThemes">주제별로 외우기 (${THEMES.length}개 주제)</button><button class="btn" data-a="vList">전체 단어 목록 · 검색</button></div>
+    <details class="how" style="margin-top:12px"><summary>왜 이렇게 외우나요?</summary>
+    <ol><li><b>먼저 떠올리고 뒤집기</b>: 뜻을 보기 전에 떠올려 보는 것 자체가 기억을 강하게 만들어요(인출 연습).</li>
+    <li><b>아는 단어는 건너뛰기</b>: 이미 아는 단어에 쓰는 시간을 모르는 단어로 돌려요.</li>
+    <li><b>연상 이미지</b>: 단어 속 아는 조각을 뜻과 엮은 장면으로 기억하는 키워드 연상법이에요.</li>
+    <li><b>간격을 두고 한 번 더</b>: 오늘 처음 익힌 단어는 다음 날 한 번 더 맞혀야 "확실히 앎"이 돼요.</li></ol></details>
+  </details>`;
+}
+function themesView(){
+  app.innerHTML=`<div class="row"><button class="btn sm" data-a="vHome">← 단어장</button></div><h1>주제별로 외우기</h1><p class="sub">뜻이 반대인 단어끼리 짝지어 주제로 묶었어요. 단계와 상관없이 골라 외울 수 있어요.</p>
+  <div class="tgrid">${THEMES.map(th=>{const all=th.poles.flatMap(p=>p[1]),k=all.filter(w=>S.v.m[w]).length;return`<button class="tcard" data-a="vTheme" data-v="${th.id}"><b>${th.name}</b><span>${k} / ${all.length}</span><div class="meter"><i class="${k===all.length?'ok':''}" style="width:${pct(k,all.length)}%"></i></div></button>`}).join('')}</div>`;
 
-  <h2>배지</h2>
-  <div class="card"><div class="bgrid">${badges().map(b=>`<div class="bdg ${b[2]?'on':''}"><b>${b[0]}</b><span>${b[1]}</span></div>`).join('')}</div></div>
-  <div class="row"><button class="btn" data-a="vList">단어 전체 목록 · 검색</button></div>`;
 }
 const auto=()=>{if(S.v.auto!==false&&VC.mode==='learn')say(VC.set[VC.i][0])};
 const autoQ=()=>{if(VC.mode==='quiz'&&VC.qs[VC.i].ty==='ls')say(VC.qs[VC.i].v[0])};
@@ -2637,6 +2663,7 @@ Object.assign(A,{
   vSnext:()=>{const w=VC.q.shift(),r=VC.res;if(r==='A'||r==='U'||r==='W'){VC.cnt.rep++;VC.q.splice(Math.min(r==='A'?6:3,VC.q.length),0,w)}else delete VC.cur[w];VC.stage='front';VC.pick=null;VC.res=null;render();window.scrollTo(0,0);if(VC.q[0]&&S.v.auto!==false)say(VC.q[0])},
   vAuto:()=>{S.v.auto=S.v.auto===false;save();render()},
   vHome:()=>{VC={mode:'home'};render()},
+  vThemes:()=>{VC={mode:'themes'};render();window.scrollTo(0,0)},
   vStart:()=>{startSort(pile().slice(0,40).concat(missionSet().map(v=>v[0])))},
   vReview:()=>A.vStart(),
   vRelearn:()=>{VC.mode='learn';VC.i=0;render();auto()},
@@ -2682,7 +2709,8 @@ GROUPS.splice(0,GROUPS.length,
  {id:'home',label:'내 강의실',ic:'🏠',views:[['home','대시보드','오늘 할 일과 학습 로드맵'],['plan','오늘의 계획','하루 학습 순서']]},
  {id:'learn',label:'커리큘럼',ic:'📘',views:[['train','커리큘럼','단원별 강의 → 연습 → 테스트']]},
  {id:'exam',label:'시험',ic:'⏱',views:[['test','실력 진단','처음 한 번, 약점 찾기'],['mock','모의고사','실전 6회'],['report','성적 리포트','최근 시험 결과']]},
- {id:'review',label:'복습',ic:'🔁',views:[['review','오답 노트','강사 해설 + 유사 문제'],['vocab','단어장','모르는 단어만 반복']]},
+ {id:'review',label:'오답',ic:'🔁',views:[['review','오답 노트','강사 해설 + 유사 문제']]},
+ {id:'vocab',label:'단어장',ic:'🔤',views:[['vocab','단어장','']]},
  {id:'stats',label:'내 실력',ic:'📈',views:[['stats','내 실력','']]});
 const PLANS=[
  {id:'free',n:'무료 체험',p:'0원',per:'',d:'먼저 써 보고 결정하세요',f:['실력 진단 1회 + 리포트','오리엔테이션·1단원 강의','단어장 하루 15개','오답 노트']},
@@ -2816,6 +2844,7 @@ let _celeb='';
 {const _rd=render;render=function(){_rd.apply(this,arguments);try{const f=app.querySelector('.card.flash .chip.ok');const key=f?view+'|'+f.textContent+'|'+(app.querySelector('.card.flash h2')||{}).textContent:'';if(f&&key!==_celeb){confetti();if(!/오늘 학습 완료/.test(f.textContent))gainXP(20)}_celeb=key;hstat()}catch(e){}}}
 {const hb=$('#helpb');if(hb&&!$('#hstat')){const s=document.createElement('span');s.id='hstat';hb.parentNode.insertBefore(s,hb.previousSibling&&hb.previousSibling.id==='langsel'?hb.previousSibling:hb)}}
 
+/* 단어장 홈 번역 */Object.assign(I18N.en,{"장": "cards", "오늘의 카드": "Today's cards", "😵 모름 §": "😵 Don't know §", "🤔 애매 §": "🤔 Unsure §", "🔁 다시 확인 §": "🔁 Check again §", "✨ 새 단어 §": "✨ New words §", "오늘 볼 카드가 없어요.": "No cards to study today.", "이어서 학습 →": "Keep going →", "학습 시작 →": "Start →", "다음 단계": "Next level", "일 연속": "-day streak", "하루 한 번만 해도 연속 기록이 이어져요.": "Study once a day to keep your streak going.", "내가 외워야 할 단어": "Words I need to know", "/ §개 확실히 앎": "/ § mastered", "확실히 앎 §": "Mastered §", "익히는 중 §": "Learning §", "헷갈림 §": "Confused §", "아직 안 봄 §": "Not seen yet §", "§ 달성까지 §개": "§2 more to reach §1", "하루 §개씩이면 이 단계를 약 §일 뒤 끝내요.": "At § a day, you'll finish this level in about § days.", "이 단계를 모두 외웠어요!": "You mastered this whole level!", "내 성취": "My achievements", "다음 레벨까지 §": "§ to next level", "확실히 아는 단어": "Words mastered", "전체 §개 중": "of § total", "최고 연속": "Best streak", "§일": "§ days", "배지 §": "Badges §", "다음에 받을 배지": "Next badges to earn", "설정": "Settings", "더 보기": "More", "학습 단계, 하루 새 단어 수, 주제별 학습, 전체 목록": "Level, new words per day, themes, full list", "학습 단계 (눌러서 바꾸기)": "Level (tap to switch)", "주제별로 외우기 (§개 주제)": "Learn by theme (§ themes)", "전체 단어 목록 · 검색": "Full word list · Search", ": 뜻을 보기 전에 떠올려 보는 것 자체가 기억을 강하게 만들어요(인출 연습).": ": Trying to recall a meaning before you see it strengthens memory (retrieval practice).", ": 이미 아는 단어에 쓰는 시간을 모르는 단어로 돌려요.": ": Time you'd spend on words you already know goes to the ones you don't.", ": 단어 속 아는 조각을 뜻과 엮은 장면으로 기억하는 키워드 연상법이에요.": ": The keyword method links a familiar part of the word to its meaning in a vivid picture.", ": 오늘 처음 익힌 단어는 다음 날 한 번 더 맞혀야 \"확실히 앎\"이 돼요.": ": A word you learn today becomes \"mastered\" only after you get it right again the next day.", "← 단어장": "← Vocabulary", "뜻이 반대인 단어끼리 짝지어 주제로 묶었어요. 단계와 상관없이 골라 외울 수 있어요.": "Words with opposite meanings are paired and grouped by theme. Pick any theme, whatever your level.", "오답": "Mistakes", "오답 노트": "Wrong-answer notes"});Object.assign(I18N.zh,{"장": "张", "오늘의 카드": "今日卡片", "😵 모름 §": "😵 不认识 §", "🤔 애매 §": "🤔 模糊 §", "🔁 다시 확인 §": "🔁 再次确认 §", "✨ 새 단어 §": "✨ 新单词 §", "오늘 볼 카드가 없어요.": "今天没有要学的卡片。", "이어서 학습 →": "继续学习 →", "학습 시작 →": "开始学习 →", "다음 단계": "下一阶段", "일 연속": "天连续打卡", "하루 한 번만 해도 연속 기록이 이어져요.": "每天学一次就能保持连续记录。", "내가 외워야 할 단어": "我需要掌握的单词", "/ §개 확실히 앎": "/ § 个已确定掌握", "확실히 앎 §": "确定掌握 §", "익히는 중 §": "学习中 §", "헷갈림 §": "易混淆 §", "아직 안 봄 §": "尚未学习 §", "§ 달성까지 §개": "距离 §1 还差 §2 个", "하루 §개씩이면 이 단계를 약 §일 뒤 끝내요.": "每天 § 个，大约 § 天后完成这一阶段。", "이 단계를 모두 외웠어요!": "这一阶段全部掌握了！", "내 성취": "我的成就", "다음 레벨까지 §": "距下一级还差 §", "확실히 아는 단어": "确定掌握的单词", "전체 §개 중": "共 § 个", "최고 연속": "最长连续", "§일": "§天", "배지 §": "徽章 §", "다음에 받을 배지": "下一个可获得的徽章", "설정": "设置", "더 보기": "更多", "학습 단계, 하루 새 단어 수, 주제별 학습, 전체 목록": "学习阶段、每日新词数、主题学习、完整列表", "학습 단계 (눌러서 바꾸기)": "学习阶段（点击切换）", "주제별로 외우기 (§개 주제)": "按主题记忆（§个主题）", "전체 단어 목록 · 검색": "完整单词列表 · 搜索", ": 뜻을 보기 전에 떠올려 보는 것 자체가 기억을 강하게 만들어요(인출 연습).": "：在看释义之前先回想，本身就能强化记忆（提取练习）。", ": 이미 아는 단어에 쓰는 시간을 모르는 단어로 돌려요.": "：把花在已认识单词上的时间，转到不认识的单词上。", ": 단어 속 아는 조각을 뜻과 엮은 장면으로 기억하는 키워드 연상법이에요.": "：关键词联想法，把单词中熟悉的部分和词义编成画面来记。", ": 오늘 처음 익힌 단어는 다음 날 한 번 더 맞혀야 \"확실히 앎\"이 돼요.": "：今天新学的单词，第二天再答对一次才算“确定掌握”。", "← 단어장": "← 单词本", "뜻이 반대인 단어끼리 짝지어 주제로 묶었어요. 단계와 상관없이 골라 외울 수 있어요.": "把意思相反的单词配对，按主题分组。不论处于哪个阶段都可以选择学习。", "오답": "错题", "오답 노트": "错题本"});
 /* ---------- 다국어 (ko / en / zh) ---------- */
 const LANGS=[['ko','한국어'],['en','English'],['zh','中文']];
 let LANG=(()=>{const l=S.lang;if(l&&LANGS.some(x=>x[0]===l))return l;return 'en'})();
