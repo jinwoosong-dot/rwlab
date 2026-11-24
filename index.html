@@ -210,6 +210,29 @@ details.unit>summary::after{content:'▾';color:var(--mut);margin-left:4px;trans
 details.unit .u-t{font-size:17px}details.unit summary .u-p{width:90px}
 details.unit.cur{border:2px solid var(--pri,#2447b8)}
 .ugrp{margin-top:14px}.ug-h{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}.ug-n{width:22px;height:22px;border-radius:50%;background:var(--pri,#2447b8);color:#fff;display:grid;place-items:center;font-size:12px}
+.nowc{border:2px solid var(--pri,#2447b8);background:linear-gradient(180deg,#f3f6ff,#fff)}
+.nowc.done{border-color:var(--ok);background:#f1faf4}
+.nc-k{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--pri,#2447b8)}.nowc.done .nc-k{color:var(--ok)}
+.nc-b{display:flex;align-items:center;gap:14px;margin-top:8px;flex-wrap:wrap}.nc-i{font-size:34px}.nc-t{font-size:20px;font-weight:800;line-height:1.3}
+.nowc .btn.lg{font-size:16px;padding:12px 22px}
+.titem{display:flex;align-items:center;gap:12px}.titem .sub{font-size:13px}.titem.cur{background:var(--pri2,#eef2ff);border-radius:10px}
+.dtiles{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.dtile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;font:inherit;color:inherit;cursor:pointer}
+.dtile:hover{border-color:var(--pri,#2447b8)}.dt-i{font-size:22px}.dt-t{font-size:13px;color:var(--mut);font-weight:700}.dtile b{font-size:24px}
+/* 휴대폰 하단 탭바 */
+#bnav{display:none}
+#mabout{display:none;border:0;background:none;font:inherit;font-size:13px;color:var(--mut);cursor:pointer;padding:4px 6px}
+@media (max-width:760px){
+ #nav{display:none!important}
+ #bnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+ #bnav button{border:0;background:none;font:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:700;color:#6b7488;padding:4px 0;position:relative;cursor:pointer}
+ #bnav button i{font-style:normal;font-size:20px;line-height:1}
+ #bnav button.on{color:var(--pri,#2447b8)}
+ #bnav .cnt{position:absolute;top:0;left:calc(50% + 6px)}#bnav .dot{position:absolute;top:2px;left:calc(50% + 8px);width:7px;height:7px;border-radius:50%;background:#d0463b}
+ body{padding-bottom:72px}
+ body.exam #bnav{display:none}
+ #mabout{display:inline-flex}
+}
 .kbar{display:flex;gap:6px;margin:10px 0 4px;flex-wrap:wrap}
 .kbar>div{flex:1;min-width:84px;border-radius:12px;padding:8px 10px;background:#f1f3f8;text-align:center}
 .kbar b{display:block;font-size:20px;line-height:1.2}.kbar span{font-size:12.5px;color:#556}
@@ -451,6 +474,7 @@ details.unit .pstep b{font-size:15px;font-weight:700}
 .vr-m{font-size:13px;color:var(--mut);margin-top:3px;line-height:1.45}
 .pstep.done .vr-t b{color:var(--mut);text-decoration:none}
 details.unit .pstep .sub{font-size:13px}
+@media (max-width:760px){#helpb{display:none}#langsel{max-width:96px}.bar{flex-wrap:nowrap!important;gap:6px}.bar .logo small{display:none}}
 </style>
 </head>
 <body>
@@ -1900,7 +1924,9 @@ function render(){
   const g=grpOf(view),wn=(()=>{try{return wrongIds().length}catch(e){return 0}})(),vd=(()=>{try{return dueList().length}catch(e){return 0}})();
   if(g)S.lastV=Object.assign(S.lastV||{},{[g.id]:view});
   $('#nav').innerHTML=GROUPS.map(x=>`<button data-a="navg" data-v="${x.id}" class="${g&&g.id===x.id?'on':''}"><i>${x.ic}</i>${x.label}${x.id==='learn'&&wn?'<em class="dot"></em>':''}${x.id==='vocab'&&vd?`<em class="cnt">${vd>99?'99+':vd}</em>`:''}</button>`).join('');
-  const sub=g&&g.views.length>1?g.views:null;
+  const vis=g?g.views.filter(x=>!x[3]):[],sub=vis.length>1?vis:null;
+  {let b=$('#bnav');if(!b){b=document.createElement('nav');b.id='bnav';document.body.appendChild(b)}const BN={home:L3('홈','Home','首页'),learn:L3('커리큘럼','Curriculum','课程'),exam:L3('시험','Tests','考试'),vocab:L3('단어장','Words','单词'),stats:L3('내 실력','My level','我的')};b.innerHTML=GROUPS.filter(x=>x.id!=='about').map(x=>`<button data-a="navg" data-v="${x.id}" class="${g&&g.id===x.id?'on':''}"><i>${x.ic}</i>${BN[x.id]||x.label}${x.id==='learn'&&wn?'<em class="dot"></em>':''}${x.id==='vocab'&&vd?`<em class="cnt">${vd>99?'99+':vd}</em>`:''}</button>`).join('');if(LANG!=='ko')i18Node(b)}
+  {const h=$('#helpb');if(h&&!$('#mabout')){const m=document.createElement('button');m.id='mabout';m.setAttribute('data-a','navg');m.setAttribute('data-v','about');m.textContent='서비스 소개';h.parentNode.insertBefore(m,h);if(LANG!=='ko')i18Node(m)}}
   $('#subnav').innerHTML=sub?`<div class="subbar">${sub.map(([v,l,d])=>`<button data-a="nav" data-v="${v}" class="${view===v?'on':''}"><b>${l}${v==='review'&&wn?` <em class="cnt">${wn}</em>`:''}</b><span>${d}</span></button>`).join('')}</div>`:'';
   $('#subnav').style.display=sub?'':'none';
   $('#helpb').className=view==='info'?'on':'';
@@ -1961,38 +1987,45 @@ function nextSkill(){ // 다음에 훈련할 유형: 진단 취약 순으로, �
 }
 
 /* ---------- 홈 ---------- */
+function planSteps(){
+  backfill();const P=S.plan,cfg={20:{q:5,w:10},40:{q:10,w:20},60:{q:20,w:20}}[P.min]||{q:10,w:20},dd=dayRec(),due=dueList().length,wr=wrongIds().length,rk=ranked();
+  const weak=S.log.length?rk.m.filter(a=>a.p<80).slice(0,3).map(a=>a.k):[],wk=weak.length?weak:(S.log.length?rk.m.slice(0,3).map(a=>a.k):[]);
+  const dow=new Date().getDay(),slot=[null,0,0,1,1,2,'mix'][dow],focus=typeof slot==='number'?wk[Math.min(slot,wk.length-1)]:null,o=[];
+  if(!S.diag.done)o.push({ic:'⏱️',done:false,t:'실력 진단 받기',s:'모듈 1만 풀어도 돼요 (27문항 · 32분). 진단이 있어야 취약 유형에 맞춘 계획이 나와요.',a:'nav',v:'test',b:L3('진단 시작','Start the diagnostic','开始诊断')});
+  if(!lecDone('GEN'))o.push({ic:'🎬',done:false,t:L3('오리엔테이션 영상 보기 (처음 한 번)','Watch the orientation video (once)','观看入门视频（一次）'),s:L3('시험 구조, 시간 배분, 풀이 4단계 · 약 3분','Test structure, pacing, the 4-step method · ~3 min','考试结构、时间分配、四步解题法 · 约3分钟'),a:'startLesson',v:'GEN',b:L3('영상 보기','Watch','观看')});
+  if(vK(0))o.push({ic:'🔁',done:due===0,t:`단어 복습 ${due?due+'개':''}`,s:due?'잊기 직전에 다시 보는 단어예요. 가장 먼저 하세요.':'오늘 복습할 단어를 다 했어요.',a:'planReview',v:'',b:L3('복습','Review','复习')});
+  o.push({ic:'🔤',done:dd.vm>0,t:`새 단어 ${cfg.w}개`,s:dd.vm>0?`오늘 미션 ${dd.vm}회 클리어`:'학습 → 퀴즈 통과',a:'planVocab',v:cfg.w,b:L3('단어 미션','Word mission','单词任务')});
+  if(focus){const need=!lecDone(focus);o.push({ic:'📘',done:!need&&dd.q>=cfg.q,t:`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,s:`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,a:need?'startLesson':'startDrill2',v:focus,b:need?L3('강의 보기','Watch lesson','看课程'):L3('훈련','Practice','练习')})}
+  else if(S.log.length&&dow===6)o.push({ic:'🔀',done:dd.q>=cfg.q,t:`혼합 훈련 ${cfg.q}개`,s:`이번 주에 연습한 유형을 섞어서 풀어요 · 오늘 ${dd.q} / ${cfg.q}`,a:'startMixed',v:'',b:L3('혼합 훈련','Mixed practice','混合训练')});
+  else if(S.log.length&&dow===0)o.push({ic:'📝',done:false,t:'쉬거나, 2–3주에 한 번 모의고사',s:'오늘은 가볍게. 지난 모의고사에서 2–3주가 지났으면 다시 응시해 변화를 확인해요.',a:'nav',v:'mock',b:L3('모의고사','Practice tests','模拟考试')});
+  else if(S.diag.done){const sts=COURSE.map(unitState),ci=sts.findIndex(s=>!s.done);if(ci>=0)o.push({ic:'📘',done:dd.q>=cfg.q,t:L3(`커리큘럼 · ${ci}단원 이어서`,`Curriculum · continue Unit ${ci}`,`课程 · 继续第${ci}单元`),s:L3(`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}`,`Practice solved today ${dd.q} / ${cfg.q}`,`今天已做练习 ${dd.q} / ${cfg.q}`),a:'openU',v:ci,b:L3('이어서','Continue','继续')})}
+  if(wr)o.push({ic:'❌',done:false,t:`오답 노트 ${wr}문항`,s:'어제까지 틀린 문제를 다시 풀어요. 맞히면 목록에서 빠져요.',a:'startReview',v:'',b:L3('오답 풀기','Redo misses','重做错题')});
+  return o;
+}
 function home(){
-  const d=S.diag.done,st=d?stats():null,wr=wrongIds().length,nx=nextSkill();
-  const cur=S.diag.cur,pend=S.diag.m1done&&!S.diag.m2done;
-  const cfg={20:{q:5},40:{q:10},60:{q:20}}[S.plan.min]||{q:10},dq=dayRec().q||0,vd=!!S.v.days[today()],due=dueList().length;
-  const lvl=Math.floor(S.v.xp/300),into=S.v.xp%300,stk=streak();
+  const cur=S.diag.cur,pend=S.diag.m1done&&!S.diag.m2done,lvl=Math.floor(S.v.xp/300),into=S.v.xp%300,stk=streak();
   backfill();const sts=COURSE.map(unitState),ci=sts.findIndex(s=>!s.done),tot=sts.reduce((a,s)=>a+s.steps.length,0),dn=sts.reduce((a,s)=>a+s.cnt,0);
-  const mk=MOCK.filter(s=>lastOf(s)).length,dg=!!lastOf('A');
+  const mk=MOCK.filter(s=>lastOf(s)).length,dg=lastOf('A');
   const dday=S.plan&&S.plan.exam?Math.ceil((new Date(S.plan.exam)-new Date(today()))/864e5):null;
-  const stage=!dg?1:ci>=0&&dn<tot*0.6?2:3;
-  const step=(n,ic,t,status,body,btn,on)=>`<div class="rm ${on?'on':''} ${status==='done'?'done':''}"><div class="rm-n">${status==='done'?'✓':n}</div><div class="rm-b"><div class="rm-h"><span class="rm-ic">${ic}</span><b>${t}</b>${on?'<span class="chip warn">지금 단계</span>':status==='done'?'<span class="chip ok">완료</span>':''}</div>${body}</div><div class="rm-a">${btn}</div></div>`;
-  const tasks=[
-    !dg?{t:'실력 진단 보기',ok:false,a:'nav',v:'test',b:'시작'}:{t:`커리큘럼 · ${ci>=0?COURSE[ci].t:'복습'}`,ok:false,a:'nav',v:'train',b:'이어서'},
-    {t:`연습 문제 ${Math.min(dq,cfg.q)} / ${cfg.q}`,ok:dq>=cfg.q,a:nx?'openSkill':'nav',v:nx||'train',b:'풀기'},
-    {t:due?`단어 복습 ${due}개`:'단어 미션',ok:vd,a:'nav',v:'vocab',b:'하기'},
-    ...(wr?[{t:`오답 ${wr}문항`,ok:false,a:'startReview',v:'',b:'풀기'}]:[])];
-  const dn2=tasks.filter(t=>t.ok).length;
+  const steps=planSteps(),left=steps.filter(x=>!x.done),done=steps.length-left.length;
+  const hero=cur||pend?{ic:'⏱️',t:L3(`${SETS[S.diag.set][2]} 이어서 풀기`,`Continue ${T(SETS[S.diag.set][2])}`,`继续 ${T(SETS[S.diag.set][2])}`),s:cur?L3(`모듈 ${cur.mod} · 남은 시간 ${fmt(cur.left)}`,`Module ${cur.mod} · ${fmt(cur.left)} left`,`模块${cur.mod} · 剩余 ${fmt(cur.left)}`):L3('모듈 2가 남아 있어요','Module 2 is waiting','还剩模块2'),a:'nav',v:setView(S.diag.set),b:L3('이어서 풀기','Continue','继续作答')}:left[0];
+  const tile=(ic,t,v,sub,a,val)=>`<button class="dtile" data-a="${a}" data-v="${val}"><span class="dt-i">${ic}</span><span class="dt-t">${t}</span><b>${v}</b><span class="sub">${sub}</span></button>`;
   app.innerHTML=`
   <div class="dash-top"><div><h1 style="margin:0">${S.user?`${S.user.nm}님의 강의실`:'내 강의실'}</h1>
     <p class="sub" style="margin:4px 0 0">${dday!=null&&dday>=0?`시험까지 D-${dday} · `:''}${S.user&&S.user.tg?`목표 ${S.user.tg}점 · `:''}하루 ${S.plan.min}분 계획</p></div><span class="sp"></span>
-    <div class="dash-st"><span>🔥 <b>${stk}</b>일 연속</span><span>⭐ <b>Lv.${lvl+1}</b> ${into}/300 XP</span></div></div>
-  ${!S.user?`<div class="beta-note row"><span>가입하면 이름과 시험일에 맞춰 학습 계획을 보여 드려요.</span><span class="sp"></span><button class="btn sm pri" data-a="signup">회원 가입</button></div>`:''}
-  ${cur||pend?`<div class="resume"><b>${SETS[S.diag.set][2]} 푸는 중</b><span>${cur?`모듈 ${cur.mod} · 남은 시간 ${fmt(cur.left)}`:'모듈 2가 남아 있어요'}</span><span class="sp"></span><button class="btn pri" data-a="nav" data-v="${setView(S.diag.set)}">이어서 풀기</button></div>`:''}
-  <div class="card"><div class="row"><h3 style="margin:0">오늘 할 일</h3><span class="sp"></span><span class="chip ${dn2===tasks.length?'ok':'gray'}">${dn2} / ${tasks.length} 완료</span><button class="btn sm" data-a="nav" data-v="plan">자세히</button></div>
-    <div class="tlist">${tasks.map(t=>`<div class="titem ${t.ok?'ok':''}"><span class="tck">${t.ok?'✓':''}</span><span class="sp">${t.t}</span>${t.ok?'':`<button class="btn sm pri" data-a="${t.a}" data-v="${t.v}">${t.b}</button>`}</div>`).join('')}</div></div>
-  <h2 class="sec">나의 학습 로드맵</h2>
-  <div class="roadmap">
-    ${step(1,'⏱️','실력 진단',dg?'done':'',`<p>${dg?`정답 ${lastOf('A').c} / ${lastOf('A').n} · 약한 유형을 찾았어요.`:'27문제(32분)로 11개 유형 중 약한 곳을 찾아요.'}</p>`,dg?`<button class="btn sm" data-a="nav" data-v="report">리포트</button>`:`<button class="btn pri" data-a="nav" data-v="test">진단 시작</button>`,stage===1)}
-    ${step(2,'📘','커리큘럼 학습',dn>=tot?'done':'',`<p>${ci>=0?`지금: <b>${ci}단원 ${COURSE[ci].t}</b>`:'모든 단원을 끝냈어요.'}</p><div class="meter"><i class="ok" style="width:${pct(dn,tot)}%"></i></div><p class="sub">${dn} / ${tot} 단계 · 단원마다 강의 → 연습 → 테스트</p>`,`<button class="btn ${stage===2?'pri':''}" data-a="nav" data-v="train">이어서 학습</button>`,stage===2)}
-    ${step(3,'📝','실전 모의고사',mk>=MOCK.length?'done':'',`<p>${mk} / ${MOCK.length}회 완료 · 2~3주에 한 번 실력 변화를 확인해요.</p>`,`<button class="btn ${stage===3?'pri':''}" data-a="nav" data-v="mock">모의고사</button>`,stage===3)}
-    ${step('↻','🔁','매일 복습','',`<p>오답 ${wr}문항 · 단어 복습 ${due}개</p>`,`<button class="btn sm" data-a="nav" data-v="review">오답</button><button class="btn sm" data-a="nav" data-v="vocab">단어</button>`,false)}
-  </div>
-  ${(()=>{if(!S.log.length)return'';const rk=ranked(),list=rk.m.slice(0,3);return list.length?`<div class="card"><div class="row"><h3 style="margin:0">약한 유형</h3><span class="sp"></span><button class="btn sm" data-a="nav" data-v="stats">전체 보기</button></div>${list.map(srow).join('')}</div>`:''})()}`;
+    <div class="dash-st">${stk?`<span>🔥 <b>${stk}</b>일 연속</span>`:`<span>${L3('오늘 시작하면 🔥 1일째!','Start today for 🔥 day 1!','今天开始就是 🔥 第1天！')}</span>`}${S.v.xp?`<span>⭐ <b>Lv.${lvl+1}</b> ${into}/300 XP</span>`:''}</div></div>
+  ${hero?`<div class="card nowc"><div class="nc-k">${L3('지금 할 일','Do this now','现在要做的')}</div><div class="nc-b"><span class="nc-i">${hero.ic}</span><div class="sp"><div class="nc-t">${hero.t}</div><div class="sub">${hero.s}</div></div><button class="btn pri lg" data-a="${hero.a}" data-v="${hero.v}">${hero.b} →</button></div></div>`
+    :`<div class="card nowc done"><div class="nc-k">${L3('오늘 할 일 완료','All done for today','今天的任务完成了')}</div><div class="nc-b"><span class="nc-i">🎉</span><div class="sp"><div class="nc-t">${L3('오늘 계획을 모두 끝냈어요!','You finished today’s plan!','今天的计划全部完成了！')}</div><div class="sub">${L3('더 하고 싶다면 커리큘럼에서 다음 강의를 보거나 단어 카드를 더 풀어 보세요.','Want more? Watch the next lesson or do more word cards.','还想学？去看下一节课或多做些单词卡。')}</div></div></div></div>`}
+  <div class="card"><div class="row"><h3 style="margin:0">오늘 할 일</h3><span class="chip ${done===steps.length?'ok':'gray'}">${done} / ${steps.length} 완료</span><span class="sp"></span><button class="btn sm" data-a="nav" data-v="plan">⚙️ ${L3('계획 설정','Plan settings','计划设置')}</button></div>
+    <div class="tlist">${steps.map(t=>`<div class="titem ${t.done?'ok':''} ${t===hero?'cur':''}"><span class="tck">${t.done?'✓':''}</span><div class="sp"><b>${t.t}</b>${t===hero?'':`<div class="sub">${t.s}</div>`}</div>${t.done?'':`<button class="btn sm" data-a="${t.a}" data-v="${t.v}">${t.b}</button>`}</div>`).join('')}</div></div>
+  ${!S.user?`<div class="beta-note row"><span>가입하면 이름과 시험일에 맞춰 학습 계획을 보여 드려요.</span><span class="sp"></span><button class="btn sm" data-a="signup">회원 가입</button></div>`:''}
+  <h2 class="sec">${L3('내 진행 현황','My progress','我的进度')}</h2>
+  <div class="dtiles">
+    ${tile('⏱️',L3('실력 진단','Diagnostic','实力诊断'),dg?`${dg.c} / ${dg.n}`:L3('아직 안 봄','Not taken','未参加'),dg?L3('리포트 보기','View report','查看报告'):L3('27문항 · 32분','27 questions · 32 min','27题 · 32分钟'),'nav',dg?'report':'test')}
+    ${tile('📘',L3('커리큘럼','Curriculum','课程体系'),`${pct(dn,tot)}%`,ci>=0?L3(`지금 ${ci}단원`,`Now: Unit ${ci}`,`当前第${ci}单元`):L3('모두 완료','All done','全部完成'),'nav','train')}
+    ${tile('📝',L3('모의고사','Practice tests','模拟考试'),`${mk} / ${MOCK.length}`,L3('2~3주에 한 번','Once every 2–3 weeks','每2~3周一次'),'nav','mock')}
+    ${tile('🔤',L3('단어','Vocabulary','单词'),`${kCount('K').toLocaleString()}`,L3('확실히 아는 단어','words mastered','确定掌握的单词'),'nav','vocab')}
+  </div>`;
 }
 
 /* ---------- 모의고사 ---------- */
@@ -2218,10 +2251,9 @@ function plan(){
   const dleft=P.exam?Math.ceil((new Date(P.exam+'T00:00:00')-new Date(today()+'T00:00:00'))/864e5):null;
   const days=['월','화','수','목','금','토','일'],wkplan=[0,0,1,1,2,'mix','rest'].map(s=>typeof s==='number'?(wk.length?SK[wk[Math.min(s,wk.length-1)]][1]:'진단 후 정해져요'):s==='mix'?'혼합 훈련 + 오답 노트':'휴식 또는 모의고사');
   const last7=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const r=S.day[dkey(d)]||{q:0,vm:0,vr:0};return{l:'일월화수목금토'[d.getDay()],q:r.q,v:r.vm+r.vr}}),mx=Math.max(5,...last7.map(x=>x.q));
-  app.innerHTML=`<h1>학습 계획</h1><p class="sub">진단 결과와 복습 일정을 바탕으로 오늘 할 일을 정해 드려요. 위에서부터 순서대로 하면 돼요.</p>
+  app.innerHTML=`<button class="btn sm" data-a="nav" data-v="home">← ${L3('내 강의실','My classroom','我的课堂')}</button><h1>${L3('계획 설정','Plan settings','计划设置')}</h1><p class="sub">${L3('하루 공부 시간과 시험일을 정하면 내 강의실의 "오늘 할 일"이 그에 맞춰 바뀌어요.','Set your daily study time and test date, and "Today’s tasks" in My classroom adjusts to match.','设置每日学习时间和考试日期，“我的课堂”里的今日任务会随之调整。')}</p>
   <div class="card"><div class="row"><span class="sub">하루 공부 시간</span>${[20,40,60].map(m=>`<button class="btn sm ${P.min===m?'pri':''}" data-a="planMin" data-v="${m}">${m}분</button>`).join('')}<span class="sp"></span><span class="sub">시험일</span><input type="date" id="pexam" class="inp" style="flex:none;min-width:0" value="${P.exam||''}">${dleft!=null&&dleft>=0?`<span class="chip warn">D-${dleft}</span>`:''}</div>
     <p class="sub" style="margin-top:8px">${P.min}분 기준: 단어 ${cfg.w}개 + 훈련 문제 ${cfg.q}개 + 오답 복습${dleft!=null&&dleft>=0?` · 시험까지 약 ${Math.max(1,Math.round(dleft/7))}주, 이 속도면 훈련 문제 약 ${(dleft*cfg.q*5/7|0).toLocaleString()}개를 풀 수 있어요.`:''}</p></div>
-  <h2>오늘 할 일 <span class="sub">${'일월화수목금토'[dow]}요일</span></h2><div class="card">${steps}</div>
   <h2>이번 주 계획</h2><div class="card" style="overflow-x:auto"><table><tr>${days.map((d,i)=>`<th style="${(dow+6)%7===i?'color:var(--pri)':''}">${d}</th>`).join('')}</tr><tr>${wkplan.map((x,i)=>`<td style="${(dow+6)%7===i?'background:var(--pri2);font-weight:700':''}">${x}</td>`).join('')}</tr></table>
     <p class="sub" style="margin-top:8px">가장 약한 유형부터 이틀씩 집중하고, 토요일에는 섞어서 풀어요. 단어와 오답 노트는 매일 해요. 정답률이 80%를 넘은 유형은 자동으로 다음 유형으로 바뀌어요.</p></div>
   <h2>최근 7일</h2><div class="card"><div class="bars">${last7.map(x=>`<div><i style="height:${Math.round(x.q/mx*70)+2}px"></i><b>${x.q}</b><span>${x.l}</span>${x.v?'<em>단어 ✓</em>':'<em>&nbsp;</em>'}</div>`).join('')}</div><p class="sub">막대는 그날 푼 훈련 문제 수예요.</p></div>
@@ -2719,7 +2751,7 @@ function vocab(){
       <div class="vh-n"><b>${tot}</b><span>장</span></div><div class="vh-t">오늘의 카드</div>
       <div class="sub">${[nU?`😵 모름 ${nU}`:'',nA?`🤔 애매 ${nA}`:'',nLd?`🔁 다시 확인 ${nLd}`:'',set.length?`✨ 새 단어 ${set.length}`:''].filter(Boolean).join(' · ')||'오늘 볼 카드가 없어요.'}</div>
       ${tot?`<button class="btn pri lg" data-a="vStart">${done?'이어서 학습':'학습 시작'} →</button>`:t<5?`<button class="btn pri lg" data-a="vTier" data-v="${t+1}">다음 단계 · ${TN[t+1]}</button>`:''}</div>
-    <div class="vh-r"><div class="vh-fire">🔥 <b>${st}</b>일 연속</div><div class="week">${days.map(d=>`<div class="${d.on?'on':''} ${d.t?'td':''}">${d.l}</div>`).join('')}</div><div class="sub" style="margin-top:6px">하루 한 번만 해도 연속 기록이 이어져요.</div></div>
+    <div class="vh-r"><div class="vh-fire">${st?`🔥 <b>${st}</b>일 연속`:L3('오늘 시작하면 🔥 1일째!','Start today for 🔥 day 1!','今天开始就是 🔥 第1天！')}</div><div class="week">${days.map(d=>`<div class="${d.on?'on':''} ${d.t?'td':''}">${d.l}</div>`).join('')}</div><div class="sub" style="margin-top:6px">하루 한 번만 해도 연속 기록이 이어져요.</div></div>
   </div>
 
   <div class="card"><div class="row"><div><div class="sub">내가 외워야 할 단어</div><h3 style="margin:2px 0"><span class="chip" style="background:${TC[t]};color:#fff">${TN[t]}</span> ${TD[t]}</h3></div></div>
@@ -2774,7 +2806,7 @@ Object.assign(A,{
   vSnext:()=>{const w=VC.q.shift(),r=VC.res;if(r==='A'||r==='U'||r==='W'){VC.cnt.rep++;VC.q.splice(Math.min(r==='A'?6:3,VC.q.length),0,w)}else delete VC.cur[w];VC.stage='front';VC.pick=null;VC.res=null;render();window.scrollTo(0,0);if(VC.q[0]&&S.v.auto!==false)say(VC.q[0])},
   vAuto:()=>{S.v.auto=S.v.auto===false;save();render()},
   vHome:()=>{VC={mode:'home'};render()},
-  openU:v=>{S.openU=+v;save();render();setTimeout(()=>{const e=document.getElementById('unit'+v);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})},30)},
+  openU:v=>{S.openU=+v;S.tt='course';save();if(view!=='train'){skillOpen=null;A.nav('train')}else render();setTimeout(()=>{const e=document.getElementById('unit'+v);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})},30)},
   vThemes:()=>{VC={mode:'themes'};render();window.scrollTo(0,0)},
   vStart:()=>{startSort(pile().slice(0,40).concat(missionSet().map(v=>v[0])))},
   vReview:()=>A.vStart(),
@@ -2818,10 +2850,9 @@ const I18PAT=[
 VIEWS.push(['about','서비스 소개'],['pricing','요금제']);
 GROUPS.splice(0,GROUPS.length,
  {id:'about',label:'서비스 소개',ic:'✨',views:[['about','서비스 소개','무엇을 어떻게 배우나요'],['pricing','요금제','무료로 시작하기']]},
- {id:'home',label:'내 강의실',ic:'🏠',views:[['home','대시보드','오늘 할 일과 학습 로드맵'],['plan','오늘의 계획','하루 학습 순서']]},
- {id:'learn',label:'커리큘럼',ic:'📘',views:[['train','커리큘럼','단원별 강의 → 연습 → 테스트']]},
+ {id:'home',label:'내 강의실',ic:'🏠',views:[['home','대시보드',''],['plan','계획 설정','',1]]},
+ {id:'learn',label:'커리큘럼',ic:'📘',views:[['train','커리큘럼','단원별 강의 → 연습 → 테스트'],['review','오답 노트','강사 해설 + 유사 문제']]},
  {id:'exam',label:'시험',ic:'⏱',views:[['test','실력 진단','처음 한 번, 약점 찾기'],['mock','모의고사','실전 6회'],['report','성적 리포트','최근 시험 결과']]},
- {id:'review',label:'오답',ic:'🔁',views:[['review','오답 노트','강사 해설 + 유사 문제']]},
  {id:'vocab',label:'단어장',ic:'🔤',views:[['vocab','단어장','']]},
  {id:'stats',label:'내 실력',ic:'📈',views:[['stats','내 실력','']]});
 const PLANS=[
