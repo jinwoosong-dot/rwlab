@@ -233,6 +233,24 @@ details.unit.cur{border:2px solid var(--pri,#2447b8)}
  body.exam #bnav{display:none}
  #mabout{display:inline-flex}
 }
+.wkc{border:2px solid #d79a1c;background:linear-gradient(180deg,#fffaf0,#fff)}.wkc .nc-k{color:#b5790a}.wkc.done{border-color:var(--ok);background:#f1faf4}
+.wsug{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.wopt{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;font-weight:600;cursor:pointer;color:inherit}
+.wopt.on{border-color:#d79a1c;background:#fff4dc}.wo-c{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #cfd6e4;display:grid;place-items:center;font-size:12px;color:#fff}.wopt.on .wo-c{background:#d79a1c;border-color:#d79a1c}
+.wg{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line)}.wg:first-of-type{border-top:0}.wg b{font-size:15px}
+.wbar{height:7px;border-radius:5px;background:#eef0f5;overflow:hidden;margin-top:5px}.wbar i{display:block;height:100%;background:#d79a1c}.wg.ok .wbar i{background:var(--ok)}
+.wdone{font-weight:800;margin:8px 0 0}.wrefl{margin:8px 0 0;font-style:italic}
+.ghost2{background:none;border-color:transparent;color:var(--mut)}
+.mchip{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:3px 9px;background:#eef0f5;color:#58627a;white-space:nowrap}
+.mchip.lv1{background:#fdecea;color:#b3392f}.mchip.lv2{background:#fff4dc;color:#9a6a06}.mchip.lv3{background:#e7f6ee;color:#137a45}.mchip.lv4{background:#e9edfb;color:var(--pri,#2447b8)}
+.mmap{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:12px}
+.mtile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;color:inherit;cursor:pointer}
+.mtile b{font-size:13.5px;line-height:1.3}.mt-i{font-size:20px}.mtile.lv3{border-color:#9fd8b8}.mtile.lv4{border-color:var(--pri,#2447b8);background:#f3f6ff}
+.cfrow{display:flex;align-items:center;gap:8px;margin:4px 0 10px;flex-wrap:wrap}.cfrow .sub{font-size:13px}
+.cfb{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:inherit}.cfb.on{background:var(--pri,#2447b8);border-color:var(--pri,#2447b8);color:#fff}
+.refc .rf{border-radius:10px;padding:10px 14px;margin-top:8px;display:flex;flex-direction:column;gap:4px}.rf.bad{background:#fdecea}.rf.warn{background:#fff4dc}.rf ul{margin:4px 0 0;padding-left:18px;font-size:13.5px}
+.reflin{width:100%;box-sizing:border-box;margin-top:6px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+.lvup{border:2px solid var(--ok);background:#f1faf4;font-size:17px}
 .kbar{display:flex;gap:6px;margin:10px 0 4px;flex-wrap:wrap}
 .kbar>div{flex:1;min-width:84px;border-radius:12px;padding:8px 10px;background:#f1f3f8;text-align:center}
 .kbar b{display:block;font-size:20px;line-height:1.2}.kbar span{font-size:12.5px;color:#556}
@@ -1917,7 +1935,7 @@ const L='ABCD',DIFF=['','쉬움','보통','어려움'],TOTAL=32*60;
 if(S.diag.done&&!S.diag.m1done&&!S.diag.m2done){S.diag.m1done=true;S.diag.route=DQ.filter(q=>S.diag.ans[q.id]===q.a).length>=18?'hard':'easy';S.diag.m2=pickM2(S.diag.route)}
 S.unit=S.unit||{};let UT=null;S.trap=S.trap||{};S.why=S.why||{};S.day=S.day||{};S.plan=S.plan||{min:40,exam:''};
 const dayRec=()=>{const k=today();return S.day[k]=S.day[k]||{q:0,vm:0,vr:0}};
-const logAns=(q,ok,src)=>{if(src!=='m')dayRec().q++;S.log.push({s:q.s,ok,src});if(S.log.length>5000)S.log=S.log.slice(-5000)};
+const logAns=(q,ok,src,c)=>{if(src!=='m')dayRec().q++;const e={s:q.s,ok,src,d:today()};if(c)e.c=c;S.log.push(e);if(S.log.length>5000)S.log=S.log.slice(-5000)};
 let view='home',TS=null,DR=null,VC={mode:'home'},skillOpen=null;
 const VIEWS=[['home','홈'],['plan','학습 계획'],['test','실력 진단'],['mock','모의고사'],['report','리포트'],['stats','내 실력'],['train','강의 · 훈련'],['review','오답 노트'],['vocab','단어'],['info','안내']];
 
@@ -1987,17 +2005,77 @@ function acc(k){const a=k?S.log.filter(x=>x.s===k):S.log,n=a.length,c=a.filter(x
 function lvl(a){return a.n<MINN?['측정 중','gray']:a.p>=80?['강점','ok']:a.p>=60?['보완','warn']:['취약','bad']}
 function trend(a){if(a.n<10||a.rn<5)return'';const d=a.rp-a.p;return d>=5?`<span class="tr up">▲ 최근 ${a.rp}%</span>`:d<=-5?`<span class="tr dn">▼ 최근 ${a.rp}%</span>`:`<span class="tr">― 최근 ${a.rp}%</span>`}
 function ranked(){const all=SKORDER.map(acc),m=all.filter(a=>a.n>=MINN).sort((a,b)=>b.loss-a.loss||a.p-b.p);return{m,lack:all.filter(a=>a.n<MINN)}}
-function srow(a){const lb=lvl(a);return`<div class="srow" data-a="openSkill" data-v="${a.k}" role="button" tabindex="0">
+function srow(a){const lb=lvl(a);/*mastery*/return`<div class="srow" data-a="openSkill" data-v="${a.k}" role="button" tabindex="0">
   <div class="sname"><b>${SK[a.k][1]}</b><span class="sub">${SK[a.k][0]}</span></div>
   <div class="sbar"><div class="meter"><i class="${a.n<MINN?'':cls(a.p)}" style="width:${a.n?a.p:0}%;${a.n<MINN?'background:#b9c1d3':''}"></i></div>${trend(a)}</div>
   <div class="sval"><b>${a.n?a.p+'%':'–'}</b><span class="sub">${a.c}/${a.n}문항</span></div>
-  <span class="chip ${lb[1]}">${lb[0]}</span></div>`}
+  ${mchip(a.k)}</div>`}
 function nextSkill(){ // 다음에 훈련할 유형: 진단 취약 순으로, 아직 훈련 문항을 다 맞히지 못한 첫 유형
   const rk=ranked(),order=S.log.length?rk.m.map(a=>a.k).concat(rk.lack.map(a=>a.k)):SKORDER;
   return order.find(k=>{const s=drillStat(k);return s.ok<s.n})||null;
 }
 
 /* ---------- 홈 ---------- */
+/* ---------- 학생 주도: 주간 목표 · 확신도 · 숙련도 ---------- */
+const MLV=()=>[[L3('시작 전','Not started','未开始'),'○'],[L3('입문','Beginner','入门'),'🌱'],[L3('안정','Steady','稳定'),'🌿'],[L3('숙련','Skilled','熟练'),'🌳'],[L3('마스터','Master','精通'),'🏆']];
+function mastery(k,skip){const a=S.log.filter(x=>x.s===k&&x.src!=='m');const r=(skip?a.slice(0,Math.max(0,a.length-skip)):a).slice(-20),n=r.length,p=pct(r.filter(x=>x.ok).length,n);
+  const lv=n<5?0:p>=90&&n>=15?4:p>=80&&n>=10?3:p>=60?2:1;return{lv,n,p}}
+function mchip(k){const m=mastery(k),L=MLV()[m.lv];return`<span class="mchip lv${m.lv}" title="${L3('최근 20문항 기준','Based on the last 20 questions','按最近20题计算')}">${L[1]} ${L[0]}</span>`}
+function masteryMap(){const M=MLV();return`<div class="card"><div class="row"><h3 style="margin:0">${L3('유형별 숙련도','Skill levels','各题型熟练度')}</h3><span class="sp"></span><span class="sub">${M.slice(1).map(x=>x[1]+' '+x[0]).join(' → ')}</span></div>
+  <div class="mmap">${SKORDER.map(k=>{const m=mastery(k);return`<button class="mtile lv${m.lv}" data-a="openSkill" data-v="${k}"><span class="mt-i">${M[m.lv][1]}</span><b>${skN(k)}</b><span class="sub">${M[m.lv][0]}${m.n?` · ${m.p}%`:''}</span></button>`}).join('')}</div>
+  <p class="sub" style="margin:10px 0 0">${L3('최근 20문항 정답률로 정해요. 안정 60% · 숙련 80%(10문항 이상) · 마스터 90%(15문항 이상).','Based on accuracy over your last 20 questions. Steady 60% · Skilled 80% (10+ questions) · Master 90% (15+ questions).','按最近20题的正确率判定。稳定60% · 熟练80%（10题以上）· 精通90%（15题以上）。')}</p></div>`}
+// 주간 목표
+const monday=()=>{const d=new Date();const g=(d.getDay()+6)%7;d.setDate(d.getDate()-g);return dkey(d)};
+const wkDays=()=>{const m=new Date(monday()+'T00:00:00');return[...Array(7)].map((_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return dkey(d)})};
+function goalProg(g){const mon=monday(),days=wkDays();
+  if(g.t==='skill')return S.log.filter(x=>x.s===g.k&&x.ok&&x.d&&x.d>=mon&&x.src!=='m').length;
+  if(g.t==='lesson'){const vs=VIDS[g.k]||[];return vs.filter(v=>S.vid&&S.vid[v.id]).length}
+  if(g.t==='vocab')return days.reduce((a,d)=>a+((S.day[d]||{}).vm||0),0);
+  if(g.t==='review')return S.log.filter(x=>x.src==='r'&&x.d&&x.d>=mon).length;
+  if(g.t==='days')return days.filter(d=>{const r=S.day[d]||{};return r.q||r.vm||r.vr||(S.v.days&&S.v.days[d])}).length;
+  if(g.t==='mock')return S.hist.filter(h=>h.set!=='A'&&h.date>=mon).length+(S.diag.done&&S.diag.set!=='A'&&(S.diag.date||'')>=mon&&!S.hist.some(h=>h.set===S.diag.set&&h.date===S.diag.date)?1:0);
+  return 0}
+function goalN(g){return g.t==='lesson'?(VIDS[g.k]||[]).length:g.n}
+function goalTxt(g){const n=goalN(g);return({
+  skill:()=>L3(`${skN(g.k)} 문제 ${n}개 맞히기`,`Get ${n} ${skN(g.k)} questions right`,`${skN(g.k)}答对${n}题`),
+  lesson:()=>L3(`${skN(g.k)} 강의 ${n}개 보기`,`Watch the ${n} ${skN(g.k)} lesson${n>1?'s':''}`,`看完${skN(g.k)}课程${n}节`),
+  vocab:()=>L3(`단어 미션 ${n}번 하기`,`Do ${n} word missions`,`完成${n}次单词任务`),
+  review:()=>L3(`오답 노트 문제 ${n}개 다시 풀기`,`Redo ${n} missed questions`,`重做${n}道错题`),
+  days:()=>L3(`일주일에 ${n}일 공부하기`,`Study ${n} days this week`,`本周学习${n}天`),
+  mock:()=>L3('모의고사 1회 보기','Take 1 practice test','做1套模拟考试')}[g.t])()}
+function goalAct(g){return{skill:lecDone(g.k)?['startDrill2',g.k,L3('훈련','Practice','练习')]:['startLesson',g.k,L3('강의부터','Lesson first','先看课程')],lesson:['startLesson',g.k,L3('영상 보기','Watch','观看')],vocab:['planVocab',S.v.goal||15,L3('단어 미션','Word mission','单词任务')],review:['startReview','',L3('오답 풀기','Redo misses','重做错题')],days:['nav','train',L3('공부하기','Study','学习')],mock:['nav','mock',L3('모의고사','Practice tests','模拟考试')]}[g.t]}
+function goalSuggest(){const o=[],rk=ranked(),weak=(S.log.length?rk.m.filter(a=>a.p<80).map(a=>a.k):[]).concat(rk.lack.map(a=>a.k)).filter((k,i,a)=>a.indexOf(k)===i);
+  const wk=(weak.length?weak:SKORDER).slice(0,3);
+  wk.forEach(k=>{if(!lecDone(k)&&(VIDS[k]||[]).length)o.push({t:'lesson',k});o.push({t:'skill',k,n:15})});
+  o.push({t:'vocab',n:5},{t:'days',n:5});if(wrongIds().length)o.push({t:'review',n:Math.min(10,Math.max(3,wrongIds().length))});o.push({t:'mock',n:1});
+  return o.slice(0,9)}
+let WKSEL=null;
+function weekCard(){const id=monday(),wk=S.wk&&S.wk.id===id?S.wk:null,left=7-((new Date().getDay()+6)%7);
+  if(!wk){const sug=goalSuggest();WKSEL=WKSEL||[];const prev=S.wk&&S.wk.goals&&S.wk.id!==id?S.wk:S.wkLast||null,pd=prev?prev.goals.filter(g=>g.done).length:0;
+    return`<div class="card wkc"><div class="nc-k">${L3('이번 주 목표 정하기','Set this week’s goals','设定本周目标')}</div>
+      <p style="margin:6px 0 10px">${prev?L3(`지난주에는 목표 ${prev.goals.length}개 중 <b>${pd}개</b>를 달성했어요. `,`Last week you reached <b>${pd}</b> of ${prev.goals.length} goals. `,`上周 ${prev.goals.length} 个目标完成了 <b>${pd}</b> 个。`):''}${L3('이번 주에 할 일을 <b>직접 1~3개</b> 골라요. 고른 목표가 "지금 할 일"이 돼요.','Pick <b>1–3 goals yourself</b> for this week. They become your “Do this now”.','<b>自己选1~3个</b>本周目标，它们会成为“现在要做的”。')}</p>
+      <div class="wsug">${sug.map((g,i)=>{const on=WKSEL.includes(i);return`<button class="wopt ${on?'on':''}" data-a="wkPick" data-v="${i}"><span class="wo-c">${on?'✓':''}</span>${goalTxt(g)}</button>`}).join('')}</div>
+      <div class="row" style="margin-top:12px"><span class="sub">${L3(`${WKSEL.length} / 3 선택`,`${WKSEL.length} / 3 selected`,`已选 ${WKSEL.length} / 3`)}</span><span class="sp"></span><button class="btn pri" data-a="wkSet" ${WKSEL.length?'':'disabled'}>${L3('이번 주 목표로 정하기','Set as this week’s goals','设为本周目标')}</button></div></div>`}
+  const gs=wk.goals.map(g=>{const n=goalN(g),p=Math.min(n,goalProg(g));if(p>=n&&!g.done){g.done=1;save()}return{g,n,p}}),dn=gs.filter(x=>x.p>=x.n).length,lastR=Object.keys(S.refl||{}).sort().pop();
+  return`<div class="card wkc ${dn===gs.length?'done':''}"><div class="row"><div class="nc-k">${L3('이번 주 내 목표','My goals this week','我的本周目标')}</div><span class="chip ${dn===gs.length?'ok':'gray'}">${dn} / ${gs.length}</span><span class="sp"></span><span class="sub">${L3(`이번 주 ${left}일 남음`,`${left} day${left>1?'s':''} left`,`本周还剩${left}天`)}</span></div>
+    ${gs.map(({g,n,p})=>{const a=goalAct(g),ok=p>=n;return`<div class="wg ${ok?'ok':''}"><span class="tck">${ok?'✓':''}</span><div class="sp"><b>${goalTxt(g)}</b><div class="wbar"><i style="width:${pct(p,n)}%"></i></div></div><span class="sub">${p} / ${n}</span>${ok?'':`<button class="btn sm" data-a="${a[0]}" data-v="${a[1]}">${a[2]}</button>`}</div>`}).join('')}
+    ${dn===gs.length?`<p class="wdone">🎉 ${L3('이번 주 목표를 모두 달성했어요!','You reached all your goals this week!','本周目标全部完成！')}</p>`:''}
+    ${lastR?`<p class="sub wrefl">📝 ${L3('지난번 메모','Your last note','上次的笔记')} (${lastR.slice(5)}): “${esc(S.refl[lastR])}”</p>`:''}
+    <div class="row" style="margin-top:6px"><span class="sp"></span><button class="btn sm ghost2" data-a="wkReset">${L3('목표 다시 고르기','Change goals','重新选择目标')}</button></div></div>`}
+function heroFromGoals(){const id=monday();if(!S.wk||S.wk.id!==id)return null;const g=S.wk.goals.find(g=>goalProg(g)<goalN(g));if(!g)return null;const a=goalAct(g),n=goalN(g),p=goalProg(g);
+  return{ic:'🎯',t:goalTxt(g),s:L3(`이번 주 내 목표 · ${p} / ${n}`,`My weekly goal · ${p} / ${n}`,`我的本周目标 · ${p} / ${n}`),a:a[0],v:a[1],b:a[2]}}
+// 훈련 결과: 확신도 돌아보기
+function confReview(){if(!DR||!DR.cf)return'';const ids=DR.ids,sure=ids.filter(id=>DR.cf[id]==='y'&&!DR.res[id]),lucky=ids.filter(id=>DR.cf[id]==='n'&&DR.res[id]);
+  const row=id=>{const q=QI[id];return`<li><span class="chip gray">${skN(q.s)}</span> ${(t=>t.length>100?t.slice(0,100)+'…':t)(esc(String(q.p||q.q).replace(/<[^>]+>/g,'').replace(/_{3,}/g,'___')))}</li>`};
+  return`<div class="card refc"><h3 style="margin-top:0">🧠 ${L3('돌아보기','Look back','回顾')}</h3>
+    ${sure.length?`<div class="rf bad"><b>${L3(`확신했는데 틀린 문제 ${sure.length}개`,`${sure.length} you were sure about but missed`,`有把握却答错 ${sure.length} 题`)}</b><span class="sub">${L3('여기가 진짜 약점이에요. 해설을 꼭 다시 보세요.','These are your real weak spots. Reread the explanations.','这才是真正的弱项，一定要重看解析。')}</span><ul>${sure.map(row).join('')}</ul></div>`:''}
+    ${lucky.length?`<div class="rf warn"><b>${L3(`애매했는데 맞힌 문제 ${lucky.length}개`,`${lucky.length} you got right but weren’t sure`,`没把握却答对 ${lucky.length} 题`)}</b><span class="sub">${L3('운일 수 있어요. 왜 맞았는지 설명할 수 있는지 확인해 보세요.','Could be luck. Check that you can explain why it’s right.','可能是运气，确认自己能讲清为什么对。')}</span><ul>${lucky.map(row).join('')}</ul></div>`:''}
+    ${!sure.length&&!lucky.length?`<p class="sub">${Object.keys(DR.cf).length?L3('확신과 결과가 잘 맞았어요. 내 실력을 정확히 알고 있어요!','Your confidence matched your results. You know where you stand!','把握程度和结果一致，你很清楚自己的水平！'):L3('다음에는 답을 고르기 전에 "확신 / 애매"를 눌러 보세요. 진짜 약점을 찾는 데 도움이 돼요.','Next time, tap “Sure / Unsure” before answering. It helps find your real weak spots.','下次作答前点一下“有把握 / 没把握”，有助于找到真正的弱项。')}</p>`:''}
+    <label class="sub" for="reflin" style="display:block;margin-top:12px">${L3('오늘 가장 헷갈린 것을 한 줄로 적어 보세요 (선택)','In one line: what confused you most today? (optional)','用一句话写下今天最困惑的地方（可选）')}</label>
+    <input id="reflin" class="reflin" maxlength="120" value="${esc((S.refl||{})[today()]||'')}" placeholder="${L3('예: 콜론 앞이 완전한 문장인지 자꾸 놓침','e.g. I keep forgetting the left side of a colon must be complete','例：总忘记冒号前要是完整句子')}"></div>`}
+function levelUpNote(){if(!DR||!DR.k||DR.lv0==null)return'';const now=mastery(DR.k).lv;if(now<=DR.lv0)return'';const M=MLV();setTimeout(()=>{try{confetti()}catch(e){}},50);
+  return`<div class="card lvup">🎉 <b>${skN(DR.k)}</b> ${M[DR.lv0][1]} ${M[DR.lv0][0]} → <b>${M[now][1]} ${M[now][0]}</b> ${L3('으로 올라갔어요!','— level up!','，升级了！')}</div>`}
+
 function planSteps(){
   backfill();const P=S.plan,cfg={20:{q:5,w:10},40:{q:10,w:20},60:{q:20,w:20}}[P.min]||{q:10,w:20},dd=dayRec(),due=dueList().length,wr=wrongIds().length,rk=ranked();
   const weak=S.log.length?rk.m.filter(a=>a.p<80).slice(0,3).map(a=>a.k):[],wk=weak.length?weak:(S.log.length?rk.m.slice(0,3).map(a=>a.k):[]);
@@ -2006,7 +2084,7 @@ function planSteps(){
   if(!lecDone('GEN'))o.push({ic:'🎬',done:false,t:L3('오리엔테이션 영상 보기 (처음 한 번)','Watch the orientation video (once)','观看入门视频（一次）'),s:L3('시험 구조, 시간 배분, 풀이 4단계 · 약 3분','Test structure, pacing, the 4-step method · ~3 min','考试结构、时间分配、四步解题法 · 约3分钟'),a:'startLesson',v:'GEN',b:L3('영상 보기','Watch','观看')});
   if(vK(0))o.push({ic:'🔁',done:due===0,t:`단어 복습 ${due?due+'개':''}`,s:due?'잊기 직전에 다시 보는 단어예요. 가장 먼저 하세요.':'오늘 복습할 단어를 다 했어요.',a:'planReview',v:'',b:L3('복습','Review','复习')});
   o.push({ic:'🔤',done:dd.vm>0,t:`새 단어 ${cfg.w}개`,s:dd.vm>0?`오늘 미션 ${dd.vm}회 클리어`:'학습 → 퀴즈 통과',a:'planVocab',v:cfg.w,b:L3('단어 미션','Word mission','单词任务')});
-  if(focus){const need=!lecDone(focus);o.push({ic:'📘',done:!need&&dd.q>=cfg.q,t:`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,s:`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,a:need?'startLesson':'startDrill2',v:focus,b:need?L3('강의 보기','Watch lesson','看课程'):L3('훈련','Practice','练习')})}
+  if(focus){const need=!lecDone(focus);o.push({ic:'📘',done:!need&&dd.q>=cfg.q,t:L3(`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,`${skN(focus)}: ${need?'lesson → ':''}${cfg.q} questions`,`${skN(focus)}${need?'概念课 → ':''}${cfg.q}道题`),s:L3(`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,`Practice solved today ${dd.q} / ${cfg.q}${need?' · Take the lesson first':''}`,`今日已练 ${dd.q} / ${cfg.q}${need?' · 先看课程':''}`),a:need?'startLesson':'startDrill2',v:focus,b:need?L3('강의 보기','Watch lesson','看课程'):L3('훈련','Practice','练习')})}
   else if(S.log.length&&dow===6)o.push({ic:'🔀',done:dd.q>=cfg.q,t:`혼합 훈련 ${cfg.q}개`,s:`이번 주에 연습한 유형을 섞어서 풀어요 · 오늘 ${dd.q} / ${cfg.q}`,a:'startMixed',v:'',b:L3('혼합 훈련','Mixed practice','混合训练')});
   else if(S.log.length&&dow===0)o.push({ic:'📝',done:false,t:'쉬거나, 2–3주에 한 번 모의고사',s:'오늘은 가볍게. 지난 모의고사에서 2–3주가 지났으면 다시 응시해 변화를 확인해요.',a:'nav',v:'mock',b:L3('모의고사','Practice tests','模拟考试')});
   else if(S.diag.done){const sts=COURSE.map(unitState),ci=sts.findIndex(s=>!s.done);if(ci>=0)o.push({ic:'📘',done:dd.q>=cfg.q,t:L3(`커리큘럼 · ${ci}단원 이어서`,`Curriculum · continue Unit ${ci}`,`课程 · 继续第${ci}单元`),s:L3(`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}`,`Practice solved today ${dd.q} / ${cfg.q}`,`今天已做练习 ${dd.q} / ${cfg.q}`),a:'openU',v:ci,b:L3('이어서','Continue','继续')})}
@@ -2019,12 +2097,13 @@ function home(){
   const mk=MOCK.filter(s=>lastOf(s)).length,dg=lastOf('A');
   const dday=S.plan&&S.plan.exam?Math.ceil((new Date(S.plan.exam)-new Date(today()))/864e5):null;
   const steps=planSteps(),left=steps.filter(x=>!x.done),done=steps.length-left.length;
-  const hero=cur||pend?{ic:'⏱️',t:L3(`${SETS[S.diag.set][2]} 이어서 풀기`,`Continue ${T(SETS[S.diag.set][2])}`,`继续 ${T(SETS[S.diag.set][2])}`),s:cur?L3(`모듈 ${cur.mod} · 남은 시간 ${fmt(cur.left)}`,`Module ${cur.mod} · ${fmt(cur.left)} left`,`模块${cur.mod} · 剩余 ${fmt(cur.left)}`):L3('모듈 2가 남아 있어요','Module 2 is waiting','还剩模块2'),a:'nav',v:setView(S.diag.set),b:L3('이어서 풀기','Continue','继续作答')}:left[0];
+  const hero=cur||pend?{ic:'⏱️',t:L3(`${SETS[S.diag.set][2]} 이어서 풀기`,`Continue ${T(SETS[S.diag.set][2])}`,`继续 ${T(SETS[S.diag.set][2])}`),s:cur?L3(`모듈 ${cur.mod} · 남은 시간 ${fmt(cur.left)}`,`Module ${cur.mod} · ${fmt(cur.left)} left`,`模块${cur.mod} · 剩余 ${fmt(cur.left)}`):L3('모듈 2가 남아 있어요','Module 2 is waiting','还剩模块2'),a:'nav',v:setView(S.diag.set),b:L3('이어서 풀기','Continue','继续作答')}:(heroFromGoals()||left[0]);
   const tile=(ic,t,v,sub,a,val)=>`<button class="dtile" data-a="${a}" data-v="${val}"><span class="dt-i">${ic}</span><span class="dt-t">${t}</span><b>${v}</b><span class="sub">${sub}</span></button>`;
   app.innerHTML=`
   <div class="dash-top"><div><h1 style="margin:0">${S.user?`${S.user.nm}님의 강의실`:'내 강의실'}</h1>
     <p class="sub" style="margin:4px 0 0">${dday!=null&&dday>=0?`시험까지 D-${dday} · `:''}${S.user&&S.user.tg?`목표 ${S.user.tg}점 · `:''}하루 ${S.plan.min}분 계획</p></div><span class="sp"></span>
     <div class="dash-st">${stk?`<span>🔥 <b>${stk}</b>일 연속</span>`:`<span>${L3('오늘 시작하면 🔥 1일째!','Start today for 🔥 day 1!','今天开始就是 🔥 第1天！')}</span>`}${S.v.xp?`<span>⭐ <b>Lv.${lvl+1}</b> ${into}/300 XP</span>`:''}</div></div>
+  ${weekCard()}
   ${hero?`<div class="card nowc"><div class="nc-k">${L3('지금 할 일','Do this now','现在要做的')}</div><div class="nc-b"><span class="nc-i">${hero.ic}</span><div class="sp"><div class="nc-t">${hero.t}</div><div class="sub">${hero.s}</div></div><button class="btn pri lg" data-a="${hero.a}" data-v="${hero.v}">${hero.b} →</button></div></div>`
     :`<div class="card nowc done"><div class="nc-k">${L3('오늘 할 일 완료','All done for today','今天的任务完成了')}</div><div class="nc-b"><span class="nc-i">🎉</span><div class="sp"><div class="nc-t">${L3('오늘 계획을 모두 끝냈어요!','You finished today’s plan!','今天的计划全部完成了！')}</div><div class="sub">${L3('더 하고 싶다면 커리큘럼에서 다음 강의를 보거나 단어 카드를 더 풀어 보세요.','Want more? Watch the next lesson or do more word cards.','还想学？去看下一节课或多做些单词卡。')}</div></div></div></div>`}
   <div class="card"><div class="row"><h3 style="margin:0">오늘 할 일</h3><span class="chip ${done===steps.length?'ok':'gray'}">${done} / ${steps.length} 완료</span><span class="sp"></span><button class="btn sm" data-a="nav" data-v="plan">⚙️ ${L3('계획 설정','Plan settings','计划设置')}</button></div>
@@ -2256,7 +2335,7 @@ function plan(){
   if(!lecDone('GEN'))steps+=st(false,L3('오리엔테이션 영상 보기 (처음 한 번)','Watch the orientation video (once)','观看入门视频（一次）'),L3('시험 구조, 시간 배분, 풀이 4단계 · 약 3분','Test structure, pacing, the 4-step method · ~3 min','考试结构、时间分配、四步解题法 · 约3分钟'),'<button class="btn pri sm" data-a="startLesson" data-v="GEN">'+L3('영상','Watch','观看')+'</button>');
   if(vK(0))steps+=st(due===0,`단어 복습 ${due?due+'개':''}`,due?'잊기 직전에 다시 보는 단어예요. 가장 먼저 하세요.':'오늘 복습할 단어를 다 했어요.','<button class="btn pri sm" data-a="planReview">복습</button>');
   steps+=st(dd.vm>0,`새 단어 ${cfg.w}개`,dd.vm>0?`오늘 미션 ${dd.vm}회 클리어`:'학습 → 퀴즈 통과',`<button class="btn pri sm" data-a="planVocab" data-v="${cfg.w}">단어 미션</button>`);
-  if(focus){const need=!lecDone(focus);steps+=st(!need&&dd.q>=cfg.q,`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,`<button class="btn pri sm" data-a="${need?'startLesson':'startDrill2'}" data-v="${focus}">${need?'강의':'훈련'}</button>`)}
+  if(focus){const need=!lecDone(focus);steps+=st(!need&&dd.q>=cfg.q,L3(`${SK[focus][1]} ${need?'개념 강의 → ':''}문제 ${cfg.q}개`,`${skN(focus)}: ${need?'lesson → ':''}${cfg.q} questions`,`${skN(focus)}${need?'概念课 → ':''}${cfg.q}道题`),L3(`오늘 푼 훈련 문제 ${dd.q} / ${cfg.q}${need?' · 강의를 먼저 들으세요':''}`,`Practice solved today ${dd.q} / ${cfg.q}${need?' · Take the lesson first':''}`,`今日已练 ${dd.q} / ${cfg.q}${need?' · 先看课程':''}`),`<button class="btn pri sm" data-a="${need?'startLesson':'startDrill2'}" data-v="${focus}">${need?'강의':'훈련'}</button>`)}
   else if(S.log.length&&dow===6)steps+=st(dd.q>=cfg.q,`혼합 훈련 ${cfg.q}개`,`이번 주에 연습한 유형을 섞어서 풀어요 · 오늘 ${dd.q} / ${cfg.q}`,'<button class="btn pri sm" data-a="startMixed">혼합 훈련</button>');
   else if(S.log.length&&dow===0)steps+=st(false,'쉬거나, 2–3주에 한 번 모의고사','오늘은 가볍게. 지난 모의고사에서 2–3주가 지났으면 다시 응시해 변화를 확인해요.','<button class="btn sm" data-a="nav" data-v="mock">모의고사</button>');
   if(wr)steps+=st(false,`오답 노트 ${wr}문항`,'어제까지 틀린 문제를 다시 풀어요. 맞히면 목록에서 빠져요.','<button class="btn pri sm" data-a="startReview">오답 풀기</button>');
@@ -2287,7 +2366,7 @@ function mystats(){
   let rows;
   if(srt==='order')rows=Object.keys(DOM).map(d=>{const ks=SKORDER.filter(k=>SK[k][2]===d),dn=ks.reduce((s,k)=>s+acc(k).n,0),dc=ks.reduce((s,k)=>s+acc(k).c,0);
     return`<div class="dhead"><b>${DOM[d][1]}</b><span class="sub">${DOM[d][0]}</span><span class="sp"></span><b>${dn?pct(dc,dn)+'%':'–'}</b><span class="sub">${dc}/${dn}</span></div>${ks.map(k=>srow(acc(k))).join('')}`}).join('');
-  else{const list=srt==='low'?rk.m.slice().sort((a,b)=>a.p-b.p):rk.m;rows=list.map(srow).join('')+(rk.lack.length?`<div class="dhead"><b>측정 중</b><span class="sub">${MINN}문항 이상 풀면 판정해요</span></div>${rk.lack.map(srow).join('')}`:'')}
+  else{const list=srt==='low'?rk.m.slice().sort((a,b)=>a.p-b.p):rk.m;rows=list.map(srow).join('')+(rk.lack.length?`<div class="dhead"><b>${L3('측정 중','Measuring','测量中')}</b><span class="sub">${L3(`${MINN}문항 이상 풀면 판정해요`,`Rated after ${MINN}+ questions`,`做满${MINN}题后判定`)}</span></div>${rk.lack.map(srow).join('')}`:'')}
   app.innerHTML=`<h1>내 실력</h1><p class="sub">모의고사·훈련·오답 노트에서 푼 모든 문제를 유형별로 모아 계산해요.</p>
   <div class="grid">
     <div class="card"><div class="sub">푼 문항</div><div class="big">${tot.n}</div><div class="sub">누적</div></div>
@@ -2295,6 +2374,7 @@ function mystats(){
     <div class="card"><div class="sub">가장 약한 유형</div><div class="big" style="font-size:22px">${w[0]?SK[w[0].k][1]:'–'}</div><div class="sub">${w[0]?w[0].p+'% · '+w[0].c+'/'+w[0].n+'문항':'3문항 이상 푼 유형이 없어요'}</div></div>
     <div class="card"><div class="sub">가장 강한 유형</div><div class="big" style="font-size:22px">${strong?SK[strong.k][1]:'–'}</div><div class="sub">${strong?strong.p+'% · '+strong.c+'/'+strong.n+'문항':''}</div></div>
   </div>
+  ${masteryMap()}
   ${w.length&&w[0].p<100?`<div class="card" style="border-color:var(--bad)"><h3 style="margin-top:0">지금 점수를 가장 많이 잃는 유형</h3>
     <p class="sub">정답률이 낮고 시험에 자주 나오는 유형일수록 위에 와요. "모듈당 예상 실점" = 시험 한 모듈에 나오는 평균 문항 수 × 내 오답률.</p>
     ${w.filter(a=>a.p<100).map((a,i)=>`<div class="row" style="margin:8px 0"><span class="chip bad">${i+1}</span><b>${SK[a.k][1]}</b><span class="sub">정답률 ${a.p}% · 모듈당 약 ${a.loss.toFixed(1)}문항 실점</span><span class="sp"></span><button class="btn sm pri" data-a="openSkill" data-v="${a.k}">훈련</button></div>`).join('')}</div>`:''}
@@ -2386,17 +2466,19 @@ function drill(){
       <div class="row" style="justify-content:center">${ok?(nx?`<button class="btn pri" data-a="wnOpen" data-v="${nx}">다음 오답 해설 →</button>`:''):`<button class="btn pri" data-a="wnOpen" data-v="${src}">해설 다시 보기</button><button class="btn" data-a="wnSim" data-v="${src}">새 유사 문제로 재도전</button>`}<button class="btn" data-a="wnBack">오답 목록</button></div></div>`;return}
   if(DR.i>=DR.ids.length){
     const wrong=DR.ids.filter(id=>!DR.res[id]),n=DR.ids.length;
-    app.innerHTML=`<h1>훈련 결과</h1><div class="card"><div class="sub">${title}</div><div class="big">${n-wrong.length} / ${n}</div>
+    app.innerHTML=`<h1>훈련 결과</h1>${levelUpNote()}<div class="card"><div class="sub">${title}</div><div class="big">${n-wrong.length} / ${n}</div>
       ${DR.k?(()=>{const a=acc(DR.k);return`<p class="sub">이 유형 누적 정답률 <b>${a.p}%</b> (${a.c}/${a.n}문항)${a.rn>=5?` · 최근 10문항 ${a.rp}%`:''}</p>`})():''}
       <p>${wrong.length?'틀린 문제는 해설의 근거를 지문에서 직접 찾아본 뒤, 맞힐 때까지 다시 풀어 보세요.':'모두 맞혔어요.'}</p>
       <div class="row">${wrong.length?`<button class="btn pri" data-a="retry">틀린 문제 다시 풀기 (${wrong.length})</button>`:''}
-      ${DR.k?`<button class="btn" data-a="backSkill">풀이법 다시 보기</button><button class="btn" data-a="backTrain">유형 목록</button>`:`<button class="btn" data-a="quitDrill">오답 노트로</button>`}</div></div>`;
+      ${DR.k?`<button class="btn" data-a="backSkill">풀이법 다시 보기</button><button class="btn" data-a="backTrain">유형 목록</button>`:`<button class="btn" data-a="quitDrill">오답 노트로</button>`}</div></div>${confReview()}`;
     return;
   }
+  if(DR.k&&DR.lv0==null)DR.lv0=mastery(DR.k).lv;
   const q=QI[DR.ids[DR.i]],pk=DR.pick;
   app.innerHTML=`<div class="row"><button class="btn sm" data-a="quitDrill">← 그만하기</button><b>${title}</b><span class="sp"></span>${DR.k?'':`<span class="chip">${SK[q.s][1]}</span>`}<span class="chip gray">${DIFF[q.d]}</span><b>${DR.i+1} / ${DR.ids.length}</b></div>
   <div class="qwrap"><div class="card pass">${q.p}</div>
   <div class="card"><div class="stem">${q.q}</div>
+    ${pk==null?`<div class="cfrow"><span class="sub">${L3('고르기 전에, 얼마나 확신해요?','Before you answer: how sure are you?','作答前：你有多大把握？')}</span><button class="cfb ${DR.conf==='y'?'on':''}" data-a="dconf" data-v="y">🎯 ${L3('확신','Sure','有把握')}</button><button class="cfb ${DR.conf==='n'?'on':''}" data-a="dconf" data-v="n">🤔 ${L3('애매','Unsure','没把握')}</button></div>`:''}
     ${q.c.map((c,i)=>`<button class="ch ${pk==null?'':i===q.a?'right':i===pk?'wrong':''}" data-a="dpick" data-v="${i}" ${pk==null?'':'disabled'}><b>${L[i]}</b><span>${c}</span></button>`).join('')}
     ${pk==null?'':`${pk!==q.a&&whyOpt(q,pk)?(()=>{const[cd,rs]=whyOpt(q,pk);return`<div class="fb"><div class="row"><b>내가 고른 ${L[pk]}가 틀린 이유</b><span class="chip bad">함정: ${TRAP[cd][0]}</span></div><p>${rs}</p><p class="sub">${TRAP[cd][1]}</p></div>`})():''}
     <div class="exp"><b>${pk===q.a?'정답이에요.':'정답은 '+L[q.a]+'.'}</b> ${q.e}</div>
@@ -2591,10 +2673,14 @@ const A={
   wnOpen:v=>{DR=null;RV=v;if(view!=='review')nav('review');else{render();window.scrollTo(0,0)}},
   wnBack:()=>{DR=null;RV=null;render();window.scrollTo(0,0)},
   wnSim:v=>{const q=QI[v];RV=null;DR={k:null,wn:v,ids:similar(q,3),i:0,pick:null,res:{}};if(view!=='review')nav('review');else{render();window.scrollTo(0,0)}},
-  dpick:v=>{const q=QI[DR.ids[DR.i]];DR.pick=+v;const ok=DR.pick===q.a;if(!ok){S.wp=S.wp||{};S.wp[q.id]=DR.pick}DR.res[q.id]=ok;DR.why=null;if(!ok&&q.w&&q.w[DR.pick]){const cd=q.w[DR.pick].split('|')[0];S.trap[cd]=(S.trap[cd]||0)+1}logAns(q,ok,DR.k?'d':'r');const r=S.drill[q.id]||{n:0};S.drill[q.id]={n:r.n+1,ok};save();render()},
+  dpick:v=>{const q=QI[DR.ids[DR.i]];DR.pick=+v;const ok=DR.pick===q.a;if(!ok){S.wp=S.wp||{};S.wp[q.id]=DR.pick}DR.res[q.id]=ok;DR.why=null;if(!ok&&q.w&&q.w[DR.pick]){const cd=q.w[DR.pick].split('|')[0];S.trap[cd]=(S.trap[cd]||0)+1}DR.cf=DR.cf||{};if(DR.conf)DR.cf[q.id]=DR.conf;logAns(q,ok,DR.k?'d':'r',DR.conf);DR.conf=null;const r=S.drill[q.id]||{n:0};S.drill[q.id]={n:r.n+1,ok};save();render()},
   dwhy:c=>{const q=QI[DR.ids[DR.i]];if(DR.why)return;DR.why=c;S.why[c]=(S.why[c]||0)+1;save();render()},
   dnext:()=>{DR.i++;DR.pick=null;DR.why=null;render();window.scrollTo(0,0)},
-  retry:()=>{DR={k:DR.k,mix:DR.mix,ids:DR.ids.filter(id=>!DR.res[id]),i:0,pick:null,res:{}};render()},
+  retry:()=>{DR={k:DR.k,mix:DR.mix,ids:DR.ids.filter(id=>!DR.res[id]),i:0,pick:null,res:{},lv0:DR.lv0};render()},
+  dconf:v=>{DR.conf=DR.conf===v?null:v;render()},
+  wkPick:v=>{v=+v;WKSEL=WKSEL||[];const i=WKSEL.indexOf(v);if(i>=0)WKSEL.splice(i,1);else if(WKSEL.length<3)WKSEL.push(v);render()},
+  wkSet:()=>{const sug=goalSuggest();if(!WKSEL||!WKSEL.length)return;if(S.wk&&S.wk.id&&S.wk.id!==monday())S.wkLast=S.wk;S.wk={id:monday(),goals:WKSEL.map(i=>Object.assign({},sug[i]))};WKSEL=null;save();render();try{confetti()}catch(e){}},
+  wkReset:()=>{if(S.wk&&S.wk.id===monday())S.wk=null;WKSEL=[];save();render()},
   quitDrill:()=>{const w=DR&&DR.wn;DR=null;RV=w||null;render()},
   askReset:()=>modal(`<h3>학습 기록을 모두 지울까요?</h3><p class="sub">모의고사 결과, 훈련 기록, 암기한 단어가 모두 삭제되고 되돌릴 수 없어요.</p><div class="row"><button class="btn" data-a="closeModal">취소</button><button class="btn pri" data-a="reset">모두 지우기</button></div>`),
   reset:()=>{S={diag:{ans:{},t:{},done:false},drill:{},v:defV(),log:[],lec:{},unit:{},trap:{},why:{},day:{},plan:{min:40,exam:''}};ensureV();save();closeModal();nav('home')}
@@ -2992,6 +3078,7 @@ window.addEventListener('message',e=>{const m=e.data||{};if(m.type==='lessonDone
 
 /* ---------- 참여 요소: XP, 헤더 상태, 축하 효과 ---------- */
 function gainXP(n){if(!n)return;S.v.xp=(S.v.xp||0)+n;const k=today();if(!S.v.days[k])S.v.days[k]=1;S.v.best=Math.max(S.v.best||0,streak());save();toastXP(n)}
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='reflin'){S.refl=S.refl||{};const v=e.target.value.trim();if(v)S.refl[today()]=v;else delete S.refl[today()];save()}});
 function toastXP(n){try{const t=document.createElement('div');t.className='xptoast';t.textContent='+'+n+' XP';document.body.appendChild(t);setTimeout(()=>t.remove(),1300)}catch(e){}}
 function confetti(){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const C=['#2447b8','#f2b632','#18a058','#e0464e','#7a3fc4','#16b5c9'];const box=document.createElement('div');box.className='confetti';for(let i=0;i<46;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=C[i%C.length];s.style.animationDelay=(Math.random()*.35)+'s';s.style.animationDuration=(1+Math.random()*.8)+'s';s.style.transform='rotate('+(Math.random()*360)+'deg)';box.appendChild(s)}document.body.appendChild(box);setTimeout(()=>box.remove(),2400)}catch(e){}}
 function hstat(){const el=$('#hstat');if(!el)return;const lvl=Math.floor((S.v.xp||0)/300);el.innerHTML=`<span title="연속 학습일">🔥 ${streak()}</span><span title="레벨">⭐ Lv.${lvl+1}</span>`}
