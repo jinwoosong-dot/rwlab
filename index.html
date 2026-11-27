@@ -233,6 +233,9 @@ details.unit.cur{border:2px solid var(--pri,#2447b8)}
  body.exam #bnav{display:none}
  #mabout{display:inline-flex}
 }
+.src{border:2px solid var(--ok);background:#f1faf4}.src .nc-k{color:#137a45}
+.grow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.grow>div{display:flex;flex-direction:column}.grow b{font-size:26px}.gr-a{font-size:22px;color:var(--mut)}.gr-d{font-size:20px;font-weight:800;border-radius:10px;padding:4px 12px}.gr-d.ok{background:#e7f6ee;color:#137a45}.gr-d.bad{background:#fdecea;color:#b3392f}
+.ttr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--line)}.ttr .sub{flex-basis:100%}
 .hintb{background:#fff8e6;border:1px solid #f0d48a;border-left:4px solid #d79a1c;border-radius:10px;padding:12px 14px;margin:4px 0 12px}.hintb p{margin:6px 0 8px;font-size:15.5px;font-weight:600}
 .fixb{background:#f1faf4;border-left:4px solid var(--ok);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:15px}
 .lesb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f3f6ff;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:14.5px}.lesb span{flex:1;min-width:200px}
@@ -2107,7 +2110,7 @@ const L='ABCD',DIFF=['','쉬움','보통','어려움'],TOTAL=32*60;
 if(S.diag.done&&!S.diag.m1done&&!S.diag.m2done){S.diag.m1done=true;S.diag.route=DQ.filter(q=>S.diag.ans[q.id]===q.a).length>=18?'hard':'easy';S.diag.m2=pickM2(S.diag.route)}
 S.unit=S.unit||{};let UT=null;S.trap=S.trap||{};S.why=S.why||{};S.day=S.day||{};S.plan=S.plan||{min:40,exam:''};
 const dayRec=()=>{const k=today();return S.day[k]=S.day[k]||{q:0,vm:0,vr:0}};
-const logAns=(q,ok,src,c)=>{if(src!=='m')dayRec().q++;const e={s:q.s,ok,src,d:today()};if(c)e.c=c;S.log.push(e);if(S.log.length>5000)S.log=S.log.slice(-5000)};
+const logAns=(q,ok,src,c,t)=>{if(src!=='m')dayRec().q++;const e={s:q.s,ok,src,d:today()};if(c)e.c=c;if(t)e.t=t;S.log.push(e);if(S.log.length>5000)S.log=S.log.slice(-5000)};
 let view='home',TS=null,DR=null,VC={mode:'home'},skillOpen=null;
 const VIEWS=[['home','홈'],['plan','학습 계획'],['test','실력 진단'],['mock','모의고사'],['report','리포트'],['stats','내 실력'],['train','강의 · 훈련'],['review','오답 노트'],['vocab','단어'],['info','안내']];
 
@@ -2219,12 +2222,12 @@ function fixNote(q,pk){if(DR.first==null)return'';const cd=trapOf(q,DR.first),le
   if(pk===q.a)return`<div class="fixb">✅ ${L3('힌트를 보고 스스로 고쳤어요. 처음 답은 오답으로 기록되지만, 고친 경험이 실력이 돼요.','You fixed it yourself after the hint. The first answer still counts as a miss, but fixing it is how you improve.','看了提示后你自己改对了。第一次作答仍记为错误，但自己改正才是真正的进步。')}</div>`;
   return les?`<div class="lesb"><span>${L3('같은 함정에 다시 걸리지 않게, 관련 강의에서 규칙을 확인해 보세요.','To avoid this trap next time, check the rule in the related lesson.','为了下次不再掉进同一个陷阱，去相关课程里确认规则。')}</span><button class="btn sm" data-a="vid" data-v="${les}">📺 ${L3('관련 강의 보기','Watch the lesson','观看相关课程')}</button></div>`:''}
 function trapPool(cd,k,excl){const src=(k?pool(k):PQ).filter(q=>!excl.includes(q.id)&&q.c.some((c,i)=>i!==q.a&&trapOf(q,i)===cd)),fresh=src.filter(q=>!(S.drill[q.id]&&S.drill[q.id].ok));return shuffle(fresh.length>=3?fresh:src).slice(0,3).map(q=>q.id)}
-function nextRx(){if(!DR||DR.wn)return'';if(DR.rx===undefined){const ids=DR.ids,n=ids.length,c=ids.filter(id=>DR.res[id]).length,p=pct(c,n),tc=DR.tc||{},cf=DR.cf||{},cnt={};
+function nextRx(){if(!DR||DR.wn||DR.sr)return'';if(DR.rx===undefined){const ids=DR.ids,n=ids.length,c=ids.filter(id=>DR.res[id]).length,p=pct(c,n),tc=DR.tc||{},cf=DR.cf||{},cnt={};
     ids.forEach(id=>{if(!DR.res[id]&&tc[id])cnt[tc[id]]=(cnt[tc[id]]||0)+1});const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];
     const lucky=ids.filter(id=>cf[id]==='n'&&DR.res[id]).length,k=DR.k;let rx=null;
     if(k&&p<50)rx={t:'low',p};
     if(!rx&&top&&cnt[top]>=2){const tp=trapPool(top,k,ids);if(tp.length>=2)rx={t:'trap',cd:top,n:cnt[top],ids:tp,les:lesFor(QI[ids.find(id=>tc[id]===top)],top)}}
-    if(!rx&&k){if(p<60)rx={t:'low',p};else if(p>=80&&lucky<=2)rx={t:'up',p};else if(lucky>=3)rx={t:'firm',lucky};else rx={t:'mid',p}}
+    if(!rx&&k){if(p<60)rx={t:'low',p};else if(p>=70&&(()=>{const ts=Object.values(DR.ts||{});return ts.length>=3&&ts.reduce((x,y)=>x+y,0)/ts.length>90})())rx={t:'slow',p};else if(p>=80&&lucky<=2)rx={t:'up',p};else if(lucky>=3)rx={t:'firm',lucky};else rx={t:'mid',p}}
     DR.rx=rx}
   const rx=DR.rx;if(!rx)return'';const k=DR.k,les=k&&(VIDS[k]||[])[0]?VIDS[k][0].id:null,wrongN=DR.ids.filter(id=>!DR.res[id]).length;let t,s,b;
   if(rx.t==='trap'){t=L3(`같은 함정에 ${rx.n}번 걸렸어요`,`You fell for the same trap ${rx.n} times`,`同一个陷阱掉进去了${rx.n}次`);
@@ -2236,6 +2239,9 @@ function nextRx(){if(!DR||DR.wn)return'';if(DR.rx===undefined){const ids=DR.ids,
   else if(rx.t==='up'){t=L3('잘하고 있어요. 난이도를 올려요','You are doing well. Time to level up','做得很好，提高难度吧');
     s=L3(`정답률 ${rx.p}%에 확신도도 안정적이에요. 어려운 문제로 올라가거나, 다른 유형과 섞어서 실전처럼 풀어 보세요.`,`${rx.p}% with steady confidence. Move up to hard questions, or mix skills like the real test.`,`正确率${rx.p}%，把握也稳定。可以挑战难题，或像真实考试一样混合题型。`);
     b=`<button class="btn pri" data-a="rxLevel" data-v="h">${L3('어려운 문제 5개','5 hard questions','5道难题')} →</button><button class="btn" data-a="startMixed">${L3('혼합 훈련','Mixed practice','混合训练')}</button>`}
+  else if(rx.t==='slow'){t=L3('정확해요. 이제 속도를 올려요','Accurate. Now build speed','很准确，现在提高速度');
+    s=L3(`정답률은 ${rx.p}%로 좋은데 문제당 90초를 넘겼어요. 실제 시험은 문제당 약 ${PACE}초예요. 시간을 재면서 5문제를 풀어 보세요.`,`${rx.p}% is good, but you averaged over 90s per question. The real test allows about ${PACE}s. Try 5 questions against the clock.`,`正确率${rx.p}%不错，但平均每题超过90秒。真实考试每题约${PACE}秒。计时做5道题试试。`);
+    b=`<button class="btn pri" data-a="rxTimed">⏱ ${L3('시간 재고 5문제','5 timed questions','计时5题')} →</button><button class="btn" data-a="rxMore">${L3('한 세트 더 풀기','One more set','再做一组')}</button>`}
   else if(rx.t==='firm'){t=L3('맞혔지만 아직 불안해요. 한 세트 더 다져요','Right, but not yet solid. One more set','答对了但还不稳，再巩固一组');
     s=L3(`애매한 채로 맞힌 문제가 ${rx.lucky}개예요. 같은 난이도로 한 세트 더 풀면서, 답을 고를 때마다 "왜 이게 답인지" 한 문장으로 말해 보세요.`,`You got ${rx.lucky} right while unsure. Do one more set at this level, and say in one sentence why each answer is right.`,`有${rx.lucky}题是没把握却答对的。再做一组同难度的题，每次作答都用一句话说出“为什么选它”。`);
     b=`<button class="btn pri" data-a="rxMore">${L3('한 세트 더 풀기','One more set','再做一组')} →</button>`}
@@ -2244,13 +2250,44 @@ function nextRx(){if(!DR||DR.wn)return'';if(DR.rx===undefined){const ids=DR.ids,
     b=`${wrongN?`<button class="btn pri" data-a="retry">${L3(`틀린 문제 다시 풀기 (${wrongN})`,`Redo missed questions (${wrongN})`,`重做错题（${wrongN}）`)}</button>`:''}<button class="btn" data-a="rxMore">${L3('한 세트 더 풀기','One more set','再做一组')}</button>`}
   return`<div class="card rxc"><div class="nc-k">🧭 ${L3('다음 추천','Recommended next','下一步建议')}</div><h3>${t}</h3><p>${s}</p><div class="row">${b}</div></div>`}
 
+/* ---------- 풀이 시간 · 간격 복습 · 효과 확인 ---------- */
+const PACE=71,SRGAP=[7,14,28];
+function avgTime(k){const r=S.log.filter(x=>x.t&&(!k||x.s===k)&&x.src!=='m').slice(-20);return r.length>=3?Math.round(r.reduce((a,x)=>a+x.t,0)/r.length):0}
+const secTxt=s=>L3(`${s}초`,`${s}s`,`${s}秒`);
+function paceNote(){const ts=Object.values(DR.ts||{});if(ts.length<3)return'';const a=Math.round(ts.reduce((x,y)=>x+y,0)/ts.length);
+  return`<p class="sub">⏱ ${L3(`문제당 평균 ${a}초 · 실제 시험은 문제당 약 ${PACE}초예요`,`Average ${a}s per question · the real test allows about ${PACE}s`,`平均每题${a}秒 · 真实考试每题约${PACE}秒`)}${a>90?` · <b>${L3('조금 느려요','a bit slow','稍慢')}</b>`:''}</p>`}
+function slowNote(){const sl=SKORDER.filter(k=>{const a=acc(k),t=avgTime(k);return a.n>=5&&a.p>=70&&t>85});if(!sl.length)return'';
+  return`<p class="sub" style="margin:8px 0 0">⏱ ${L3('정확하지만 느린 유형','Accurate but slow','正确但偏慢的题型')}: ${sl.map(k=>`<b>${skN(k)}</b> ${secTxt(avgTime(k))}`).join(' · ')} — ${L3(`시험 기준은 문제당 약 ${PACE}초예요.`,`the test allows about ${PACE}s per question.`,`考试每题约${PACE}秒。`)}</p>`}
+setInterval(()=>{try{const el=document.getElementById('qtm');if(!el||!DR||!DR.timed||!DR.t0)return;const r=75-Math.floor((Date.now()-DR.t0)/1000);el.textContent='⏱ '+(r>=0?r:0)+(r<0?' · '+L3('시간 초과','time is up','超时'):'');el.className='chip '+(r<=10?'bad':'gray')}catch(e){}},500);
+// 간격 복습
+function srDue(){S.sr=S.sr||{};const t=today();return SKORDER.filter(k=>S.sr[k]&&S.sr[k].due<=t)}
+function srEnroll(k){S.sr=S.sr||{};if(k&&!S.sr[k]&&mastery(k).lv>=3){S.sr[k]={due:addDays(SRGAP[0]),step:0};save()}}
+function srCard(){const due=srDue().slice(0,3);if(!due.length)return'';
+  return`<div class="card src"><div class="row"><div class="sp"><div class="nc-k">🔁 ${L3('복습할 때가 됐어요','Time for a review','该复习了')}</div><b>${due.map(skN).join(' · ')}</b><div class="sub">${L3(`잘하던 유형을 아직 기억하는지 ${due.length*3}문제로 확인해요. 통과하면 다음 복습은 더 나중에 와요.`,`Check with ${due.length*3} questions that you still remember these skills. Pass, and the next review comes later.`,`用${due.length*3}道题确认是否还记得这些题型。通过后，下次复习间隔会更长。`)}</div></div><button class="btn pri" data-a="startSR">${L3('복습 시작','Start review','开始复习')} →</button></div></div>`}
+function srResult(){if(!DR||!DR.sr)return'';if(!DR.srOut){const out=[];DR.sr.forEach(k=>{const ids=DR.ids.filter(id=>QI[id].s===k),c=ids.filter(id=>DR.res[id]).length,ok=c>=Math.ceil(ids.length*2/3),r=S.sr[k]||{step:0};
+      if(ok){r.step=Math.min(SRGAP.length-1,(r.step||0)+(r.pen?0:1));r.pen=0;r.due=addDays(SRGAP[r.step])}else{r.step=0;r.pen=1;r.due=addDays(3)}S.sr[k]=r;out.push({k,c,n:ids.length,ok,due:r.due})});DR.srOut=out;save()}
+  return`<div class="card rxc"><div class="nc-k">🔁 ${L3('간격 복습 결과','Spaced review result','间隔复习结果')}</div>${DR.srOut.map(o=>`<div class="wg"><span class="tck">${o.ok?'✓':''}</span><div class="sp"><b>${skN(o.k)}</b> <span class="sub">${o.c} / ${o.n}</span><div class="sub">${o.ok?L3(`기억하고 있어요. 다음 복습: ${o.due.slice(5)}`,`Still solid. Next review: ${o.due.slice(5)}`,`记得很牢。下次复习：${o.due.slice(5)}`):L3(`조금 잊었어요. 숙련도를 한 칸 내렸어요. ${o.due.slice(5)}에 다시 확인하고, 통과하면 돌아와요.`,`It has faded a little, so the level dropped one step. Review again on ${o.due.slice(5)}; pass and it comes back.`,`有些遗忘，熟练度降了一级。${o.due.slice(5)}再复习，通过后即可恢复。`)}</div></div>${o.ok?'':`<button class="btn sm" data-a="startDrill2" data-v="${o.k}">${L3('훈련','Practice','练习')}</button>`}</div>`).join('')}</div>`}
+// 효과 확인
+function testRecs(){const r=S.hist.filter(h=>h.sk).slice();if(S.diag.done){const sk=skOf(S.diag.set),st=stats();if(sk)r.push({set:S.diag.set,date:S.diag.date||today(),c:st.c,n:st.n,est:estimate(st),sk})}return r}
+function growthCard(){const r=testRecs();const head=`<h3 style="margin-top:0">📈 ${L3('처음과 비교한 성장','Growth since your first test','与第一次测试相比的进步')}</h3>`;
+  if(r.length<2)return`<div class="card">${head}<p class="sub" style="margin:0">${L3('모의고사를 한 번 더 보면, 처음 진단과 유형별로 비교해서 훈련이 실제로 효과가 있었는지 보여드려요.','Take one more practice test and this will compare it with your first, skill by skill, to show whether your practice is working.','再做一次模拟考试，这里会按题型与第一次对比，显示训练是否真的有效。')}</p><div class="row" style="margin-top:10px"><button class="btn sm" data-a="nav" data-v="mock">${L3('모의고사','Practice tests','模拟考试')}</button></div></div>`;
+  const a=r[0],b=r[r.length-1],pa=pct(a.c,a.n),pb=pct(b.c,b.n),df=SKORDER.filter(k=>a.sk[k]&&b.sk[k]&&a.sk[k][1]&&b.sk[k][1]).map(k=>({k,d:pct(b.sk[k][0],b.sk[k][1])-pct(a.sk[k][0],a.sk[k][1])})),up=df.filter(x=>x.d>0).sort((x,y)=>y.d-x.d).slice(0,3),dn=df.filter(x=>x.d<0).sort((x,y)=>x.d-y.d).slice(0,3),sg=n=>(n>0?'+':'')+n;
+  return`<div class="card">${head}<div class="grow"><div><span class="sub">${a.date||''} · ${L3('첫 시험','First test','第一次')}</span><b>${pa}%</b><span class="sub">${a.est||''}</span></div><div class="gr-a">→</div><div><span class="sub">${b.date||''} · ${L3('최근 시험','Latest test','最近一次')}</span><b>${pb}%</b><span class="sub">${b.est||''}</span></div><div class="gr-d ${pb>=pa?'ok':'bad'}">${sg(pb-pa)}%p</div></div>
+    ${up.length?`<p style="margin:10px 0 0">▲ ${L3('오른 유형','Improved','进步的题型')}: ${up.map(x=>`<b>${skN(x.k)}</b> ${sg(x.d)}%p`).join(' · ')}</p>`:''}
+    ${dn.length?`<p style="margin:6px 0 0">▼ ${L3('내려간 유형','Dropped','退步的题型')}: ${dn.map(x=>`<b>${skN(x.k)}</b> ${sg(x.d)}%p`).join(' · ')}</p>`:''}
+    <p class="sub" style="margin:8px 0 0">${L3('시험 한 번에 유형당 문항이 2~6개뿐이라 작은 차이는 우연일 수 있어요. 큰 변화와 방향만 보세요.','Each test has only 2–6 questions per skill, so small differences can be chance. Look at big changes and direction.','每次考试每种题型只有2~6题，小差异可能是偶然，只看大的变化和方向。')}</p></div>`}
+function lastMonday(){const d=new Date(monday()+'T00:00:00');d.setDate(d.getDate()-7);return dkey(d)}
+function trapTrend(){const tw=S.tw||{},a=tw[lastMonday()],b=tw[monday()]||{};if(!a)return`<p class="sub" style="margin:0 0 10px">${L3('다음 주부터는 지난주와 이번 주에 같은 함정에 걸린 횟수를 비교해 보여드려요.','From next week, this will compare how often you fell for each trap last week and this week.','从下周起，这里会比较上周和本周掉进各个陷阱的次数。')}</p>`;
+  const ks=Object.keys(a).filter(c=>TRAP[c]).sort((x,y)=>a[y]-a[x]).slice(0,4);if(!ks.length)return'';
+  return`<div class="ttr"><b>${L3('지난주 → 이번 주','Last week → this week','上周 → 本周')}</b>${ks.map(c=>{const x=a[c],y=b[c]||0;return`<span class="chip ${y<x?'ok':y>x?'bad':'gray'}">${TRAP[c][0]} · ${x} → ${y}</span>`}).join('')}<span class="sub">${L3('이번 주는 아직 진행 중이에요. 줄지 않는 함정은 관련 강의를 다시 보세요.','This week is still in progress. For traps that are not shrinking, rewatch the related lesson.','本周尚未结束。没有减少的陷阱，请重看相关课程。')}</span></div>`}
+
 /* ---------- 학생 주도: 주간 목표 · 확신도 · 숙련도 ---------- */
 const MLV=()=>[[L3('시작 전','Not started','未开始'),'○'],[L3('입문','Beginner','入门'),'🌱'],[L3('안정','Steady','稳定'),'🌿'],[L3('숙련','Skilled','熟练'),'🌳'],[L3('마스터','Master','精通'),'🏆']];
 function mastery(k,skip){const a=S.log.filter(x=>x.s===k&&x.src!=='m');const r=(skip?a.slice(0,Math.max(0,a.length-skip)):a).slice(-20),n=r.length,p=pct(r.filter(x=>x.ok).length,n);
-  const lv=n<5?0:p>=90&&n>=15?4:p>=80&&n>=10?3:p>=60?2:1;return{lv,n,p}}
+  let lv=n<5?0:p>=90&&n>=15?4:p>=80&&n>=10?3:p>=60?2:1;if(lv>1&&S.sr&&S.sr[k]&&S.sr[k].pen)lv--;return{lv,n,p}}
 function mchip(k){const m=mastery(k),L=MLV()[m.lv];return`<span class="mchip lv${m.lv}" title="${L3('최근 20문항 기준','Based on the last 20 questions','按最近20题计算')}">${L[1]} ${L[0]}</span>`}
 function masteryMap(){const M=MLV();return`<div class="card"><div class="row"><h3 style="margin:0">${L3('유형별 숙련도','Skill levels','各题型熟练度')}</h3><span class="sp"></span><span class="sub">${M.slice(1).map(x=>x[1]+' '+x[0]).join(' → ')}</span></div>
-  <div class="mmap">${SKORDER.map(k=>{const m=mastery(k);return`<button class="mtile lv${m.lv}" data-a="openSkill" data-v="${k}"><span class="mt-i">${M[m.lv][1]}</span><b>${skN(k)}</b><span class="sub">${M[m.lv][0]}${m.n?` · ${m.p}%`:''}</span></button>`}).join('')}</div>
+  <div class="mmap">${SKORDER.map(k=>{const m=mastery(k);return`<button class="mtile lv${m.lv}" data-a="openSkill" data-v="${k}"><span class="mt-i">${M[m.lv][1]}</span><b>${skN(k)}</b><span class="sub">${M[m.lv][0]}${m.n?` · ${m.p}%`:''}${avgTime(k)?` · ${secTxt(avgTime(k))}`:''}</span></button>`}).join('')}</div>${slowNote()}
   <p class="sub" style="margin:10px 0 0">${L3('최근 20문항 정답률로 정해요. 안정 60% · 숙련 80%(10문항 이상) · 마스터 90%(15문항 이상).','Based on accuracy over your last 20 questions. Steady 60% · Skilled 80% (10+ questions) · Master 90% (15+ questions).','按最近20题的正确率判定。稳定60% · 熟练80%（10题以上）· 精通90%（15题以上）。')}</p></div>`}
 // 주간 목표
 const monday=()=>{const d=new Date();const g=(d.getDay()+6)%7;d.setDate(d.getDate()-g);return dkey(d)};
@@ -2331,6 +2368,7 @@ function home(){
   <div class="dash-top"><div><h1 style="margin:0">${S.user?`${S.user.nm}님의 강의실`:'내 강의실'}</h1>
     <p class="sub" style="margin:4px 0 0">${dday!=null&&dday>=0?`시험까지 D-${dday} · `:''}${S.user&&S.user.tg?`목표 ${S.user.tg}점 · `:''}하루 ${S.plan.min}분 계획</p></div><span class="sp"></span>
     <div class="dash-st">${stk?`<span>🔥 <b>${stk}</b>일 연속</span>`:`<span>${L3('오늘 시작하면 🔥 1일째!','Start today for 🔥 day 1!','今天开始就是 🔥 第1天！')}</span>`}${S.v.xp?`<span>⭐ <b>Lv.${lvl+1}</b> ${into}/300 XP</span>`:''}</div></div>
+  ${srCard()}
   ${weekCard()}
   ${hero?`<div class="card nowc"><div class="nc-k">${L3('지금 할 일','Do this now','现在要做的')}</div><div class="nc-b"><span class="nc-i">${hero.ic}</span><div class="sp"><div class="nc-t">${hero.t}</div><div class="sub">${hero.s}</div></div><button class="btn pri lg" data-a="${hero.a}" data-v="${hero.v}">${hero.b} →</button></div></div>`
     :`<div class="card nowc done"><div class="nc-k">${L3('오늘 할 일 완료','All done for today','今天的任务完成了')}</div><div class="nc-b"><span class="nc-i">🎉</span><div class="sp"><div class="nc-t">${L3('오늘 계획을 모두 끝냈어요!','You finished today’s plan!','今天的计划全部完成了！')}</div><div class="sub">${L3('더 하고 싶다면 커리큘럼에서 다음 강의를 보거나 단어 카드를 더 풀어 보세요.','Want more? Watch the next lesson or do more word cards.','还想学？去看下一节课或多做些单词卡。')}</div></div></div></div>`}
@@ -2603,6 +2641,7 @@ function mystats(){
     <div class="card"><div class="sub">가장 강한 유형</div><div class="big" style="font-size:22px">${strong?SK[strong.k][1]:'–'}</div><div class="sub">${strong?strong.p+'% · '+strong.c+'/'+strong.n+'문항':''}</div></div>
   </div>
   ${masteryMap()}
+  ${growthCard()}
   ${w.length&&w[0].p<100?`<div class="card" style="border-color:var(--bad)"><h3 style="margin-top:0">지금 점수를 가장 많이 잃는 유형</h3>
     <p class="sub">정답률이 낮고 시험에 자주 나오는 유형일수록 위에 와요. "모듈당 예상 실점" = 시험 한 모듈에 나오는 평균 문항 수 × 내 오답률.</p>
     ${w.filter(a=>a.p<100).map((a,i)=>`<div class="row" style="margin:8px 0"><span class="chip bad">${i+1}</span><b>${SK[a.k][1]}</b><span class="sub">정답률 ${a.p}% · 모듈당 약 ${a.loss.toFixed(1)}문항 실점</span><span class="sp"></span><button class="btn sm pri" data-a="openSkill" data-v="${a.k}">훈련</button></div>`).join('')}</div>`:''}
@@ -2611,7 +2650,7 @@ function mystats(){
   <div class="card">${rows}</div>
   ${(()=>{const ts=Object.keys(S.trap).filter(c=>TRAP[c]).sort((a,b)=>S.trap[b]-S.trap[a]).slice(0,5),tt=Object.values(S.trap).reduce((a,b)=>a+b,0),ws=Object.keys(WHY).filter(c=>S.why[c]),wt=ws.reduce((a,c)=>a+S.why[c],0);
     if(!ts.length&&!ws.length)return`<h2>자주 걸리는 함정</h2><div class="card"><p class="sub">훈련에서 틀린 문제가 쌓이면, 어떤 종류의 오답에 자주 끌리는지 여기에 보여드려요.</p></div>`;
-    return`<h2>자주 걸리는 함정</h2><div class="card">${ts.map(c=>`<div class="trow"><div class="row"><b>${TRAP[c][0]}</b><span class="sp"></span><b>${S.trap[c]}회</b><span class="sub">${pct(S.trap[c],tt)}%</span></div><div class="meter"><i class="bad" style="width:${pct(S.trap[c],S.trap[ts[0]])}%"></i></div><p class="sub">${TRAP[c][1]}</p></div>`).join('')||'<p class="sub">아직 기록이 없어요.</p>'}</div>
+    return`<h2>자주 걸리는 함정</h2><div class="card">${trapTrend()}${ts.map(c=>`<div class="trow"><div class="row"><b>${TRAP[c][0]}</b><span class="sp"></span><b>${S.trap[c]}회</b><span class="sub">${pct(S.trap[c],tt)}%</span></div><div class="meter"><i class="bad" style="width:${pct(S.trap[c],S.trap[ts[0]])}%"></i></div><p class="sub">${TRAP[c][1]}</p></div>`).join('')||'<p class="sub">아직 기록이 없어요.</p>'}</div>
     ${ws.length?`<h2>내가 고른 오답 원인</h2><div class="card">${ws.sort((a,b)=>S.why[b]-S.why[a]).map(c=>`<div class="trow"><div class="row"><b>${WHY[c]}</b><span class="sp"></span><b>${S.why[c]}회</b><span class="sub">${pct(S.why[c],wt)}%</span></div><div class="meter"><i class="warn" style="width:${pct(S.why[c],S.why[ws[0]])}%"></i></div><p class="sub">${WHYTIP[c]}</p></div>`).join('')}</div>`:''}`})()}
   <div class="legend"><span class="chip ok">강점 80% 이상</span><span class="chip warn">보완 60–79%</span><span class="chip bad">취약 60% 미만</span><span class="chip gray">측정 중 ${MINN}문항 미만</span><span class="sub">▲▼ 는 최근 10문항이 누적 정답률보다 5%p 이상 높거나 낮을 때 표시돼요. 유형을 누르면 훈련으로 이동해요.</span></div>`;
 }
@@ -2685,7 +2724,7 @@ function lecture(){
 }
 function lcScroll(){try{const el=document.querySelector('.lcard .now')||document.querySelector('.lcard .demo.cur');if(el&&el.scrollIntoView)el.scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}}
 function drill(){
-  const title=DR.wn?'유사 문제 확인 · '+SK[QI[DR.wn].s][1]:DR.k?SK[DR.k][1]:DR.mix?'혼합 훈련':'오답 노트';
+  const title=DR.wn?'유사 문제 확인 · '+SK[QI[DR.wn].s][1]:DR.k?SK[DR.k][1]:DR.sr?L3('간격 복습','Spaced review','间隔复习'):DR.mix?'혼합 훈련':'오답 노트';
   if(DR.i>=DR.ids.length&&DR.wn){const n=DR.ids.length,c=DR.ids.filter(id=>DR.res[id]).length,ok=c===n,src=DR.wn;
     if(!DR.judged){DR.judged=1;S.wn=S.wn||{};const r=S.wn[src]||{tries:0};r.tries=(r.tries||0)+1;if(ok){r.st='done';r.date=today();S.drill[src]={n:((S.drill[src]||{}).n||0)+1,ok:true}}else r.st='open';S.wn[src]=r;save()}
     const nx=wrongIds().find(id=>id!==src);
@@ -2693,17 +2732,18 @@ function drill(){
       <p>${ok?'유사 문제를 모두 맞혔어요. 이 오답은 <b>완료</b>로 옮겼어요.':'3문제를 모두 맞혀야 통과예요. 틀린 문제의 해설을 확인하고, 원래 문제의 강사 해설을 한 번 더 읽은 뒤 새 문제로 다시 도전하세요.'}</p>
       <div class="row" style="justify-content:center">${ok?(nx?`<button class="btn pri" data-a="wnOpen" data-v="${nx}">다음 오답 해설 →</button>`:''):`<button class="btn pri" data-a="wnOpen" data-v="${src}">해설 다시 보기</button><button class="btn" data-a="wnSim" data-v="${src}">새 유사 문제로 재도전</button>`}<button class="btn" data-a="wnBack">오답 목록</button></div></div>`;return}
   if(DR.i>=DR.ids.length){
-    const wrong=DR.ids.filter(id=>!DR.res[id]),n=DR.ids.length;
+    const wrong=DR.ids.filter(id=>!DR.res[id]),n=DR.ids.length;if(DR.k)srEnroll(DR.k);
     app.innerHTML=`<h1>훈련 결과</h1>${levelUpNote()}<div class="card"><div class="sub">${title}</div><div class="big">${n-wrong.length} / ${n}</div>
       ${DR.k?(()=>{const a=acc(DR.k);return`<p class="sub">이 유형 누적 정답률 <b>${a.p}%</b> (${a.c}/${a.n}문항)${a.rn>=5?` · 최근 10문항 ${a.rp}%`:''}</p>`})():''}
-      <p>${wrong.length?'틀린 문제는 해설의 근거를 지문에서 직접 찾아본 뒤, 맞힐 때까지 다시 풀어 보세요.':'모두 맞혔어요.'}</p>${(n=>n?`<p class="sub">💡 ${L3(`힌트를 보고 스스로 고친 문제 ${n}개`,`${n} fixed by yourself after a hint`,`看提示后自己改对 ${n} 题`)}</p>`:'')(Object.values(DR.fx||{}).filter(x=>x===1).length)}
+      <p>${wrong.length?'틀린 문제는 해설의 근거를 지문에서 직접 찾아본 뒤, 맞힐 때까지 다시 풀어 보세요.':'모두 맞혔어요.'}</p>${(n=>n?`<p class="sub">💡 ${L3(`힌트를 보고 스스로 고친 문제 ${n}개`,`${n} fixed by yourself after a hint`,`看提示后自己改对 ${n} 题`)}</p>`:'')(Object.values(DR.fx||{}).filter(x=>x===1).length)}${paceNote()}
       <div class="row">${wrong.length?`<button class="btn ${nextRx()?'':'pri'}" data-a="retry">틀린 문제 다시 풀기 (${wrong.length})</button>`:''}
-      ${DR.k?`<button class="btn" data-a="backSkill">풀이법 다시 보기</button><button class="btn" data-a="backTrain">유형 목록</button>`:`<button class="btn" data-a="quitDrill">오답 노트로</button>`}</div></div>${nextRx()}${confReview()}`;
+      ${DR.k?`<button class="btn" data-a="backSkill">풀이법 다시 보기</button><button class="btn" data-a="backTrain">유형 목록</button>`:DR.sr?`<button class="btn" data-a="navg" data-v="home">${L3('내 강의실로','Back to My classroom','回到我的教室')}</button>`:`<button class="btn" data-a="quitDrill">오답 노트로</button>`}</div></div>${srResult()}${nextRx()}${confReview()}`;
     return;
   }
   if(DR.k&&DR.lv0==null)DR.lv0=mastery(DR.k).lv;
+  if(DR.pick==null&&DR.first==null&&!DR.t0)DR.t0=Date.now();
   const q=QI[DR.ids[DR.i]],pk=DR.pick;
-  app.innerHTML=`<div class="row"><button class="btn sm" data-a="quitDrill">← 그만하기</button><b>${title}</b><span class="sp"></span>${DR.k?'':`<span class="chip">${SK[q.s][1]}</span>`}<span class="chip gray">${DIFF[q.d]}</span><b>${DR.i+1} / ${DR.ids.length}</b></div>
+  app.innerHTML=`<div class="row"><button class="btn sm" data-a="quitDrill">← 그만하기</button><b>${title}</b><span class="sp"></span>${DR.k?'':`<span class="chip">${SK[q.s][1]}</span>`}${DR.timed?'<span class="chip gray" id="qtm">⏱</span>':''}<span class="chip gray">${DIFF[q.d]}</span><b>${DR.i+1} / ${DR.ids.length}</b></div>
   <div class="qwrap"><div class="card pass">${q.p}</div>
   <div class="card"><div class="stem">${q.q}</div>
     ${pk==null&&DR.first!=null?hintBox(q):''}
@@ -2906,14 +2946,17 @@ const A={
   dpick:v=>{const q=QI[DR.ids[DR.i]];v=+v;
     if(DR.first!=null){if(v===DR.first||DR.pick!=null)return;DR.pick=v;DR.fx=DR.fx||{};DR.fx[q.id]=v===q.a?1:0;DR.why=null;save();render();return}
     const ok=v===q.a;DR.res[q.id]=ok;DR.why=null;DR.cf=DR.cf||{};if(DR.conf)DR.cf[q.id]=DR.conf;
-    if(!ok){S.wp=S.wp||{};S.wp[q.id]=v;const cd=trapOf(q,v);S.trap[cd]=(S.trap[cd]||0)+1;DR.tc=DR.tc||{};DR.tc[q.id]=cd;DR.first=v;DR.pick=null}else DR.pick=v;
-    logAns(q,ok,DR.k?'d':'r',DR.conf);DR.conf=null;const r=S.drill[q.id]||{n:0};S.drill[q.id]={n:r.n+1,ok};save();render()},
+    const sec=DR.t0?Math.max(1,Math.min(600,Math.round((Date.now()-DR.t0)/1000))):0;if(sec){DR.ts=DR.ts||{};DR.ts[q.id]=sec}
+    if(!ok){S.wp=S.wp||{};S.wp[q.id]=v;const cd=trapOf(q,v);S.trap[cd]=(S.trap[cd]||0)+1;S.tw=S.tw||{};const wk=monday();S.tw[wk]=S.tw[wk]||{};S.tw[wk][cd]=(S.tw[wk][cd]||0)+1;Object.keys(S.tw).sort().slice(0,-6).forEach(x=>delete S.tw[x]);DR.tc=DR.tc||{};DR.tc[q.id]=cd;DR.first=v;DR.pick=null}else DR.pick=v;
+    logAns(q,ok,DR.k?'d':DR.sr?'s':'r',DR.conf,sec);DR.conf=null;const r=S.drill[q.id]||{n:0};S.drill[q.id]={n:r.n+1,ok};save();render()},
   dskip:()=>{const q=QI[DR.ids[DR.i]];if(DR.first==null)return;DR.pick=DR.first;DR.fx=DR.fx||{};DR.fx[q.id]=0;render()},
   rxTrap:()=>{const rx=DR.rx;if(!rx||!rx.ids)return;DR={k:DR.k,mix:DR.mix,ids:rx.ids,i:0,pick:null,res:{}};render();window.scrollTo(0,0)},
   rxLevel:v=>{const k=DR.k;if(!k)return;const pl=pool(k).filter(q=>v==='h'?q.d===3:q.d<=2),fresh=pl.filter(q=>!(S.drill[q.id]&&S.drill[q.id].ok)),src=fresh.length>=5?fresh:shuffle(pl);DR={k,ids:src.slice(0,5).map(q=>q.id),i:0,pick:null,res:{}};render();window.scrollTo(0,0)},
+  rxTimed:()=>{const k=DR.k;if(!k)return;const pl=pool(k),fresh=pl.filter(q=>!(S.drill[q.id]&&S.drill[q.id].ok)),src=shuffle(fresh.length>=5?fresh:pl);DR={k,timed:1,ids:src.slice(0,5).map(q=>q.id),i:0,pick:null,res:{}};render();window.scrollTo(0,0)},
+  startSR:()=>{const due=srDue().slice(0,3);if(!due.length)return;const ids=due.flatMap(k=>shuffle(pool(k)).slice(0,3).map(q=>q.id));DR={k:null,sr:due,ids,i:0,pick:null,res:{}};skillOpen=null;LC=null;nav('train')},
   rxMore:()=>{const k=DR.k;if(k)A.startDrill(k)},
   dwhy:c=>{const q=QI[DR.ids[DR.i]];if(DR.why)return;DR.why=c;S.why[c]=(S.why[c]||0)+1;save();render()},
-  dnext:()=>{DR.i++;DR.pick=null;DR.first=null;DR.why=null;render();window.scrollTo(0,0)},
+  dnext:()=>{DR.i++;DR.pick=null;DR.first=null;DR.t0=0;DR.why=null;render();window.scrollTo(0,0)},
   retry:()=>{DR={k:DR.k,mix:DR.mix,ids:DR.ids.filter(id=>!DR.res[id]),i:0,pick:null,res:{},lv0:DR.lv0};render()},
   dconf:v=>{DR.conf=DR.conf===v?null:v;render()},
   wkPick:v=>{v=+v;WKSEL=WKSEL||[];const i=WKSEL.indexOf(v);if(i>=0)WKSEL.splice(i,1);else if(WKSEL.length<3)WKSEL.push(v);render()},
